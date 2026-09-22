@@ -1,0 +1,7 @@
+export default async function handler(req,res){
+res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');
+let ethShare=null,emShare=null,errors=[];
+try{const r=await fetch('https://api.coingecko.com/api/v3/global',{headers:{accept:'application/json','user-agent':'RUMBO/1.0'}});if(!r.ok)throw Error('CoinGecko '+r.status);const j=await r.json(),v=Number(j?.data?.market_cap_percentage?.eth);if(Number.isFinite(v))ethShare=v}catch(e){errors.push(String(e.message||e))}
+try{const h={'user-agent':'Mozilla/5.0 RUMBO/1.0',accept:'text/html'},[a,e]=await Promise.all([fetch('https://www.msci.com/indexes/index/892400/msci-acwi-index',{headers:h}),fetch('https://www.msci.com/indexes/index/891800/msci-em-emerging-markets-index-2',{headers:h})]);if(!a.ok||!e.ok)throw Error('MSCI');const [at,et]=await Promise.all([a.text(),e.text()]),clean=x=>x.replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' '),cap=x=>{const m=clean(x).match(/Index Market Cap\s*\$?\s*([0-9]+(?:\.[0-9]+)?)\s*T/i);return m?+m[1]:null},ac=cap(at),em=cap(et);if(ac&&em)emShare=em/ac*100}catch(e){errors.push(String(e.message||e))}
+res.status(200).json({ethShare,emShare,updated:new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'}),errors});
+}
