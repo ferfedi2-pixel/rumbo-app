@@ -135,7 +135,84 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
  .horizon-head-pro{align-items:flex-start!important;flex-direction:column!important}.horizon-head-pro h2{font-size:25px!important}.compound-row{padding:12px!important;border-radius:18px!important}.capital-track{height:23px!important}.compound-total strong{font-size:24px!important}.horizon-insights{grid-template-columns:1fr!important}.assumption-grid-pro{grid-template-columns:1fr!important}
 }
 @media(prefers-reduced-motion:reduce){.motion-art *,.capital-bar{animation:none!important}}
-\n</style></head><body>
+\n
+/* ===== RUMBO PRO V2.1 · refinado incremental ===== */
+#summary{grid-column:span 12!important}
+#summary #marketCard{
+  grid-column:auto!important;margin-top:14px!important;padding:11px 0 0!important;
+  border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important
+}
+#summary #marketCard .head{margin:0 0 8px!important}
+#summary #marketCard .head h2{font-size:11px!important;text-transform:uppercase!important;letter-spacing:.08em!important;color:var(--nav)!important}
+#summary #marketCard .market{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;flex-wrap:wrap!important}
+#summary #marketCard .chips{display:flex!important;gap:6px!important;flex-wrap:wrap!important}
+#summary #marketCard .chip{
+  display:inline-flex!important;align-items:center!important;gap:5px!important;padding:6px 9px!important;
+  border-radius:999px!important;background:rgba(15,43,77,.045)!important;border:1px solid rgba(15,43,77,.09)!important;
+  font-size:9px!important;color:var(--mut)!important
+}
+#summary #marketCard .chip b{font-size:10px!important;color:var(--ink)!important}
+#summary #marketCard .notice{display:none!important}
+#summary #marketCard #refresh{padding:7px 9px!important;font-size:9.5px!important}
+#cartera .name-only .form2{grid-template-columns:1fr!important}
+#cartera .name-only .field.user-field{display:none!important}
+#cartera .name-only .actions{margin-top:8px!important}
+#cartera .name-only .head{margin-bottom:8px!important}
+#rebalanceo .grid{
+  grid-template-columns:minmax(0,.82fr) 122px minmax(0,1.18fr)!important;
+  align-items:stretch!important;gap:10px!important
+}
+#rebalanceo .s5,#rebalanceo .s7{grid-column:auto!important}
+.rebalance-flow{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:8px 3px;color:var(--mut)
+}
+.rebalance-flow>span{font-size:8px;font-weight:900;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+.rebalance-flow strong{display:block;margin-top:5px;color:var(--nav);font-size:12px;line-height:1.28;letter-spacing:-.02em}
+.rebalance-flow small{display:block;max-width:104px;margin-top:5px;font-size:8.5px;line-height:1.35;color:var(--mut)}
+.rebalance-flow .arrow{
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-top:11px;
+  color:#fff;font-size:20px;background:linear-gradient(135deg,var(--nav),var(--nav2));
+  box-shadow:0 9px 22px rgba(15,43,77,.18);animation:rumboArrow 2.6s ease-in-out infinite
+}
+@keyframes rumboArrow{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+#rebalanceo .res .weight-flow{
+  display:flex!important;align-items:center!important;gap:6px!important;flex-wrap:wrap!important;
+  margin-top:4px!important;color:var(--mut)!important;font-size:9px!important
+}
+#rebalanceo .res .weight-flow b{font-size:10.5px!important;color:var(--ink)!important}
+#rebalanceo .res .weight-flow i{font-style:normal!important;color:var(--gold)!important;font-weight:900!important}
+#rebalanceo .res .weight-flow .target{
+  padding:3px 6px!important;border-radius:999px!important;background:rgba(15,43,77,.055)!important;
+  border:1px solid rgba(15,43,77,.10)!important;color:var(--nav)!important
+}
+.motion-art{opacity:.82!important}
+.motion-art .route{
+  stroke-dasharray:42 11!important;animation:rumboRouteFlow 7s linear infinite,routePulse 4.4s ease-in-out infinite!important
+}
+@keyframes rumboRouteFlow{to{stroke-dashoffset:-106}}
+.motion-art .spark{
+  position:absolute;width:7px;height:7px;border-radius:50%;z-index:4;
+  background:#fff8e8;box-shadow:0 0 0 5px rgba(231,210,171,.08),0 0 22px rgba(231,210,171,.50);
+  animation:rumboSpark 4s ease-in-out infinite
+}
+.motion-art .spark.s1{left:18%;top:60%}.motion-art .spark.s2{right:18%;top:22%;animation-delay:.8s}.motion-art .spark.s3{right:25%;bottom:22%;animation-delay:1.6s;background:#89d7b8}
+@keyframes rumboSpark{0%,100%{transform:translateY(0) scale(.85);opacity:.55}50%{transform:translateY(-8px) scale(1.15);opacity:1}}
+@media(max-width:800px){
+  #rebalanceo .grid{grid-template-columns:1fr!important}
+  .rebalance-flow{padding:1px 8px 7px!important}
+  .rebalance-flow small{max-width:250px!important}
+  .rebalance-flow .arrow{width:35px;height:35px;margin-top:7px;animation:rumboArrowDown 2.6s ease-in-out infinite}
+  @keyframes rumboArrowDown{0%,100%{transform:rotate(90deg) translateX(-2px)}50%{transform:rotate(90deg) translateX(3px)}}
+}
+@media(max-width:600px){
+  .motion-art{right:-14px!important;bottom:-10px!important;width:182px!important;height:182px!important;opacity:.48!important}
+  #rebalanceo .num strong{white-space:nowrap!important;font-size:38px!important}
+  #summary #marketCard .market{align-items:flex-start!important}
+}
+
+</style></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav"><button class="on" data-v="inicio">Inicio</button><button data-v="cartera">Cartera</button><button data-v="rebalanceo">Rebalanceo</button><button data-v="horizonte">Horizonte</button></nav><main>
 <section class="view on" id="inicio"><div class="hero"><div class="heroIn"><div><span class="kick">Plan de inversión</span><h1 id="homeTitle">Configura<br>tu cartera</h1><p id="homeUser">Elige una cartera RUMBO o crea la tuya.</p></div><div class="num"><span>Patrimonio actual</span><strong id="homeTotal">—</strong></div></div></div><div class="grid"><div class="card" id="empty"><div style="text-align:center;padding:23px 10px"><h2 style="margin:0 0 7px">Configura tu cartera</h2><p style="font-size:11px;color:var(--mut)">Tres estrategias RUMBO o una cartera personalizada.</p><button class="btn" onclick="go('cartera')">Empezar</button></div></div><div class="card s7" id="summary" hidden><div class="head"><h2>Distribución</h2><span class="pill" id="risk">—</span></div><div class="donutWrap"><div class="donut" id="donut"></div><div class="leg" id="legend"></div></div><div id="blocks" style="margin-top:11px"></div></div><div class="card s5" id="marketCard" hidden><div class="head"><h2>Pesos de mercado</h2><span class="pill" id="marketDate">Referencia</span></div><div class="market"><div class="chips"><span class="chip">Emergentes <b id="emShare">—</b></span><span class="chip" id="ethChip">Ethereum <b id="ethShare">—</b></span></div><button class="btn alt tiny" id="refresh">↻ Actualizar</button></div><div class="notice" id="marketNote" style="margin-top:8px"></div></div></div></section>
@@ -151,7 +228,7 @@ const MODELS={refugio:{name:'RUMBO Refugio',risk:3,rate:5,desc:'Más estabilidad
 let s={user:'Felipe',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,date:'31/08/2026',status:'Última referencia válida'}};
 try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)s={...s,...x,market:{...s.market,...(x.market||{})}}}catch(e){}
 function save(){localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
-function model(){return MODELS[s.type]||null}function pname(){return model()?.name||(s.type==='custom'?s.customName:'Sin configurar')}
+function model(){return MODELS[s.type]||null}function pname(){const label=String(s.customName||'').trim();const customLabel=label&&label!=='Mi cartera'?label:'';return customLabel||model()?.name||(s.type==='custom'?(label||'Mi cartera'):'Sin configurar')}
 function assets(){if(s.type==='custom')return s.custom.map((a,i)=>({id:a.id||'c'+i,name:a.name||'Activo '+(i+1),short:a.name||'Activo '+(i+1),w:+a.pct||0,color:a.color||C.world,detail:'Activo personalizado'}));const m=model();if(!m)return[];const a=[],e=Math.max(0,Math.min(40,+s.market.em||11.85))/100;if(m.blocks.eq){a.push({...PROD.world,w:m.blocks.eq*(1-e)});a.push({...PROD.em,w:m.blocks.eq*e})}if(m.blocks.bond)a.push({...PROD.bonds,w:m.blocks.bond});if(m.blocks.crypto){if(m.eth){const h=Math.max(0,Math.min(40,+s.market.eth||11.43))/100;a.push({...PROD.btc,w:m.blocks.crypto*(1-h)});a.push({...PROD.eth,w:m.blocks.crypto*h})}else a.push({...PROD.btc,w:m.blocks.crypto})}return a}
 function total(){return assets().reduce((z,a)=>z+(+s.hold[a.id]||0),0)}
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===id));render();scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
@@ -159,7 +236,7 @@ function bbar(l,v,c=''){return '<div class="bar"><span>'+l+'</span><div class="t
 function renderModels(){models.innerHTML=Object.entries(MODELS).map(([id,m])=>'<div class="model '+(s.type===id?'sel':'')+'"><span class="pill">Riesgo '+m.risk+'/7</span><h3>'+m.name.replace('RUMBO ','')+'</h3><p>'+m.desc+'</p>'+bbar('Bolsa',m.blocks.eq)+(m.blocks.bond?bbar('Bonos',m.blocks.bond,'b'):'')+(m.blocks.crypto?bbar('Cripto',m.blocks.crypto,'c'):'')+'<div class="actions"><button class="btn tiny" onclick="choose(\''+id+'\')">'+(s.type===id?'Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">+ info</button></div></div>').join('')}
 window.choose=id=>{s.type=id;save();render()};window.info=id=>{const m=MODELS[id],old=s.type;s.type=id;const a=assets();s.type=old;modalTitle.textContent=m.name;modalBody.innerHTML='<p style="color:var(--mut);font-size:11px">'+m.desc+'</p><div class="info"><div><b>Riesgo estimado '+m.risk+'/7</b><small>Orientativo; no es SRI oficial PRIIPs.</small></div><div><b>Horizonte: '+pct(m.rate)+' anual</b><small>Estimación nominal media de largo plazo.</small></div>'+a.map(x=>'<div><b>'+x.name+' · '+pct(x.w)+'</b><small>'+x.detail+(x.isin&&x.isin!=='—'?' · ISIN '+x.isin:'')+(x.ter&&x.ter!=='—'?' · TER '+x.ter:'')+'</small></div>').join('')+'</div>';modal.classList.add('on')};closeModal.onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')}
 function blk(n,v,a){return '<div class="block"><div class="bt"><b>'+n+'</b><strong>'+pct(v)+'</strong></div>'+a.map(x=>'<div class="sub"><span>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')+'</div>'}
-function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML=ok?pname().replace('RUMBO ','RUMBO<br>'):'Configura<br>tu cartera';homeUser.textContent=ok?s.user:'Elige una cartera RUMBO o crea la tuya.';homeTotal.textContent=ok?euro.format(total()):'—';risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
+function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML=ok?pname().replace('RUMBO ','RUMBO<br>'):'Configura<br>tu cartera';homeUser.textContent=ok?'Tu estrategia actual: simple, visible y preparada para seguir aportando.':'Elige una cartera RUMBO o crea la tuya.';homeTotal.textContent=ok?euro.format(total()):'—';risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
 refresh.onclick=async()=>{refresh.disabled=true;refresh.textContent='Actualizando…';let msg=[];try{const r=await fetch('/api/market',{cache:'no-store'}),j=await r.json();if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;msg.push('Ethereum actualizado')}if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;msg.push('Emergentes actualizado')}s.market.date=j.updated||new Date().toLocaleDateString('es-ES')}catch(e){msg.push('No se pudo actualizar')}s.market.status=msg.length?msg.join(' · '):'Se mantiene la última referencia válida';save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar'}
 function renderPortfolio(){renderModels();userName.value=s.user;customName.value=s.customName;customRate.value=s.customRate;renderCustom();const a=assets();selected.hidden=!a.length;if(a.length){selectedRisk.textContent=model()?'Riesgo '+model().risk+'/7':'Personalizada';selectedComp.innerHTML=a.map(x=>'<div class="sub"><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+x.color+';margin-right:7px"></i>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')}}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function renderCustom(){customAssets.innerHTML=s.custom.length?s.custom.map((a,i)=>'<div class="asset"><input type="color" value="'+a.color+'" onchange="editA('+i+',\'color\',this.value)"><input value="'+esc(a.name)+'" placeholder="Activo" onchange="editA('+i+',\'name\',this.value)"><input type="number" min="0" max="100" step=".1" value="'+(+a.pct||0)+'" onchange="editA('+i+',\'pct\',this.value)"><button class="x" onclick="delA('+i+')">×</button></div>').join(''):'<div class="notice">Añade un activo, su porcentaje y un color.</div>';customSum.textContent=pct(s.custom.reduce((z,a)=>z+(+a.pct||0),0))}
@@ -214,4 +291,74 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
  render();
 })();
 </script>
-\n</body></html>
+\n
+<script id="rumbo-pro-v21">
+(function(){
+  // Un único campo visible para nombrar la cartera.
+  var u=document.getElementById('userName'), n=document.getElementById('customName');
+  if(u&&n){
+    var card=u.closest('.card');
+    if(card){
+      card.classList.add('name-only');
+      var title=card.querySelector('.head h2'); if(title) title.textContent='Nombre de la cartera';
+      var uf=u.closest('.field'); if(uf) uf.classList.add('user-field');
+      var lab=n.closest('.field')?.querySelector('label'); if(lab) lab.textContent='Nombre (opcional)';
+      n.placeholder='Ej. Cartera Felipe';
+    }
+  }
+
+  // El pequeño ajuste automático queda dentro del propio reparto.
+  var summary=document.getElementById('summary'), market=document.getElementById('marketCard');
+  if(summary&&market&&market.parentElement!==summary){
+    var h=market.querySelector('.head h2'); if(h) h.textContent='Reparto de mercado';
+    summary.appendChild(market);
+  }
+
+  // Flujo visual: cartera actual → objetivo → aportación propuesta.
+  var rg=document.querySelector('#rebalanceo .grid');
+  if(rg&&!document.getElementById('rebalanceFlow')){
+    var flow=document.createElement('div');
+    flow.id='rebalanceFlow';flow.className='rebalance-flow';
+    flow.innerHTML='<span>Objetivo</span><strong id="rebalanceTarget">—</strong><small>Acercar la cartera al reparto objetivo sin vender</small><div class="arrow">→</div>';
+    rg.insertBefore(flow,rg.children[1]||null);
+    var title=rg.querySelector('.s7 .head h2'); if(title) title.textContent='Aportación propuesta';
+  }
+  function targetText(){
+    var m=model();
+    if(!m) return s.type==='custom'?'Distribución personalizada':'—';
+    var p=[];
+    if(m.blocks.eq) p.push(m.blocks.eq+'% RV');
+    if(m.blocks.bond) p.push(m.blocks.bond+'% bonos');
+    if(m.blocks.crypto) p.push(m.id==='horizonte'?m.blocks.crypto+'% BTC':m.blocks.crypto+'% cripto');
+    return p.join(' · ');
+  }
+  function enhanceRebalance(){
+    var t=document.getElementById('rebalanceTarget'); if(t) t.textContent=targetText();
+    document.querySelectorAll('#holds .hold small').forEach(function(x){x.textContent='Saldo actual'});
+    document.querySelectorAll('#results .res').forEach(function(row){
+      var sm=row.querySelector('small'); if(!sm||sm.classList.contains('weight-flow')) return;
+      var m=sm.textContent.match(/Actual\s+([^·]+)\s*·\s*objetivo\s+(.+)/i);
+      if(!m) return;
+      sm.className='weight-flow';
+      sm.innerHTML='<span>Actual <b>'+m[1].trim()+'</b></span><i>→</i><span class="target">Objetivo <b>'+m[2].trim()+'</b></span>';
+    });
+  }
+  var results=document.getElementById('results');
+  if(results) new MutationObserver(enhanceRebalance).observe(results,{childList:true,subtree:true});
+  enhanceRebalance();
+
+  // Algo más de vida en la brújula/ruta, sin convertirla en una animación llamativa.
+  var art=document.querySelector('.motion-art');
+  if(art&&!art.querySelector('.spark')){
+    art.insertAdjacentHTML('beforeend','<i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>');
+  }
+
+  // Al cambiar de cartera, refrescar también el objetivo central.
+  var oldRender=window.render;
+  if(typeof oldRender==='function'){
+    window.render=function(){oldRender();enhanceRebalance();};
+  }
+})();
+</script>
+
+</body></html>
