@@ -212,6 +212,86 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   #summary #marketCard .market{align-items:flex-start!important}
 }
 
+
+/* ===== RUMBO PRO V2.2 · pulido visual, fuente EM y utilidades ===== */
+:root{--accent-gold:#c9a66a;--accent-green:#2f9f75}
+.top-actions{display:flex;align-items:center;gap:8px;position:relative}
+.top-actions #saved{font-size:9px!important;color:var(--mut)!important}
+.app-menu-btn{
+ width:38px;height:38px;border:1px solid rgba(16,42,72,.12);border-radius:12px;
+ display:grid;place-items:center;background:rgba(255,253,248,.88);color:var(--nav);
+ box-shadow:0 7px 18px rgba(60,44,27,.07);font-size:22px;line-height:1;font-weight:900
+}
+.app-menu-btn:hover{background:#fff}
+.app-menu{
+ position:absolute;right:0;top:46px;z-index:120;width:210px;padding:8px;border-radius:16px;
+ background:#fffdf8;border:1px solid var(--line);box-shadow:0 18px 48px rgba(34,28,21,.16);
+ display:none
+}
+.app-menu.on{display:block}
+.app-menu .menu-title{display:block;padding:7px 9px 5px;color:var(--mut);font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.09em}
+.app-menu button{width:100%;border:0;border-radius:11px;padding:10px;text-align:left;background:transparent;color:var(--ink);font-size:11px;font-weight:800}
+.app-menu button:hover{background:rgba(16,42,72,.055)}
+.app-menu button.danger{color:#a43749}.app-menu button.danger:hover{background:rgba(164,55,73,.07)}
+.reset-modal{
+ position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:18px;background:rgba(10,22,36,.42);backdrop-filter:blur(7px)
+}
+.reset-modal.on{display:grid}
+.reset-box{width:min(390px,100%);padding:20px;border-radius:24px;background:#fffdf8;border:1px solid var(--line);box-shadow:0 26px 80px rgba(21,26,33,.24)}
+.reset-box h3{margin:0;font-size:22px;letter-spacing:-.045em}.reset-box p{margin:8px 0 0;color:var(--mut);font-size:11px;line-height:1.5}
+.reset-box .actions{justify-content:flex-end;margin-top:16px}.reset-confirm{background:linear-gradient(135deg,#9e3046,#c65368)!important;color:white!important}
+
+.btn{
+ color:#fff!important;text-shadow:0 1px 0 rgba(0,0,0,.09)!important;
+ background:linear-gradient(135deg,#102a48,#24547f)!important;
+ border:1px solid rgba(255,255,255,.05)!important;
+ box-shadow:0 9px 22px rgba(16,42,72,.16),inset 0 1px 0 rgba(255,255,255,.10)!important
+}
+.btn:hover{filter:brightness(1.06)}
+.btn.alt,.btn.ghost{
+ color:#153654!important;text-shadow:none!important;background:linear-gradient(180deg,#fffdf9,#f0e7d9)!important;
+ border:1px solid rgba(16,42,72,.16)!important;box-shadow:0 5px 14px rgba(52,42,31,.06)!important
+}
+.nav button.on{color:#fff!important}
+#cartera .hero{
+ background:
+ radial-gradient(ellipse at 88% 5%,rgba(225,192,130,.30),transparent 19rem),
+ radial-gradient(ellipse at 7% 112%,rgba(116,158,205,.13),transparent 20rem),
+ linear-gradient(135deg,#102843 0%,#1a3c61 58%,#315f80 100%)!important
+}
+#rebalanceo .hero{
+ background:
+ radial-gradient(ellipse at 84% 4%,rgba(74,181,139,.25),transparent 18rem),
+ radial-gradient(ellipse at 8% 112%,rgba(109,151,205,.16),transparent 19rem),
+ linear-gradient(135deg,#0d263e 0%,#143c52 58%,#175a62 100%)!important
+}
+#horizonte .hero{
+ background:
+ radial-gradient(ellipse at 84% 8%,rgba(82,183,145,.20),transparent 19rem),
+ radial-gradient(ellipse at 10% 112%,rgba(218,181,113,.28),transparent 19rem),
+ linear-gradient(135deg,#102540 0%,#173a62 56%,#264d68 100%)!important
+}
+#cartera .hero:after,#rebalanceo .hero:after,#horizonte .hero:after{
+ content:"";position:absolute;right:-70px;top:-90px;width:250px;height:250px;border-radius:50%;
+ border:1px solid rgba(255,255,255,.08);box-shadow:0 0 0 28px rgba(255,255,255,.025),0 0 0 58px rgba(255,255,255,.018);pointer-events:none
+}
+#rebalanceo .auto-chip{
+ display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:7px 10px;border-radius:999px;
+ background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:9px;font-weight:800;letter-spacing:.02em
+}
+#rebalanceo .auto-chip i{width:7px;height:7px;border-radius:50%;background:#67d8aa;box-shadow:0 0 0 4px rgba(103,216,170,.10)}
+.em-source-link{
+ display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;text-decoration:none;
+ color:var(--nav);font-size:9px;font-weight:850;background:#fffaf2;border:1px solid rgba(16,42,72,.13)
+}
+.em-source-link:hover{background:white}
+#summary #marketCard .source-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+@media(max-width:600px){
+ .top-actions #saved{display:none!important}.app-menu{right:0;top:43px}
+ .app-menu-btn{width:36px;height:36px}
+ #cartera .hero:after,#rebalanceo .hero:after,#horizonte .hero:after{right:-110px;top:-110px;width:230px;height:230px}
+}
+
 </style></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav"><button class="on" data-v="inicio">Inicio</button><button data-v="cartera">Cartera</button><button data-v="rebalanceo">Rebalanceo</button><button data-v="horizonte">Horizonte</button></nav><main>
@@ -358,6 +438,74 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   if(typeof oldRender==='function'){
     window.render=function(){oldRender();enhanceRebalance();};
   }
+})();
+</script>
+
+
+<script id="rumbo-pro-v22">
+(function(){
+  // Menú de utilidad: reinicio total.
+  var top=document.querySelector('.top');
+  var saved=document.getElementById('saved');
+  if(top&&saved&&!document.getElementById('appMenuBtn')){
+    var wrap=document.createElement('div');wrap.className='top-actions';
+    saved.parentNode.insertBefore(wrap,saved);wrap.appendChild(saved);
+    var btn=document.createElement('button');btn.id='appMenuBtn';btn.className='app-menu-btn';btn.setAttribute('aria-label','Menú');btn.textContent='⋮';wrap.appendChild(btn);
+    var menu=document.createElement('div');menu.id='appMenu';menu.className='app-menu';
+    menu.innerHTML='<span class="menu-title">Cartera</span><button class="danger" id="resetPortfolio">Reiniciar cartera</button>';
+    wrap.appendChild(menu);
+    btn.onclick=function(e){e.stopPropagation();menu.classList.toggle('on')};
+    document.addEventListener('click',function(){menu.classList.remove('on')});
+    menu.addEventListener('click',function(e){e.stopPropagation()});
+  }
+  if(!document.getElementById('resetModal')){
+    var rm=document.createElement('div');rm.id='resetModal';rm.className='reset-modal';
+    rm.innerHTML='<div class="reset-box"><h3>Reiniciar cartera</h3><p>Se borrarán el nombre, la cartera elegida, los saldos y la aportación. RUMBO volverá al estado inicial.</p><div class="actions"><button class="btn ghost" id="cancelReset">Cancelar</button><button class="btn reset-confirm" id="confirmReset">Reiniciar</button></div></div>';
+    document.body.appendChild(rm);
+  }
+  var reset=document.getElementById('resetPortfolio'),modal=document.getElementById('resetModal');
+  if(reset)reset.onclick=function(){document.getElementById('appMenu')?.classList.remove('on');modal.classList.add('on')};
+  document.getElementById('cancelReset').onclick=function(){modal.classList.remove('on')};
+  modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('on')});
+  document.getElementById('confirmReset').onclick=function(){
+    var market=s.market;
+    s={user:'',type:null,customName:'',customRate:6,custom:[],hold:{},money:0,market:market};
+    localStorage.removeItem(KEY);
+    localStorage.setItem(KEY,JSON.stringify(s));
+    location.reload();
+  };
+
+  // Señal discreta de que el rebalanceo es automático por aportaciones.
+  var rebHero=document.querySelector('#rebalanceo .hero .heroIn > div');
+  if(rebHero&&!rebHero.querySelector('.auto-chip')){
+    rebHero.insertAdjacentHTML('beforeend','<span class="auto-chip"><i></i>Rebalanceo automático por aportaciones</span>');
+  }
+
+  // Emergentes: fuente transparente y verificable. No fingimos una actualización que el origen no ofrece por API estable.
+  var market=document.getElementById('marketCard');
+  var emChip=document.querySelector('#marketCard .chip:first-child');
+  if(market&&emChip&&!document.getElementById('emSourceLink')){
+    var src=document.createElement('a');src.id='emSourceLink';src.className='em-source-link';src.href='/emergentes.html';src.target='_blank';src.rel='noopener';src.innerHTML='↗ Ver fuente MSCI';
+    var marketBox=market.querySelector('.market');
+    if(marketBox){
+      var row=document.createElement('div');row.className='source-row';row.appendChild(src);
+      marketBox.appendChild(row);
+    }
+    emChip.style.cursor='pointer';
+    emChip.title='Ver cómo se obtiene el peso de emergentes';
+    emChip.onclick=function(){window.open('/emergentes.html','_blank','noopener')};
+  }
+
+  // El botón de actualización se reserva para el dato cripto cuando Ethereum está presente.
+  var oldHome=window.renderHome;
+  if(typeof oldHome==='function'){
+    window.renderHome=function(){
+      oldHome();
+      var m=model(),r=document.getElementById('refresh');
+      if(r){r.style.display=m&&m.eth?'inline-flex':'none';r.textContent='↻ Actualizar cripto';}
+    };
+  }
+  if(typeof window.render==='function')window.render();
 })();
 </script>
 
