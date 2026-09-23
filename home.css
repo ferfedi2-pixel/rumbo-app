@@ -1,0 +1,128 @@
+/* Portada RUMBO. Las reglas de esta hoja sólo afectan a Inicio. */
+body:has(#inicio.on){background:#07121c!important;color:#f4f7fa}
+body:has(#inicio.on) .top{background:#07121c!important;color:#f4f7fa!important;border-bottom:1px solid #253440!important}
+body:has(#inicio.on) .top .brand b{color:#f6f7f5!important}
+body:has(#inicio.on) .top .brand small{color:#a5b1bd!important}
+body:has(#inicio.on) .top #saved{color:#8a9caa!important}
+body:has(#inicio.on) .nav{background:#0c1c29!important;border-color:#345064!important;box-shadow:0 12px 32px #0009!important}
+body:has(#inicio.on) .nav button{color:#aebfcd!important}
+body:has(#inicio.on) .nav button.on{background:#22cbae!important;color:#05251f!important}
+
+#inicio{color:#f4f7fa;margin-top:12px}
+#inicio [hidden]{display:none!important}
+#inicio .homeHeroV3{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:380px!important;margin:0!important;padding:0!important;border:1px solid #2b4050;border-radius:30px!important;overflow:hidden;isolation:isolate;background:#0a1925!important;box-shadow:0 20px 48px #0005}
+#inicio .homeHeroV3:before,#inicio .homeHeroV3:after{display:none!important}
+#inicio .homeHeroCopy{grid-area:1/1;width:auto!important;padding:44px 24px 38px 42px!important;z-index:2}
+#inicio .homeKicker{color:#6fe4ce;font-size:11px!important;letter-spacing:.19em;font-weight:750}
+#inicio .homeHeroCopy h1{max-width:590px!important;margin:19px 0 10px!important;font:700 clamp(40px,5vw,67px)/1.04 Georgia,"Times New Roman",serif!important;letter-spacing:-.045em!important;color:#fff}
+#inicio .homeHeroCopy h1 em{font-style:normal;color:#43d5ba}
+#inicio .homeHeroCopy p{max-width:420px!important;margin:0!important;color:#b7c5ce!important;font-size:16px!important;line-height:1.45!important}
+#inicio .homeValue{position:relative!important;left:auto!important;bottom:auto!important;margin:28px 0 0!important;z-index:3}
+#inicio .homeValue span{display:block;color:#b7c8d4!important;font-size:13px!important;letter-spacing:.06em!important;text-transform:uppercase}
+#inicio .homeValue strong{display:block;margin-top:6px!important;color:#fff;font:700 clamp(39px,4.5vw,58px)/1.06 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em!important;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#inicio .homeSceneryImage{position:relative;grid-area:1/2;inset:auto;z-index:0;width:auto;height:auto;min-height:380px;background:#101d27 url('/assets/rumbo-road-bg.jpg') center 16%/cover no-repeat;filter:none!important;transform:none!important}
+#inicio .homeSceneryImage:after{content:"";display:block;position:absolute;inset:0;background:linear-gradient(90deg,#0a1925 0%,transparent 42%),linear-gradient(0deg,#0a1925b3,transparent 48%);pointer-events:none}
+#inicio .homeCompass{grid-area:1/2;place-self:end end;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;z-index:3!important;width:138px!important;height:138px!important;margin:0 24px 24px 0;transform:none!important;opacity:1!important;border:1px solid #e9bd6770!important;background:radial-gradient(circle at 45% 35%,#1b3545,#07121c 77%)!important;box-shadow:inset 0 0 0 6px #ffffff08,0 12px 28px #0009!important;pointer-events:none}
+#inicio .homeCompass .north{color:#ffe093!important}
+#inicio .compassNeedle{animation:northNeedleV3 6s ease-in-out infinite}
+
+#inicio .homeV3Content{display:grid;gap:14px;margin-top:14px}
+#inicio .homeEmptyV3,#inicio .homeDistributionV3,#inicio .homeMetricsV3{border:1px solid #2a4151;background:#0e1d2a;box-shadow:0 12px 30px #0003}
+#inicio .homeEmptyV3{padding:32px;border-radius:26px;text-align:left}
+#inicio .homeEmptyV3 h2{font-size:26px;margin:8px 0;color:#f6f8f9}
+#inicio .homeEmptyV3 p{max-width:420px;margin:0 0 20px;color:#b7c5d1;font-size:15px;line-height:1.5}
+#inicio .homeEmptyIcon{color:#46dcc1}
+#inicio .btn{font-size:14px!important;background:#21c6ac!important;color:#04231e!important}
+#inicio .homeDistributionV3{padding:22px;border-radius:27px}
+#inicio .homeSectionHead{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+#inicio .homeSectionHead>div{min-width:0}
+#inicio .homeSectionHead span{color:#6cddc5;font-size:11px;letter-spacing:.15em;font-weight:750}
+#inicio .homeSectionHead h2{color:#f5f8fa;font-size:26px;line-height:1.14;letter-spacing:-.035em;margin:6px 0 3px;overflow-wrap:anywhere}
+#inicio .homeSectionHead p{color:#a8bac8;font-size:13px;margin:0}
+#inicio .homeInfoBtn{width:auto;height:39px;padding:0 13px;flex:none;color:#c4d9e6;border:1px solid #416078;border-radius:12px;background:#162b3a;font:650 13px/1 system-ui,sans-serif}
+#inicio .homeInfoBtn span{color:inherit;letter-spacing:0;font-size:20px;vertical-align:-1px;margin-left:4px}
+#inicio .homeDistGrid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:30px;align-items:center}
+#inicio .homeDonutWrap{width:212px!important;height:212px!important;margin:auto}
+#inicio .homeDonutWrap .donut{width:100%;height:100%;border:0;box-shadow:0 10px 30px #0005}
+#inicio .homeDonutWrap .donut:after{display:none!important}
+#inicio .homeDonutCenter{position:absolute;inset:36px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #2c4655;border-radius:50%;background:#0d1e2b;box-shadow:inset 0 0 26px #0006;padding:8px}
+#inicio .homeDonutCenter small{color:#72dac5;font-size:11px;letter-spacing:.16em;font-weight:800}
+#inicio .homeDonutCenter strong{max-width:130px;margin:5px 0 0;color:#fff;font-size:19px!important;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#inicio .homeDonutCenter span{color:#9bafbe;font-size:11px;line-height:1.2;margin-top:5px}
+#inicio .homeAssetRow{display:grid;grid-template-columns:13px minmax(0,1fr) auto;align-items:center;gap:11px;min-height:53px;padding:8px 0;border-bottom:1px solid #ffffff19}
+#inicio .homeAssetRow:last-child{border-bottom:0}
+#inicio .homeAssetDot{display:block;width:11px;height:11px;border-radius:50%}
+#inicio .homeAssetName{color:#eef3f7;font-size:15px;font-weight:640;min-width:0;overflow-wrap:anywhere}
+#inicio .homeAssetNumbers{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+#inicio .homeAssetNumbers strong{display:block;color:#f6f8f9;font-size:17px!important;line-height:1.18;letter-spacing:-.02em}
+#inicio .homeAssetNumbers span{display:block;margin-top:3px;color:#adbdc9;font-size:13px}
+#inicio .homeMetricsV3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0;border:0;background:transparent;box-shadow:none}
+#inicio .homeMetric{display:flex;gap:14px;align-items:center;min-height:82px;padding:16px 18px;border:1px solid #2a4151;border-radius:20px;background:#0e1d2a;color:#f4f7fa;text-align:left}
+#inicio .homeMetric:hover,#inicio .homeMetric:focus-visible{border-color:#45baa8;outline:none}
+#inicio .metricIcon{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;color:#4cdbc0;background:#1d403f;font-size:23px}
+#inicio .homeMetric small{display:block;color:#a9bccb;font-size:13px}
+#inicio .homeMetric strong{display:block;margin:2px 0;color:#f7f9fa;font-size:23px;line-height:1.1;font-variant-numeric:tabular-nums}
+#inicio .homeMetric p{margin:0;color:#a1b1be;font-size:12px;line-height:1.25}
+#inicio .homeMetric>b{margin-left:auto;color:#a0b7c7;font-size:23px}
+
+@media(max-width:720px){
+  body:has(#inicio.on) .app{padding:0 12px calc(112px + env(safe-area-inset-bottom))!important}
+  body:has(#inicio.on) .top{height:72px!important;margin:0 -12px!important;padding:0 18px!important}
+  body:has(#inicio.on) .brand{gap:12px!important}
+  body:has(#inicio.on) .brand .logo{width:43px!important;height:43px!important;border-radius:50%!important}
+  body:has(#inicio.on) .brand b{font-size:18px!important;letter-spacing:.20em!important}
+  body:has(#inicio.on) .brand small{display:block!important;margin-top:2px;color:#aab8c3!important;font-size:11px!important;letter-spacing:0}
+  body:has(#inicio.on) #saved{display:none!important}
+  #inicio{margin-top:0!important}
+  #inicio .homeHeroV3{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 255px;min-height:0!important;border-radius:26px!important}
+  #inicio .homeHeroCopy{grid-area:1/1;width:100%!important;padding:23px 18px 0!important}
+  #inicio .homeKicker{font-size:10px!important;letter-spacing:.16em}
+  #inicio .homeHeroCopy h1{max-width:100%!important;margin:10px 0 7px!important;font-size:clamp(34px,9.3vw,42px)!important;line-height:1.02!important;letter-spacing:-.045em!important}
+  #inicio .homeHeroCopy p{font-size:14px!important;max-width:none!important;line-height:1.3!important}
+  #inicio .homeValue{position:relative!important;left:auto!important;bottom:auto!important;margin:19px 0 0!important}
+  #inicio .homeValue span{font-size:11px!important}
+  #inicio .homeValue strong{font-size:clamp(38px,10vw,46px)!important;margin-top:5px!important;line-height:1!important}
+  #inicio .homeSceneryImage{grid-area:2/1;min-height:0;height:238px;margin:16px 13px 0;border-radius:18px 18px 0 0;background-position:center top!important;background-size:cover!important}
+  #inicio .homeSceneryImage:after{background:linear-gradient(180deg,transparent 65%,#0a19258c 100%)}
+  #inicio .homeCompass{grid-area:2/1;place-self:end end;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;width:105px!important;height:105px!important;margin:0 26px 20px 0!important;transform:none!important}
+  #inicio .homeCompass span{font-size:9px}
+  #inicio .homeCompass .north{top:10px!important}
+  #inicio .homeCompass .south{bottom:10px!important}
+  #inicio .homeCompass .west{left:11px!important}
+  #inicio .homeCompass .east{right:11px!important}
+  #inicio .compassTicks{inset:9px!important}
+  #inicio .compassNeedle{width:13px!important;height:70px!important;margin:-35px 0 0 -6.5px!important}
+  #inicio .compassNeedle:before,#inicio .compassNeedle:after{width:13px!important;height:37px!important}
+  #inicio .compassHub{width:15px!important;height:15px!important;border-width:3px!important}
+  #inicio .homeV3Content{gap:12px;margin-top:12px}
+  #inicio .homeDistributionV3{padding:19px 17px 16px;border-radius:24px}
+  #inicio .homeSectionHead{gap:8px;margin-bottom:12px}
+  #inicio .homeSectionHead h2{font-size:23px!important}
+  #inicio .homeInfoBtn{height:36px;padding:0 9px;font-size:12px}
+  #inicio .homeDistGrid{grid-template-columns:1fr;gap:13px}
+  #inicio .homeDonutWrap{width:184px!important;height:184px!important;margin:4px auto 3px!important}
+  #inicio .homeDonutCenter{inset:32px!important}
+  #inicio .homeDonutCenter strong{font-size:17px!important}
+  #inicio .homeAssetRow{min-height:51px;padding:8px 1px}
+  #inicio .homeAssetName{font-size:14px}
+  #inicio .homeAssetNumbers strong{font-size:16px!important}
+  #inicio .homeMetricsV3{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  #inicio .homeMetric{display:block;min-height:100px;padding:12px 13px;border-radius:17px}
+  #inicio .metricIcon{display:none}
+  #inicio .homeMetric small{font-size:12px;line-height:1.15}
+  #inicio .homeMetric strong{font-size:21px}
+  #inicio .homeMetric p{font-size:11px}
+  #inicio .homeMetric>b{display:none}
+  body:has(#inicio.on) .nav{left:10px!important;right:10px!important;bottom:calc(9px + env(safe-area-inset-bottom))!important;z-index:90!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:3px!important;padding:5px!important;border-radius:21px!important}
+  body:has(#inicio.on) .nav button{min-width:0!important;min-height:58px!important;padding:5px 2px!important;border-radius:16px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;font-size:11px!important;font-weight:700!important;line-height:1.1!important}
+  body:has(#inicio.on) .nav button svg{width:21px!important;height:21px!important}
+}
+@media(max-width:350px){
+  #inicio .homeHeroCopy h1{font-size:32px!important}
+  #inicio .homeValue strong{font-size:36px!important}
+  #inicio .homeCompass{width:92px!important;height:92px!important}
+  #inicio .homeInfoBtn{font-size:0}
+  #inicio .homeInfoBtn span{font-size:22px}
+  body:has(#inicio.on) .nav button{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){#inicio .compassNeedle{animation:none!important;transform:rotate(-2deg)}}
