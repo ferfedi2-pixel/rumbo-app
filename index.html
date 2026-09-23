@@ -471,8 +471,91 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .nav button{min-height:58px!important;border-radius:17px!important;color:#879aab!important;font-size:9px!important;font-weight:750!important;display:flex!important;flex-direction:column!important;gap:4px!important;align-items:center!important;justify-content:center!important;padding:6px 3px!important}.nav button.on{background:linear-gradient(135deg,#19cbae,#2ce0c2)!important;color:#05231e!important;box-shadow:0 9px 22px rgba(26,211,182,.20)!important}.nav button svg{width:22px;height:22px}
 }
 ===== END RUMBO HOME V3 ===== */
+
+/* ===== RUMBO HOME V4 · corrección visual móvil verificada ===== */
+.homeSceneryImage{
+  position:absolute;inset:0;z-index:-3;
+  background-image:url('/assets/rumbo-road-bg.jpg');
+  background-size:cover;background-position:center 46%;
+  filter:saturate(1.08) contrast(1.04) brightness(.92);
+  transform:scale(1.015);
+}
+.homeHeroV3{background:#07131f}
+.homeHeroV3:before{
+  content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(circle at 23% 20%,rgba(255,205,104,.24),transparent 20%),
+    linear-gradient(90deg,rgba(3,11,19,.94) 0%,rgba(3,11,19,.72) 38%,rgba(3,11,19,.22) 65%,rgba(3,11,19,.08) 100%);
+}
+.homeHeroV3:after{
+  background:linear-gradient(180deg,rgba(3,11,19,.03) 0%,rgba(3,11,19,.07) 48%,rgba(3,11,19,.75) 81%,rgba(3,11,19,.94) 100%)
+}
+.homeHeroCopy{width:min(52%,560px);padding-top:39px}
+.homeHeroCopy h1{font-size:clamp(43px,5.3vw,66px);max-width:540px}
+.homeHeroCopy p{font-size:11.5px;max-width:390px}
+.homeValue{margin-top:26px}
+.homeValue strong{font-size:clamp(40px,4.8vw,58px)}
+.homeCompass{right:7%;top:54%;width:158px;height:158px;background:radial-gradient(circle at 48% 42%,rgba(18,38,52,.91),rgba(4,12,20,.96));border-color:rgba(239,192,91,.32);box-shadow:inset 0 0 0 7px rgba(255,255,255,.018),0 22px 55px rgba(0,0,0,.44),0 0 34px rgba(239,184,76,.11)}
+.homeCompass .north{color:#ffd060}
+.homeDistributionV3,.homeMetricsV3{max-width:100%}
+.homeAssetRow{min-height:58px}
+.homeAssetNumbers strong{font-variant-numeric:tabular-nums}
+.top{background:#07131f!important;color:#f3f7fa!important;border-bottom:1px solid rgba(117,146,170,.14)!important}
+.top .brand b{color:#f4f8fb!important}.top .brand small{color:#93a4b4!important}
+.top #saved{color:#6f8294!important}
+.brand .logo{background:radial-gradient(circle at 50% 50%,#102b3a,#07131f)!important}
+@media(max-width:720px){
+  body{background:linear-gradient(180deg,#07131f 0 56%,#ece4d7 56% 100%)}
+  .app{padding-left:8px!important;padding-right:8px!important;padding-bottom:126px!important}
+  .top{height:70px!important;margin:0 -8px!important;padding:0 18px!important}
+  .brand{gap:12px!important}.brand .logo{width:48px!important;height:48px!important;border-radius:50%!important}
+  .brand b{font-size:19px!important;letter-spacing:.22em!important}.brand small{font-size:9px!important;margin-top:2px!important}
+  #inicio{margin-top:0!important}
+  .homeHeroV3{margin:0 -8px!important;min-height:462px!important;border-radius:0 0 32px 32px!important;border-left:0!important;border-right:0!important}
+  .homeSceneryImage{background-size:cover!important;background-position:center top!important;filter:saturate(1.12) contrast(1.06) brightness(.93)!important}
+  .homeHeroV3:before{background:
+    radial-gradient(circle at 18% 17%,rgba(255,209,103,.18),transparent 22%),
+    linear-gradient(180deg,rgba(3,10,18,.08) 0%,rgba(3,10,18,.16) 40%,rgba(3,10,18,.68) 71%,rgba(3,10,18,.97) 100%)!important}
+  .homeHeroV3:after{background:linear-gradient(90deg,rgba(3,10,18,.56) 0%,rgba(3,10,18,.13) 55%,rgba(3,10,18,.05) 100%)!important}
+  .homeHeroCopy{position:static!important;width:100%!important;padding:29px 18px 0!important}
+  .homeKicker{font-size:9px!important;letter-spacing:.15em!important}
+  .homeHeroCopy h1{max-width:340px!important;margin:12px 0 9px!important;font-size:43px!important;line-height:.92!important;letter-spacing:-.055em!important}
+  .homeHeroCopy p{max-width:228px!important;margin:0!important;font-size:10.5px!important;line-height:1.45!important;color:#a9b7c2!important}
+  .homeValue{position:absolute!important;left:18px!important;bottom:27px!important;margin:0!important;z-index:8!important}
+  .homeValue span{font-size:10px!important;letter-spacing:.02em!important}
+  .homeValue strong{margin-top:4px!important;font-size:44px!important;line-height:1!important}
+  .homeCompass{right:16px!important;top:auto!important;bottom:36px!important;width:132px!important;height:132px!important;transform:none!important;z-index:7!important}
+  .homeCompass .north{top:13px!important}.homeCompass .south{bottom:13px!important}.homeCompass .east{right:15px!important}.homeCompass .west{left:15px!important}
+  .compassTicks{inset:11px!important}.compassNeedle{height:86px!important;margin-top:-43px!important;width:15px!important;margin-left:-7.5px!important}
+  .compassNeedle:before,.compassNeedle:after{width:15px!important;height:45px!important}
+  .compassHub{width:16px!important;height:16px!important;border-width:3px!important}
+  .homeV3Content{gap:10px!important;margin-top:10px!important}
+  .homeDistributionV3{padding:16px 14px 14px!important;border-radius:26px!important}
+  .homeSectionHead{margin-bottom:14px!important}.homeSectionHead h2{font-size:19px!important}.homeSectionHead p{font-size:9.5px!important}
+  .homeDistGrid{grid-template-columns:1fr!important;gap:12px!important}
+  .homeDonutWrap{width:206px!important;height:206px!important;margin:2px auto 5px!important}
+  .homeDonutCenter{inset:37px!important}.homeDonutCenter strong{font-size:18px!important;max-width:132px!important}.homeDonutCenter span{font-size:9px!important}
+  .homeLegendV3{width:100%!important}
+  .homeAssetRow{grid-template-columns:12px minmax(0,1fr) auto!important;min-height:64px!important;padding:11px 3px!important;gap:10px!important}
+  .homeAssetName{font-size:13px!important}.homeAssetNumbers strong{font-size:20px!important}.homeAssetNumbers span{font-size:11px!important;margin-top:1px!important}
+  .homeMetricsV3{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;padding:8px!important;border-radius:24px!important}
+  .homeMetric{grid-template-columns:34px minmax(0,1fr)!important;gap:9px!important;min-height:98px!important;padding:11px!important;border-radius:18px!important}
+  .homeMetric>b{display:none!important}.metricIcon{width:34px!important;height:34px!important;border-radius:12px!important;font-size:17px!important}
+  .homeMetric small{font-size:8.5px!important}.homeMetric strong{font-size:22px!important}.homeMetric p{font-size:8px!important;line-height:1.3!important}
+  .nav{bottom:calc(10px + env(safe-area-inset-bottom))!important;min-height:76px!important}
+  .nav button{min-height:60px!important;font-size:9.5px!important}.nav button svg{width:23px!important;height:23px!important}
+}
+@media(max-width:390px){
+  .homeHeroCopy h1{font-size:40px!important;max-width:316px!important}
+  .homeHeroCopy p{max-width:210px!important}
+  .homeValue strong{font-size:41px!important}
+  .homeCompass{width:122px!important;height:122px!important;right:13px!important;bottom:38px!important}
+  .homeDonutWrap{width:192px!important;height:192px!important}.homeDonutCenter{inset:35px!important}
+  .homeMetric{padding:10px!important;gap:7px!important}.homeMetric strong{font-size:20px!important}
+}
+===== END RUMBO HOME V4 ===== */
 </style></head><body>
-<div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
+<div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
   <button data-v="cartera" aria-label="Cartera"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 3"/></svg><span>Cartera</span></button>
@@ -481,21 +564,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
 </nav><main>
 <section class="view on" id="inicio">
   <div class="homeHeroV3">
-    <svg class="homeScenery" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="skyV3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#071725"/><stop offset=".56" stop-color="#0b2434"/><stop offset="1" stop-color="#06111c"/></linearGradient>
-        <radialGradient id="sunV3"><stop offset="0" stop-color="#fff8d8"/><stop offset=".32" stop-color="#ffd574"/><stop offset="1" stop-color="#f0a52a" stop-opacity="0"/></radialGradient>
-        <linearGradient id="routeV3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#bf7c1e"/><stop offset=".45" stop-color="#ffd36a"/><stop offset="1" stop-color="#fff0b0"/></linearGradient>
-        <filter id="routeGlowV3"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <rect width="1200" height="520" fill="url(#skyV3)"/>
-      <circle class="homeSunGlow" cx="1002" cy="122" r="93" fill="url(#sunV3)"/>
-      <circle class="homeSun" cx="1002" cy="122" r="31" fill="#ffd56d"/>
-      <path d="M0 297 126 214 224 271 342 167 438 261 548 204 650 277 753 192 877 258 980 194 1080 252 1200 203V520H0Z" fill="#0a1a26"/>
-      <path d="M0 338 106 277 201 332 321 244 448 329 569 276 688 343 809 270 927 330 1041 262 1200 326V520H0Z" fill="#08151f"/>
-      <path class="goldRouteShadow" d="M1198 164 C1081 202 1100 259 978 278 S825 294 861 337 778 375 663 389 493 431 361 493" fill="none" stroke="#e5a736" stroke-opacity=".28" stroke-width="15" filter="url(#routeGlowV3)"/>
-      <path class="goldRoute" d="M1198 164 C1081 202 1100 259 978 278 S825 294 861 337 778 375 663 389 493 431 361 493" fill="none" stroke="url(#routeV3)" stroke-width="5" stroke-linecap="round" filter="url(#routeGlowV3)"/>
-    </svg>
+    <div class="homeSceneryImage" aria-hidden="true"></div>
     <div class="homeHeroCopy">
       <span class="homeKicker">RUMBO · PLAN DE INVERSIÓN</span>
       <h1 id="homeTitle">Configura<br>tu cartera</h1>
