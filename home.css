@@ -179,7 +179,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeHeroV3{grid-template-rows:auto 365px}
   #inicio .homeSceneryImage{height:350px;margin:12px 13px 0;background-position:center 12%!important}
   #inicio .homeHeroV3 .homeValue{grid-area:2/1;max-width:calc(100% - 32px);margin:0 0 19px 27px!important}
-  #inicio .homeHeroV3 .homeValue strong{font-size:clamp(35px,9.4vw,44px)!important;white-space:nowrap}
+  #inicio .homeHeroV3 .homeValue strong{font-size:clamp(35px,9.4vw,44px)!important;overflow-wrap:anywhere}
   #inicio .homeCompass{grid-area:2/1;place-self:center end;margin:28px 25px 0 0!important}
 }
 @media(max-width:350px){
