@@ -127,3 +127,42 @@ body:has(#inicio.on) .nav button.on{background:#22cbae!important;color:#05251f!i
   body:has(#inicio.on) .nav button{font-size:10px!important}
 }
 @media(prefers-reduced-motion:reduce){#inicio .compassNeedle{animation:none!important;transform:rotate(-2deg)}}
+
+/* Portada más ligera: menos contornos y patrimonio con espacio propio. */
+body:has(#inicio.on) .top{border-bottom:0!important}
+body:has(#inicio.on) .top .brand .logo{width:52px!important;height:52px!important;border-color:#37d7b88c!important;box-shadow:none!important}
+body:has(#inicio.on) .top .brand b{font-size:22px!important;letter-spacing:.22em!important}
+body:has(#inicio.on) .top .brand small{font-size:11px!important}
+#inicio .homeV3Content{gap:18px;margin-top:15px}
+#inicio .homeValue{border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;padding:11px 16px 7px!important}
+#inicio #summary{border:0!important;border-radius:27px!important;background:#10212e!important;box-shadow:none!important;padding:27px 26px!important}
+#inicio .homeSectionHead{margin-bottom:22px}
+#inicio .homeSectionHead span{color:#79d9c8}
+#inicio .homeSectionHead h2{margin-top:7px}
+#inicio .homeInfoBtn{background:transparent;border:0;color:#78dfcc;padding:0 2px;font-weight:700}
+#inicio .homeInfoBtn:hover,#inicio .homeInfoBtn:focus-visible{color:#fff;outline:2px solid #50d8bd;outline-offset:4px}
+#inicio .homeDonutCenter{border:0;box-shadow:none}
+#inicio .homeAssetRow{border-bottom:0;padding:11px 0}
+#inicio .homeAssetDot{width:10px;height:10px}
+#inicio .homeMetric{border:0;background:#10212e;box-shadow:none}
+#inicio .homeEmptyV3{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:23px 16px 28px!important}
+#inicio .homeEmptyEyebrow{display:block;color:#61d9bf;font-size:11px;letter-spacing:.17em;font-weight:750}
+#inicio .homeEmptyV3 h2{font:700 clamp(28px,4vw,35px)/1.12 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em;margin:10px 0!important}
+#inicio .homeEmptyV3 p{margin:0 0 23px;color:#b2c3ce;font-size:15px}
+#inicio .homeStartButton{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:52px;padding:0 20px;border:0;border-radius:999px;background:#35d3b5;color:#052721;font:750 14px/1.2 system-ui,sans-serif;box-shadow:0 10px 25px #0f786337}
+#inicio .homeStartButton span{font-size:20px;line-height:1}
+#inicio .homeStartButton:hover{background:#66ead0}
+#inicio .homeStartButton:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:720px){
+  body:has(#inicio.on) .top .brand .logo{width:47px!important;height:47px!important}
+  body:has(#inicio.on) .top .brand b{font-size:19px!important}
+  body:has(#inicio.on) .top .brand small{font-size:10px!important}
+  #inicio .homeV3Content{gap:14px;margin-top:15px}
+  #inicio .homeValue{padding:8px 12px 5px!important}
+  #inicio #summary{padding:23px 18px 19px!important}
+  #inicio .homeSectionHead{margin-bottom:14px}
+  #inicio .homeAssetRow{min-height:47px!important;padding:7px 2px!important}
+  #inicio .homeMetricsV3{gap:7px}
+  #inicio .homeMetric{min-height:93px;padding:12px 11px}
+  #inicio .homeEmptyV3{padding:20px 11px 26px!important}
+}

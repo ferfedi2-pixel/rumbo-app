@@ -566,7 +566,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=2"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=3"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -591,16 +591,16 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   </div>
 
   <div class="homeV3Content">
-    <div class="homeValue"><span>Patrimonio total</span><strong id="homeTotal">—</strong></div>
+    <div class="homeValue" id="homeValue" hidden><span>Patrimonio total</span><strong id="homeTotal">—</strong></div>
     <div class="homeEmptyV3" id="empty">
-      <div class="homeEmptyIcon">⌖</div><h2>Construye tu rumbo</h2>
-      <p>Configura una de las tres estrategias RUMBO o crea una cartera propia.</p>
-      <button class="btn" onclick="go('cartera')">Configurar cartera</button>
+      <span class="homeEmptyEyebrow">TU PRIMER PASO</span><h2>Elige tu dirección.</h2>
+      <p>Selecciona una estrategia RUMBO o crea una cartera a tu medida.</p>
+      <button class="homeStartButton" onclick="go('cartera')">Configurar mi cartera <span aria-hidden="true">↗</span></button>
     </div>
 
     <div class="homeDistributionV3" id="summary" hidden>
       <div class="homeSectionHead">
-        <div><span>CARTERA ACTIVA</span><h2 id="homePortfolioName">Tu cartera</h2><p id="distMode">Distribución actual</p></div>
+        <div><span>TU CARTERA</span><h2 id="homePortfolioName">Tu cartera</h2><p id="distMode">Distribución actual</p></div>
         <button class="homeInfoBtn" onclick="go('cartera')" aria-label="Ver detalles de cartera">Ver cartera <span aria-hidden="true">›</span></button>
       </div>
       <div class="homeDistGrid">
@@ -1151,6 +1151,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   function renderHomeV3(){
     const a=assets(), ok=a.length>0, m=model(), t=total();
     empty.hidden=ok;
+    document.getElementById('homeValue').hidden=!ok;
     summary.hidden=!ok;
     homeMetrics.hidden=!ok;
     marketCard.hidden=true;
