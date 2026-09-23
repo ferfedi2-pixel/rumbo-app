@@ -144,7 +144,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 #inicio .homeDonutCenter{border:0;box-shadow:none}
 #inicio .homeAssetRow{border-bottom:0;padding:11px 0}
 #inicio .homeAssetDot{width:10px;height:10px}
-#inicio .homeMetric{border:0;background:#10212e;box-shadow:none}
+#inicio .homeMetric{border:0;background:transparent;box-shadow:none}
 #inicio .homeEmptyV3{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:23px 16px 28px!important}
 #inicio .homeEmptyEyebrow{display:block;color:#61d9bf;font-size:11px;letter-spacing:.17em;font-weight:750}
 #inicio .homeEmptyV3 h2{font:700 clamp(28px,4vw,35px)/1.12 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em;margin:10px 0!important}
@@ -162,7 +162,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio #summary{padding:23px 18px 19px!important}
   #inicio .homeSectionHead{margin-bottom:14px}
   #inicio .homeAssetRow{min-height:47px!important;padding:7px 2px!important}
-  #inicio .homeMetricsV3{gap:7px}
+  #inicio .homeMetricsV3{gap:7px;padding:0 5px}
   #inicio .homeMetric{min-height:93px;padding:12px 11px}
   #inicio .homeEmptyV3{padding:20px 11px 26px!important}
 }
