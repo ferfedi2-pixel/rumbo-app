@@ -292,6 +292,47 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
  #cartera .hero:after,#rebalanceo .hero:after,#horizonte .hero:after{right:-110px;top:-110px;width:230px;height:230px}
 }
 
+
+/* ===== RUMBO PRO V2.3 · diferenciación visual y limpieza ===== */
+#cartera .models{gap:12px!important}
+#cartera .model{border-radius:24px!important;position:relative!important;overflow:hidden!important;padding:17px!important}
+#cartera .model:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--model-accent,#4d83c2)}
+#cartera .model-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;margin-bottom:10px;color:var(--model-accent);background:var(--model-soft);border:1px solid var(--model-border)}
+#cartera .model-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7}
+#cartera .model.sel{border-color:var(--model-border)!important;box-shadow:0 0 0 3px var(--model-soft),0 14px 34px rgba(55,43,29,.08)!important}
+#cartera .model .btn:not(.ghost){background:linear-gradient(135deg,var(--model-accent),var(--model-dark))!important;box-shadow:0 8px 18px var(--model-soft)!important}
+#cartera .model .pill{color:var(--model-accent)!important;background:var(--model-soft)!important;border-color:var(--model-border)!important}
+#cartera .model-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+#cartera .model-meta span{padding:5px 7px;border-radius:999px;background:var(--model-soft);color:var(--model-accent);font-size:8px;font-weight:850}
+#selected{border-top:3px solid var(--selected-accent,#4d83c2)!important}
+#selected .head{align-items:flex-start!important}
+#selected .head h2{font-size:clamp(25px,4vw,32px)!important;letter-spacing:-.055em!important;line-height:1!important}
+#selected .selected-kicker{display:block;color:var(--mut);font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.09em;margin-bottom:5px}
+#selectedComp{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important}
+#selectedComp .sub{display:block!important;margin:0!important;padding:12px!important;border:1px solid var(--line)!important;border-radius:17px!important;background:rgba(255,255,255,.58)!important}
+#selectedComp .sub span{display:block!important;font-size:8.5px!important;text-transform:uppercase!important;letter-spacing:.055em!important;font-weight:820!important}
+#selectedComp .sub span i{display:block!important;margin:0 0 9px!important;width:9px!important;height:9px!important}
+#selectedComp .sub b{display:block!important;margin-top:4px!important;color:var(--ink)!important;font-size:23px!important;letter-spacing:-.05em!important}
+#cartera .custom-name-inline{margin:0 0 11px;padding:12px;border-radius:17px;border:1px solid var(--line);background:rgba(255,255,255,.53)}
+#cartera .custom-name-inline label{font-size:9px!important}
+#cartera .custom-name-inline input{font-size:15px!important;font-weight:800!important}
+#cartera .name-only{display:none!important}
+#inicio #legend b{font-size:18px!important;letter-spacing:-.045em!important}
+#inicio .bt strong{font-size:24px!important}
+#inicio .sub b{font-size:13px!important;color:var(--ink)!important}
+#horizonte .capital-track{height:31px!important;background:#e1e6e8!important;border:1px solid rgba(15,43,77,.07)!important}
+#horizonte .capital-paid{background:#315f91!important}
+#horizonte .capital-gain{background:#35a978!important;border-left:3px solid rgba(255,255,255,.96)!important}
+#horizonte .capital-bar{box-shadow:0 4px 12px rgba(15,43,77,.08)!important}
+#horizonte .breakdown-item.paid b{color:#315f91!important}
+#horizonte .breakdown-item.gain b{color:#25885f!important}
+#horizonte #horizonInsights{display:none!important}
+#horizonte .compound-row{background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.46))!important}
+#marketCard #refresh{display:inline-flex!important}
+#marketCard .market-status-v23{margin-top:7px;color:var(--mut);font-size:8.7px;line-height:1.35}
+@media(max-width:760px){#selectedComp{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){#selectedComp .sub b{font-size:20px!important}#horizonte .capital-track{height:27px!important}}
+
 </style></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav"><button class="on" data-v="inicio">Inicio</button><button data-v="cartera">Cartera</button><button data-v="rebalanceo">Rebalanceo</button><button data-v="horizonte">Horizonte</button></nav><main>
@@ -506,6 +547,70 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     };
   }
   if(typeof window.render==='function')window.render();
+})();
+</script>
+
+
+<script id="rumbo-pro-v23">
+(function(){
+ const UI={
+  refugio:{accent:'#2d8468',dark:'#226651',soft:'rgba(45,132,104,.10)',border:'rgba(45,132,104,.26)',icon:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 2.6 7.6 7 10 4.4-2.4 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>'},
+  horizonte:{accent:'#b77a2e',dark:'#8e5b1e',soft:'rgba(183,122,46,.11)',border:'rgba(183,122,46,.27)',icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m15.5 8.5-2.1 4.9-4.9 2.1 2.1-4.9z"/></svg>'},
+  cumbre:{accent:'#6759a9',dark:'#4e4388',soft:'rgba(103,89,169,.11)',border:'rgba(103,89,169,.26)',icon:'<svg viewBox="0 0 24 24"><path d="m3 19 6.5-10 3.2 4.6L15.5 9 21 19z"/><path d="m8 11 1.5-2 1.4 2"/></svg>'}
+ };
+ renderModels=function(){
+  models.innerHTML=Object.entries(MODELS).map(([id,m])=>{
+   const u=UI[id],target=[m.blocks.eq?m.blocks.eq+'% RV':'',m.blocks.bond?m.blocks.bond+'% bonos':'',m.blocks.crypto?m.blocks.crypto+'% cripto':''].filter(Boolean).join(' · ');
+   return '<div class="model '+(s.type===id?'sel':'')+'" style="--model-accent:'+u.accent+';--model-dark:'+u.dark+';--model-soft:'+u.soft+';--model-border:'+u.border+'"><div class="model-icon">'+u.icon+'</div><span class="pill">Riesgo '+m.risk+'/7</span><h3>'+m.name.replace('RUMBO ','')+'</h3><p>'+m.desc+'</p><div class="model-meta"><span>'+pct(m.rate)+' estimado</span><span>'+target+'</span></div>'+bbar('Bolsa',m.blocks.eq)+(m.blocks.bond?bbar('Bonos',m.blocks.bond,'b'):'')+(m.blocks.crypto?bbar('Cripto',m.blocks.crypto,'c'):'')+'<div class="actions"><button class="btn tiny" onclick="choose(\''+id+'\')">'+(s.type===id?'Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">+ info</button></div></div>';
+  }).join('');
+ };
+ const basePortfolio=renderPortfolio;
+ renderPortfolio=function(){
+  basePortfolio();
+  const a=assets(),m=model(),head=selected.querySelector('.head h2');
+  if(a.length&&head){
+   head.innerHTML='<span class="selected-kicker">Tu cartera</span>'+pname();
+   const accent=s.type==='refugio'?UI.refugio.accent:s.type==='horizonte'?UI.horizonte.accent:s.type==='cumbre'?UI.cumbre.accent:'#4d83c2';
+   selected.style.setProperty('--selected-accent',accent);
+  }
+  const customCard=customAssets.closest('.card');
+  const nameCard=customName.closest('.card');
+  const field=customName.closest('.field');
+  if(customCard&&field&&!customCard.querySelector('.custom-name-inline')){
+   const wrap=document.createElement('div');wrap.className='custom-name-inline';
+   const lab=field.querySelector('label');if(lab)lab.textContent='Nombre de la cartera';
+   customName.placeholder='Ej. Mi cartera global';
+   wrap.appendChild(field);customCard.insertBefore(wrap,customAssets);
+  }
+  if(nameCard)nameCard.classList.add('name-only');
+ };
+ const baseHome=renderHome;
+ renderHome=function(){
+  baseHome();
+  if(refresh){refresh.style.display='inline-flex';refresh.textContent='↻ Actualizar pesos'}
+  if(marketCard&&!marketCard.querySelector('.market-status-v23')){
+   const st=document.createElement('div');st.className='market-status-v23';st.id='marketStatusV23';marketCard.appendChild(st);
+  }
+  const st=document.getElementById('marketStatusV23');
+  if(st)st.textContent=s.market.status||('MSCI '+(s.market.date||'última referencia'));
+ };
+ refresh.onclick=async()=>{
+  refresh.disabled=true;refresh.textContent='Actualizando…';
+  const oldEm=+s.market.em,oldEth=+s.market.eth;
+  try{
+   const r=await fetch('/api/market?ts='+Date.now(),{cache:'no-store'}),j=await r.json();
+   let ok=false;
+   if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;ok=true}
+   if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;ok=true}
+   const same=Math.abs((+s.market.em||0)-oldEm)<0.001 && Math.abs((+s.market.eth||0)-oldEth)<0.001;
+   s.market.date=j.emDate||j.updated||s.market.date;
+   s.market.status=ok?('Comprobado ahora · '+(same?'sin cambios · ':'')+'MSCI '+(s.market.date||'último dato publicado')):'No se pudo obtener un dato nuevo; se mantiene la última referencia válida.';
+  }catch(e){s.market.status='No se pudo comprobar ahora; se mantiene la última referencia válida.'}
+  save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar pesos';
+ };
+ const baseH=renderH;
+ renderH=function(){baseH();const hi=document.getElementById('horizonInsights');if(hi)hi.innerHTML='';};
+ render();
 })();
 </script>
 
