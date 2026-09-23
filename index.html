@@ -566,7 +566,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=9"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=10"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -577,11 +577,11 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
 <section class="view on" id="inicio">
   <div class="homeHeroV3">
     <div class="homeSceneryImage" aria-hidden="true"></div>
-    <div class="homeValue" id="homeValue" hidden><span>Patrimonio total</span><strong id="homeTotal">—</strong></div>
+    <div class="homeValue" id="homeValue"><span>Patrimonio total</span><strong id="homeTotal">0 €</strong></div>
     <div class="homeHeroCopy">
       <span class="homeKicker">TU PLAN, DE UN VISTAZO</span>
-      <h1 id="homeTitle">Configura<br>tu cartera</h1>
-      <p id="homeUser">Elige una cartera RUMBO o crea la tuya.</p>
+      <h1 id="homeTitle">Tu patrimonio,<br><em>con dirección.</em></h1>
+      <p id="homeUser">Disciplina hoy. Libertad mañana.</p>
     </div>
     <div class="homeCompass" aria-hidden="true">
       <div class="compassTicks"></div>
@@ -645,7 +645,7 @@ function bbar(l,v,c=''){return '<div class="bar"><span>'+l+'</span><div class="t
 function renderModels(){models.innerHTML=Object.entries(MODELS).map(([id,m])=>'<div class="model '+(s.type===id?'sel':'')+'"><span class="pill">Riesgo '+m.risk+'/7</span><h3>'+m.name.replace('RUMBO ','')+'</h3><p>'+m.desc+'</p>'+bbar('Bolsa',m.blocks.eq)+(m.blocks.bond?bbar('Bonos',m.blocks.bond,'b'):'')+(m.blocks.crypto?bbar('Cripto',m.blocks.crypto,'c'):'')+'<div class="actions"><button class="btn tiny" onclick="choose(\''+id+'\')">'+(s.type===id?'Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">+ info</button></div></div>').join('')}
 window.choose=id=>{s.type=id;save();render()};window.info=id=>{const m=MODELS[id],old=s.type;s.type=id;const a=assets();s.type=old;modalTitle.textContent=m.name;modalBody.innerHTML='<p style="color:var(--mut);font-size:11px">'+m.desc+'</p><div class="info"><div><b>Riesgo estimado '+m.risk+'/7</b><small>Orientativo; no es SRI oficial PRIIPs.</small></div><div><b>Horizonte: '+pct(m.rate)+' anual</b><small>Estimación nominal media de largo plazo.</small></div>'+a.map(x=>'<div><b>'+x.name+' · '+pct(x.w)+'</b><small>'+x.detail+(x.isin&&x.isin!=='—'?' · ISIN '+x.isin:'')+(x.ter&&x.ter!=='—'?' · TER '+x.ter:'')+'</small></div>').join('')+'</div>';modal.classList.add('on')};closeModal.onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')}
 function blk(n,v,a){return '<div class="block"><div class="bt"><b>'+n+'</b><strong>'+pct(v)+'</strong></div>'+a.map(x=>'<div class="sub"><span>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')+'</div>'}
-function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML=ok?pname().replace('RUMBO ','RUMBO<br>'):'Configura<br>tu cartera';homeUser.textContent=ok?'Tu estrategia actual: simple, visible y preparada para seguir aportando.':'Elige una cartera RUMBO o crea la tuya.';homeTotal.textContent=ok?euro.format(total()):'—';risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
+function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML='Tu patrimonio,<br><em>con dirección.</em>';homeUser.textContent='Disciplina hoy. Libertad mañana.';homeTotal.textContent=euro.format(total());risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
 refresh.onclick=async()=>{refresh.disabled=true;refresh.textContent='Actualizando…';let msg=[];try{const r=await fetch('/api/market',{cache:'no-store'}),j=await r.json();if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;msg.push('Ethereum actualizado')}if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;msg.push('Emergentes actualizado')}s.market.date=j.updated||new Date().toLocaleDateString('es-ES')}catch(e){msg.push('No se pudo actualizar')}s.market.status=msg.length?msg.join(' · '):'Se mantiene la última referencia válida';save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar'}
 function renderPortfolio(){renderModels();userName.value=s.user;customName.value=s.customName;customRate.value=s.customRate;renderCustom();const a=assets();selected.hidden=!a.length;if(a.length){selectedRisk.textContent=model()?'Riesgo '+model().risk+'/7':'Personalizada';selectedComp.innerHTML=a.map(x=>'<div class="sub"><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+x.color+';margin-right:7px"></i>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')}}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function renderCustom(){customAssets.innerHTML=s.custom.length?s.custom.map((a,i)=>'<div class="asset"><input type="color" value="'+a.color+'" onchange="editA('+i+',\'color\',this.value)"><input value="'+esc(a.name)+'" placeholder="Activo" onchange="editA('+i+',\'name\',this.value)"><input type="number" min="0" max="100" step=".1" value="'+(+a.pct||0)+'" onchange="editA('+i+',\'pct\',this.value)"><button class="x" onclick="delA('+i+')">×</button></div>').join(''):'<div class="notice">Añade un activo, su porcentaje y un color.</div>';customSum.textContent=pct(s.custom.reduce((z,a)=>z+(+a.pct||0),0))}
@@ -1151,14 +1151,14 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   function renderHomeV3(){
     const a=assets(), ok=a.length>0, m=model(), t=total();
     empty.hidden=ok;
-    document.getElementById('homeValue').hidden=!ok;
+    document.getElementById('homeValue').hidden=false;
     summary.hidden=!ok;
     homeMetrics.hidden=!ok;
     marketCard.hidden=true;
 
-    homeTitle.innerHTML=ok?'Tu patrimonio,<br><em>con dirección.</em>':'Configura<br>tu cartera';
-    homeUser.textContent=ok?'Disciplina hoy. Libertad mañana.':'Elige una cartera RUMBO o crea la tuya.';
-    homeTotal.textContent=ok?fmt0(t):'—';
+    homeTitle.innerHTML='Tu patrimonio,<br><em>con dirección.</em>';
+    homeUser.textContent='Disciplina hoy. Libertad mañana.';
+    homeTotal.textContent=fmt0(t);
     if(!ok) return;
 
     const name=(pname()||'Cartera').replace(/^RUMBO\s+/i,'');
