@@ -358,6 +358,73 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   #horizonte .capital-gain{border-left-width:1px!important}
 }
 
+
+/* ===== RUMBO PRO V2.5 · motor de bandas y detalle por activo ===== */
+#rebalanceo .rebalance-alert{
+  margin-bottom:11px;padding:13px 14px;border-radius:18px;border:1px solid var(--line);
+  display:flex;gap:11px;align-items:flex-start;background:rgba(255,255,255,.58)
+}
+#rebalanceo .rebalance-alert .signal{
+  width:10px;height:10px;border-radius:50%;margin-top:4px;flex:0 0 auto;
+  background:#4e9f7b;box-shadow:0 0 0 5px rgba(78,159,123,.10)
+}
+#rebalanceo .rebalance-alert strong{display:block;font-size:12px;letter-spacing:-.02em}
+#rebalanceo .rebalance-alert p{margin:3px 0 0;color:var(--mut);font-size:9.5px;line-height:1.45}
+#rebalanceo .rebalance-alert.watch{background:linear-gradient(135deg,rgba(192,132,48,.09),rgba(255,255,255,.60));border-color:rgba(192,132,48,.22)}
+#rebalanceo .rebalance-alert.watch .signal{background:#c08430;box-shadow:0 0 0 5px rgba(192,132,48,.11)}
+#rebalanceo .rebalance-alert.action{background:linear-gradient(135deg,rgba(170,62,78,.08),rgba(255,255,255,.62));border-color:rgba(170,62,78,.20)}
+#rebalanceo .rebalance-alert.action .signal{background:#aa3e4e;box-shadow:0 0 0 5px rgba(170,62,78,.10)}
+#rebalanceo .res{
+  grid-template-columns:10px minmax(0,1fr) auto 34px!important;
+  align-items:center!important
+}
+#rebalanceo .res-main b{font-size:13px!important}
+#rebalanceo .weight-triplet{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+#rebalanceo .weight-triplet span{
+  display:inline-flex;align-items:center;gap:4px;padding:4px 6px;border-radius:999px;
+  font-size:8.4px;font-weight:780;color:var(--mut);background:rgba(16,42,72,.045);
+  border:1px solid rgba(16,42,72,.07)
+}
+#rebalanceo .weight-triplet b{font-size:9.5px!important;color:var(--ink)!important}
+#rebalanceo .weight-triplet .after{background:rgba(47,159,117,.075);border-color:rgba(47,159,117,.12)}
+#rebalanceo .asset-more{
+  width:31px;height:31px;border-radius:10px;border:1px solid rgba(16,42,72,.12);
+  background:rgba(16,42,72,.045);color:var(--nav);font-size:18px;font-weight:600;line-height:1;
+  display:grid;place-items:center;transition:.18s ease
+}
+#rebalanceo .asset-more.open{transform:rotate(45deg);background:var(--nav);color:#fff}
+#rebalanceo .asset-detail{
+  grid-column:1/-1;display:none;margin:2px 0 1px;padding:12px;border-radius:15px;
+  background:linear-gradient(180deg,rgba(16,42,72,.045),rgba(255,255,255,.42));
+  border:1px solid rgba(16,42,72,.075)
+}
+#rebalanceo .asset-detail.on{display:block}
+#rebalanceo .detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+#rebalanceo .detail-stat{padding:9px;border-radius:12px;background:rgba(255,255,255,.63);border:1px solid rgba(16,42,72,.06)}
+#rebalanceo .detail-stat span{display:block;color:var(--mut);font-size:7.8px;font-weight:850;text-transform:uppercase;letter-spacing:.055em}
+#rebalanceo .detail-stat b{display:block;margin-top:3px;font-size:14px!important;letter-spacing:-.025em}
+#rebalanceo .detail-explain{margin:9px 1px 0;color:var(--mut);font-size:9.1px;line-height:1.45}
+#rebalanceo .detail-action{
+  margin-top:9px;padding:9px 10px;border-radius:12px;font-size:9px;line-height:1.4;
+  background:rgba(47,159,117,.08);border:1px solid rgba(47,159,117,.14);color:#256f56
+}
+#rebalanceo .detail-action.sell{background:rgba(170,62,78,.07);border-color:rgba(170,62,78,.14);color:#8f3544}
+#rebalanceo .detail-action.watch{background:rgba(192,132,48,.08);border-color:rgba(192,132,48,.15);color:#8d6327}
+#rebalanceo .route-list{margin-top:5px;font-weight:800}
+#rebalanceo .act .action-label{font-size:7.8px!important}
+#rebalanceo .act strong{font-size:19px!important}
+@media(max-width:720px){
+  #rebalanceo .detail-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  #rebalanceo .res{grid-template-columns:9px minmax(0,1fr) auto 30px!important;padding:11px 9px!important}
+  #rebalanceo .asset-more{width:29px;height:29px}
+  #rebalanceo .weight-triplet{gap:4px}
+  #rebalanceo .weight-triplet span{font-size:7.6px;padding:3px 5px}
+  #rebalanceo .weight-triplet b{font-size:8.6px!important}
+  #rebalanceo .act strong{font-size:17px!important}
+}
+
 </style></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav"><button class="on" data-v="inicio">Inicio</button><button data-v="cartera">Cartera</button><button data-v="rebalanceo">Rebalanceo</button><button data-v="horizonte">Horizonte</button></nav><main>
@@ -693,6 +760,188 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     render();
     refresh.disabled=false;
     refresh.textContent='↻ Actualizar pesos';
+  };
+
+  render();
+})();
+</script>
+
+
+<script id="rumbo-pro-v25">
+(function(){
+  function bandFor(weight){
+    return Math.min(5, Math.max(.5, weight*.25));
+  }
+  function modelBlocks(a){
+    const m=model();
+    if(!m){
+      return a.map((x,i)=>({id:'asset:'+x.id,name:x.short||x.name,target:x.w,ids:[x.id],tol:bandFor(x.w),assetIndexes:[i]}));
+    }
+    const blocks=[];
+    const eqIdx=a.map((x,i)=>['world','em'].includes(x.id)?i:-1).filter(i=>i>=0);
+    const bondIdx=a.map((x,i)=>x.id==='bonds'?i:-1).filter(i=>i>=0);
+    const crIdx=a.map((x,i)=>['btc','eth'].includes(x.id)?i:-1).filter(i=>i>=0);
+    if(m.blocks.eq)blocks.push({id:'eq',name:'Renta variable',target:m.blocks.eq,ids:['world','em'],tol:bandFor(m.blocks.eq),assetIndexes:eqIdx});
+    if(m.blocks.bond)blocks.push({id:'bond',name:'Bonos',target:m.blocks.bond,ids:['bonds'],tol:bandFor(m.blocks.bond),assetIndexes:bondIdx});
+    if(m.blocks.crypto)blocks.push({id:'crypto',name:'Cripto',target:m.blocks.crypto,ids:['btc','eth'],tol:bandFor(m.blocks.crypto),assetIndexes:crIdx});
+    return blocks;
+  }
+  function blockWeight(block,amounts,total){
+    if(!total)return 0;
+    return block.assetIndexes.reduce((z,i)=>z+(+amounts[i]||0),0)/total*100;
+  }
+  function simulateMonths(a,startAmounts,M,months){
+    let amt=startAmounts.slice(),hit={};
+    for(let month=1;month<=months;month++){
+      const add=allocation(a,amt,M);
+      amt=amt.map((v,i)=>v+add[i]);
+      const T=amt.reduce((z,v)=>z+v,0);
+      modelBlocks(a).forEach(b=>{
+        const w=blockWeight(b,amt,T),lo=b.target-b.tol,hi=b.target+b.tol;
+        if(hit[b.id]==null&&w>=lo&&w<=hi)hit[b.id]=month;
+      });
+    }
+    return hit;
+  }
+  function routeSale(a,amounts,total,block,sale){
+    const targetEuro=a.map(x=>total*x.w/100);
+    const inside=new Set(block.assetIndexes);
+    const sellers=block.assetIndexes.map(i=>({i,excess:Math.max(0,amounts[i]-targetEuro[i])})).filter(x=>x.excess>.01);
+    const sellerSum=sellers.reduce((z,x)=>z+x.excess,0);
+    const sellMap={};
+    sellers.forEach(x=>sellMap[x.i]=sellerSum?sale*x.excess/sellerSum:0);
+
+    const buyers=a.map((x,i)=>({i,deficit:inside.has(i)?0:Math.max(0,targetEuro[i]-amounts[i])})).filter(x=>x.deficit>.01);
+    const buySum=buyers.reduce((z,x)=>z+x.deficit,0);
+    const buyMap={};
+    buyers.forEach(x=>buyMap[x.i]=buySum?sale*x.deficit/buySum:0);
+    return {sellMap,buyMap};
+  }
+  function fmtEuro(v){
+    return new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Math.max(0,v||0));
+  }
+  window.toggleAssetDetail=function(id,btn){
+    const el=document.getElementById('asset-detail-'+id);
+    if(!el)return;
+    el.classList.toggle('on');
+    if(btn)btn.classList.toggle('open',el.classList.contains('on'));
+  };
+
+  calcNow=function(){
+    const a=assets();if(!a.length)return;
+    const cur=a.map(x=>+s.hold[x.id]||0);
+    const ct=cur.reduce((x,y)=>x+y,0);
+    const M=Math.max(0,+newMoney.value||0);
+    const add=allocation(a,cur,M);
+    const after=cur.map((v,i)=>v+add[i]);
+    const T=ct+M;
+    const blocks=modelBlocks(a);
+    const correctionMonths=M>0?simulateMonths(a,after,M,6):{};
+    const blockState={};
+    const warnings=[];
+
+    blocks.forEach(b=>{
+      const w=blockWeight(b,after,T),lo=b.target-b.tol,hi=b.target+b.tol;
+      let state='ok',sale=0,route=null;
+      if(w>hi+.001){
+        const months=correctionMonths[b.id];
+        if(months&&months<=6){
+          state='contributions';
+          warnings.push({level:'watch',title:b.name+' por encima de banda',text:'Queda en '+pct(w)+' frente a un objetivo de '+pct(b.target)+'. Con la aportación mensual actual podría volver a la banda en unos '+months+' meses, sin vender.'});
+        }else{
+          state='sell';
+          const blockAmt=b.assetIndexes.reduce((z,i)=>z+after[i],0);
+          sale=Math.max(0,blockAmt-hi/100*T);
+          route=routeSale(a,after,T,b,sale);
+          warnings.push({level:'action',title:'Rebalanceo extraordinario: '+b.name,text:'Tras la aportación queda en '+pct(w)+'; la banda de control es '+pct(lo)+'–'+pct(hi)+'. Venta orientativa mínima: '+fmtEuro(sale)+' para regresar al límite superior.'});
+        }
+      }else if(w<lo-.001){
+        state='under';
+        warnings.push({level:'watch',title:b.name+' por debajo de banda',text:'Queda en '+pct(w)+' frente a un objetivo de '+pct(b.target)+'. Se priorizan nuevas aportaciones; no se propone vender otros activos mientras pueda corregirse así.'});
+      }
+      blockState[b.id]={...b,w,lo,hi,state,sale,route};
+    });
+
+    contrib.textContent=euro.format(M);
+
+    const allSell={},allBuy={};
+    Object.values(blockState).forEach(bs=>{
+      if(bs.state==='sell'&&bs.route){
+        Object.entries(bs.route.sellMap).forEach(([i,v])=>allSell[i]=(allSell[i]||0)+v);
+        Object.entries(bs.route.buyMap).forEach(([i,v])=>allBuy[i]=(allBuy[i]||0)+v);
+      }
+    });
+
+    function blockForIndex(i){return Object.values(blockState).find(b=>b.assetIndexes.includes(i))}
+    results.innerHTML=a.map((y,i)=>{
+      const currentW=ct?cur[i]/ct*100:0;
+      const afterW=T?after[i]/T*100:0;
+      const targetEuro=T*y.w/100;
+      const gap=targetEuro-after[i];
+      const b=blockForIndex(i);
+      const sell=allSell[i]||0,buy=allBuy[i]||0;
+      let actionLabel=add[i]>.004?'Aportar':'Mantener';
+      let actionValue=add[i]>.004?euro.format(add[i]):'0 €';
+      let actionClass=add[i]>.004?'good':'';
+      if(sell>.5){actionLabel='Revisar';actionValue='− '+fmtEuro(sell);actionClass='pause'}
+      const routeTxt=buy>.5?'Destino de rebalanceo: recibir aproximadamente <b>'+fmtEuro(buy)+'</b>.':'';
+      let detailAction='';
+      if(sell>.5){
+        const dest=Object.entries(allBuy).filter(([,v])=>v>.5).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([j,v])=>a[+j].short+' '+fmtEuro(v)).join(' · ');
+        detailAction='<div class="detail-action sell"><b>Rebalanceo extraordinario</b><br>Venta orientativa de este activo: <b>'+fmtEuro(sell)+'</b>.'+(dest?'<div class="route-list">Reasignar hacia: '+dest+'</div>':'')+'</div>';
+      }else if(b&&b.state==='contributions'){
+        detailAction='<div class="detail-action watch"><b>Sin venta por ahora.</b> La desviación puede corregirse con aportaciones si se mantienen aproximadamente las condiciones actuales.</div>';
+      }else if(b&&b.state==='under'){
+        detailAction='<div class="detail-action"><b>Priorizar aportaciones.</b> Este bloque está infraponderado y ayuda a absorber nuevas entradas de capital.</div>';
+      }else{
+        detailAction='<div class="detail-action"><b>Dentro de la banda.</b> No requiere una operación extraordinaria.</div>';
+      }
+      const diffTxt=gap>=0?'Faltan '+fmtEuro(gap)+' para el objetivo':'Exceso de '+fmtEuro(Math.abs(gap))+' frente al objetivo';
+      const bandTxt=b?('Banda de control del bloque '+b.name+': '+pct(b.lo)+'–'+pct(b.hi)+'.'):'Banda de control: regla 5/25.';
+      return '<div class="res">'+
+        '<i class="dot" style="background:'+y.color+'"></i>'+
+        '<div class="res-main"><b>'+y.short+'</b><div class="weight-triplet">'+
+          '<span>Actual <b>'+pct(currentW)+'</b></span>'+
+          '<span>Objetivo <b>'+pct(y.w)+'</b></span>'+
+          '<span class="after">Tras aporte <b>'+pct(afterW)+'</b></span>'+
+        '</div></div>'+
+        '<div class="act"><span class="action-label">'+actionLabel+'</span><strong class="'+actionClass+'">'+actionValue+'</strong></div>'+
+        '<button class="asset-more" aria-label="Ver detalle de '+esc(y.short)+'" onclick="toggleAssetDetail(\''+y.id+'\',this)">+</button>'+
+        '<div class="asset-detail" id="asset-detail-'+y.id+'">'+
+          '<div class="detail-grid">'+
+            '<div class="detail-stat"><span>Ahora</span><b>'+fmtEuro(cur[i])+'</b></div>'+
+            '<div class="detail-stat"><span>Tras aportación</span><b>'+fmtEuro(after[i])+'</b></div>'+
+            '<div class="detail-stat"><span>Objetivo en €</span><b>'+fmtEuro(targetEuro)+'</b></div>'+
+            '<div class="detail-stat"><span>Desviación</span><b>'+(gap>=0?'+ ':'− ')+fmtEuro(Math.abs(gap))+'</b></div>'+
+          '</div>'+
+          '<div class="detail-explain">'+diffTxt+'. '+bandTxt+' El objetivo en euros se calcula sobre el patrimonio resultante después de esta aportación.</div>'+
+          (routeTxt?'<div class="detail-action">'+routeTxt+'</div>':'')+
+          detailAction+
+        '</div>'+
+      '</div>';
+    }).join('');
+
+    let alert=document.getElementById('rebalanceAlert');
+    if(!alert){
+      alert=document.createElement('div');alert.id='rebalanceAlert';
+      results.parentElement.insertBefore(alert,results);
+    }
+    if(!ct){
+      alert.className='rebalance-alert';
+      alert.innerHTML='<i class="signal"></i><div><strong>Distribución inicial</strong><p>Sin patrimonio previo, la aportación se reparte directamente según los pesos objetivo.</p></div>';
+      rebNote.textContent='RUMBO usa primero las aportaciones para acercar la cartera a su objetivo.';
+      return;
+    }
+    const action=warnings.find(w=>w.level==='action'),watch=warnings.find(w=>w.level==='watch');
+    const msg=action||watch;
+    if(msg){
+      alert.className='rebalance-alert '+msg.level;
+      alert.innerHTML='<i class="signal"></i><div><strong>'+msg.title+'</strong><p>'+msg.text+' Pulsa + en cada activo para ver importes y destino.</p></div>';
+    }else{
+      alert.className='rebalance-alert';
+      alert.innerHTML='<i class="signal"></i><div><strong>Cartera dentro de bandas</strong><p>La aportación corrige las desviaciones sin necesidad de ventas extraordinarias.</p></div>';
+    }
+    rebNote.textContent='Regla RUMBO: primero aportaciones; venta solo si un bloque rebasa su banda y no se corrige razonablemente con las próximas aportaciones.';
   };
 
   render();
