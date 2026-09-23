@@ -25,7 +25,6 @@ body:has(#inicio.on) .nav button.on{background:#22cbae!important;color:#05251f!i
 #inicio .homeCompass{grid-area:1/2;place-self:end end;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;z-index:3!important;width:138px!important;height:138px!important;margin:0 24px 24px 0;transform:none!important;opacity:1!important;border:1px solid #e9bd6770!important;background:radial-gradient(circle at 45% 35%,#1b3545,#07121c 77%)!important;box-shadow:inset 0 0 0 6px #ffffff08,0 12px 28px #0009!important;pointer-events:none}
 #inicio .homeCompass .north{color:#ffe093!important}
 #inicio .compassNeedle{animation:northNeedleV3 6s ease-in-out infinite}
-#inicio .homeImageMotto{grid-area:1/2;place-self:start end;z-index:2;margin:25px 23px 0 0;color:#f4e7cc;font-size:10px;font-weight:650;line-height:1.7;letter-spacing:.19em;text-align:right;text-shadow:0 2px 12px #07121c,0 2px 4px #07121c;pointer-events:none}
 
 #inicio .homeV3Content{display:grid;gap:14px;margin-top:14px}
 #inicio .homeEmptyV3,#inicio .homeDistributionV3,#inicio .homeMetricsV3{border:1px solid #2a4151;background:#0e1d2a;box-shadow:0 12px 30px #0003}
@@ -86,7 +85,6 @@ body:has(#inicio.on) .nav button.on{background:#22cbae!important;color:#05251f!i
   #inicio .homeValue strong{font-size:clamp(38px,10vw,46px)!important;margin-top:5px!important;line-height:1!important}
   #inicio .homeSceneryImage{grid-area:2/1;min-height:0;height:238px;margin:16px 13px 0;border-radius:18px 18px 0 0;background-position:center top!important;background-size:cover!important}
   #inicio .homeSceneryImage:after{background:linear-gradient(180deg,transparent 65%,#0a19258c 100%)}
-  #inicio .homeImageMotto{grid-area:2/1;place-self:start end;margin:25px 27px 0 0;font-size:9px;line-height:1.7;letter-spacing:.12em}
   #inicio .homeCompass{grid-area:2/1;place-self:end end;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;width:105px!important;height:105px!important;margin:0 26px 20px 0!important;transform:none!important}
   #inicio .homeCompass span{font-size:9px}
   #inicio .homeCompass .north{top:10px!important}
@@ -186,3 +184,40 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeHeroV3 .homeValue strong{font-size:34px!important}
   #inicio .homeCompass{margin-right:21px!important}
 }
+
+/* Esfera física recortada, iluminada como el paisaje; aguja animada por separado. */
+#inicio .homeCompass{width:164px!important;height:164px!important;border:0!important;background:url('/assets/rumbo-compass-dial.webp') center/contain no-repeat!important;box-shadow:none!important;filter:drop-shadow(-5px -4px 8px #edb75c42) drop-shadow(0 15px 18px #0009);pointer-events:none}
+#inicio .homeCompass:before,#inicio .homeCompass:after,#inicio .compassTicks{display:none!important}
+#inicio .homeCompass span{color:#c8ced1!important;font-size:11px;font-weight:700;text-shadow:0 2px 4px #000}
+#inicio .homeCompass .north{color:#ffd47d!important;top:19px!important}
+#inicio .homeCompass .south{bottom:19px!important}
+#inicio .homeCompass .west{left:19px!important}
+#inicio .homeCompass .east{right:19px!important}
+#inicio .compassNeedle{width:16px!important;height:102px!important;margin:-51px 0 0 -8px!important;filter:drop-shadow(0 3px 4px #000a)}
+#inicio .compassNeedle:before,#inicio .compassNeedle:after{width:16px!important;height:53px!important}
+#inicio .compassNeedle:before{background:linear-gradient(155deg,#fff1b9 0%,#ffcb59 48%,#a86a20 100%)}
+#inicio .compassNeedle:after{background:linear-gradient(155deg,#f9f7ec,#798d9a)}
+#inicio .compassHub{width:19px!important;height:19px!important;background:radial-gradient(circle at 38% 32%,#fff2be,#d79742 62%,#553817);border:3px solid #152635!important;box-shadow:0 2px 7px #000b}
+#inicio .homeHeroV3 .homeValue strong{font-size:clamp(43px,4.8vw,61px)!important}
+@media(max-width:720px){
+  body:has(#inicio.on) .top{height:80px!important}
+  body:has(#inicio.on) .top .brand .logo{width:56px!important;height:56px!important}
+  body:has(#inicio.on) .top .brand .logo:before{width:18px;height:34px;background:linear-gradient(145deg,#32e7c8 0 49%,#f4d491 50%)}
+  body:has(#inicio.on) .top .brand b{font-size:22px!important}
+  body:has(#inicio.on) .top .brand small{font-size:11px!important}
+  #inicio .homeCompass{width:162px!important;height:162px!important;place-self:center end;margin:12px 19px 0 0!important}
+  #inicio .homeCompass .north{top:17px!important}
+  #inicio .homeCompass .south{bottom:17px!important}
+  #inicio .homeCompass .west{left:17px!important}
+  #inicio .homeCompass .east{right:17px!important}
+  #inicio .compassNeedle{height:92px!important;margin:-46px 0 0 -8px!important}
+  #inicio .compassNeedle:before,#inicio .compassNeedle:after{height:48px!important}
+  #inicio .homeHeroV3 .homeValue strong{font-size:clamp(37px,10vw,48px)!important}
+}
+@media(max-width:350px){
+  #inicio .homeCompass{width:128px!important;height:128px!important;margin-right:17px!important}
+  #inicio .compassNeedle{width:14px!important;height:80px!important;margin:-40px 0 0 -7px!important}
+  #inicio .compassNeedle:before,#inicio .compassNeedle:after{width:14px!important;height:42px!important}
+  #inicio .homeHeroV3 .homeValue strong{font-size:35px!important}
+}
+@keyframes northNeedleV3{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
