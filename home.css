@@ -20,7 +20,7 @@ body:has(#inicio.on) .nav button.on{background:#22cbae!important;color:#05251f!i
 #inicio .homeValue{position:relative!important;left:auto!important;bottom:auto!important;margin:0!important;padding:24px 26px;border:1px solid #2a4151;border-radius:24px;background:linear-gradient(135deg,#102636,#0e1d2a);z-index:1}
 #inicio .homeValue span{display:block;color:#b7c8d4!important;font-size:13px!important;letter-spacing:.06em!important;text-transform:uppercase}
 #inicio .homeValue strong{display:block;margin-top:6px!important;color:#fff;font:700 clamp(39px,4.5vw,58px)/1.06 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em!important;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-#inicio .homeSceneryImage{position:relative;grid-area:1/2;inset:auto;z-index:0;width:auto;height:auto;min-height:380px;background:#101d27 url('/assets/rumbo-road-bg.jpg') center 16%/cover no-repeat;filter:none!important;transform:none!important}
+#inicio .homeSceneryImage{position:relative;grid-area:1/2;inset:auto;z-index:0;width:auto;height:auto;min-height:380px;background:#101d27 url('/assets/rumbo-river-sunset.webp') center 16%/cover no-repeat;filter:none!important;transform:none!important}
 #inicio .homeSceneryImage:after{content:"";display:block;position:absolute;inset:0;background:linear-gradient(90deg,#0a1925 0%,transparent 42%),linear-gradient(0deg,#0a1925b3,transparent 48%);pointer-events:none}
 #inicio .homeCompass{grid-area:1/2;place-self:end end;position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;z-index:3!important;width:138px!important;height:138px!important;margin:0 24px 24px 0;transform:none!important;opacity:1!important;border:1px solid #e9bd6770!important;background:radial-gradient(circle at 45% 35%,#1b3545,#07121c 77%)!important;box-shadow:inset 0 0 0 6px #ffffff08,0 12px 28px #0009!important;pointer-events:none}
 #inicio .homeCompass .north{color:#ffe093!important}
@@ -167,4 +167,22 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeMetricsV3{gap:7px;padding:0 5px}
   #inicio .homeMetric{min-height:93px;padding:12px 11px}
   #inicio .homeEmptyV3{padding:20px 11px 26px!important}
+}
+
+/* Patrimonio sobre el paisaje, con el río y el sol a la vista. */
+#inicio .homeHeroV3 .homeValue{grid-area:1/2;place-self:end start;z-index:4;width:auto;max-width:calc(100% - 30px);margin:0 0 24px 24px!important;padding:0!important;pointer-events:none;text-shadow:0 2px 12px #07121ce6}
+#inicio .homeHeroV3 .homeValue span{color:#f0e6d8!important;font-weight:700}
+#inicio .homeHeroV3 .homeValue strong{font-family:Inter,system-ui,sans-serif!important;letter-spacing:-.05em!important}
+#inicio .homeSceneryImage:after{background:linear-gradient(0deg,#07121ce8,transparent 45%),linear-gradient(90deg,#07121c38,transparent 55%)}
+#inicio .homeCompass{place-self:center end;margin:0 24px 0 0!important}
+@media(max-width:720px){
+  #inicio .homeHeroV3{grid-template-rows:auto 365px}
+  #inicio .homeSceneryImage{height:350px;margin:12px 13px 0;background-position:center 12%!important}
+  #inicio .homeHeroV3 .homeValue{grid-area:2/1;max-width:calc(100% - 32px);margin:0 0 19px 27px!important}
+  #inicio .homeHeroV3 .homeValue strong{font-size:clamp(35px,9.4vw,44px)!important;white-space:nowrap}
+  #inicio .homeCompass{grid-area:2/1;place-self:center end;margin:28px 25px 0 0!important}
+}
+@media(max-width:350px){
+  #inicio .homeHeroV3 .homeValue strong{font-size:34px!important}
+  #inicio .homeCompass{margin-right:21px!important}
 }
