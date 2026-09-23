@@ -333,6 +333,31 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
 @media(max-width:760px){#selectedComp{grid-template-columns:repeat(2,1fr)!important}}
 @media(max-width:600px){#selectedComp .sub b{font-size:20px!important}#horizonte .capital-track{height:27px!important}}
 
+
+/* ===== RUMBO PRO V2.4 · emergentes seguro + Horizonte fino ===== */
+#horizonte .capital-track{
+  height:16px!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#e9ecee,#dfe4e6)!important;
+  border:1px solid rgba(15,43,77,.055)!important;
+  box-shadow:inset 0 1px 2px rgba(15,43,77,.07)!important
+}
+#horizonte .capital-bar{
+  border-radius:999px!important;
+  box-shadow:0 2px 8px rgba(15,43,77,.08)!important
+}
+#horizonte .capital-paid{background:linear-gradient(90deg,#2f5c8d,#4e82b7)!important}
+#horizonte .capital-gain{
+  background:linear-gradient(90deg,#2f9f75,#57bd91)!important;
+  border-left:2px solid rgba(255,255,255,.92)!important
+}
+#horizonte .compound-row{padding:14px!important}
+#horizonte .compound-breakdown{margin-top:8px!important}
+@media(max-width:600px){
+  #horizonte .capital-track{height:13px!important}
+  #horizonte .capital-gain{border-left-width:1px!important}
+}
+
 </style></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo">R</div><div><b>RUMBO</b><small>Tu cartera, con dirección</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav"><button class="on" data-v="inicio">Inicio</button><button data-v="cartera">Cartera</button><button data-v="rebalanceo">Rebalanceo</button><button data-v="horizonte">Horizonte</button></nav><main>
@@ -611,6 +636,66 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
  const baseH=renderH;
  renderH=function(){baseH();const hi=document.getElementById('horizonInsights');if(hi)hi.innerHTML='';};
  render();
+})();
+</script>
+
+
+<script id="rumbo-pro-v24">
+(function(){
+  const FALLBACK_EM=11.85;
+  const FALLBACK_DATE='31/08/2026';
+
+  // Repara el 0% que pudo guardar la versión anterior.
+  if(!s.market)s.market={};
+  const currentEm=Number(s.market.em);
+  if(!Number.isFinite(currentEm)||currentEm<=1){
+    s.market.em=FALLBACK_EM;
+    s.market.date=FALLBACK_DATE;
+    s.market.status='Última referencia válida MSCI · '+FALLBACK_DATE;
+    localStorage.setItem(KEY,JSON.stringify(s));
+  }
+
+  refresh.onclick=async()=>{
+    refresh.disabled=true;
+    refresh.textContent='Comprobando…';
+
+    const prevEm=(Number.isFinite(Number(s.market.em))&&Number(s.market.em)>1)?Number(s.market.em):FALLBACK_EM;
+    const prevEth=(Number.isFinite(Number(s.market.eth))&&Number(s.market.eth)>0)?Number(s.market.eth):11.43;
+    const prevDate=s.market.date||FALLBACK_DATE;
+
+    try{
+      const r=await fetch('/api/market?ts='+Date.now(),{cache:'no-store'});
+      const j=await r.json();
+
+      const em=Number(j.emShare);
+      const eth=Number(j.ethShare);
+      const validEm=j.emShare!==null&&j.emShare!==undefined&&Number.isFinite(em)&&em>1&&em<40;
+      const validEth=j.ethShare!==null&&j.ethShare!==undefined&&Number.isFinite(eth)&&eth>0&&eth<40;
+
+      s.market.em=validEm?em:prevEm;
+      s.market.eth=validEth?eth:prevEth;
+      s.market.date=validEm?(j.emDate||j.updated||prevDate):prevDate;
+
+      const emText=validEm
+        ? 'Emergentes '+pct(s.market.em)+' · MSCI '+s.market.date
+        : 'Emergentes: se mantiene '+pct(s.market.em)+' · última referencia MSCI '+s.market.date;
+
+      const ethText=validEth?'Ethereum '+pct(s.market.eth):'Ethereum: último dato '+pct(s.market.eth);
+      s.market.status=emText+' · '+ethText;
+    }catch(e){
+      s.market.em=prevEm;
+      s.market.eth=prevEth;
+      s.market.date=prevDate;
+      s.market.status='Sin conexión con las fuentes · se mantienen los últimos datos válidos.';
+    }
+
+    save();
+    render();
+    refresh.disabled=false;
+    refresh.textContent='↻ Actualizar pesos';
+  };
+
+  render();
 })();
 </script>
 
