@@ -224,7 +224,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 
 /* El símbolo tiene cuatro facetas separadas, como en la referencia de RUMBO. */
 .brand .logo{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
-.brand .logo:before{content:none!important;display:none!important}
+.brand .logo:before,.brand .logo:after{content:none!important;display:none!important}
 .brand .logo img{display:block;width:100%;height:100%;object-fit:contain}
 
 /* Portada a sangre: una sola imagen, con los datos delante y un fundido al contenido. */
@@ -278,3 +278,23 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 }
 @keyframes northNeedleTilt{0%,100%{transform:rotate(5deg)}50%{transform:rotate(13deg)}}
 @media(prefers-reduced-motion:reduce){#inicio .compassNeedle{animation:none!important;transform:rotate(9deg)!important}}
+
+/* La esfera acompaña la primera acción; el paisaje queda despejado. */
+#inicio .homeEmptyIntro{display:flex;align-items:center;gap:19px;max-width:500px;margin:19px 0 25px}
+#inicio .homeEmptyV3 .homeEmptyIntro p{flex:1;min-width:0;max-width:330px;margin:0!important;line-height:1.5}
+#inicio .homeEmptyV3 .homeCompass{display:block;position:relative!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;flex:none;place-self:auto;width:112px!important;height:112px!important;margin:0!important;transform:rotate(-9deg)!important;border:0!important;border-radius:50%!important;background:#0b1821!important;box-shadow:none!important;filter:drop-shadow(-2px -3px 5px #f1be5440) drop-shadow(0 9px 10px #0009)!important}
+#inicio .homeEmptyV3 .homeCompass:before{content:"";display:block!important;position:absolute;inset:0!important;width:100%!important;height:100%!important;border-radius:50%;background:url('/assets/rumbo-compass-dial.webp') center/contain no-repeat;filter:brightness(.68) saturate(.72);pointer-events:none}
+#inicio .homeEmptyV3 .homeCompass:after{display:none!important}
+#inicio .homeEmptyV3 .homeCompass span{z-index:1;font-size:9px!important}
+#inicio .homeEmptyV3 .homeCompass .north{top:12px!important}
+#inicio .homeEmptyV3 .homeCompass .south{bottom:12px!important}
+#inicio .homeEmptyV3 .homeCompass .west{left:13px!important}
+#inicio .homeEmptyV3 .homeCompass .east{right:13px!important}
+#inicio .homeEmptyV3 .homeCompass .compassNeedle{z-index:2;width:12px!important;height:68px!important;margin:-34px 0 0 -6px!important;animation:northNeedleTilt 6s ease-in-out infinite}
+#inicio .homeEmptyV3 .homeCompass .compassNeedle:before,#inicio .homeEmptyV3 .homeCompass .compassNeedle:after{width:12px!important;height:36px!important}
+#inicio .homeEmptyV3 .homeCompass .compassHub{z-index:3;width:15px!important;height:15px!important}
+@media(max-width:350px){
+  #inicio .homeEmptyIntro{gap:13px}
+  #inicio .homeEmptyV3 .homeCompass{width:98px!important;height:98px!important}
+}
+@media(prefers-reduced-motion:reduce){#inicio .homeEmptyV3 .homeCompass .compassNeedle{animation:none!important;transform:rotate(9deg)!important}}
