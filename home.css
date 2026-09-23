@@ -221,3 +221,60 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeHeroV3 .homeValue strong{font-size:35px!important}
 }
 @keyframes northNeedleV3{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+
+/* El símbolo tiene cuatro facetas separadas, como en la referencia de RUMBO. */
+.brand .logo{background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
+.brand .logo:before{content:none!important;display:none!important}
+.brand .logo img{display:block;width:100%;height:100%;object-fit:contain}
+
+/* Portada a sangre: una sola imagen, con los datos delante y un fundido al contenido. */
+@media(max-width:720px){
+  body:has(#inicio.on) .app{position:relative}
+  body:has(#inicio.on) .top{position:absolute!important;inset:0 0 auto!important;z-index:12;height:108px!important;margin:0!important;padding:18px 22px!important;border:0!important;background:transparent!important}
+  body:has(#inicio.on) .top .brand{gap:12px!important;min-width:0}
+  body:has(#inicio.on) .top .brand .logo{flex:none;width:59px!important;height:67px!important}
+  body:has(#inicio.on) .top .brand b{display:block;font-size:clamp(23px,6vw,28px)!important;font-weight:600!important;letter-spacing:.24em!important;line-height:1.08}
+  body:has(#inicio.on) .top .brand small{margin-top:5px;color:#e0e7e8!important;font-size:clamp(10px,2.7vw,12px)!important;line-height:1.2;text-shadow:0 2px 8px #091824}
+  #inicio .homeHeroV3{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr;width:calc(100% + 24px);height:clamp(610px,calc(100svh - 28px),790px)!important;min-height:0!important;margin:0 -12px!important;border:0!important;border-radius:0!important;background:#07121c!important;box-shadow:none!important;overflow:hidden}
+  #inicio .homeSceneryImage{position:absolute;inset:0!important;grid-area:1/1;z-index:0;width:100%;height:100%;min-height:0;margin:0!important;border-radius:0!important;background-position:35% center!important;background-size:cover!important}
+  #inicio .homeSceneryImage:after{background:linear-gradient(180deg,#08172492 0%,#08172428 18%,transparent 34%,#07121c32 58%,#07121ca6 77%,#07121c 100%),linear-gradient(90deg,#07121c99 0%,#07121c5e 35%,transparent 82%)}
+  #inicio .homeHeroCopy{grid-area:1/1;align-self:start;position:relative;z-index:2;width:100%!important;padding:clamp(242px,34svh,310px) 22px 0!important;pointer-events:none}
+  #inicio .homeKicker{display:none}
+  #inicio .homeHeroCopy h1{max-width:360px!important;margin:0 0 10px!important;font-size:clamp(34px,9.6vw,46px)!important;line-height:1.04!important;letter-spacing:-.045em!important;text-shadow:0 2px 18px #06121cb3}
+  #inicio .homeHeroCopy p{max-width:225px!important;margin:0!important;color:#eef1ee!important;font-size:14px!important;line-height:1.38!important;text-shadow:0 2px 12px #06121cf0}
+  #inicio .homeHeroV3 .homeValue{grid-area:1/1;place-self:end start;z-index:5;max-width:calc(100% - 42px);margin:0 0 60px 22px!important;padding:0!important;text-shadow:0 2px 16px #06121c}
+  #inicio .homeHeroV3 .homeValue span{font-size:11px!important;letter-spacing:.11em!important}
+  #inicio .homeHeroV3 .homeValue strong{font-size:clamp(38px,10.6vw,49px)!important;line-height:1.08!important;letter-spacing:-.055em!important}
+  #inicio .homeCompass{grid-area:1/1;place-self:center end;z-index:3;width:132px!important;height:132px!important;margin:260px 22px 0 0!important;transform:rotate(-9deg)!important;background:#0b1821!important;border:0!important;border-radius:50%!important;filter:drop-shadow(-3px -3px 7px #ffca6950) drop-shadow(0 12px 13px #000b)!important;box-shadow:none!important}
+  #inicio .homeCompass::before{content:"";display:block!important;position:absolute;inset:0!important;width:100%!important;height:100%!important;left:0!important;top:0!important;bottom:auto!important;border-radius:50%;background:url('/assets/rumbo-compass-dial.webp') center/contain no-repeat;filter:brightness(.68) saturate(.72);transform:none;pointer-events:none}
+  #inicio .homeCompass::after{display:none!important}
+  #inicio .homeCompass span{z-index:1;font-size:9px!important;color:#adbcc4!important}
+  #inicio .homeCompass .north{top:14px!important;color:#f5c673!important}
+  #inicio .homeCompass .south{bottom:14px!important}
+  #inicio .homeCompass .west{left:15px!important}
+  #inicio .homeCompass .east{right:15px!important}
+  #inicio .compassNeedle{z-index:2;width:13px!important;height:80px!important;margin:-40px 0 0 -6.5px!important;animation:northNeedleTilt 6s ease-in-out infinite}
+  #inicio .compassNeedle:before,#inicio .compassNeedle:after{width:13px!important;height:42px!important}
+  #inicio .compassHub{z-index:3;width:16px!important;height:16px!important}
+  #inicio .homeV3Content{margin-top:0!important}
+}
+@media(max-width:350px){
+  body:has(#inicio.on) .top{padding-left:16px!important;padding-right:16px!important}
+  body:has(#inicio.on) .top .brand .logo{width:49px!important;height:57px!important}
+  body:has(#inicio.on) .top .brand b{font-size:21px!important}
+  #inicio .homeHeroCopy{padding-left:17px!important;padding-right:17px!important}
+  #inicio .homeHeroCopy h1{font-size:33px!important}
+  #inicio .homeHeroV3 .homeValue{margin-left:17px!important}
+  #inicio .homeHeroV3 .homeValue strong{font-size:36px!important}
+  #inicio .homeCompass{width:112px!important;height:112px!important;margin-right:13px!important}
+  #inicio .compassNeedle{height:69px!important;margin-top:-34.5px!important}
+  #inicio .compassNeedle:before,#inicio .compassNeedle:after{height:36px!important}
+}
+@media(max-width:720px) and (max-height:650px){
+  #inicio .homeHeroCopy{padding-top:220px!important}
+  #inicio .homeHeroCopy p{display:none}
+  #inicio .homeCompass{margin-top:128px!important}
+  #inicio .homeHeroV3 .homeValue{margin-bottom:128px!important}
+}
+@keyframes northNeedleTilt{0%,100%{transform:rotate(5deg)}50%{transform:rotate(13deg)}}
+@media(prefers-reduced-motion:reduce){#inicio .compassNeedle{animation:none!important;transform:rotate(9deg)!important}}
