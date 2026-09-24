@@ -253,7 +253,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeCompass .south{bottom:14px!important}
   #inicio .homeCompass .west{left:15px!important}
   #inicio .homeCompass .east{right:15px!important}
-  #inicio .compassNeedle{z-index:2;width:13px!important;height:80px!important;margin:-40px 0 0 -6.5px!important;animation:northNeedleTilt 6s ease-in-out infinite}
+  #inicio .compassNeedle{z-index:2;width:13px!important;height:80px!important;margin:-40px 0 0 -6.5px!important;animation:northNeedleTilt 9s ease-in-out infinite}
   #inicio .compassNeedle:before,#inicio .compassNeedle:after{width:13px!important;height:42px!important}
   #inicio .compassHub{z-index:3;width:16px!important;height:16px!important}
   #inicio .homeV3Content{margin-top:0!important}
@@ -276,7 +276,15 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeCompass{margin-top:128px!important}
   #inicio .homeHeroV3 .homeValue{margin-bottom:128px!important}
 }
-@keyframes northNeedleTilt{0%,100%{transform:rotate(5deg)}50%{transform:rotate(13deg)}}
+@keyframes northNeedleTilt{
+  0%,100%{transform:rotate(5deg)}
+  17%{transform:rotate(-11deg)}
+  28%{transform:rotate(-18deg)}
+  43%{transform:rotate(5deg)}
+  64%{transform:rotate(13deg)}
+  76%{transform:rotate(8deg)}
+  91%{transform:rotate(-8deg)}
+}
 @media(prefers-reduced-motion:reduce){#inicio .compassNeedle{animation:none!important;transform:rotate(9deg)!important}}
 
 /* La esfera acompaña la primera acción; el paisaje queda despejado. */
@@ -290,7 +298,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 #inicio .homeEmptyV3 .homeCompass .south{bottom:12px!important}
 #inicio .homeEmptyV3 .homeCompass .west{left:13px!important}
 #inicio .homeEmptyV3 .homeCompass .east{right:13px!important}
-#inicio .homeEmptyV3 .homeCompass .compassNeedle{z-index:2;width:12px!important;height:68px!important;margin:-34px 0 0 -6px!important;animation:northNeedleTilt 6s ease-in-out infinite}
+#inicio .homeEmptyV3 .homeCompass .compassNeedle{z-index:2;width:12px!important;height:68px!important;margin:-34px 0 0 -6px!important;animation:northNeedleTilt 9s ease-in-out infinite}
 #inicio .homeEmptyV3 .homeCompass .compassNeedle:before,#inicio .homeEmptyV3 .homeCompass .compassNeedle:after{width:12px!important;height:36px!important}
 #inicio .homeEmptyV3 .homeCompass .compassHub{z-index:3;width:15px!important;height:15px!important}
 @media(max-width:350px){
@@ -433,8 +441,8 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeHeroCopy h1{max-width:355px!important;margin:0 0 13px!important;font-size:clamp(39px,10.1vw,50px)!important;line-height:.99!important;letter-spacing:-.052em!important}
   #inicio .homeHeroCopy h1 em{color:#71e1ce!important}
   #inicio .homeHeroCopy p{max-width:300px!important;font-size:15px!important;line-height:1.35!important;color:#e8eeec!important}
-  #inicio>.homeValue{min-height:120px;margin:2px 12px 0!important;padding:21px 24px 20px!important;border:1px solid #2f5b5d!important;border-radius:22px!important;background:linear-gradient(120deg,#183d40,#102a35 75%)!important;box-shadow:0 12px 28px #0004!important}
-  #inicio>.homeValue:after{content:"";position:absolute;right:27px;top:25px;width:48px;height:48px;border:1px solid #71e1ce55;border-radius:50%;box-shadow:0 0 0 9px #71e1ce0d,inset 0 0 0 9px #71e1ce0d}
+  #inicio>.homeValue{min-height:105px;margin:2px 12px 0!important;padding:15px 24px 16px!important;border:1px solid #2f5b5d!important;border-radius:22px!important;background:linear-gradient(120deg,#183d40,#102a35 75%)!important;box-shadow:0 12px 28px #0004!important}
+  #inicio>.homeValue:after{display:none!important}
   #inicio>.homeValue span{color:#a9d7d0!important;letter-spacing:.16em!important}
   #inicio>.homeValue strong{font-size:clamp(46px,12vw,58px)!important;margin-top:9px!important}
   #inicio .homeV3Content{margin-top:13px!important}
