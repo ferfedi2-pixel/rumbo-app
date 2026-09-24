@@ -376,3 +376,18 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 @media(max-width:720px) and (max-height:650px){
   #inicio .homeHeroV3{height:clamp(350px,60svh,385px)!important}
 }
+
+/* Primer paso: texto, brújula y acción forman un bloque breve en móvil. */
+@media(max-width:720px){
+  #inicio .homeEmptyV3{padding:19px 20px 21px!important}
+  #inicio .homeEmptyV3 h2{font-size:28px!important;line-height:1.1!important;margin:7px 0 0!important}
+  #inicio .homeEmptyIntro{gap:12px;margin:13px 0 17px!important;align-items:center}
+  #inicio .homeEmptyV3 .homeEmptyIntro p{font-size:13px!important;line-height:1.45!important}
+  #inicio .homeEmptyV3 .homeCompass{width:80px!important;height:80px!important}
+  #inicio .homeStartButton{min-height:50px;font-size:14px}
+}
+@media(max-width:350px){
+  #inicio .homeEmptyV3{padding:18px 17px 20px!important}
+  #inicio .homeEmptyV3 h2{font-size:26px!important}
+  #inicio .homeEmptyV3 .homeCompass{width:72px!important;height:72px!important}
+}
