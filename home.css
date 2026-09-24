@@ -391,3 +391,31 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeEmptyV3 h2{font-size:26px!important}
   #inicio .homeEmptyV3 .homeCompass{width:72px!important;height:72px!important}
 }
+
+/* El primer paso se lee como una acción breve: icono con el título, texto y botón. */
+@media(max-width:720px){
+  #inicio .homeEmptyV3{
+    display:grid;grid-template-columns:minmax(0,1fr) 70px;
+    column-gap:10px;align-items:center;padding:18px 20px 20px!important;
+  }
+  #inicio .homeEmptyEyebrow{grid-column:1;align-self:end}
+  #inicio .homeEmptyV3 h2{
+    grid-column:1;grid-row:2;font-size:26px!important;line-height:1.06!important;
+    margin:7px 0 0!important;
+  }
+  #inicio .homeEmptyIntro{display:contents!important}
+  #inicio .homeEmptyV3 .homeCompass{
+    grid-column:2;grid-row:1 / span 2;justify-self:center;
+    width:70px!important;height:70px!important;
+  }
+  #inicio .homeEmptyV3 .homeEmptyIntro p{
+    grid-column:1 / -1;grid-row:3;max-width:none!important;
+    margin:12px 0 16px!important;font-size:13px!important;line-height:1.4!important;
+  }
+  #inicio .homeStartButton{grid-column:1 / -1;grid-row:4;width:100%;min-height:49px}
+}
+@media(max-width:350px){
+  #inicio .homeEmptyV3{grid-template-columns:minmax(0,1fr) 62px;padding:17px 17px 19px!important}
+  #inicio .homeEmptyV3 h2{font-size:24px!important}
+  #inicio .homeEmptyV3 .homeCompass{width:62px!important;height:62px!important}
+}
