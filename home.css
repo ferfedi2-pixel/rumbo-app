@@ -422,3 +422,35 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeEmptyV3 h2{font-size:24px!important}
   #inicio .homeEmptyV3 .homeCompass{width:62px!important;height:62px!important}
 }
+
+/* Composición móvil: paisaje breve y primer paso con contraste cálido. */
+@media(max-width:720px){
+  #inicio .homeHeroV3{height:clamp(365px,44svh,430px)!important}
+  #inicio .homeSceneryImage{background-position:42% 38%!important}
+  #inicio .homeSceneryImage:after{background:linear-gradient(180deg,#07121c85 0%,#07121c09 27%,#07121c20 44%,#07121ce0 82%,#07121c 100%)!important}
+  #inicio .homeHeroCopy{align-self:end!important;padding:0 27px 28px!important}
+  #inicio .homeKicker{display:block!important;margin-bottom:12px;color:#eac587!important;font-size:10px!important;letter-spacing:.2em!important;text-shadow:0 2px 8px #07121c}
+  #inicio .homeHeroCopy h1{max-width:355px!important;margin:0 0 13px!important;font-size:clamp(39px,10.1vw,50px)!important;line-height:.99!important;letter-spacing:-.052em!important}
+  #inicio .homeHeroCopy h1 em{color:#71e1ce!important}
+  #inicio .homeHeroCopy p{max-width:300px!important;font-size:15px!important;line-height:1.35!important;color:#e8eeec!important}
+  #inicio>.homeValue{min-height:120px;margin:2px 12px 0!important;padding:21px 24px 20px!important;border:1px solid #2f5b5d!important;border-radius:22px!important;background:linear-gradient(120deg,#183d40,#102a35 75%)!important;box-shadow:0 12px 28px #0004!important}
+  #inicio>.homeValue:after{content:"";position:absolute;right:27px;top:25px;width:48px;height:48px;border:1px solid #71e1ce55;border-radius:50%;box-shadow:0 0 0 9px #71e1ce0d,inset 0 0 0 9px #71e1ce0d}
+  #inicio>.homeValue span{color:#a9d7d0!important;letter-spacing:.16em!important}
+  #inicio>.homeValue strong{font-size:clamp(46px,12vw,58px)!important;margin-top:9px!important}
+  #inicio .homeV3Content{margin-top:13px!important}
+  #inicio .homeEmptyV3{grid-template-columns:minmax(0,1fr) 82px;gap:0 9px;padding:26px 24px 24px!important;border:1px solid #f1e6d1!important;border-radius:24px!important;background:#efece3!important;box-shadow:0 14px 36px #0004!important}
+  #inicio .homeEmptyEyebrow{color:#276c63!important;font-size:10px!important;letter-spacing:.19em!important}
+  #inicio .homeEmptyV3 h2{margin:9px 0 0!important;color:#132f35!important;font:700 clamp(28px,7.7vw,36px)/1.05 Georgia,"Times New Roman",serif!important;letter-spacing:-.045em!important}
+  #inicio .homeEmptyV3 .homeCompass{width:82px!important;height:82px!important;filter:drop-shadow(0 8px 9px #23443c44)!important}
+  #inicio .homeEmptyV3 .homeEmptyIntro p{margin:17px 0 23px!important;color:#435960!important;font-size:14px!important;line-height:1.45!important}
+  #inicio .homeStartButton{min-height:56px;padding:0 18px;justify-content:space-between;border-radius:15px;background:#11695f;color:#fff;font-size:14px;box-shadow:none}
+  #inicio .homeStartButton span{font-size:24px}
+  #inicio .homeStartButton:hover{background:#0c554e}
+}
+@media(max-width:350px){
+  #inicio .homeHeroCopy{padding-left:20px!important;padding-right:20px!important}
+  #inicio .homeHeroCopy h1{font-size:37px!important}
+  #inicio .homeEmptyV3{grid-template-columns:minmax(0,1fr) 70px;padding:23px 19px!important}
+  #inicio .homeEmptyV3 .homeCompass{width:70px!important;height:70px!important}
+  #inicio .homeEmptyV3 h2{font-size:27px!important}
+}
