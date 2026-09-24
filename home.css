@@ -330,3 +330,49 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio>.homeValue strong{font-size:37px!important}
   #inicio .homeEmptyV3 .homeCompass{width:82px!important;height:82px!important}
 }
+
+/* Menú principal: botón opaco y lectura clara sobre la fotografía. */
+.app-menu-btn{width:44px!important;height:44px!important;border:1px solid #36566a!important;border-radius:14px!important;background:#102838!important;color:#ecf7f4!important;box-shadow:0 8px 22px #06151e80!important}
+.app-menu-btn svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.app-menu-btn:hover,.app-menu-btn[aria-expanded="true"]{background:#1a3b4b!important;border-color:#4c9f9c!important}
+.app-menu-btn:focus-visible{outline:2px solid #59ddc6;outline-offset:3px}
+.app-menu{top:52px!important;min-width:210px;background:#102431!important;border:1px solid #385468!important;box-shadow:0 18px 40px #0008!important}
+.app-menu .menu-title{color:#b3cbd1!important;font-size:11px!important}
+.app-menu button{min-height:44px;color:#f1f7f5!important;font-size:14px!important}
+.app-menu button:hover,.app-menu button:focus-visible{background:#1b3a49!important;outline:none}
+.app-menu button.danger{color:#ffb0b3!important}
+
+/* Cifra principal con una jerarquía más clara, manteniendo el paisaje intacto. */
+#inicio>.homeValue{background:#102735!important;border-color:#2b4857!important;box-shadow:0 12px 26px #0002!important}
+#inicio>.homeValue:before{display:none!important}
+#inicio>.homeValue span{font-size:11px!important;font-weight:700!important;letter-spacing:.12em!important;color:#b8cdd1!important}
+#inicio>.homeValue strong{font-family:Manrope,Inter,system-ui,sans-serif!important;font-weight:750!important;letter-spacing:-.055em!important;color:#f7faf9!important}
+@media(max-width:720px){
+  #inicio>.homeValue{padding:23px 23px 25px!important}
+  #inicio>.homeValue strong{font-size:clamp(43px,11.8vw,54px)!important;line-height:1.04!important;margin-top:7px!important}
+}
+@media(max-width:350px){#inicio>.homeValue strong{font-size:42px!important}}
+#inicio>.homeValue strong.compact{font-size:clamp(34px,9.4vw,46px)!important}
+
+/* Resumen de cartera: anillo compacto y filas con porcentajes e importes alineados. */
+#inicio #summary{background:#0e202d!important}
+#inicio .homeSectionHead h2{font-weight:750;letter-spacing:-.035em}
+#inicio .homeInfoBtn{min-height:44px}
+#inicio .homeDonutCenter{background:#0e202d!important}
+#inicio .homeAssetRow{min-height:62px!important;padding:12px 2px!important;border:0!important;border-top:1px solid #ffffff1b!important;gap:12px!important}
+#inicio .homeAssetRow:first-child{border-top:0!important}
+#inicio .homeAssetDot{width:12px;height:12px;border-radius:4px;box-shadow:0 0 0 3px #ffffff0c}
+#inicio .homeAssetName{font-size:15px;font-weight:640}
+#inicio .homeAssetNumbers strong{font-size:18px!important;font-weight:750;letter-spacing:-.035em}
+#inicio .homeAssetNumbers span{font-size:13px;color:#aec0c9}
+@media(max-width:720px){
+  #inicio #summary{padding:23px 18px 18px!important}
+  #inicio .homeDistGrid{gap:15px}
+  #inicio .homeDonutWrap{width:172px!important;height:172px!important}
+  #inicio .homeDonutCenter{inset:30px!important}
+  #inicio .homeAssetRow{min-height:59px!important;padding:10px 1px!important}
+  #inicio .homeAssetName{font-size:14px}
+}
+@media(max-width:720px) and (max-height:650px){
+  #inicio .homeHeroV3{height:clamp(350px,60svh,385px)!important}
+}

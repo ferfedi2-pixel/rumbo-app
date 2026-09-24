@@ -566,7 +566,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=12"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=13"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -782,12 +782,13 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   if(top&&saved&&!document.getElementById('appMenuBtn')){
     var wrap=document.createElement('div');wrap.className='top-actions';
     saved.parentNode.insertBefore(wrap,saved);wrap.appendChild(saved);
-    var btn=document.createElement('button');btn.id='appMenuBtn';btn.className='app-menu-btn';btn.setAttribute('aria-label','Menú');btn.textContent='⋮';wrap.appendChild(btn);
+    var btn=document.createElement('button');btn.id='appMenuBtn';btn.className='app-menu-btn';btn.type='button';btn.setAttribute('aria-label','Abrir menú');btn.setAttribute('aria-controls','appMenu');btn.setAttribute('aria-expanded','false');btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';wrap.appendChild(btn);
     var menu=document.createElement('div');menu.id='appMenu';menu.className='app-menu';
     menu.innerHTML='<span class="menu-title">Cartera</span><button class="danger" id="resetPortfolio">Reiniciar cartera</button>';
     wrap.appendChild(menu);
-    btn.onclick=function(e){e.stopPropagation();menu.classList.toggle('on')};
-    document.addEventListener('click',function(){menu.classList.remove('on')});
+    btn.onclick=function(e){e.stopPropagation();var open=menu.classList.toggle('on');btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú')};
+    document.addEventListener('click',function(){menu.classList.remove('on');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Abrir menú')});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('on')){menu.classList.remove('on');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Abrir menú');btn.focus()}});
     menu.addEventListener('click',function(e){e.stopPropagation()});
   }
   if(!document.getElementById('resetModal')){
@@ -796,7 +797,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     document.body.appendChild(rm);
   }
   var reset=document.getElementById('resetPortfolio'),modal=document.getElementById('resetModal');
-  if(reset)reset.onclick=function(){document.getElementById('appMenu')?.classList.remove('on');modal.classList.add('on')};
+  if(reset)reset.onclick=function(){document.getElementById('appMenu')?.classList.remove('on');var menuBtn=document.getElementById('appMenuBtn');menuBtn?.setAttribute('aria-expanded','false');menuBtn?.setAttribute('aria-label','Abrir menú');modal.classList.add('on')};
   document.getElementById('cancelReset').onclick=function(){modal.classList.remove('on')};
   modal.addEventListener('click',function(e){if(e.target===modal)modal.classList.remove('on')});
   document.getElementById('confirmReset').onclick=function(){
@@ -1162,6 +1163,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     homeTitle.innerHTML='Tu patrimonio,<br><em>con dirección.</em>';
     homeUser.textContent='Disciplina hoy. Libertad mañana.';
     homeTotal.textContent=fmt0(t);
+    homeTotal.classList.toggle('compact',String(Math.round(t)).replace(/\D/g,'').length>=7);
     if(!ok) return;
 
     const name=(pname()||'Cartera').replace(/^RUMBO\s+/i,'');
