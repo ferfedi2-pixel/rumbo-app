@@ -441,11 +441,11 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeHeroCopy h1{max-width:355px!important;margin:0 0 13px!important;font-size:clamp(39px,10.1vw,50px)!important;line-height:.99!important;letter-spacing:-.052em!important}
   #inicio .homeHeroCopy h1 em{color:#71e1ce!important}
   #inicio .homeHeroCopy p{max-width:300px!important;font-size:15px!important;line-height:1.35!important;color:#e8eeec!important}
-  #inicio>.homeValue{min-height:105px;margin:2px 12px 0!important;padding:15px 24px 16px!important;border:1px solid #2f5b5d!important;border-radius:22px!important;background:linear-gradient(120deg,#183d40,#102a35 75%)!important;box-shadow:0 12px 28px #0004!important}
+  #inicio>.homeValue{min-height:92px;margin:2px 12px 0!important;padding:11px 22px 12px!important;border:1px solid #2f5b5d!important;border-radius:22px!important;background:linear-gradient(120deg,#183d40,#102a35 75%)!important;box-shadow:0 12px 28px #0004!important}
   #inicio>.homeValue:after{display:none!important}
   #inicio>.homeValue span{color:#a9d7d0!important;letter-spacing:.16em!important}
-  #inicio>.homeValue strong{font-size:clamp(46px,12vw,58px)!important;margin-top:9px!important}
-  #inicio .homeV3Content{margin-top:13px!important}
+  #inicio>.homeValue strong{font-size:clamp(40px,11vw,50px)!important;margin-top:4px!important}
+  #inicio .homeV3Content{margin-top:24px!important}
   #inicio .homeEmptyV3{grid-template-columns:minmax(0,1fr) 82px;gap:0 9px;margin-bottom:16px!important;padding:26px 24px 24px!important;border:1px solid #f1e6d1!important;border-radius:24px!important;background:#efece3!important;box-shadow:0 14px 36px #0004!important}
   #inicio .homeEmptyEyebrow{color:#276c63!important;font-size:10px!important;letter-spacing:.19em!important}
   #inicio .homeEmptyV3 h2{margin:9px 0 0!important;color:#132f35!important;font:700 clamp(28px,7.7vw,36px)/1.05 Georgia,"Times New Roman",serif!important;letter-spacing:-.045em!important}
