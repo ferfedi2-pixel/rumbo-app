@@ -565,7 +565,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=20"><link rel="stylesheet" href="/portfolio.css?v=1"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=20"><link rel="stylesheet" href="/portfolio.css?v=2"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -627,7 +627,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
     </div>
   </div>
 </section>
-<section class="view" id="cartera"><div class="hero"><div class="heroIn"><div><span class="kick">TU PLAN EMPIEZA AQUÍ</span><h1>Elige tu cartera.</h1><p>Escoge una estrategia RUMBO o crea tu propia combinación. Podrás revisarla cuando quieras.</p></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Estrategias RUMBO</h2><span class="pill">3 opciones</span></div><div class="models" id="models"></div></div><div class="card s5"><div class="head"><h2>Identidad</h2></div><div class="form2"><div class="field"><label>Tu nombre</label><input id="userName"></div><div class="field"><label>Nombre cartera propia</label><input id="customName"></div></div><div class="actions"><button class="btn ghost tiny" id="saveIdentity">Guardar</button></div></div><div class="card s7"><div class="head"><div><span class="custom-kicker">A TU MANERA</span><h2>Crea tu cartera</h2></div><span class="pill" id="customSum">0%</span></div><p class="custom-intro">Pon nombre a tus activos y reparte el 100% entre ellos.</p><div class="assetList" id="customAssets"></div><div class="actions"><button class="btn alt tiny" id="addAsset">+ Añadir activo</button><button class="btn tiny" id="useCustom">Usar esta cartera</button></div><div class="notice" style="margin-top:8px">La suma de los porcentajes debe ser 100%.</div></div><div class="card" id="selected" hidden><div class="head"><h2>Composición seleccionada</h2><span class="pill" id="selectedRisk">—</span></div><div id="selectedComp"></div></div></div></section>
+<section class="view" id="cartera"><div class="hero"><div class="heroIn"><div><span class="kick">ELIGE TU DIRECCIÓN</span><h1>Una cartera para tu rumbo.</h1><p>Elige una estrategia o crea la tuya.</p></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Estrategias RUMBO</h2></div><div class="models" id="models"></div><p class="portfolio-footnote">Riesgo en escala propia; rentabilidad hipotética anual, sin garantías.</p></div><div class="card s5"><div class="head"><h2>Identidad</h2></div><div class="form2"><div class="field"><label>Tu nombre</label><input id="userName"></div><div class="field"><label>Nombre cartera propia</label><input id="customName"></div></div><div class="actions"><button class="btn ghost tiny" id="saveIdentity">Guardar</button></div></div><div class="card s7"><div class="head"><div><span class="custom-kicker">A TU MANERA</span><h2>Crea tu cartera</h2></div><span class="pill" id="customSum">0%</span></div><p class="custom-intro">Elige los activos y reparte el 100%.</p><div class="assetList" id="customAssets"></div><div class="actions"><button class="btn alt tiny" id="addAsset">+ Añadir activo</button><button class="btn tiny" id="useCustom">Usar esta cartera</button></div><div class="notice" style="margin-top:8px">La suma de los porcentajes debe ser 100%.</div></div><div class="card" id="selected" hidden><div class="head"><h2>Composición seleccionada</h2><span class="pill" id="selectedRisk">—</span></div><div id="selectedComp"></div></div></div></section>
 <section class="view" id="rebalanceo"><div class="hero"><div class="heroIn"><div><span class="kick">Aportación</span><h1>Rebalanceo</h1><p>Introduce lo que tienes. RUMBO dirige la siguiente aportación.</p></div><div class="num"><span>Total cartera</span><strong id="rebTotal">—</strong></div></div></div><div class="grid"><div class="card s5"><div class="head"><h2>Cartera actual</h2><span class="pill" id="rebName">Sin configurar</span></div><div class="holds" id="holds"></div><div class="field" style="margin-top:10px"><label>Nueva aportación</label><input id="newMoney" type="number" min="0" step="10" value="1000"></div><div class="actions"><button class="btn tiny" id="calc">Calcular</button><button class="btn ghost tiny" id="clear">Limpiar</button></div></div><div class="card s7"><div class="head"><h2>Próxima aportación</h2><span class="pill" id="contrib">—</span></div><div class="results" id="results"></div><div class="notice" id="rebNote" style="margin-top:8px"></div></div></div></section>
 <section class="view" id="horizonte"><div class="hero"><div class="heroIn"><div><span class="kick">Largo plazo</span><h1>Horizonte</h1><p>Una estimación útil, no una promesa.</p></div><div class="num"><span>Rentabilidad estimada</span><strong id="hRateHero">—</strong></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Proyección</h2><span class="pill" id="hName">Sin cartera</span></div><div class="hcards" id="hcards"></div></div><div class="card"><div class="head"><h2>Supuestos</h2></div><div class="block"><div class="sub"><span>Patrimonio actual</span><b id="hStart">—</b></div><div class="sub"><span>Aportación mensual</span><b id="hMonthly">—</b></div><div class="sub"><span>Rentabilidad anual</span><b id="hRate">—</b></div></div><div class="field" id="customRateWrap" style="margin-top:9px;display:none"><label>Rentabilidad personalizada</label><input id="customRate" type="number" min="0" max="30" step=".1" value="6"></div><div class="notice" style="margin-top:8px">Estimación nominal orientativa. No es una previsión garantizada.</div></div></div></section>
 </main></div><div class="modal" id="modal"><div class="sheet"><div class="sh"><h3 id="modalTitle"></h3><button class="close" id="closeModal">×</button></div><div id="modalBody"></div></div></div>
@@ -635,7 +635,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
 const euro=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}),pct=n=>Number(n).toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:2})+'%',KEY='rumbo_v1';
 const C={world:'#5688c7',em:'#d65d70',bonds:'#39aa7d',btc:'#d59a2e',eth:'#876fca'};
 const PROD={world:{id:'world',name:'Países desarrollados',short:'Desarrollados',detail:'iShares Developed World Index (IE) Acc EUR clase S',isin:'IE000ZYRH0Q7',ter:'0,06%',color:C.world},em:{id:'em',name:'Mercados emergentes',short:'Emergentes',detail:'iShares Emerging Markets Index Fund (IE) Acc EUR clase S',isin:'IE000QAZP7L2',ter:'0,16%',color:C.em},bonds:{id:'bonds',name:'Bonos globales',short:'Bonos',detail:'Vanguard Global Bond Index Fund',isin:'IE00B18GC888',ter:'—',color:C.bonds},btc:{id:'btc',name:'Bitcoin',short:'Bitcoin',detail:'BTC',isin:'—',ter:'—',color:C.btc},eth:{id:'eth',name:'Ethereum',short:'Ethereum',detail:'ETH',isin:'—',ter:'—',color:C.eth}};
-const MODELS={refugio:{name:'RUMBO Refugio',risk:3,rate:5,desc:'Perfil conservador con menor volatilidad objetivo.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'RUMBO Horizonte',risk:5,rate:6,desc:'Perfil moderado con balance entre renta variable y activos defensivos.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'RUMBO Cumbre',risk:6,rate:8.5,desc:'Perfil dinámico con mayor volatilidad y retorno esperado.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
+const MODELS={refugio:{name:'RUMBO Refugio',risk:3,rate:5,desc:'Perfil conservador con menor volatilidad objetivo.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'RUMBO Travesía',risk:5,rate:6,desc:'Perfil moderado con balance entre renta variable y activos defensivos.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'RUMBO Cumbre',risk:6,rate:8.5,desc:'Perfil dinámico con mayor volatilidad y retorno esperado.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
 let s={user:'Felipe',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,date:'31/08/2026',status:'Última referencia válida'}};
 try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)s={...s,...x,market:{...s.market,...(x.market||{})}}}catch(e){}
 function save(){localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
@@ -844,14 +844,15 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
 <script id="rumbo-pro-v23">
 (function(){
  const UI={
-  refugio:{accent:'#2d8468',dark:'#226651',soft:'rgba(45,132,104,.10)',border:'rgba(45,132,104,.26)',icon:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 2.6 7.6 7 10 4.4-2.4 7-5.5 7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>'},
-  horizonte:{accent:'#b77a2e',dark:'#8e5b1e',soft:'rgba(183,122,46,.11)',border:'rgba(183,122,46,.27)',icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m15.5 8.5-2.1 4.9-4.9 2.1 2.1-4.9z"/></svg>'},
-  cumbre:{accent:'#6759a9',dark:'#4e4388',soft:'rgba(103,89,169,.11)',border:'rgba(103,89,169,.26)',icon:'<svg viewBox="0 0 24 24"><path d="m3 19 6.5-10 3.2 4.6L15.5 9 21 19z"/><path d="m8 11 1.5-2 1.4 2"/></svg>'}
+  refugio:{accent:'#5ed6b1'},
+  horizonte:{accent:'#7ecbdf'},
+  cumbre:{accent:'#efb974'}
  };
  renderModels=function(){
   models.innerHTML=Object.entries(MODELS).map(([id,m])=>{
-   const u=UI[id],target=[m.blocks.eq?m.blocks.eq+'% RV':'',m.blocks.bond?m.blocks.bond+'% bonos':'',m.blocks.crypto?m.blocks.crypto+'% cripto':''].filter(Boolean).join(' · ');
-   return '<div class="model '+(s.type===id?'sel':'')+'" style="--model-accent:'+u.accent+';--model-dark:'+u.dark+';--model-soft:'+u.soft+';--model-border:'+u.border+'"><div class="model-icon">'+u.icon+'</div><span class="pill">Riesgo '+m.risk+'/7</span>'+(s.type===id?'<span class="selected-mark">✓ Tu elección</span>':'')+'<h3>'+m.name.replace('RUMBO ','')+'</h3><p>'+m.desc+'</p><div class="model-meta"><span>Hipótesis anual '+pct(m.rate)+'</span><span>'+target+'</span></div>'+bbar('Bolsa',m.blocks.eq)+(m.blocks.bond?bbar('Bonos',m.blocks.bond,'b'):'')+(m.blocks.crypto?bbar('Cripto',m.blocks.crypto,'c'):'')+'<div class="actions"><button class="btn tiny" aria-pressed="'+(s.type===id)+'" onclick="choose(\''+id+'\')">'+(s.type===id?'✓ Seleccionada':'Elegir '+m.name.replace('RUMBO ','')+'')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">Ver detalles</button></div></div>';
+   const name=m.name.replace('RUMBO ',''),chosen=s.type===id;
+   const allocation=[['Renta variable',m.blocks.eq],['Renta fija',m.blocks.bond],['Criptomonedas',m.blocks.crypto]];
+   return '<article class="model model-'+id+(chosen?' sel':'')+'" style="--model-accent:'+UI[id].accent+'"><div class="model-top"><span class="model-art art-'+id+'" aria-hidden="true"></span><div class="model-identity"><span class="model-overline">RUMBO</span><h3>'+name+'</h3>'+(chosen?'<span class="selected-mark">✓ Tu cartera</span>':'')+'</div></div><div class="model-stats"><div><span>Riesgo</span><strong>'+m.risk+'<small>/7</small></strong></div><div><span>Rentabilidad estimada</span><strong>'+pct(m.rate)+'<small> / año</small></strong></div></div><div class="model-allocation">'+allocation.map(([label,value])=>'<div class="allocation-row"><span>'+label+'</span><span class="allocation-track"><i style="width:'+value+'%"></i></span><strong>'+value+'%</strong></div>').join('')+'</div><div class="actions"><button class="btn tiny" aria-pressed="'+chosen+'" onclick="choose(\''+id+'\')">'+(chosen?'✓ Seleccionada':'Elegir '+name)+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">Detalles</button></div></article>';
   }).join('');
  };
  const basePortfolio=renderPortfolio;
@@ -860,7 +861,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   const a=assets(),m=model(),head=selected.querySelector('.head h2');
   if(a.length&&head){
    head.innerHTML='<span class="selected-kicker">Tu cartera</span>'+pname();
-   const accent=s.type==='refugio'?UI.refugio.accent:s.type==='horizonte'?UI.horizonte.accent:s.type==='cumbre'?UI.cumbre.accent:'#4d83c2';
+   const accent=UI[s.type]?.accent||'#4d83c2';
    selected.style.setProperty('--selected-accent',accent);
   }
   const customCard=customAssets.closest('.card');
@@ -874,7 +875,9 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   }
   if(nameCard)nameCard.classList.add('name-only');
   if(customCard)customCard.classList.remove('name-only');
-  if(a.length&&selected.parentElement)selected.parentElement.insertBefore(selected,selected.parentElement.firstElementChild);
+  selected.hidden=true;
+  if(customCard)customCard.classList.toggle('custom-selected',s.type==='custom');
+  if(customCard){const kick=customCard.querySelector('.custom-kicker');if(kick)kick.textContent=s.type==='custom'?'✓ TU CARTERA':'A TU MANERA'}
  };
  const baseHome=renderHome;
  renderHome=function(){
