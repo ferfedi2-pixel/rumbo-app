@@ -298,3 +298,35 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeEmptyV3 .homeCompass{width:98px!important;height:98px!important}
 }
 @media(prefers-reduced-motion:reduce){#inicio .homeEmptyV3 .homeCompass .compassNeedle{animation:none!important;transform:rotate(9deg)!important}}
+
+/* Paisaje breve y dos superficies claramente separadas. */
+#inicio>.homeValue{position:relative!important;inset:auto!important;display:block;width:100%;margin:14px 0 0!important;padding:24px 28px 25px!important;border:1px solid #2b4555!important;border-radius:24px!important;background:linear-gradient(125deg,#152d3d 0%,#102332 65%,#0d1d2a 100%)!important;box-shadow:0 14px 35px #0003!important;text-shadow:none!important}
+#inicio>.homeValue:before{content:"";position:absolute;left:28px;top:0;width:72px;height:2px;background:#42d8bd;border-radius:0 0 3px 3px}
+#inicio>.homeValue span{color:#a8c4ce!important;font:700 12px/1.3 system-ui,sans-serif!important;letter-spacing:.13em!important;text-transform:uppercase}
+#inicio>.homeValue strong{display:block;margin-top:9px!important;color:#f7faf7!important;font:700 clamp(40px,5vw,58px)/1.05 system-ui,sans-serif!important;letter-spacing:-.055em!important;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#inicio .homeV3Content{margin-top:14px!important}
+#inicio .homeEmptyV3{padding:27px 29px 29px!important;border:1px solid #294454!important;border-radius:24px!important;background:linear-gradient(145deg,#102431,#0b1b29)!important;box-shadow:0 14px 35px #0003!important}
+#inicio .homeEmptyV3 h2{margin:8px 0 0!important;color:#f7faf7!important}
+#inicio .homeEmptyIntro{margin:8px 0 21px;max-width:560px;gap:22px}
+#inicio .homeEmptyV3 .homeEmptyIntro p{order:0;max-width:350px;color:#b9c9d0;font-size:15px!important}
+#inicio .homeEmptyV3 .homeCompass{order:1;width:108px!important;height:108px!important}
+#inicio .homeStartButton{min-height:49px;padding:0 23px}
+@media(max-width:720px){
+  #inicio .homeHeroV3{height:clamp(450px,68svh,580px)!important}
+  #inicio .homeSceneryImage{background-position:35% 28%!important}
+  #inicio>.homeValue{margin:12px 12px 0!important;width:calc(100% - 24px);padding:21px 22px 22px!important;border-radius:21px!important}
+  #inicio>.homeValue:before{left:22px}
+  #inicio>.homeValue strong{font-size:clamp(38px,10vw,48px)!important}
+  #inicio .homeV3Content{margin-top:12px!important;padding:0 12px}
+  #inicio .homeEmptyV3{padding:22px 21px 23px!important;border-radius:21px!important}
+  #inicio .homeEmptyV3 h2{font-size:30px!important}
+  #inicio .homeEmptyIntro{gap:14px;margin:8px 0 19px;max-width:none}
+  #inicio .homeEmptyV3 .homeEmptyIntro p{font-size:14px!important;line-height:1.48}
+  #inicio .homeEmptyV3 .homeCompass{width:94px!important;height:94px!important}
+  #inicio .homeStartButton{width:100%}
+}
+@media(max-width:350px){
+  #inicio .homeHeroV3{height:430px!important}
+  #inicio>.homeValue strong{font-size:37px!important}
+  #inicio .homeEmptyV3 .homeCompass{width:82px!important;height:82px!important}
+}
