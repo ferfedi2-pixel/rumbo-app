@@ -8,16 +8,16 @@ body:has(#cartera.on) .nav button{color:#aebfcd!important}
 body:has(#cartera.on) .nav button.on{background:#22cbae!important;color:#05251f!important}
 
 #cartera{color:#f4f7f5}
-#cartera .hero{min-height:0!important;padding:32px 34px!important;border:1px solid #31515b!important;border-radius:27px!important;background:radial-gradient(circle at 88% 120%,#50cdb53d,transparent 44%),repeating-radial-gradient(circle at 93% 20%,transparent 0 39px,#a5eee309 40px 41px),linear-gradient(130deg,#15303c,#0d1e2a)!important;box-shadow:0 14px 34px #0003!important}
+#cartera .hero{min-height:0!important;padding:26px 32px!important;border:1px solid #31515b!important;border-radius:27px!important;background:radial-gradient(circle at 88% 120%,#50cdb53d,transparent 44%),repeating-radial-gradient(circle at 93% 20%,transparent 0 39px,#a5eee309 40px 41px),linear-gradient(130deg,#15303c,#0d1e2a)!important;box-shadow:0 14px 34px #0003!important}
 #cartera .hero:before,#cartera .hero:after{display:none!important}
 #cartera .kick{color:#78ddc9!important;letter-spacing:.16em!important;font-size:10px!important}
 #cartera .kick:before{background:#78ddc9!important}
-#cartera .hero h1{max-width:560px;font:700 clamp(38px,5vw,53px)/1.07 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em!important;margin:13px 0 11px!important}
+#cartera .hero h1{max-width:560px;font:700 clamp(36px,4vw,46px)/1.1 Georgia,"Times New Roman",serif!important;letter-spacing:-.035em!important;margin:9px 0 7px!important}
 #cartera .hero p{color:#c1d0d6!important;font-size:15px!important;line-height:1.45!important;font-weight:450!important}
 #cartera .grid{margin-top:26px!important;gap:20px!important}
 #cartera .grid>.card:has(> .models){grid-column:span 12;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 #cartera .grid>.card:has(> .models)>.head{margin:0 0 15px!important}
-#cartera .grid>.card:has(> .models)>.head h2{color:#f7f5ee!important;font:700 27px/1.15 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em!important}
+#cartera .grid>.card:has(> .models)>.head h2{color:#f7f5ee!important;font:700 23px/1.15 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em!important}
 #cartera .portfolio-footnote{margin:13px 3px 0;color:#99adba;font-size:11px;line-height:1.5}
 
 /* Las tres estrategias comparten estructura, pero tienen colores y paisajes propios. */
@@ -29,36 +29,27 @@ body:has(#cartera.on) .nav button.on{background:#22cbae!important;color:#05251f!
 #cartera .model.sel{border:2px solid var(--model-accent)!important;padding:19px!important;background:#f1f3e9!important;color:#123c39!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--model-accent) 20%,transparent),0 17px 36px #0006!important}
 #cartera .model-horizonte.sel{background:#edf3f5!important;color:#1c4152!important}
 #cartera .model-cumbre.sel{background:#f7ede5!important;color:#493238!important}
-#cartera .model-top{display:flex;align-items:center;gap:15px;min-height:110px}
-#cartera .model-art{display:block;flex:none;width:108px;height:108px;border-radius:50%;background-image:url('/assets/strategies/medallions.webp');background-repeat:no-repeat;background-size:425px 638px;background-position:-27px -17px;filter:drop-shadow(0 6px 11px #0006)}
-#cartera .art-horizonte{background-position:-159px -17px}
-#cartera .art-cumbre{background-position:-291px -134px}
+#cartera .model-top{display:flex;align-items:center;gap:13px;min-height:72px}
+#cartera .model-art{display:block;flex:none;width:72px;height:72px;border-radius:50%;background-image:url('/assets/strategies/medallions.webp');background-repeat:no-repeat;background-size:287px 430px;background-position:-18px -11px;filter:drop-shadow(0 3px 6px #0006)}
+#cartera .art-horizonte{background-position:-107px -11px}
+#cartera .art-cumbre{background-position:-196px -91px}
 #cartera .model-identity{min-width:0}
-#cartera .model-overline{display:block;color:var(--model-accent);font-size:10px;font-weight:800;letter-spacing:.17em}
-#cartera .model h3{margin:5px 0 0!important;color:inherit!important;font:700 clamp(25px,2.6vw,31px)/1.1 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em!important;overflow-wrap:anywhere}
-#cartera .selected-mark{display:inline-block;margin-top:8px;padding:5px 8px;color:#0a4f45;background:#b7e9d8;border:1px solid #91d7c4;border-radius:99px;font-size:11px;font-weight:800;white-space:nowrap}
+#cartera .model-overline{display:block;color:var(--model-accent);font-size:9px;font-weight:800;letter-spacing:.14em}
+#cartera .model h3{margin:4px 0 0!important;color:inherit!important;font:700 26px/1.1 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em!important;overflow-wrap:anywhere}
+#cartera .selected-mark{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:27px;height:27px;color:#0a4f45;background:#b7e9d8;border:1px solid #91d7c4;border-radius:50%;font-size:15px;font-weight:800}
 #cartera .model-horizonte .selected-mark{color:#15576e;background:#cbe8ee;border-color:#a4d0df}
 #cartera .model-cumbre .selected-mark{color:#724629;background:#f8ddbd;border-color:#e9c59c}
-#cartera .model-stats{display:grid;grid-template-columns:0.75fr 1.25fr;gap:10px;margin:15px 0 14px}
-#cartera .model-stats>div{min-width:0;min-height:66px;padding:12px;border:1px solid #ffffff2b;border-radius:15px;background:#08171c38}
-#cartera .model.sel .model-stats>div{background:#ffffffa9;border-color:#1d464523}
-#cartera .model-stats span{display:block;color:#b3cacc;font-size:10px;font-weight:700;line-height:1.25}
-#cartera .model.sel .model-stats span{color:#55706d}
-#cartera .model-stats strong{display:block;margin-top:5px;color:#f7f7f1;font-size:23px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums;white-space:nowrap}
-#cartera .model.sel .model-stats strong{color:#1a4440}
-#cartera .model-horizonte.sel .model-stats strong{color:#1c4960}
-#cartera .model-cumbre.sel .model-stats strong{color:#6b4334}
-#cartera .model-stats small{font-size:11px;font-weight:600;color:#b5c6c4}
-#cartera .model.sel .model-stats small{color:#56736e}
-#cartera .model-allocation{display:grid;gap:10px;margin:2px 0 1px}
-#cartera .allocation-row{display:grid;grid-template-columns:1fr 64px 42px;gap:8px;align-items:center;min-width:0;color:#e0ebeb;font-size:11px;font-weight:700}
-#cartera .model.sel .allocation-row{color:#314d4a}
-#cartera .allocation-row strong{text-align:right;color:#fff;font-size:13px;font-variant-numeric:tabular-nums}
-#cartera .model.sel .allocation-row strong{color:#163e3d}
-#cartera .allocation-track{height:5px;border-radius:30px;background:#ffffff3b;overflow:hidden}
-#cartera .model.sel .allocation-track{background:#183a3a20}
-#cartera .allocation-track i{display:block;height:100%;border-radius:30px;background:var(--model-accent)}
-#cartera .model .actions{display:flex;gap:9px;flex-wrap:nowrap!important;margin-top:auto!important;padding-top:20px!important}
+#cartera .model-allocation{display:grid;gap:7px;margin:17px 0 0}
+#cartera .allocation-row{display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:44px;padding:9px 12px;border:1px solid #ffffff28;border-left:3px solid var(--model-accent);border-radius:12px;background:#ffffff0b;color:#eef6f4;font-size:13px;font-weight:700}
+#cartera .model.sel .allocation-row{color:#284b47;background:#fff9;border-color:#183e4128;border-left-color:var(--model-accent)}
+#cartera .allocation-row strong{color:#fff;font-size:18px;line-height:1;font-variant-numeric:tabular-nums}
+#cartera .model.sel .allocation-row strong{color:#193b38}
+#cartera .model-stats{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:13px 1px 0;color:#b8c9c8;font-size:10px;font-weight:650}
+#cartera .model.sel .model-stats{color:#5d7572}
+#cartera .model-stats span:last-child{text-align:right}
+#cartera .model-stats strong{margin-left:3px;color:#f6f7ee;font-size:13px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+#cartera .model.sel .model-stats strong{color:#214c47}
+#cartera .model .actions{display:flex;gap:9px;flex-wrap:nowrap!important;margin-top:auto!important;padding-top:16px!important}
 #cartera .model .btn{min-height:43px!important;font-size:12px!important;box-shadow:none!important}
 #cartera .model .btn:not(.ghost){flex:1 1 auto;background:var(--model-accent)!important;color:#0a2930!important}
 #cartera .model.sel .btn:not(.ghost){background:#174c47!important;color:#fff!important}
@@ -70,19 +61,26 @@ body:has(#cartera.on) .nav button.on{background:#22cbae!important;color:#05251f!
 #cartera #selected{display:none!important}
 
 /* La opción personalizada conserva su editor y queda visualmente separada. */
-#cartera .card.s7{grid-column:span 12;padding:24px!important;border:1px solid #3e615e!important;border-radius:25px!important;background:linear-gradient(135deg,#153239,#122833)!important;box-shadow:0 14px 32px #0003!important;color:#f4f7f5!important}
-#cartera .card.s7.custom-selected{border-color:#55dfc2!important;box-shadow:0 0 0 3px #41c7a522,0 14px 32px #0003!important}
-#cartera .card.s7>.head{align-items:start!important;margin-bottom:4px!important}
+#cartera .card.s7{grid-column:span 12;padding:20px 23px!important;border:1px solid #3e615e!important;border-radius:25px!important;background:linear-gradient(135deg,#153239,#122833)!important;box-shadow:0 14px 32px #0003!important;color:#f4f7f5!important}
+#cartera .card.s7.custom-selected,#cartera .card.s7.custom-open{border-color:#55dfc2!important;box-shadow:0 0 0 3px #41c7a522,0 14px 32px #0003!important}
+#cartera .card.s7>.head{align-items:center!important;margin:0!important;gap:15px}
+#cartera .card.s7>.head>div{min-width:0}
 #cartera .custom-kicker{display:block;color:#83dec8;font-size:10px;font-weight:800;letter-spacing:.15em;margin-bottom:6px}
-#cartera .card.s7 h2{color:#f7f5ee!important;font:700 27px/1.1 Georgia,"Times New Roman",serif!important}
+#cartera .card.s7 h2{color:#f7f5ee!important;font:700 23px/1.1 Georgia,"Times New Roman",serif!important;overflow-wrap:anywhere}
 #cartera .card.s7 .pill{color:#a8e5d5!important;background:#20534b!important;border-color:#397368!important}
-#cartera .custom-intro{margin:4px 0 16px;color:#c1d0d4;font-size:13px;line-height:1.45}
+#cartera .custom-intro{margin:5px 0 0;color:#c1d0d4;font-size:12px;line-height:1.4}
+#cartera .custom-toggle{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:none;min-height:45px;padding:10px 15px;border:1px solid #79d8c1;border-radius:13px;background:#2ac7ad;color:#072a26;font-size:12px;font-weight:800;white-space:nowrap}
+#cartera .custom-toggle span{font-size:19px;line-height:.7}
+#cartera .custom-toggle:focus-visible{outline:3px solid #a7eddc;outline-offset:3px}
+#cartera #customEditor[hidden]{display:none!important}
+#cartera #customEditor{margin-top:18px;padding-top:17px;border-top:1px solid #ffffff28;scroll-margin-top:12px}
+#cartera .custom-editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;color:#d9ece6;font-size:12px;font-weight:800}
 #cartera .custom-name-inline{max-width:440px;padding:0!important;margin:0 0 15px!important;border:0!important;background:transparent!important}
 #cartera .custom-name-inline label{color:#99cdbf!important;font-size:10px!important}
 #cartera .card.s7 input{background:#f8f7f2!important;color:#183339!important}
 #cartera .asset{border-color:#45646a!important;background:#0d222c!important}
 #cartera .assetList>.notice{padding:13px!important}
-#cartera .card.s7>.notice,#cartera .assetList>.notice{background:#ffffff0a!important;border-color:#4a6968!important;color:#aec9c6!important}
+#cartera #customEditor>.notice,#cartera .assetList>.notice{background:#ffffff0a!important;border-color:#4a6968!important;color:#aec9c6!important}
 #cartera .card.s7 .actions{margin-top:14px!important}
 #cartera .card.s7 .btn{min-height:44px!important;font-size:12px!important}
 #cartera .card.s7 .btn.alt{background:#213d43!important;border:1px solid #678980!important;color:#d7f1e9!important}
@@ -98,37 +96,37 @@ body:has(#cartera.on) .nav button.on{background:#22cbae!important;color:#05251f!
  body:has(#cartera.on) .nav button{min-width:0!important;min-height:58px!important;padding:5px 2px!important;border-radius:16px!important;display:flex!important;flex-direction:column!important;gap:3px!important;font-size:10px!important;line-height:1.1!important}
  body:has(#cartera.on) .nav button svg{width:21px!important;height:21px!important}
  #cartera{margin-top:5px!important}
- #cartera .hero{margin:0!important;padding:24px 22px!important;border-radius:25px!important}
- #cartera .hero h1{font-size:39px!important}
+ #cartera .hero{margin:0!important;padding:21px 21px!important;border-radius:25px!important}
+ #cartera .hero h1{font-size:33px!important}
  #cartera .hero p{font-size:14px!important}
  #cartera .grid{gap:17px!important;margin-top:23px!important}
- #cartera .grid>.card:has(> .models)>.head h2{font-size:24px!important}
+ #cartera .grid>.card:has(> .models)>.head h2{font-size:22px!important}
  #cartera .model{padding:18px!important}
  #cartera .model.sel{padding:17px!important}
- #cartera .model-art{width:100px;height:100px;background-size:394px 591px;background-position:-25px -15px}
- #cartera .art-horizonte{background-position:-147px -15px}
- #cartera .art-cumbre{background-position:-269px -124px}
- #cartera .model-top{gap:14px;min-height:100px}
- #cartera .model h3{font-size:30px!important}
- #cartera .model-stats{margin:13px 0}
- #cartera .model .actions{padding-top:17px!important}
- #cartera .card.s7{padding:21px!important}
+ #cartera .model-art{width:70px;height:70px;background-size:278px 417px;background-position:-18px -11px}
+ #cartera .art-horizonte{background-position:-104px -11px}
+ #cartera .art-cumbre{background-position:-190px -88px}
+ #cartera .model-top{gap:12px;min-height:70px}
+ #cartera .model h3{font-size:25px!important}
+ #cartera .model .actions{padding-top:16px!important}
+ #cartera .card.s7{padding:18px!important}
+ #cartera .card.s7 h2{font-size:21px!important}
  #cartera .asset{grid-template-columns:32px minmax(0,1fr) 64px 34px!important;gap:5px!important;padding:7px!important}
  #cartera .asset input{min-width:0;padding:8px 5px!important;font-size:12px!important}
  #cartera .asset input[type=color]{padding:2px!important;height:33px}
  #cartera .card.s7 .actions{display:grid;grid-template-columns:1fr 1fr}
 }
 @media(max-width:350px){
- #cartera .hero h1{font-size:34px!important}
- #cartera .model-art{width:88px;height:88px;background-size:346px 519px;background-position:-22px -14px}
- #cartera .art-horizonte{background-position:-129px -14px}
- #cartera .art-cumbre{background-position:-237px -109px}
- #cartera .model-top{min-height:88px;gap:11px}
- #cartera .model h3{font-size:27px!important}
- #cartera .model-stats{grid-template-columns:.72fr 1.28fr;gap:6px}
- #cartera .model-stats>div{padding:10px 7px}
- #cartera .model-stats strong{font-size:20px}
- #cartera .model-stats span{font-size:9px}
+ #cartera .hero h1{font-size:31px!important}
+ #cartera .model-art{width:64px;height:64px;background-size:256px 384px;background-position:-16px -10px}
+ #cartera .art-horizonte{background-position:-95px -10px}
+ #cartera .art-cumbre{background-position:-175px -81px}
+ #cartera .model-top{min-height:64px;gap:10px}
+ #cartera .model h3{font-size:23px!important}
+ #cartera .model-stats{font-size:9px}
+ #cartera .model-stats strong{font-size:12px}
+ #cartera .card.s7>.head{align-items:flex-start!important;flex-direction:column}
+ #cartera .custom-toggle{width:100%}
  #cartera .card.s7 .actions{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:no-preference){#cartera .model-art{transition:transform .32s ease}#cartera .model:hover .model-art{transform:rotate(3deg) scale(1.03)}}
