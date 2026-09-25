@@ -433,7 +433,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
 
 /* Composición móvil: paisaje breve y primer paso con contraste cálido. */
 @media(max-width:720px){
-  #inicio .homeHeroV3{height:clamp(365px,44svh,430px)!important}
+  #inicio .homeHeroV3{height:clamp(397px,48svh,460px)!important}
   #inicio .homeSceneryImage{background-position:42% 38%!important}
   #inicio .homeSceneryImage:after{background:linear-gradient(180deg,#07121c85 0%,#07121c09 27%,#07121c20 44%,#07121ce0 82%,#07121c 100%)!important}
   #inicio .homeHeroCopy{align-self:end!important;padding:0 27px 28px!important}
@@ -454,8 +454,8 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeStartButton{min-height:56px;padding:0 18px;justify-content:space-between;border-radius:15px;background:#11695f;color:#fff;font-size:14px;box-shadow:none}
   #inicio .homeStartButton span{font-size:24px}
   #inicio .homeStartButton:hover{background:#0c554e}
-  body:has(#inicio.on) .nav{left:10px!important;right:10px!important;padding:4px!important}
-  body:has(#inicio.on) .nav button{min-height:46px!important;padding:3px 2px!important}
+  body:has(#inicio.on) .nav{left:10px!important;right:10px!important;min-height:64px!important;padding:4px!important}
+  body:has(#inicio.on) .nav button{min-height:44px!important;padding:2px 2px!important}
 }
 @media(max-width:350px){
   #inicio .homeHeroCopy{padding-left:20px!important;padding-right:20px!important}
