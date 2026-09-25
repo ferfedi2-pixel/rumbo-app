@@ -454,7 +454,7 @@ body:has(#inicio.on) .top .brand small{font-size:11px!important}
   #inicio .homeStartButton{min-height:56px;padding:0 18px;justify-content:space-between;border-radius:15px;background:#11695f;color:#fff;font-size:14px;box-shadow:none}
   #inicio .homeStartButton span{font-size:24px}
   #inicio .homeStartButton:hover{background:#0c554e}
-  body:has(#inicio.on) .nav{left:10%!important;right:10%!important;gap:2px!important;padding:4px!important;border-radius:19px!important}
+  body:has(#inicio.on) .nav{left:12%!important;right:12%!important;gap:2px!important;padding:4px!important;border-radius:19px!important}
   body:has(#inicio.on) .nav button{min-height:50px!important;gap:2px!important;font-size:10.5px!important}
   body:has(#inicio.on) .nav button svg{width:19px!important;height:19px!important}
 }
