@@ -31,6 +31,7 @@ body.concept-v2 .app-menu-btn{
   color:#1d3439!important;background:#fffdf8!important;border:1px solid #d9ded7!important;
   box-shadow:none!important;border-radius:12px!important;
 }
+body.concept-v2 .app-menu-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 body.concept-v2 .app-menu{background:#fffdf8!important;border-color:#d9ded7!important;box-shadow:0 16px 30px #1d34391c!important}
 body.concept-v2 .app-menu .menu-title{color:#607177!important}
 body.concept-v2 .app-menu button{color:#1d3439!important}
