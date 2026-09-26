@@ -101,6 +101,7 @@
   rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
   rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
 
