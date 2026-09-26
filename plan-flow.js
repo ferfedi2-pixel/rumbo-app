@@ -46,16 +46,13 @@
   const originalInfo = window.info;
   window.info = id => {
     showingModelDetails = true;
-    try {originalInfo(id)} finally {showingModelDetails = false}
+    try {
+      originalInfo(id);
+      modalTitle.textContent = String(MODELS[id]?.name || '').replace(/^RUMBO\s+/i,'');
+    } finally {showingModelDetails = false}
   };
 
-  // El cuarto acceso de la barra es el plan. Horizonte y datos viven en el menú.
-  const addNav = document.querySelector('.nav [data-v="aportar"]');
-  addNav.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-5 5 5-5 5 5M4 19h16"/></svg><span>Aportar</span>';
-  const planNav = document.querySelector('.nav [data-v="cartera"]');
-  planNav.setAttribute('aria-label','Mi plan');
-  planNav.querySelector('span').textContent = 'Mi plan';
-
+  // La barra agrupa las cuatro áreas; la aportación es la acción principal de Rebalanceo.
   const contributePage = document.createElement('section');
   contributePage.id = 'aportar';
   contributePage.className = 'view';
@@ -66,6 +63,14 @@
   inputField.querySelector('label').textContent = 'Importe previsto';
   const controls = byId('contributeControls');
   controls.append(inputField, byId('calc'));
+  const contributionHelp = contributePage.querySelector('.contribute-input .flow-help');
+  const startPlan = document.createElement('button');
+  startPlan.id = 'rebStartPlan';
+  startPlan.className = 'btn';
+  startPlan.type = 'button';
+  startPlan.textContent = 'Configurar mi cartera';
+  startPlan.onclick = () => go('cartera');
+  controls.append(startPlan);
   const resultCard = byId('results').closest('.card');
   resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
   contributeGrid.append(resultCard);
@@ -81,6 +86,8 @@
   resultCard.append(lastRecord);
 
   byId('rebalanceFlow')?.remove();
+  const holdingsCard = byId('holds').closest('.card');
+  holdingsCard.querySelector('.head h2').textContent = 'Tus saldos';
   const oldActions = byId('clear').closest('.actions');
   const clearSaldos = byId('clear');
   oldActions.remove();
@@ -88,10 +95,14 @@
   reviewCard.id = 'rebalanceReview';
   reviewCard.className = 'card rebalance-review';
   rebPage.querySelector('.grid').append(reviewCard);
-  const rebHero = rebPage.querySelector('.heroIn > div');
-  rebHero.querySelector('.kick').textContent = 'CARTERA ACTUAL';
-  rebHero.querySelector('p').textContent = 'Comprueba cuánto tienes y cómo se compara con tu objetivo.';
-  rebHero.querySelector('.auto-chip')?.remove();
+  holdingsCard.classList.add('current-hold-card');
+  planCard.after(holdingsCard,reviewCard);
+  const rebHero = contributePage.querySelector('.heroIn > div');
+  rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
+  rebHero.querySelector('h1').textContent = 'Rebalanceo';
+  rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebPage.replaceChildren(...contributePage.childNodes);
+  contributePage.remove();
 
   const settings = document.createElement('section');
   settings.id = 'ajustes';
@@ -107,13 +118,12 @@
   byId('resetModal').querySelector('p').textContent = 'Se borrarán el plan, los saldos, las aportaciones registradas y los ajustes de este dispositivo. No se puede deshacer.';
 
   const menu = byId('appMenu');
-  menu.innerHTML = '<span class="menu-title">Más opciones</span><button type="button" id="openHorizon">Horizonte</button><button type="button" id="openSettings">Ajustes</button>';
+  menu.innerHTML = '<span class="menu-title">Más opciones</span><button type="button" id="openSettings">Ajustes</button>';
   function closeMenu() {
     menu.classList.remove('on');
     byId('appMenuBtn').setAttribute('aria-expanded','false');
     byId('appMenuBtn').setAttribute('aria-label','Abrir menú');
   }
-  byId('openHorizon').onclick = () => {closeMenu();go('horizonte')};
   byId('openSettings').onclick = () => {closeMenu();go('ajustes')};
 
   const flowModal = document.createElement('div');
@@ -140,7 +150,8 @@
   flowModal.addEventListener('click', e => {if (e.target === flowModal) closeModal()});
   document.addEventListener('keydown', e => {if (e.key === 'Escape' && flowModal.classList.contains('on')) closeModal()});
   const copyCustom = () => (s.custom || []).map(a => ({...a}));
-  const label = type => type === 'custom' ? (String(s.customName || '').trim() || 'Personalizada') : MODELS[type]?.name || 'Sin plan';
+  const shortName = name => String(name || '').replace(/^RUMBO\s+/i,'');
+  const currentName = () => shortName(pname());
   const blocks = (type, custom) => {
     if (type === 'custom') return (custom || []).map(a => [a.name,+a.pct || 0]);
     const b = MODELS[type]?.blocks;
@@ -160,15 +171,21 @@
     selectionCard.classList.toggle('selection-card',true);
     identityCard.classList.toggle('identity-card',true);
     planCard.hidden = !active;
+    holdingsCard.hidden = !active;
+    reviewCard.hidden = !active;
     selectedCard.hidden = !active;
     const hero = planPage.querySelector('.heroIn > div');
-    hero.querySelector('.kick').textContent = active ? 'TU ESTRATEGIA' : 'PRIMER PASO';
-    hero.querySelector('h1').textContent = 'Mi plan';
-    hero.querySelector('p').textContent = active ? 'El reparto que guía tus aportaciones y revisiones.' : 'Escoge una estrategia para empezar o crea la tuya.';
+    hero.querySelector('.kick').textContent = active ? 'TU CARTERA' : 'PRIMER PASO';
+    hero.querySelector('h1').textContent = 'Cartera';
+    hero.querySelector('p').textContent = active ? 'Tu plan, saldos y distribución en un solo lugar.' : 'Escoge una estrategia para empezar o crea la tuya.';
+    const customNameLabel = personalCard.querySelector('.custom-name-inline label');
+    if (customNameLabel) customNameLabel.textContent = 'Ponle nombre a tu cartera';
     if (!active) return;
+    rebName.textContent = currentName();
+    hName.textContent = currentName();
     const m = model();
     const targets = blocks(s.type,s.custom);
-    planCard.innerHTML = '<span class="plan-eyebrow">PLAN ACTIVO</span><div class="plan-active-head"><div><h2>'+esc(pname())+'</h2><p>Tu reparto objetivo para el largo plazo.</p></div><span class="pill">'+(m?'Riesgo '+m.risk+'/7':'Personalizada')+'</span></div><div class="plan-weights">'+blockMarkup(targets)+'</div><div class="plan-actions"><button type="button" class="btn ghost tiny" id="reviewPlan">Revisar mi plan</button>'+(reviewing?'<button type="button" class="btn ghost tiny" id="cancelPlanReview">Cancelar revisión</button>':'')+'</div>';
+    planCard.innerHTML = '<span class="plan-eyebrow">PLAN ACTIVO</span><div class="plan-active-head"><div><h2>'+esc(currentName())+'</h2><p>Tu reparto objetivo para el largo plazo.</p></div><span class="pill">'+(m?'Riesgo '+m.risk+'/7':'Personalizada')+'</span></div><div class="plan-weights">'+blockMarkup(targets)+'</div><div class="plan-actions"><button type="button" class="btn ghost tiny" id="reviewPlan">Revisar mi plan</button>'+(reviewing?'<button type="button" class="btn ghost tiny" id="cancelPlanReview">Cancelar revisión</button>':'')+'</div>';
     byId('reviewPlan').onclick = beginReview;
     if (reviewing) byId('cancelPlanReview').onclick = cancelReview;
   }
@@ -207,10 +224,10 @@
     const currentType = snapshot?.type || s.type;
     const previousCustom = snapshot?.custom || s.custom;
     const previousName = snapshot?.customName || s.customName;
-    const nextName = candidate.type === 'custom' ? candidate.name : MODELS[candidate.type].name;
+    const nextName = candidate.type === 'custom' ? candidate.name : shortName(MODELS[candidate.type].name);
     const isChange = !!currentType;
     const warning = reason === 'mercado' ? '<p class="flow-caution">Si tus objetivos y circunstancias siguen siendo los mismos, una caída por sí sola merece una revisión pausada. También puedes continuar si has comprobado que tu plan ya no encaja contigo.</p>' : '';
-    openModal('<span class="plan-eyebrow">'+(isChange?'COMPARA ANTES DE CAMBIAR':'CONFIRMA TU PLAN')+'</span><h2 id="planFlowTitle">'+(isChange?'Revisar el nuevo reparto':'Vas a fijar '+esc(nextName))+'</h2><p>RUMBO usará estos porcentajes para orientar tus aportaciones y revisiones. Es un plan de largo plazo; comprueba que encaja contigo.</p><div class="plan-compare">'+(isChange?'<div><h3>Actual · '+esc(currentType==='custom'?previousName:MODELS[currentType].name)+'</h3>'+blockMarkup(blocks(currentType,previousCustom))+'</div>':'')+'<div><h3>Nuevo · '+esc(nextName)+'</h3>'+blockMarkup(blocks(candidate.type,candidate.custom))+'</div></div>'+warning+(isChange?'<p class="flow-help">Tus saldos e historial se conservarán. Cambiar el objetivo no ejecuta operaciones.</p>':'')+'<div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Volver</button><button type="button" class="btn" id="flowConfirm">Confirmar plan</button></div>');
+    openModal('<span class="plan-eyebrow">'+(isChange?'COMPARA ANTES DE CAMBIAR':'CONFIRMA TU PLAN')+'</span><h2 id="planFlowTitle">'+(isChange?'Revisar el nuevo reparto':'Vas a fijar '+esc(nextName))+'</h2><p>Este reparto guiará tus aportaciones y revisiones. Es un plan de largo plazo; comprueba que encaja contigo.</p><div class="plan-compare">'+(isChange?'<div><h3>Actual · '+esc(currentType==='custom'?previousName:shortName(MODELS[currentType].name))+'</h3>'+blockMarkup(blocks(currentType,previousCustom))+'</div>':'')+'<div><h3>Nuevo · '+esc(nextName)+'</h3>'+blockMarkup(blocks(candidate.type,candidate.custom))+'</div></div>'+warning+(isChange?'<p class="flow-help">Tus saldos e historial se conservarán. Cambiar el objetivo no ejecuta operaciones.</p>':'')+'<div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Volver</button><button type="button" class="btn" id="flowConfirm">Confirmar plan</button></div>');
     byId('flowCancel').onclick = closeModal;
     byId('flowConfirm').onclick = () => {
       if (isChange) archivePlan();
@@ -303,14 +320,19 @@
       off.forEach(x => {
         const panel = byId('asset-detail-'+x.id);
         const detail = panel?.querySelector('.detail-action');
-        if (detail) detail.textContent = 'Fuera del objetivo actual. Las aportaciones no comprarán este activo; revisa su peso en Rebalanceo.';
+        if (detail) detail.textContent = 'Fuera del objetivo actual. Las aportaciones no comprarán este activo; revisa su peso en Cartera.';
         const explanation = panel?.querySelector('.detail-explain');
         if (explanation) explanation.textContent = 'Este saldo sigue incluido en el valor total, aunque el plan actual ya no asigna aportaciones a este activo.';
       });
     }
   };
   function renderContribution() {
-    byId('addPlanName').textContent = s.type ? pname() : 'Sin plan';
+    byId('addPlanName').textContent = s.type ? currentName() : 'Sin plan';
+    inputField.hidden = !s.type;
+    byId('calc').hidden = !s.type;
+    startPlan.hidden = !!s.type;
+    contributionHelp.hidden = !s.type;
+    resultCard.hidden = !s.type;
     register.disabled = !s.type || !(Number(byId('newMoney').value) > 0);
     const last = (s.contributions || []).at(-1);
     lastRecord.textContent = last ? 'Última aportación registrada: '+euro.format(last.amount)+' · '+new Date(last.at).toLocaleDateString('es-ES') : '';
@@ -323,7 +345,7 @@
     const a=assets(), m=Math.max(0,+byId('newMoney').value || 0);
     if (!a.length || !m) return;
     const amounts=allocation(a,a.map(x => +s.hold[x.id] || 0),m);
-    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Rebalanceo.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
+    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
     byId('flowCancel').onclick=closeModal;
     byId('flowConfirm').onclick=() => {
       a.forEach((x,i) => {s.hold[x.id]=Math.round(((+s.hold[x.id]||0)+amounts[i])*100)/100});

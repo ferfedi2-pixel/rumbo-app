@@ -565,13 +565,13 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=1"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=2"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
+  <button data-v="cartera" aria-label="Cartera"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 3"/></svg><span>Cartera</span></button>
   <button data-v="rebalanceo" aria-label="Rebalanceo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h12"/><path d="m14 4 3 3-3 3"/><path d="M19 17H7"/><path d="m10 14-3 3 3 3"/></svg><span>Rebalanceo</span></button>
-  <button data-v="aportar" aria-label="Aportar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-5 5 5-5 5 5M4 19h16"/></svg><span>Aportar</span></button>
-  <button data-v="cartera" aria-label="Mi plan"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 3"/></svg><span>Mi plan</span></button>
+  <button data-v="horizonte" aria-label="Horizonte"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18 9 13l3 3 7-9"/><path d="M14 7h5v5"/></svg><span>Horizonte</span></button>
 </nav><main>
 <section class="view on" id="inicio">
   <div class="homeHeroV3">
@@ -608,7 +608,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
       <div class="homeDistGrid">
         <div class="homeDonutWrap">
           <div class="donut" id="donut" role="img" aria-label="Distribución de la cartera"></div>
-          <div class="homeDonutCenter"><small>RUMBO</small><strong id="donutPortfolio">—</strong><span id="donutCaption">Distribución actual</span></div>
+          <div class="homeDonutCenter"><small>CARTERA</small><strong id="donutPortfolio">—</strong><span id="donutCaption">Distribución actual</span></div>
         </div>
         <div class="homeLegendV3" id="legend"></div>
       </div>
@@ -617,7 +617,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
     </div>
 
     <div class="homeMetricsV3" id="homeMetrics" hidden>
-      <button class="homeMetric" onclick="go('aportar')"><span class="metricIcon">＋</span><div><small>Aportación prevista</small><strong id="homeContribution">—</strong><p>Calcula el reparto</p></div><b>›</b></button>
+      <button class="homeMetric" onclick="go('rebalanceo')"><span class="metricIcon">＋</span><div><small>Aportación prevista</small><strong id="homeContribution">—</strong><p>Calcula el reparto</p></div><b>›</b></button>
       <button class="homeMetric" onclick="go('horizonte')"><span class="metricIcon">↗</span><div><small>Rentabilidad supuesta</small><strong id="homeExpected">—</strong><p>Hipótesis anual, no garantía</p></div><b>›</b></button>
     </div>
 
@@ -1192,22 +1192,14 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     if(!ok) return;
 
     const name=(pname()||'Cartera').replace(/^RUMBO\s+/i,'');
-    donutPortfolio.textContent=name;
-    document.getElementById('homePortfolioName').textContent=pname();
+    donutPortfolio.textContent=name.toLocaleUpperCase('es-ES');
+    document.getElementById('homePortfolioName').textContent=name;
     const actual = a.map(x=>({x,amount:+s.hold[x.id]||0}));
     const useActual=t>0;
-    distMode.textContent=useActual?'Distribución actual':'Distribución objetivo · introduce tus saldos en Rebalanceo';
+    distMode.textContent=useActual?'Distribución actual':'Distribución objetivo · introduce tus saldos en Cartera';
     donutCaption.textContent=useActual?'Distribución actual':'Distribución objetivo';
-    const colors={world:'#589bf2',em:'#ee6d86',bonds:'#32cfa5',btc:'#f3bb4d',eth:'#f3bb4d'};
-    const rows=[];
-    actual.forEach(({x,amount})=>{
-      const crypto=m?.eth&&(x.id==='btc'||x.id==='eth');
-      if(crypto){
-        let row=rows.find(r=>r.id==='crypto');
-        if(!row){row={id:'crypto',name:'Cripto',color:colors.btc,amount:0,target:0};rows.push(row)}
-        row.amount+=amount;row.target+=x.w;
-      }else rows.push({id:x.id,name:x.short,color:colors[x.id]||x.color,amount,target:x.w});
-    });
+    const colors={world:'#589bf2',em:'#ee6d86',bonds:'#32cfa5',btc:'#f3bb4d',eth:'#aa83e6'};
+    const rows=actual.map(({x,amount})=>({id:x.id,name:x.short,color:colors[x.id]||x.color,amount,target:x.w}));
     let pos=0;
     const segments=rows.map(row=>{row.share=useActual?row.amount/t*100:row.target;const start=pos;pos+=Math.max(0,row.share);return row.color+' '+start+'% '+pos+'%'});
     donut.style.background='conic-gradient('+segments.join(',')+')';
@@ -1231,5 +1223,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=1"></script>
+<script src="/plan-flow.js?v=2"></script>
 </body></html>
