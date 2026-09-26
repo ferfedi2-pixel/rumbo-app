@@ -261,7 +261,7 @@ body.concept-v2 .close{color:#1d3439;background:#eaece6}
   body.concept-v2 .nav button{
     min-width:0!important;min-height:53px!important;padding:5px 1px!important;
     flex-direction:column!important;gap:3px!important;border-radius:13px!important;
-    font-size:10px!important;line-height:1.1!important;
+    font-size:11px!important;line-height:1.1!important;
   }
   body.concept-v2 .nav button svg{width:19px!important;height:19px!important}
   body.concept-v2 #inicio .homeHeroV3{
@@ -270,14 +270,14 @@ body.concept-v2 .close{color:#1d3439;background:#eaece6}
     margin:0 -15px!important;width:calc(100% + 30px);
   }
   body.concept-v2 #inicio .homeHeroCopy{align-self:start!important}
-  body.concept-v2 #inicio .homeKicker{margin-bottom:14px!important;font-size:9px!important;letter-spacing:.14em!important}
+  body.concept-v2 #inicio .homeKicker{margin-bottom:14px!important;font-size:11px!important;letter-spacing:.12em!important}
   body.concept-v2 #inicio .homeHeroCopy h1{
     max-width:420px!important;margin:0 0 12px!important;
     font-size:clamp(39px,10.3vw,56px)!important;line-height:1.02!important;
   }
   body.concept-v2 #inicio .homeHeroCopy p{max-width:370px!important;margin-bottom:20px!important;font-size:14px!important;line-height:1.45!important}
   body.concept-v2 .homeHeroAction{min-height:48px;font-size:13px}
-  body.concept-v2 .homeHeroNote{margin-top:12px;font-size:10px}
+  body.concept-v2 .homeHeroNote{margin-top:12px;font-size:11px}
   body.concept-v2 #inicio .homePlanArt{
     min-height:225px;padding:21px 20px 17px;gap:7px;border-radius:17px;
     box-shadow:none!important;
@@ -291,7 +291,7 @@ body.concept-v2 .close{color:#1d3439;background:#eaece6}
   body.concept-v2 #inicio .artPath{display:none}
   body.concept-v2 #inicio .artFoot{font-size:8px;margin-top:4px}
   body.concept-v2 #inicio>.homeValue{margin-top:13px!important;padding:18px 19px!important;border-radius:15px!important}
-  body.concept-v2 #inicio>.homeValue span{font-size:9px!important;max-width:115px}
+  body.concept-v2 #inicio>.homeValue span{font-size:11px!important;max-width:135px}
   body.concept-v2 #inicio>.homeValue strong{font-size:36px!important}
   body.concept-v2 #inicio .homeV3Content{margin-top:13px!important}
   body.concept-v2 #inicio .homeEmptyV3{
@@ -299,7 +299,7 @@ body.concept-v2 .close{color:#1d3439;background:#eaece6}
   }
   body.concept-v2 #inicio .homeEmptyV3 h2{font-size:28px!important}
   body.concept-v2 #inicio .homeEmptyIntro{margin:7px 0 17px!important}
-  body.concept-v2 #inicio .homeEmptyV3 .homeEmptyIntro p{font-size:13px!important}
+  body.concept-v2 #inicio .homeEmptyV3 .homeEmptyIntro p{font-size:14px!important}
   body.concept-v2 #inicio .homeStartButton{width:100%;min-height:47px;grid-column:auto;grid-row:auto}
   body.concept-v2 #inicio #summary{padding:22px 18px!important}
   body.concept-v2 #cartera .hero,body.concept-v2 #rebalanceo .hero,body.concept-v2 #horizonte .hero{
@@ -314,9 +314,10 @@ body.concept-v2 .close{color:#1d3439;background:#eaece6}
   body.concept-v2 #cartera .art-cumbre{background-position:-147px -68px}
 }
 @media(max-width:350px){
-  body.concept-v2 .nav button{font-size:9px!important}
+  body.concept-v2 .nav button{font-size:10px!important}
   body.concept-v2 #inicio .homeHeroCopy h1{font-size:36px!important}
   body.concept-v2 #inicio .homePlanArt{min-height:215px}
   body.concept-v2 #inicio>.homeValue strong{font-size:32px!important}
 }
+body.concept-v2 #inicio [hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){body.concept-v2 *,body.concept-v2 *:before,body.concept-v2 *:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
