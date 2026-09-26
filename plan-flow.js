@@ -89,6 +89,7 @@
   reviewCard.className = 'card rebalance-review';
   rebPage.querySelector('.grid').append(reviewCard);
   const rebHero = rebPage.querySelector('.heroIn > div');
+  rebHero.querySelector('.kick').textContent = 'CARTERA ACTUAL';
   rebHero.querySelector('p').textContent = 'Comprueba cuánto tienes y cómo se compara con tu objetivo.';
   rebHero.querySelector('.auto-chip')?.remove();
 
@@ -300,8 +301,11 @@
     if (off.length) {
       rebNote.textContent += ' Los activos fuera del plan conservan su saldo y requieren una revisión aparte.';
       off.forEach(x => {
-        const detail = byId('asset-detail-'+x.id)?.querySelector('.detail-action');
+        const panel = byId('asset-detail-'+x.id);
+        const detail = panel?.querySelector('.detail-action');
         if (detail) detail.textContent = 'Fuera del objetivo actual. Las aportaciones no comprarán este activo; revisa su peso en Rebalanceo.';
+        const explanation = panel?.querySelector('.detail-explain');
+        if (explanation) explanation.textContent = 'Este saldo sigue incluido en el valor total, aunque el plan actual ya no asigna aportaciones a este activo.';
       });
     }
   };
