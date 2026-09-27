@@ -1,11 +1,19 @@
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
-  let ethShare=null,emShare=null,emDate=null,errors=[];
+  let ethShare=null,ethDate=null,emShare=null,emDate=null,errors=[];
   try{
     const r=await fetch('https://api.coingecko.com/api/v3/global',{headers:{accept:'application/json','user-agent':'Mozilla/5.0 Perplexity/2.3'}});
     if(!r.ok)throw new Error('CoinGecko '+r.status);
-    const j=await r.json(),v=Number(j?.data?.market_cap_percentage?.eth);
-    if(Number.isFinite(v))ethShare=v;
+    const j=await r.json();
+    const btc=Number(j?.data?.market_cap_percentage?.btc);
+    const eth=Number(j?.data?.market_cap_percentage?.eth);
+    // CoinGecko publishes each coin's share of the whole market. Our plan
+    // contains only BTC and ETH, so normalize over those two shares.
+    if(Number.isFinite(btc)&&Number.isFinite(eth)&&btc>0&&eth>0){
+      ethShare=100*eth/(btc+eth);
+      const updated=Number(j?.data?.updated_at);
+      if(Number.isFinite(updated)&&updated>0)ethDate=new Date(updated*1000).toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'});
+    }
   }catch(e){errors.push('ETH: '+String(e.message||e))}
   try{
     const h={'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140 Safari/537.36','accept':'text/html,application/xhtml+xml','accept-language':'en-US,en;q=0.9'};
@@ -22,5 +30,5 @@ export default async function handler(req,res){
     if(ac&&em)emShare=em/ac*100;
     emDate=date(et)||date(at);
   }catch(e){errors.push('MSCI: '+String(e.message||e))}
-  res.status(200).json({ethShare,emShare,emDate,updated:new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'}),source:'MSCI + CoinGecko',errors});
+  res.status(200).json({ethShare,ethDate,ethBasis:'btc-eth',emShare,emDate,updated:new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'}),source:'MSCI + CoinGecko',errors});
 }

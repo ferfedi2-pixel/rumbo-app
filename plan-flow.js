@@ -141,12 +141,19 @@
   dataSources.id = 'dataSources';
   dataSources.className = 'data-sources';
   dataSources.innerHTML = '<summary>Datos y límites de esta proyección</summary><p id="marketSources"></p><button type="button" class="btn ghost tiny" id="refreshSources">Comprobar referencias</button><p>Los porcentajes de emergentes y Ethereum distribuyen los bloques del plan; pueden quedar desactualizados. Las hipótesis anuales son supuestos, no datos de mercado ni previsiones. El escenario no incorpora inflación, impuestos, costes ni cambios de precios.</p>';
-  byId('hRate').closest('.card').append(dataSources);
+  const horizonAssumptions = byId('hRate').closest('.card');
+  const horizonWarning = document.createElement('p');
+  horizonWarning.className = 'horizon-warning';
+  horizonWarning.textContent = 'Esta proyección es una estimación basada en hipótesis. No representa una garantía de rentabilidad futura.';
+  horizonAssumptions.append(horizonWarning,dataSources);
   byId('refreshSources').onclick = () => byId('refresh').click();
   function renderSources() {
     const emDate = s.market.emDate || s.market.date || 'fecha no disponible';
     const ethDate = s.market.ethDate || 'fecha no confirmada';
-    byId('marketSources').textContent = 'Emergentes: '+pct(s.market.em)+' del bloque de renta variable (aproximación MSCI, '+emDate+'). Ethereum: '+pct(s.market.eth)+' del bloque cripto (cuota global de ETH de CoinGecko aplicada al bloque BTC/ETH; el resto se asigna a BTC, '+ethDate+'). '+(s.market.status||'');
+    const ethSource = s.market.ethBasis === 'btc-eth'
+      ? 'peso relativo entre BTC y ETH según capitalización de CoinGecko, '+ethDate
+      : 'referencia anterior basada en cuota global, que no equivale al peso relativo BTC/ETH; actualiza cuando haya conexión';
+    byId('marketSources').textContent = 'Emergentes: '+pct(s.market.em)+' del bloque de renta variable (aproximación MSCI, '+emDate+'). Ethereum: '+pct(s.market.eth)+' del bloque cripto ('+ethSource+'). '+(s.market.status||'');
   }
 
   const menu = byId('appMenu');
@@ -182,6 +189,24 @@
   flowModal.addEventListener('click', e => {if (e.target === flowModal) closeModal()});
   document.addEventListener('keydown', e => {if (e.key === 'Escape' && flowModal.classList.contains('on')) closeModal()});
   const copyCustom = () => (s.custom || []).map(a => ({...a}));
+  // El formulario edita un borrador; el plan activo solo cambia tras validar y confirmar.
+  let draftCustom = copyCustom();
+  renderCustom = function () {
+    customAssets.innerHTML = draftCustom.length ? draftCustom.map((a,i) => '<div class="asset"><input aria-label="Color del activo '+(i+1)+'" type="color" value="'+esc(a.color||C.world)+'" onchange="editA('+i+',\'color\',this.value)"><input aria-label="Nombre del activo '+(i+1)+'" value="'+esc(a.name||'')+'" placeholder="Activo" onchange="editA('+i+',\'name\',this.value)"><input aria-label="Porcentaje del activo '+(i+1)+'" type="number" min="0" max="100" step=".1" value="'+esc(a.pct??0)+'" onchange="editA('+i+',\'pct\',this.value)"><button class="x" aria-label="Eliminar activo '+(i+1)+'" onclick="delA('+i+')">×</button></div>').join('') : '<div class="notice">Añade un activo, su porcentaje y un color.</div>';
+    customSum.textContent=pct(draftCustom.reduce((z,a)=>z+(Number(a.pct)||0),0));
+  };
+  window.editA = (i,k,v) => {
+    if(!draftCustom[i])return;
+    draftCustom[i][k]=v;
+    customSum.textContent=pct(draftCustom.reduce((z,a)=>z+(Number(a.pct)||0),0));
+    showCustomError('');
+  };
+  window.delA = i => {draftCustom.splice(i,1);renderCustom();showCustomError('')};
+  let draftSerial=0;
+  byId('addAsset').onclick = () => {
+    draftCustom.push({id:'c'+Date.now()+'_'+(++draftSerial),name:'',pct:0,color:[C.world,C.em,C.bonds,C.btc,C.eth][draftCustom.length%5]});
+    renderCustom();showCustomError('');
+  };
   const shortName = name => String(name || '').replace(/^Perplexity\s+/i,'');
   const currentName = () => shortName(pname());
   const blocks = (type, custom) => {
@@ -240,6 +265,7 @@
   }
   function cancelReview() {
     if (snapshot) {s.custom=snapshot.custom;s.customName=snapshot.customName}
+    draftCustom=copyCustom();
     reviewing=false;snapshot=null;reason='';
     customEditor.hidden=true;
     customToggle.setAttribute('aria-expanded','false');
@@ -271,6 +297,7 @@
         s.customName = snapshot.customName;
       }
       s.type = candidate.type;
+      draftCustom=copyCustom();
       s.planSetAt = new Date().toISOString();
       if (isChange) {
         s.planHistory ||= [];
@@ -292,6 +319,7 @@
   };
   customToggle.onclick = () => {
     const open = customEditor.hidden;
+    if(open){draftCustom=copyCustom();renderCustom();showCustomError('')}
     customEditor.hidden = !open;
     customToggle.setAttribute('aria-expanded',String(open));
     personalCard.classList.toggle('custom-open',open);
@@ -300,16 +328,16 @@
     if (open) customEditor.scrollIntoView({behavior:'smooth',block:'start'});
   };
   useCustom.onclick = () => {
-    if (!s.custom.length) {showCustomError('Añade al menos un activo antes de aplicar la cartera.');return}
-    const missingName = s.custom.findIndex(a => !String(a.name||'').trim());
+    if (!draftCustom.length) {showCustomError('Añade al menos un activo antes de aplicar la cartera.');return}
+    const missingName = draftCustom.findIndex(a => !String(a.name||'').trim());
     if (missingName >= 0) {showCustomError('Pon un nombre al activo '+(missingName+1)+'.');return}
-    const invalidWeight = s.custom.findIndex(a => !Number.isFinite(Number(a.pct)) || +a.pct < 0 || +a.pct > 100);
+    const invalidWeight = draftCustom.findIndex(a => String(a.pct).trim()==='' || !Number.isFinite(Number(a.pct)) || +a.pct < 0 || +a.pct > 100);
     if (invalidWeight >= 0) {showCustomError('El porcentaje del activo '+(invalidWeight+1)+' debe estar entre 0 % y 100 %.');return}
-    const sum = s.custom.reduce((z,a) => z+Number(a.pct),0);
+    const sum = draftCustom.reduce((z,a) => z+Number(a.pct),0);
     if (Math.abs(sum-100) > .01) {showCustomError('La suma actual es '+pct(sum)+'. Ajusta los porcentajes hasta llegar al 100 %.');return}
     showCustomError('');
     const name = customName.value.trim() || 'Mi cartera';
-    offerPlan({type:'custom',name,custom:copyCustom()});
+    offerPlan({type:'custom',name,custom:draftCustom.map(a=>({...a,pct:Number(a.pct)}))});
   };
 
   function renderReview() {

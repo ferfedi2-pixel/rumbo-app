@@ -565,7 +565,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=1"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=2"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>PERPLEXITY</b><small>Tu plan de inversión, con claridad</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -636,9 +636,13 @@ const euro=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximu
 const C={world:'#5688c7',em:'#d65d70',bonds:'#39aa7d',btc:'#d59a2e',eth:'#876fca'};
 const PROD={world:{id:'world',name:'Países desarrollados',short:'Desarrollados',detail:'iShares Developed World Index (IE) Acc EUR clase S',isin:'IE000ZYRH0Q7',ter:'0,06%',color:C.world},em:{id:'em',name:'Mercados emergentes',short:'Emergentes',detail:'iShares Emerging Markets Index Fund (IE) Acc EUR clase S',isin:'IE000QAZP7L2',ter:'0,16%',color:C.em},bonds:{id:'bonds',name:'Bonos globales',short:'Bonos',detail:'Vanguard Global Bond Index Fund',isin:'IE00B18GC888',ter:'—',color:C.bonds},btc:{id:'btc',name:'Bitcoin',short:'Bitcoin',detail:'BTC',isin:'—',ter:'—',color:C.btc},eth:{id:'eth',name:'Ethereum',short:'Ethereum',detail:'ETH',isin:'—',ter:'—',color:C.eth}};
 const MODELS={refugio:{name:'Horizonte',risk:3,rate:5,desc:'Menor exposición a las oscilaciones, con renta fija.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'Equilibrio',risk:5,rate:6,desc:'Combina crecimiento, renta fija y una parte de Bitcoin.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'Cumbre',risk:6,rate:8.5,desc:'Más exposición a renta variable y criptoactivos; grandes caídas posibles.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
-let s={user:'Felipe',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,date:'31/08/2026',status:'Última referencia válida'}};
+let s={user:'',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,ethBasis:'global-legacy',date:'31/08/2026',status:'Referencia guardada: comprueba su fecha antes de utilizarla.'}};
 try{const current=localStorage.getItem(KEY),legacy=current?null:localStorage.getItem('rumbo_v1'),x=JSON.parse(current||legacy||'null');if(x){s={...s,...x,market:{...s.market,...(x.market||{})}};if(legacy)localStorage.setItem(KEY,JSON.stringify(s))}}catch(e){}
-function save(){localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
+if(!Array.isArray(s.custom))s.custom=[];
+if(!s.hold||typeof s.hold!=='object'||Array.isArray(s.hold))s.hold={};
+if(s.type&&s.type!=='custom'&&!MODELS[s.type])s.type=null;
+if(!Number.isFinite(Number(s.money))||Number(s.money)<0)s.money=1000;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}catch(e){saved.textContent='No se pudo guardar en este navegador'}}
 function model(){return MODELS[s.type]||null}function pname(){const label=String(s.customName||'').trim();return s.type==='custom'?(label||'Mi cartera'):(model()?.name||'Sin configurar')}
 function assets(){if(s.type==='custom')return s.custom.map((a,i)=>({id:a.id||'c'+i,name:a.name||'Activo '+(i+1),short:a.name||'Activo '+(i+1),w:+a.pct||0,color:a.color||C.world,detail:'Activo personalizado'}));const m=model();if(!m)return[];const a=[],e=Math.max(0,Math.min(40,+s.market.em||11.85))/100;if(m.blocks.eq){a.push({...PROD.world,w:m.blocks.eq*(1-e)});a.push({...PROD.em,w:m.blocks.eq*e})}if(m.blocks.bond)a.push({...PROD.bonds,w:m.blocks.bond});if(m.blocks.crypto){if(m.eth){const h=Math.max(0,Math.min(40,+s.market.eth||11.43))/100;a.push({...PROD.btc,w:m.blocks.crypto*(1-h)});a.push({...PROD.eth,w:m.blocks.crypto*h})}else a.push({...PROD.btc,w:m.blocks.crypto})}return a}
 function total(){return assets().reduce((z,a)=>z+(+s.hold[a.id]||0),0)}
@@ -649,10 +653,10 @@ window.choose=id=>{s.type=id;save();render()};window.info=id=>{const m=MODELS[id
 function blk(n,v,a){return '<div class="block"><div class="bt"><b>'+n+'</b><strong>'+pct(v)+'</strong></div>'+a.map(x=>'<div class="sub"><span>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')+'</div>'}
 function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML='Tu inversión,<br><em>con dirección.</em>';homeUser.textContent='Calcula dónde aportar y cuándo rebalancear.';homeTotal.textContent=euro.format(total());risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
 refresh.onclick=async()=>{refresh.disabled=true;refresh.textContent='Actualizando…';let msg=[];try{const r=await fetch('/api/market',{cache:'no-store'}),j=await r.json();if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;msg.push('Ethereum actualizado')}if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;msg.push('Emergentes actualizado')}s.market.date=j.updated||new Date().toLocaleDateString('es-ES')}catch(e){msg.push('No se pudo actualizar')}s.market.status=msg.length?msg.join(' · '):'Se mantiene la última referencia válida';save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar'}
-function renderPortfolio(){renderModels();userName.value=s.user;customName.value=s.customName;customRate.value=s.customRate;renderCustom();const a=assets();selected.hidden=!a.length;if(a.length){selectedRisk.textContent=model()?'Riesgo '+model().risk+'/7':'Personalizada';selectedComp.innerHTML=a.map(x=>'<div class="sub"><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+x.color+';margin-right:7px"></i>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')}}
+function renderPortfolio(){renderModels();userName.value=s.user;customName.value=s.customName;customRate.value=s.customRate;renderCustom();const a=assets();selected.hidden=!a.length;if(a.length){selectedRisk.textContent=model()?'Riesgo '+model().risk+'/7':'Personalizada';selectedComp.innerHTML=a.map(x=>'<div class="sub"><span><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+x.color+';margin-right:7px"></i>'+esc(x.name)+'</span><b>'+pct(x.w)+'</b></div>').join('')}}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function renderCustom(){customAssets.innerHTML=s.custom.length?s.custom.map((a,i)=>'<div class="asset"><input aria-label="Color del activo '+(i+1)+'" type="color" value="'+a.color+'" onchange="editA('+i+',\'color\',this.value)"><input aria-label="Nombre del activo '+(i+1)+'" value="'+esc(a.name)+'" placeholder="Activo" onchange="editA('+i+',\'name\',this.value)"><input aria-label="Porcentaje del activo '+(i+1)+'" type="number" min="0" max="100" step=".1" value="'+(+a.pct||0)+'" onchange="editA('+i+',\'pct\',this.value)"><button class="x" aria-label="Eliminar activo '+(i+1)+'" onclick="delA('+i+')">×</button></div>').join(''):'<div class="notice">Añade un activo, su porcentaje y un color.</div>';customSum.textContent=pct(s.custom.reduce((z,a)=>z+(+a.pct||0),0))}
 window.editA=(i,k,v)=>{s.custom[i][k]=k==='pct'?+v:v;customSum.textContent=pct(s.custom.reduce((z,a)=>z+(+a.pct||0),0))};window.delA=i=>{s.custom.splice(i,1);renderCustom()};addAsset.onclick=()=>{s.custom.push({id:'c'+Date.now(),name:'',pct:0,color:[C.world,C.em,C.bonds,C.btc,C.eth][s.custom.length%5]});renderCustom()};saveIdentity.onclick=()=>{s.user=userName.value.trim()||'Usuario';s.customName=customName.value.trim()||'Mi cartera';save();render()};useCustom.onclick=()=>{const z=s.custom.reduce((q,a)=>q+(+a.pct||0),0);if(Math.abs(z-100)>.01)return alert('La cartera suma '+pct(z)+'. Debe sumar 100%.');if(s.custom.some(a=>!a.name.trim()))return alert('Pon nombre a todos los activos.');s.user=userName.value.trim()||'Usuario';s.customName=customName.value.trim()||'Mi cartera';s.type='custom';save();go('inicio')}
-function renderReb(){const a=assets();rebName.textContent=a.length?pname():'Sin configurar';rebTotal.textContent=a.length?euro.format(total()):'—';newMoney.value=s.money;if(!a.length){holds.innerHTML='<div class="notice">Configura una cartera antes de introducir importes.</div>';results.innerHTML='';return}holds.innerHTML=a.map(x=>'<div class="hold"><span class="badge" style="background:'+x.color+'">'+(x.id==='btc'?'₿':x.id==='eth'?'Ξ':x.short[0])+'</span><div><b>'+x.short+'</b><small>Objetivo '+pct(x.w)+'</small></div><input type="number" min="0" step="10" value="'+(+s.hold[x.id]||'')+'" placeholder="0 €" onchange="setH(\''+x.id+'\',this.value)"></div>').join('');calcNow()}
+function renderReb(){const a=assets();rebName.textContent=a.length?pname():'Sin configurar';rebTotal.textContent=a.length?euro.format(total()):'—';newMoney.value=s.money;if(!a.length){holds.innerHTML='<div class="notice">Configura una cartera antes de introducir importes.</div>';results.innerHTML='';return}holds.innerHTML=a.map(x=>'<div class="hold"><span class="badge" style="background:'+x.color+'">'+esc(x.id==='btc'?'₿':x.id==='eth'?'Ξ':x.short[0])+'</span><div><b>'+esc(x.short)+'</b><small>Objetivo '+pct(x.w)+'</small></div><input type="number" min="0" step="10" value="'+(+s.hold[x.id]||'')+'" placeholder="0 €" onchange="setH(\''+x.id+'\',this.value)"></div>').join('');calcNow()}
 window.setH=(id,v)=>{s.hold[id]=Math.max(0,+v||0);save();render()};newMoney.onchange=e=>{s.money=Math.max(0,+e.target.value||0);save();calcNow()};clear.onclick=()=>{s.hold={};save();render()};calc.onclick=()=>{s.money=Math.max(0,+newMoney.value||0);save();render()}
 function allocation(a,cur,M){const T=cur.reduce((x,y)=>x+y,0)+M,d=a.map(x=>T*x.w/100);let lo=-1e8,hi=1e8;for(let k=0;k<100;k++){const mid=(lo+hi)/2;let z=0;for(let i=0;i<a.length;i++)z+=Math.max(0,d[i]-cur[i]-mid);if(z>M)lo=mid;else hi=mid}const l=(lo+hi)/2;let x=a.map((_,i)=>Math.max(0,d[i]-cur[i]-l)),z=x.reduce((q,w)=>q+w,0);x=z?x.map(v=>v*M/z):a.map(y=>M*y.w/100);x=x.map(v=>Math.round(v*100)/100);const diff=Math.round((M-x.reduce((q,w)=>q+w,0))*100)/100;if(x.length)x[0]+=diff;return x}
 function calcNow(){const a=assets();if(!a.length)return;const cur=a.map(x=>+s.hold[x.id]||0),ct=cur.reduce((x,y)=>x+y,0),M=Math.max(0,+newMoney.value||0),x=allocation(a,cur,M);contrib.textContent=euro.format(M);results.innerHTML=a.map((y,i)=>{const ap=ct?cur[i]/ct*100:0,v=x[i];return '<div class="res"><i class="dot" style="background:'+y.color+'"></i><div><b>'+y.short+'</b><small>Actual '+pct(ap)+' · objetivo '+pct(y.w)+'</small></div><div class="act"><span>'+(v>.004?'Aportar':'Pausar')+'</span><strong class="'+(v>.004?'good':'pause')+'">'+(v>.004?euro.format(v):'0 €')+'</strong></div></div>'}).join('');rebNote.textContent=ct?'La aportación se dirige a los activos infraponderados sin vender.':'Sin patrimonio introducido, se reparte según los pesos objetivo.'}
@@ -962,17 +966,18 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
       const em=Number(j.emShare);
       const eth=Number(j.ethShare);
       const validEm=j.emShare!==null&&j.emShare!==undefined&&Number.isFinite(em)&&em>1&&em<40;
-      const validEth=j.ethShare!==null&&j.ethShare!==undefined&&Number.isFinite(eth)&&eth>0&&eth<40;
+      const validEth=j.ethBasis==='btc-eth'&&j.ethShare!==null&&j.ethShare!==undefined&&Number.isFinite(eth)&&eth>0&&eth<40;
 
       s.market.em=validEm?em:prevEm;
       s.market.eth=validEth?eth:prevEth;
+      if(validEth){s.market.ethBasis='btc-eth';s.market.ethDate=j.ethDate||('consultado '+(j.updated||'fecha no disponible'));}
       s.market.date=validEm?(j.emDate||j.updated||prevDate):prevDate;
 
       const emText=validEm
         ? 'Emergentes '+pct(s.market.em)+' · MSCI '+s.market.date
         : 'Emergentes: se mantiene '+pct(s.market.em)+' · última referencia MSCI '+s.market.date;
 
-      const ethText=validEth?'Ethereum '+pct(s.market.eth):'Ethereum: último dato '+pct(s.market.eth);
+      const ethText=validEth?'Ethereum '+pct(s.market.eth)+' de BTC+ETH':'Ethereum: se mantiene la referencia anterior; revisa su fecha y método';
       s.market.status=emText+' · '+ethText;
     }catch(e){
       s.market.em=prevEm;
@@ -1112,7 +1117,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
       const routeTxt=buy>.5?'Destino de rebalanceo: recibir aproximadamente <b>'+fmtEuro(buy)+'</b>.':'';
       let detailAction='';
       if(sell>.5){
-        const dest=Object.entries(allBuy).filter(([,v])=>v>.5).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([j,v])=>a[+j].short+' '+fmtEuro(v)).join(' · ');
+        const dest=Object.entries(allBuy).filter(([,v])=>v>.5).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([j,v])=>esc(a[+j].short)+' '+fmtEuro(v)).join(' · ');
         detailAction='<div class="detail-action sell"><b>Rebalanceo extraordinario</b><br>Venta orientativa de este activo: <b>'+fmtEuro(sell)+'</b>.'+(dest?'<div class="route-list">Reasignar hacia: '+dest+'</div>':'')+'</div>';
       }else if(b&&b.state==='contributions'){
         detailAction='<div class="detail-action watch"><b>Sin venta por ahora.</b> La desviación puede corregirse con aportaciones si se mantienen aproximadamente las condiciones actuales.</div>';
@@ -1125,7 +1130,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
       const bandTxt=b?('Banda de control del bloque '+b.name+': '+pct(b.lo)+'–'+pct(b.hi)+'.'):'Banda de control: regla 5/25.';
       return '<div class="res">'+
         '<i class="dot" style="background:'+y.color+'"></i>'+
-        '<div class="res-main"><b>'+y.short+'</b><div class="weight-triplet">'+
+        '<div class="res-main"><b>'+esc(y.short)+'</b><div class="weight-triplet">'+
           '<span>Actual <b>'+pct(currentW)+'</b></span>'+
           '<span>Objetivo <b>'+pct(y.w)+'</b></span>'+
           '<span class="after">Tras aporte <b>'+pct(afterW)+'</b></span>'+
@@ -1223,5 +1228,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=4"></script>
+<script src="/plan-flow.js?v=5"></script>
 </body></html>
