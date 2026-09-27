@@ -370,4 +370,5 @@
     renderContribution();
   };
   render();
+  if (new URLSearchParams(location.search).get('view') === 'rebalanceo') go('rebalanceo');
 })();

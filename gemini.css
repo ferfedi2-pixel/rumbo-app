@@ -3,6 +3,7 @@ body:has(#rebalanceo.on){background:#e9efeb!important;color:#26383d!important}
 #cartera .current-hold-card{padding:18px!important;border:1px solid #3e615e!important;border-radius:20px!important}
 #rebalanceo{color:#26383d!important}
 #rebalanceo .hero{min-height:0!important;margin:0!important;padding:17px 0 25px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#26383d!important}
+#rebalanceo .hero:after{display:none!important}
 #rebalanceo .hero .kick{color:#66777b!important;font:750 10px/1.4 system-ui,sans-serif!important;letter-spacing:.17em!important}
 #rebalanceo .hero h1{font:700 clamp(39px,4.3vw,54px)/1.03 Georgia,serif!important;letter-spacing:-.035em!important;color:#1a2c32!important;margin:7px 0 7px!important}
 #rebalanceo .hero p{color:#6c797b!important;font-size:13px!important}
@@ -65,4 +66,3 @@ body:has(#rebalanceo.on){background:#e9efeb!important;color:#26383d!important}
   #rebalanceo .weight-triplet span,#rebalanceo .weight-triplet b{font-size:9px!important}
   #rebalanceo .act strong{font-size:19px!important}
 }
-
