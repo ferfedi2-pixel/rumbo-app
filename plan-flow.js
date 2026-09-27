@@ -66,11 +66,11 @@
   const contributePage = document.createElement('section');
   contributePage.id = 'aportar';
   contributePage.className = 'view';
-  contributePage.innerHTML = '<div class="hero"><div class="heroIn"><div><span class="kick">APORTACIÓN PERIÓDICA</span><h1>Aportar</h1><p>Dirige tu próxima aportación según el plan y los saldos actuales.</p></div></div></div><div class="grid"><div class="card contribute-input"><div class="head"><h2>Próxima aportación</h2><span class="pill" id="addPlanName">Sin plan</span></div><div id="contributeControls"></div><p class="flow-help">Es una propuesta. Tus saldos no cambiarán hasta que registres una aportación realizada.</p></div></div>';
+  contributePage.innerHTML = '<div class="hero"><div class="heroIn"><div><span class="kick">CÁLCULO</span><h1>Rebalanceo</h1><p>Aportación y desviaciones.</p></div></div></div><div class="grid"><section class="contribute-input"><div class="head"><h2>Importe</h2><span class="pill" id="addPlanName">Sin plan</span></div><div id="contributeControls"></div><p class="flow-help">Los saldos se actualizan al registrar la aportación.</p></section></div>';
   rebPage.after(contributePage);
   const contributeGrid = contributePage.querySelector('.grid');
   const inputField = byId('newMoney').closest('.field');
-  inputField.querySelector('label').textContent = 'Importe previsto';
+  inputField.querySelector('label').textContent = 'Nueva aportación';
   const controls = byId('contributeControls');
   controls.append(inputField, byId('calc'));
   const contributionHelp = contributePage.querySelector('.contribute-input .flow-help');
@@ -81,8 +81,8 @@
   startPlan.textContent = 'Configurar mi cartera';
   startPlan.onclick = () => go('cartera');
   controls.append(startPlan);
-  const resultCard = byId('results').closest('.card');
-  resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
+  const resultCard = byId('rebalanceResult');
+  resultCard.querySelector('.head h2').textContent = 'Asignación orientativa';
   contributeGrid.append(resultCard);
   const guidance = document.createElement('p');
   guidance.id = 'rebalanceGuidance';
@@ -93,7 +93,7 @@
   register.id = 'registerContribution';
   register.className = 'btn flow-register';
   register.type = 'button';
-  register.textContent = 'Registrar aportación realizada';
+  register.textContent = 'Registrar aportación';
   resultCard.append(register);
   const lastRecord = document.createElement('p');
   lastRecord.id = 'lastContribution';
@@ -101,11 +101,11 @@
   resultCard.append(lastRecord);
   const rebalanceExplanation = document.createElement('details');
   rebalanceExplanation.className = 'rebalance-explanation';
-  rebalanceExplanation.innerHTML = '<summary>¿Qué significa revisar un rebalanceo extraordinario?</summary><p>Si, después de aportar, un bloque sigue fuera de su banda y las siguientes aportaciones podrían no corregirlo en el plazo simulado, se muestra un ajuste orientativo. Es una señal para revisar tus datos, costes y situación; no se ejecutan compras ni ventas.</p>';
+  rebalanceExplanation.innerHTML = '<summary>Rebalanceo extraordinario</summary><p>Si la desviación persiste fuera de banda, revisa el ajuste orientativo. La aplicación no ejecuta operaciones.</p>';
   resultCard.append(rebalanceExplanation);
 
   byId('rebalanceFlow')?.remove();
-  const holdingsCard = byId('holds').closest('.card');
+  const holdingsCard = byId('rebalanceHoldings');
   holdingsCard.querySelector('.head h2').textContent = 'Tus saldos';
   const oldActions = byId('clear').closest('.actions');
   const clearSaldos = byId('clear');
@@ -117,9 +117,9 @@
   holdingsCard.classList.add('current-hold-card');
   planCard.after(holdingsCard,reviewCard);
   const rebHero = contributePage.querySelector('.heroIn > div');
-  rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
+  rebHero.querySelector('.kick').textContent = 'CÁLCULO';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
-  rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebHero.querySelector('p').textContent = 'Aportación y desviaciones.';
   rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
@@ -396,8 +396,8 @@
     const priorities = planned.map((x,i) => ({name:x.short,amount:apportions[i]}))
       .filter(x => x.amount > .005).sort((a,b) => b.amount-a.amount).slice(0,2).map(x => x.name);
     guidance.textContent = amount > 0
-      ? 'Con tu próxima aportación de '+euro.format(amount)+', prioriza '+(priorities.length ? priorities.join(' y ') : 'los activos infraponderados')+'.'
-      : 'Introduce un importe para ver hacia dónde podría orientarse tu próxima aportación.';
+      ? 'Prioridad: '+(priorities.length ? priorities.join(' · ') : 'activos infraponderados')+'.'
+      : 'Introduce un importe para calcular la asignación.';
     results.querySelectorAll('.res').forEach((row,i) => {
       const title = row.querySelector('.res-main > b');
       if (!title || !planned[i]) return;

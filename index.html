@@ -565,7 +565,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=3"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=4"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>PERPLEXITY</b><small>Tu plan de inversión, con claridad</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -629,7 +629,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   </div>
 </section>
 <section class="view" id="cartera"><div class="hero"><div class="heroIn"><div><span class="kick">TU ESTRATEGIA</span><h1>Elige tu cartera.</h1><p>Un plan claro para invertir a tu manera.</p></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Tres estrategias para empezar</h2></div><div class="models" id="models"></div><p class="portfolio-footnote">Riesgo orientativo en escala propia. La rentabilidad es una hipótesis para la simulación, no una garantía.</p></div><div class="card s5"><div class="head"><h2>Identidad</h2></div><div class="form2"><div class="field"><label>Tu nombre</label><input id="userName"></div><div class="field"><label>Nombre cartera propia</label><input id="customName"></div></div><div class="actions"><button class="btn ghost tiny" id="saveIdentity">Guardar</button></div></div><div class="card s7" id="customCard"><div class="head"><div><span class="custom-kicker">A TU MANERA</span><h2 id="customHeading">Personalizada</h2><p class="custom-intro">Elige los activos y reparte el 100%.</p></div><button class="custom-toggle" id="customToggle" type="button" aria-controls="customEditor" aria-expanded="false">Crear la mía <span aria-hidden="true">↗</span></button></div><div id="customEditor" hidden><div class="custom-editor-head"><span>Tu reparto</span><span class="pill" id="customSum">0%</span></div><div class="assetList" id="customAssets"></div><div class="actions"><button class="btn alt tiny" id="addAsset">+ Añadir activo</button><button class="btn tiny" id="useCustom">Usar esta cartera</button></div><div class="notice" style="margin-top:8px">La suma de los porcentajes debe ser 100%.</div></div></div><div class="card" id="selected" hidden><div class="head"><h2>Composición seleccionada</h2><span class="pill" id="selectedRisk">—</span></div><div id="selectedComp"></div></div></div></section>
-<section class="view" id="rebalanceo"><div class="hero"><div class="heroIn"><div><span class="kick">Aportación</span><h1>Rebalanceo</h1><p>Introduce lo que tienes. La siguiente aportación se orienta según tu plan.</p></div><div class="num"><span>Total cartera</span><strong id="rebTotal">—</strong></div></div></div><div class="grid"><div class="card s5"><div class="head"><h2>Cartera actual</h2><span class="pill" id="rebName">Sin configurar</span></div><div class="holds" id="holds"></div><div class="field" style="margin-top:10px"><label>Nueva aportación</label><input id="newMoney" type="number" min="0" step="10" value="1000"></div><div class="actions"><button class="btn tiny" id="calc">Calcular</button><button class="btn ghost tiny" id="clear">Limpiar</button></div></div><div class="card s7"><div class="head"><h2>Próxima aportación</h2><span class="pill" id="contrib">—</span></div><div class="results" id="results"></div><div class="notice" id="rebNote" style="margin-top:8px"></div></div></div></section>
+<section class="view" id="rebalanceo"><div class="hero"><div class="heroIn"><div><span class="kick">Cálculo</span><h1>Rebalanceo</h1><p>Aportación y desviaciones.</p></div><div class="num"><span>Total cartera</span><strong id="rebTotal">—</strong></div></div></div><div class="grid"><section class="rebalance-holdings s5" id="rebalanceHoldings"><div class="head"><h2>Cartera actual</h2><span class="pill" id="rebName">Sin configurar</span></div><div class="holds" id="holds"></div><div class="field"><label for="newMoney">Nueva aportación</label><input id="newMoney" type="number" min="0" step="10" value="1000" inputmode="decimal"></div><div class="actions"><button class="btn tiny" id="calc">Calcular</button><button class="btn ghost tiny" id="clear">Limpiar</button></div></section><section class="rebalance-result s7" id="rebalanceResult"><div class="head"><h2>Asignación</h2><span class="pill" id="contrib">—</span></div><div class="results" id="results"></div><div class="notice" id="rebNote"></div></section></div></section>
 <section class="view" id="horizonte"><div class="hero"><div class="heroIn"><div><span class="kick">Largo plazo</span><h1>Horizonte</h1><p>Una estimación útil, no una promesa.</p></div><div class="num"><span>Hipótesis anual</span><strong id="hRateHero">—</strong></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Proyección</h2><span class="pill" id="hName">Sin cartera</span></div><div class="hcards" id="hcards"></div></div><div class="card"><div class="head"><h2>Supuestos</h2></div><div class="block"><div class="sub"><span>Patrimonio actual</span><b id="hStart">—</b></div><div class="sub"><span>Aportación mensual</span><b id="hMonthly">—</b></div><div class="sub"><span>Rentabilidad anual</span><b id="hRate">—</b></div></div><div class="field" id="customRateWrap" style="margin-top:9px;display:none"><label>Rentabilidad personalizada</label><input id="customRate" type="number" min="0" max="30" step=".1" value="6"></div><div class="notice" style="margin-top:8px">Escenario nominal basado en una rentabilidad constante. No incluye inflación, impuestos ni costes. No es una previsión ni asesoramiento financiero personalizado.</div></div></div></section>
 </main></div><div class="modal" id="modal"><div class="sheet"><div class="sh"><h3 id="modalTitle"></h3><button class="close" id="closeModal">×</button></div><div id="modalBody"></div></div></div>
 <script>
@@ -1159,20 +1159,20 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     }
     if(!ct){
       alert.className='rebalance-alert';
-      alert.innerHTML='<i class="signal"></i><div><strong>Distribución inicial</strong><p>Sin patrimonio previo, la aportación se reparte directamente según los pesos objetivo.</p></div>';
-      rebNote.textContent='Perplexity usa primero las aportaciones para acercar la cartera a su objetivo.';
+      alert.innerHTML='<i class="signal"></i><div><strong>Distribución inicial</strong><p>Asignación según pesos objetivo.</p></div>';
+      rebNote.textContent='Prioridad: aportaciones.';
       return;
     }
     const action=warnings.find(w=>w.level==='action'),watch=warnings.find(w=>w.level==='watch');
     const msg=action||watch;
     if(msg){
       alert.className='rebalance-alert '+msg.level;
-      alert.innerHTML='<i class="signal"></i><div><strong>'+msg.title+'</strong><p>'+msg.text+' Pulsa + en cada activo para ver importes y destino.</p></div>';
+      alert.innerHTML='<i class="signal"></i><div><strong>'+msg.title+'</strong><p>'+msg.text+' Detalle por activo en +.</p></div>';
     }else{
       alert.className='rebalance-alert';
-      alert.innerHTML='<i class="signal"></i><div><strong>Cartera dentro de bandas</strong><p>La aportación corrige las desviaciones sin necesidad de ventas extraordinarias.</p></div>';
+      alert.innerHTML='<i class="signal"></i><div><strong>Dentro de bandas</strong><p>Ajuste mediante aportaciones.</p></div>';
     }
-    rebNote.textContent='Regla de la cartera: primero aportaciones; venta solo si un bloque rebasa su banda y no se corrige razonablemente con las próximas aportaciones.';
+    rebNote.textContent='Primero, aportaciones. Revisa un ajuste extraordinario solo si persiste una desviación fuera de banda.';
   };
 
   render();
@@ -1229,5 +1229,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=5"></script>
+<script src="/plan-flow.js?v=6"></script>
 </body></html>

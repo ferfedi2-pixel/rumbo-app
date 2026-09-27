@@ -90,6 +90,7 @@ body:has(.view.on) .top #saved{color:#a8c4c8!important}
 #cartera .model .model-fit{font-size:12px!important}
 #cartera .model .model-includes{font-size:11px!important}
 #cartera .active-plan-card,#cartera .current-hold-card,#cartera .rebalance-review,#cartera .card.s7{background:#fffdf8!important;border:1px solid #d7e3db!important;color:#17353e!important;box-shadow:0 12px 28px #102d3612!important}
+#cartera .current-hold-card{padding:18px!important;border-radius:20px!important}
 #cartera .active-plan-card{border-top:5px solid #159c86!important}
 #cartera .active-plan-card .plan-eyebrow,#cartera .custom-kicker{color:#13796c!important}
 #cartera .plan-active-head h2,#cartera .card.s7 h2,#cartera .current-hold-card h2,#cartera .rebalance-review h2{color:#17353e!important}
@@ -108,37 +109,79 @@ body:has(.view.on) .top #saved{color:#a8c4c8!important}
 #cartera .card.s7 .notice{background:#f2f7f3!important;border-color:#d9e8de!important;color:#526c70!important}
 #cartera .custom-error{background:#fff1eb!important;border-color:#d49679!important;color:#923d2d!important}
 
-/* Rebalanceo: la propuesta destaca; las cifras técnicas quedan en tarjetas claras. */
-#rebalanceo .hero,#horizonte .hero,#ajustes .hero{background:linear-gradient(115deg,#0e3341,#1a5c60)!important;border-color:#2c6768!important}
-#rebalanceo .card,#horizonte .card,#ajustes .card{background:#fffdf8!important;border:1px solid #d7e3db!important;color:#17353e!important;box-shadow:0 12px 28px #102d3612!important}
-#rebalanceo .card h2,#horizonte .head h2,#horizonte .horizon-head-pro h2,#ajustes .card h2{color:#17353e!important}
-#rebalanceo .pill,#horizonte .pill{background:#e8f4ee!important;border-color:#c4ded3!important;color:#126c5d!important}
-#rebalanceo .rebalance-guidance{background:#0d776d!important;border-color:#0d776d!important;color:#fff!important;font:750 clamp(18px,2vw,23px)/1.35 system-ui,sans-serif!important}
-#rebalanceo .hold,#rebalanceo .res{background:#f3f8f4!important;border-color:#d9e8de!important;color:#17353e!important}
-#rebalanceo .hold small,#rebalanceo .res small,#rebalanceo .asset-current-value{color:#5b7479!important}
-#rebalanceo .field label{color:#406466!important}
-#rebalanceo .res:has(.good){background:#e4f5eb!important;border-color:#9ed3bd!important}
-#rebalanceo .res .act strong{color:#126b50!important}
-#rebalanceo .res .act strong.pause{color:#697e81!important}
-#rebalanceo .weight-triplet span{background:#fff!important;border-color:#d4e3da!important;color:#4f6a70!important;font-size:10px!important}
-#rebalanceo .weight-triplet b{color:#1a3d43!important;font-size:11px!important}
-#rebalanceo .rebalance-alert{background:#edf6f2!important;border-color:#c7dfd2!important}
-#rebalanceo .rebalance-alert strong{color:#173d3c!important;font-size:14px}
-#rebalanceo .rebalance-alert p{color:#4e6769!important;font-size:11px}
-#rebalanceo .rebalance-alert.watch{background:#fff8e9!important;border-color:#edd5aa!important}
-#rebalanceo .rebalance-alert.action{background:#fff0ec!important;border-color:#ecc2b8!important}
-#rebalanceo .asset-more{background:#fff!important;border-color:#a9ccc0!important;color:#126b5c!important}
-#rebalanceo .asset-detail,#rebalanceo .detail-stat{background:#fff!important;border-color:#d9e8de!important;color:#17353e!important}
-#rebalanceo .detail-stat span,#rebalanceo .detail-explain{color:#62787b!important}
-#rebalanceo .detail-explain,#rebalanceo .detail-action{font-size:11px!important}
-#rebalanceo .act .action-label{font-size:10px!important;color:#526d70!important}
-#rebalanceo .detail-action{background:#eaf6ee!important;color:#235b49!important}
-#rebalanceo .detail-action.sell{background:#fff1ed!important;color:#923e35!important}
-#rebalanceo .detail-action.watch{background:#fff8e9!important;color:#805721!important}
-#rebalanceo .rebalance-explanation,#horizonte .data-sources{background:#f2f7f3!important;border-color:#d9e8de!important;color:#536e71!important}
-#rebalanceo .rebalance-explanation summary,#horizonte .data-sources summary{color:#126e62!important}
-#rebalanceo .notice,#horizonte .notice{background:#f2f7f3!important;border-color:#d9e8de!important;color:#526c70!important}
-#rebalanceo .flow-help,#horizonte .flow-help{color:#60787b!important}
+/* Rebalanceo: composición abierta, datos sobre el fondo y una única cifra dominante. */
+#horizonte .hero,#ajustes .hero{background:linear-gradient(115deg,#0e3341,#1a5c60)!important;border-color:#2c6768!important}
+#horizonte .card,#ajustes .card{background:#fffdf8!important;border:1px solid #d7e3db!important;color:#17353e!important;box-shadow:0 12px 28px #102d3612!important}
+#horizonte .head h2,#horizonte .horizon-head-pro h2,#ajustes .card h2{color:#17353e!important}
+#horizonte .pill{background:#e8f4ee!important;border-color:#c4ded3!important;color:#126c5d!important}
+#horizonte .data-sources{background:#f2f7f3!important;border-color:#d9e8de!important;color:#536e71!important}
+#horizonte .data-sources summary{color:#126e62!important}
+#horizonte .notice{background:#f2f7f3!important;border-color:#d9e8de!important;color:#526c70!important}
+#horizonte .flow-help{color:#60787b!important}
+#rebalanceo{color:#26383d!important}
+#rebalanceo .hero{min-height:0!important;margin:0!important;padding:17px 0 25px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#26383d!important}
+#rebalanceo .hero .kick{color:#66777b!important;font:750 10px/1.4 system-ui,sans-serif!important;letter-spacing:.17em!important}
+#rebalanceo .hero h1{font:700 clamp(39px,4.3vw,54px)/1.03 Georgia,serif!important;letter-spacing:-.035em!important;color:#1a2c32!important;margin:7px 0 7px!important}
+#rebalanceo .hero p{color:#6c797b!important;font-size:13px!important}
+#rebalanceo .hero .num{color:#26383d!important}
+#rebalanceo .hero .num span{color:#718083!important}
+#rebalanceo .hero .num strong{color:#283c42!important;font-variant-numeric:tabular-nums;font-size:clamp(25px,3vw,35px)!important}
+#rebalanceo .grid{display:grid!important;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)!important;align-items:start!important;gap:clamp(28px,5vw,68px)!important;margin-top:0!important;padding:27px 0 50px!important;border-top:1px solid #c9d4d1!important}
+#rebalanceo .grid>.contribute-input,#rebalanceo .grid>.rebalance-result{grid-column:auto!important;min-width:0!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#rebalanceo .grid>.rebalance-result{border-left:1px solid #c9d4d1!important;padding-left:clamp(27px,4vw,54px)!important}
+#rebalanceo .head{margin:0 0 20px!important;gap:12px!important;align-items:baseline!important}
+#rebalanceo .head h2{margin:0!important;color:#35454a!important;font:750 11px/1.4 system-ui,sans-serif!important;text-transform:uppercase!important;letter-spacing:.14em!important}
+#rebalanceo .pill{padding:0!important;background:none!important;border:0!important;border-radius:0!important;color:#737f81!important;font-size:11px!important;font-weight:600!important}
+#rebalanceo #contrib{display:none!important}
+#rebalanceo .contribute-input .field{margin:14px 0 20px!important}
+#rebalanceo .contribute-input .field label{display:block!important;color:#626f72!important;font:650 12px/1.5 system-ui,sans-serif!important;margin-bottom:8px!important}
+#rebalanceo #newMoney{display:block!important;width:100%!important;min-width:0!important;height:auto!important;box-sizing:border-box!important;padding:0 0 12px!important;border:0!important;border-bottom:2px solid #536468!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;color:#1d3036!important;font:700 clamp(60px,7.5vw,96px)/1.08 system-ui,sans-serif!important;letter-spacing:-.075em!important;font-variant-numeric:tabular-nums!important;appearance:textfield!important}
+#rebalanceo #newMoney::-webkit-inner-spin-button,#rebalanceo #newMoney::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+#rebalanceo #newMoney:focus-visible{border-bottom-color:#1b343b!important;box-shadow:0 2px 0 #1b343b!important;outline:0!important}
+#rebalanceo #contributeControls{gap:14px!important}
+#rebalanceo #calc,#rebalanceo #rebStartPlan,#rebalanceo .flow-register{min-height:46px!important;background:#243b42!important;border:1px solid #243b42!important;color:#f8faf9!important;box-shadow:none!important;border-radius:9px!important}
+#rebalanceo .flow-help{margin:15px 0 0!important;color:#7b8788!important;font-size:11px!important;line-height:1.45!important}
+#rebalanceo .rebalance-guidance{margin:0 0 12px!important;padding:0 0 17px!important;border:0!important;border-bottom:1px solid #d5deda!important;border-radius:0!important;background:transparent!important;color:#35474b!important;font:650 15px/1.45 system-ui,sans-serif!important}
+#rebalanceo .rebalance-alert,#rebalanceo .rebalance-alert.watch,#rebalanceo .rebalance-alert.action{display:flex!important;gap:11px!important;margin:0!important;padding:13px 0!important;border:0!important;border-bottom:1px solid #d5deda!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#rebalanceo .rebalance-alert .signal,#rebalanceo .rebalance-alert.watch .signal,#rebalanceo .rebalance-alert.action .signal{background:#879597!important;box-shadow:none!important;width:6px!important;height:6px!important;margin-top:6px!important}
+#rebalanceo .rebalance-alert strong{color:#36484c!important;font-size:12px!important}
+#rebalanceo .rebalance-alert p{color:#758285!important;font-size:11px!important}
+#rebalanceo .results{display:grid!important;gap:0!important;margin:0!important}
+#rebalanceo .results .res,#rebalanceo .results .res:has(.good){display:grid!important;grid-template-columns:minmax(0,1fr) auto 34px!important;align-items:center!important;gap:14px!important;margin:0!important;padding:17px 0!important;border:0!important;border-bottom:1px solid #d5deda!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#46585d!important}
+#rebalanceo .res .dot{display:none!important}
+#rebalanceo .res-main{min-width:0!important}
+#rebalanceo .res-main>b{color:#39494d!important;font-size:14px!important;font-weight:700!important}
+#rebalanceo .asset-current-value,#rebalanceo .res small{color:#778487!important;font-size:10px!important;font-weight:500!important}
+#rebalanceo .weight-triplet{gap:2px 12px!important;margin-top:7px!important}
+#rebalanceo .weight-triplet span,#rebalanceo .weight-triplet .after{padding:0!important;border:0!important;border-radius:0!important;background:none!important;color:#818c8e!important;font-size:10px!important;font-weight:500!important}
+#rebalanceo .weight-triplet b{color:#515f62!important;font-size:10px!important;font-weight:650!important;font-variant-numeric:tabular-nums}
+#rebalanceo .act .action-label{color:#148170!important;font-size:10px!important;letter-spacing:.06em!important}
+#rebalanceo .act strong,#rebalanceo .act strong.good{color:#148170!important;font-size:clamp(20px,2.3vw,27px)!important;font-variant-numeric:tabular-nums!important;letter-spacing:-.035em!important}
+#rebalanceo .act:has(strong.pause) .action-label,#rebalanceo .act strong.pause{color:#68777a!important}
+#rebalanceo .asset-more,#rebalanceo .asset-more.open{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;border:1px solid #bfcac8!important;border-radius:50%!important;background:transparent!important;color:#617276!important;box-shadow:none!important}
+#rebalanceo .asset-detail{padding:15px 0 2px!important;margin:0!important;border:0!important;border-top:1px dotted #c8d2cf!important;border-radius:0!important;background:transparent!important;color:#46585d!important}
+#rebalanceo .detail-grid{gap:8px 14px!important}
+#rebalanceo .detail-stat{padding:3px 0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#44555a!important}
+#rebalanceo .detail-stat span,#rebalanceo .detail-explain{color:#7a8688!important}
+#rebalanceo .detail-action,#rebalanceo .detail-action.sell,#rebalanceo .detail-action.watch{padding:10px 0!important;border:0!important;border-top:1px solid #d5deda!important;border-radius:0!important;background:transparent!important;color:#68777a!important}
+#rebalanceo #rebNote{margin:15px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:none!important;color:#7c8789!important;font-size:11px!important}
+#rebalanceo .rebalance-explanation{margin-top:18px!important;padding:15px 0!important;border:0!important;border-top:1px solid #d5deda!important;border-radius:0!important;background:transparent!important;color:#768285!important;font-size:11px!important}
+#rebalanceo .rebalance-explanation summary{color:#526368!important;font-weight:650!important}
+@media(max-width:780px){
+  #rebalanceo .grid{grid-template-columns:1fr!important;gap:31px!important;padding-top:23px!important}
+  #rebalanceo .grid>.rebalance-result{border-left:0!important;border-top:1px solid #c9d4d1!important;padding:25px 0 0!important}
+  #rebalanceo #newMoney{font-size:clamp(62px,15vw,88px)!important}
+  #rebalanceo .results .res,#rebalanceo .results .res:has(.good){grid-template-columns:minmax(0,1fr) auto 32px!important;gap:9px!important}
+  #rebalanceo .weight-triplet{gap:3px 9px!important}
+}
+@media(max-width:600px){
+  #rebalanceo .hero{padding:16px 4px 22px!important}
+  #rebalanceo .hero .num{margin-top:16px!important}
+  #rebalanceo .hero h1{font-size:40px!important}
+  #rebalanceo .results .res,#rebalanceo .results .res:has(.good){padding:17px 0!important}
+  #rebalanceo .weight-triplet span,#rebalanceo .weight-triplet b{font-size:9px!important}
+  #rebalanceo .act strong{font-size:19px!important}
+}
 
 /* Horizonte: misma jerarquía que el resto, con el gráfico como protagonista. */
 #horizonte .horizon-head-pro p,#horizonte .compound-total span,#horizonte .breakdown-item span,#horizonte .assumption-pro span{color:#5c7579!important}
