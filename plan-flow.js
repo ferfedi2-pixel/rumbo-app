@@ -72,8 +72,14 @@
   startPlan.onclick = () => go('cartera');
   controls.append(startPlan);
   const resultCard = byId('results').closest('.card');
+  resultCard.classList.add('rebalance-result');
   resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
   contributeGrid.append(resultCard);
+  const guidance = document.createElement('p');
+  guidance.id = 'rebalanceGuidance';
+  guidance.className = 'rebalance-guidance';
+  guidance.setAttribute('aria-live','polite');
+  resultCard.querySelector('.head').after(guidance);
   const register = document.createElement('button');
   register.id = 'registerContribution';
   register.className = 'btn flow-register';
@@ -84,6 +90,10 @@
   lastRecord.id = 'lastContribution';
   lastRecord.className = 'flow-help';
   resultCard.append(lastRecord);
+  const rebalanceExplanation = document.createElement('details');
+  rebalanceExplanation.className = 'rebalance-explanation';
+  rebalanceExplanation.innerHTML = '<summary>¿Qué significa un rebalanceo extraordinario?</summary><p>Se muestra cuando, tras aportar, algún bloque sigue fuera de su banda y las próximas aportaciones podrían no corregirlo en el plazo calculado. Revisa los saldos, costes y tu situación antes de decidir; la aplicación no ejecuta operaciones.</p>';
+  resultCard.append(rebalanceExplanation);
 
   byId('rebalanceFlow')?.remove();
   const holdingsCard = byId('holds').closest('.card');
@@ -98,9 +108,9 @@
   holdingsCard.classList.add('current-hold-card');
   planCard.after(holdingsCard,reviewCard);
   const rebHero = contributePage.querySelector('.heroIn > div');
-  rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
+  rebHero.querySelector('.kick').textContent = 'APORTACIÓN';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
-  rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebHero.querySelector('p').textContent = 'Introduce un importe y revisa el reparto propuesto.';
   rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
@@ -176,9 +186,9 @@
     reviewCard.hidden = !active;
     selectedCard.hidden = !active;
     const hero = planPage.querySelector('.heroIn > div');
-    hero.querySelector('.kick').textContent = active ? 'TU CARTERA' : 'PRIMER PASO';
+    hero.querySelector('.kick').textContent = active ? 'CARTERA ACTIVA' : 'PRIMER PASO';
     hero.querySelector('h1').textContent = 'Cartera';
-    hero.querySelector('p').textContent = active ? 'Tu plan, saldos y distribución en un solo lugar.' : 'Escoge una estrategia para empezar o crea la tuya.';
+    hero.querySelector('p').textContent = active ? 'Consulta tus saldos y el reparto objetivo.' : 'Compara tres repartos o crea el tuyo.';
     const customNameLabel = personalCard.querySelector('.custom-name-inline label');
     if (customNameLabel) customNameLabel.textContent = 'Ponle nombre a tu cartera';
     if (!active) return;
@@ -326,6 +336,22 @@
         if (explanation) explanation.textContent = 'Este saldo sigue incluido en el valor total, aunque el plan actual ya no asigna aportaciones a este activo.';
       });
     }
+    const planned = assets();
+    const amount = Math.max(0,Number(byId('newMoney').value)||0);
+    const apportions = allocation(planned,planned.map(x => +s.hold[x.id] || 0),amount);
+    const priorities = planned.map((x,i) => ({name:x.short,amount:apportions[i]}))
+      .filter(x => x.amount > .005).sort((a,b) => b.amount-a.amount).slice(0,2).map(x => x.name);
+    guidance.textContent = amount > 0
+      ? 'Con '+euro.format(amount)+' de aportación, el reparto propuesto prioriza '+(priorities.length ? priorities.join(' y ') : 'los activos infraponderados')+'.'
+      : 'Introduce un importe para calcular el reparto.';
+    results.querySelectorAll('.res').forEach((row,i) => {
+      const title = row.querySelector('.res-main > b');
+      if (!title || !planned[i]) return;
+      const value = document.createElement('small');
+      value.className = 'asset-current-value';
+      value.textContent = 'Saldo actual: '+euro.format(+s.hold[planned[i].id] || 0);
+      title.after(value);
+    });
   };
   function renderContribution() {
     byId('addPlanName').textContent = s.type ? currentName() : 'Sin plan';
