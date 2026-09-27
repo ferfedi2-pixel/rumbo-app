@@ -1,4 +1,4 @@
-/* RUMBO V1 · navegación diaria y revisión consciente del plan. */
+/* Perplexity V1 · navegación diaria y revisión consciente del plan. */
 (() => {
   'use strict';
   const byId = id => document.getElementById(id);
@@ -8,6 +8,16 @@
   const selectionCard = byId('models').closest('.card');
   const identityCard = byId('userName').closest('.card');
   const personalCard = byId('customCard');
+  const customError = document.createElement('p');
+  customError.id = 'customError';
+  customError.className = 'custom-error';
+  customError.setAttribute('role','alert');
+  customError.hidden = true;
+  byId('customEditor').append(customError);
+  function showCustomError(message) {
+    customError.textContent = message;
+    customError.hidden = !message;
+  }
   const selectedCard = byId('selected');
   const planCard = document.createElement('div');
   planCard.id = 'activePlanCard';
@@ -48,7 +58,7 @@
     showingModelDetails = true;
     try {
       originalInfo(id);
-      modalTitle.textContent = String(MODELS[id]?.name || '').replace(/^RUMBO\s+/i,'');
+      modalTitle.textContent = String(MODELS[id]?.name || '').replace(/^Perplexity\s+/i,'');
     } finally {showingModelDetails = false}
   };
 
@@ -74,6 +84,11 @@
   const resultCard = byId('results').closest('.card');
   resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
   contributeGrid.append(resultCard);
+  const guidance = document.createElement('p');
+  guidance.id = 'rebalanceGuidance';
+  guidance.className = 'rebalance-guidance';
+  guidance.setAttribute('aria-live','polite');
+  resultCard.querySelector('.head').after(guidance);
   const register = document.createElement('button');
   register.id = 'registerContribution';
   register.className = 'btn flow-register';
@@ -84,6 +99,10 @@
   lastRecord.id = 'lastContribution';
   lastRecord.className = 'flow-help';
   resultCard.append(lastRecord);
+  const rebalanceExplanation = document.createElement('details');
+  rebalanceExplanation.className = 'rebalance-explanation';
+  rebalanceExplanation.innerHTML = '<summary>¿Qué significa revisar un rebalanceo extraordinario?</summary><p>Si, después de aportar, un bloque sigue fuera de su banda y las siguientes aportaciones podrían no corregirlo en el plazo simulado, se muestra un ajuste orientativo. Es una señal para revisar tus datos, costes y situación; no se ejecutan compras ni ventas.</p>';
+  resultCard.append(rebalanceExplanation);
 
   byId('rebalanceFlow')?.remove();
   const holdingsCard = byId('holds').closest('.card');
@@ -118,6 +137,18 @@
   byId('resetModal').querySelector('h3').textContent = 'Restablecer todos los datos';
   byId('resetModal').querySelector('p').textContent = 'Se borrarán el plan, los saldos, las aportaciones registradas y los ajustes de este dispositivo. No se puede deshacer.';
 
+  const dataSources = document.createElement('details');
+  dataSources.id = 'dataSources';
+  dataSources.className = 'data-sources';
+  dataSources.innerHTML = '<summary>Datos y límites de esta proyección</summary><p id="marketSources"></p><button type="button" class="btn ghost tiny" id="refreshSources">Comprobar referencias</button><p>Los porcentajes de emergentes y Ethereum distribuyen los bloques del plan; pueden quedar desactualizados. Las hipótesis anuales son supuestos, no datos de mercado ni previsiones. El escenario no incorpora inflación, impuestos, costes ni cambios de precios.</p>';
+  byId('hRate').closest('.card').append(dataSources);
+  byId('refreshSources').onclick = () => byId('refresh').click();
+  function renderSources() {
+    const emDate = s.market.emDate || s.market.date || 'fecha no disponible';
+    const ethDate = s.market.ethDate || 'fecha no confirmada';
+    byId('marketSources').textContent = 'Emergentes: '+pct(s.market.em)+' del bloque de renta variable (MSCI, '+emDate+'). Ethereum: '+pct(s.market.eth)+' del bloque cripto (CoinGecko, '+ethDate+'). '+(s.market.status||'');
+  }
+
   const menu = byId('appMenu');
   menu.innerHTML = '<span class="menu-title">Más opciones</span><button type="button" id="openSettings">Ajustes</button>';
   function closeMenu() {
@@ -151,7 +182,7 @@
   flowModal.addEventListener('click', e => {if (e.target === flowModal) closeModal()});
   document.addEventListener('keydown', e => {if (e.key === 'Escape' && flowModal.classList.contains('on')) closeModal()});
   const copyCustom = () => (s.custom || []).map(a => ({...a}));
-  const shortName = name => String(name || '').replace(/^RUMBO\s+/i,'');
+  const shortName = name => String(name || '').replace(/^Perplexity\s+/i,'');
   const currentName = () => shortName(pname());
   const blocks = (type, custom) => {
     if (type === 'custom') return (custom || []).map(a => [a.name,+a.pct || 0]);
@@ -269,9 +300,14 @@
     if (open) customEditor.scrollIntoView({behavior:'smooth',block:'start'});
   };
   useCustom.onclick = () => {
-    const sum = s.custom.reduce((z,a) => z+(+a.pct || 0),0);
-    if (Math.abs(sum-100) > .01) {alert('El reparto suma '+pct(sum)+'. Debe sumar 100%.');return}
-    if (!s.custom.length || s.custom.some(a => !String(a.name||'').trim())) {alert('Pon un nombre a todos los activos.');return}
+    if (!s.custom.length) {showCustomError('Añade al menos un activo antes de aplicar la cartera.');return}
+    const missingName = s.custom.findIndex(a => !String(a.name||'').trim());
+    if (missingName >= 0) {showCustomError('Pon un nombre al activo '+(missingName+1)+'.');return}
+    const invalidWeight = s.custom.findIndex(a => !Number.isFinite(Number(a.pct)) || +a.pct < 0 || +a.pct > 100);
+    if (invalidWeight >= 0) {showCustomError('El porcentaje del activo '+(invalidWeight+1)+' debe estar entre 0 % y 100 %.');return}
+    const sum = s.custom.reduce((z,a) => z+Number(a.pct),0);
+    if (Math.abs(sum-100) > .01) {showCustomError('La suma actual es '+pct(sum)+'. Ajusta los porcentajes hasta llegar al 100 %.');return}
+    showCustomError('');
     const name = customName.value.trim() || 'Mi cartera';
     offerPlan({type:'custom',name,custom:copyCustom()});
   };
@@ -326,6 +362,22 @@
         if (explanation) explanation.textContent = 'Este saldo sigue incluido en el valor total, aunque el plan actual ya no asigna aportaciones a este activo.';
       });
     }
+    const planned = assets();
+    const amount = Math.max(0,Number(byId('newMoney').value)||0);
+    const apportions = allocation(planned,planned.map(x => +s.hold[x.id] || 0),amount);
+    const priorities = planned.map((x,i) => ({name:x.short,amount:apportions[i]}))
+      .filter(x => x.amount > .005).sort((a,b) => b.amount-a.amount).slice(0,2).map(x => x.name);
+    guidance.textContent = amount > 0
+      ? 'Con tu próxima aportación de '+euro.format(amount)+', prioriza '+(priorities.length ? priorities.join(' y ') : 'los activos infraponderados')+'.'
+      : 'Introduce un importe para ver hacia dónde podría orientarse tu próxima aportación.';
+    results.querySelectorAll('.res').forEach((row,i) => {
+      const title = row.querySelector('.res-main > b');
+      if (!title || !planned[i]) return;
+      const value = document.createElement('small');
+      value.className = 'asset-current-value';
+      value.textContent = 'Saldo actual: '+euro.format(+s.hold[planned[i].id] || 0);
+      title.after(value);
+    });
   };
   function renderContribution() {
     byId('addPlanName').textContent = s.type ? currentName() : 'Sin plan';
@@ -346,7 +398,7 @@
     const a=assets(), m=Math.max(0,+byId('newMoney').value || 0);
     if (!a.length || !m) return;
     const amounts=allocation(a,a.map(x => +s.hold[x.id] || 0),m);
-    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
+    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en Perplexity. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
     byId('flowCancel').onclick=closeModal;
     byId('flowConfirm').onclick=() => {
       a.forEach((x,i) => {s.hold[x.id]=Math.round(((+s.hold[x.id]||0)+amounts[i])*100)/100});
@@ -368,6 +420,7 @@
     renderPlanState();
     renderReview();
     renderContribution();
+    renderSources();
   };
   render();
 })();

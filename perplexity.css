@@ -1,0 +1,27 @@
+/* Versión 1: Perplexity. Mejoras de claridad sobre la interfaz existente. */
+#inicio #homeValue[hidden]{display:none!important}
+#cartera .model .model-fit{min-height:0;margin:6px 0 0;color:#c5dcda;font-size:11px;line-height:1.45}
+#cartera .model .model-includes{min-height:0;margin:12px 1px 0;color:#a8c8c3;font-size:10px;line-height:1.5}
+#cartera .model.sel .model-fit,#cartera .model.sel .model-includes{color:#3b6560}
+#cartera .model-horizonte.sel .model-fit,#cartera .model-horizonte.sel .model-includes{color:#365e70}
+#cartera .model-cumbre.sel .model-fit,#cartera .model-cumbre.sel .model-includes{color:#745954}
+#cartera .model-stats{border-top:1px solid #ffffff26;padding-top:10px}
+#cartera .model.sel .model-stats{border-color:#183e4128}
+#cartera .custom-error[hidden]{display:none!important}
+#cartera .custom-error{margin:12px 0 0;padding:10px 12px;border-radius:12px;border:1px solid #e4a282;background:#7b333533;color:#ffe3d6;font-size:12px;line-height:1.4}
+#rebalanceo .rebalance-guidance{margin:0 0 14px;padding:15px 17px;border:1px solid #499684;border-radius:17px;background:linear-gradient(100deg,#184b48,#17333b);color:#edfbf6;font:700 clamp(17px,2vw,22px)/1.3 Georgia,"Times New Roman",serif}
+#rebalanceo .asset-current-value{display:block;margin-top:4px;color:#a8c9c3;font-size:10px;font-weight:600}
+#rebalanceo .rebalance-explanation{margin-top:15px;padding:12px 14px;border:1px solid #456664;border-radius:14px;background:#ffffff08;color:#c5d8d3;font-size:11px;line-height:1.5}
+#rebalanceo .rebalance-explanation summary{cursor:pointer;font-weight:800;color:#cbe9de}
+#rebalanceo .rebalance-explanation p{margin:9px 0 0}
+#horizonte .data-sources{margin-top:14px;padding:13px 15px;border:1px solid #4a6968;border-radius:15px;background:#ffffff0a;color:#c5d8d3;font-size:11px;line-height:1.55}
+#horizonte .data-sources summary{cursor:pointer;font-weight:800;color:#dcf0e8}
+#horizonte .data-sources p{margin:10px 0}
+#horizonte .data-sources .btn{min-height:38px;border-color:#71998f!important;color:#e6f5ef!important}
+@media(max-width:600px){
+  .brand b{font-size:14px!important;letter-spacing:.1em!important}
+  .brand small{font-size:8px!important}
+  #cartera .model .model-fit{font-size:11px}
+  #cartera .model .model-includes{font-size:10px}
+  #rebalanceo .rebalance-guidance{padding:13px 14px;font-size:18px}
+}

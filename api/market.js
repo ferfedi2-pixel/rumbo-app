@@ -2,7 +2,7 @@ export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');
   let ethShare=null,emShare=null,emDate=null,errors=[];
   try{
-    const r=await fetch('https://api.coingecko.com/api/v3/global',{headers:{accept:'application/json','user-agent':'Mozilla/5.0 RUMBO/2.3'}});
+    const r=await fetch('https://api.coingecko.com/api/v3/global',{headers:{accept:'application/json','user-agent':'Mozilla/5.0 Perplexity/2.3'}});
     if(!r.ok)throw new Error('CoinGecko '+r.status);
     const j=await r.json(),v=Number(j?.data?.market_cap_percentage?.eth);
     if(Number.isFinite(v))ethShare=v;

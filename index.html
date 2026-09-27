@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f2b4d"><meta name="description" content="RUMBO · cartera personal">
+<meta name="theme-color" content="#0f2b4d"><meta name="description" content="Perplexity · organiza tu plan de inversión a largo plazo">
 <link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg">
-<title>RUMBO</title>
+<title>Versión 1: Perplexity</title>
 <style>
 :root{--bg:#f3eadc;--paper:#fffaf2;--ink:#172235;--mut:#786f63;--nav:#0f2b4d;--nav2:#1b456f;--line:#00000018;--blue:#5688c7;--em:#d65d70;--bond:#39aa7d;--btc:#d59a2e;--eth:#876fca}
 *{box-sizing:border-box}body{margin:0;min-height:100dvh;color:var(--ink);font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at 8% -5%,#0f2b4d20,transparent 28rem),linear-gradient(#f9f2e8,#eadcca 60%,#f7f0e6)}
@@ -565,8 +565,8 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=2"></head><body>
-<div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=1"></head><body>
+<div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>PERPLEXITY</b><small>Tu plan de inversión, con claridad</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
   <button data-v="cartera" aria-label="Cartera"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 3"/></svg><span>Cartera</span></button>
@@ -578,16 +578,16 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
     <div class="homeSceneryImage" aria-hidden="true"></div>
     <div class="homeHeroCopy">
       <span class="homeKicker">TU PLAN, DE UN VISTAZO</span>
-      <h1 id="homeTitle">Tu inversión,<br><em>con dirección.</em></h1>
-      <p id="homeUser">Calcula dónde aportar y cuándo rebalancear.</p>
+      <h1 id="homeTitle">Tu cartera,<br><em>más clara.</em></h1>
+      <p id="homeUser">Organiza tu plan, orienta aportaciones y revisa desviaciones.</p>
     </div>
   </div>
 
-  <div class="homeValue" id="homeValue"><span>Valor de la cartera</span><strong id="homeTotal">0 €</strong></div>
+  <div class="homeValue" id="homeValue" hidden><span>Valor de la cartera</span><strong id="homeTotal">0 €</strong></div>
 
   <div class="homeV3Content">
     <div class="homeEmptyV3" id="empty">
-      <span class="homeEmptyEyebrow">TU PRIMER PASO</span><h2>Elige tu dirección.</h2>
+      <span class="homeEmptyEyebrow">TU PRIMER PASO</span><h2>Empieza por tu plan.</h2>
       <div class="homeEmptyIntro">
         <div class="homeCompass" aria-hidden="true">
           <div class="compassTicks"></div>
@@ -595,7 +595,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
           <div class="compassNeedle"><i></i></div>
           <div class="compassHub"></div>
         </div>
-        <p>Tres estrategias de distinto riesgo, o una creada por ti.</p>
+        <p>Define una cartera, registra tus saldos y descubre cómo orientar tu próxima aportación.</p>
       </div>
       <button class="homeStartButton" onclick="go('cartera')">Configurar mi cartera <span aria-hidden="true">↗</span></button>
     </div>
@@ -627,17 +627,17 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
     </div>
   </div>
 </section>
-<section class="view" id="cartera"><div class="hero"><div class="heroIn"><div><span class="kick">TU ESTRATEGIA</span><h1>Elige tu cartera.</h1><p>Un plan claro para invertir a tu manera.</p></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Tres formas de avanzar</h2></div><div class="models" id="models"></div><p class="portfolio-footnote">Riesgo en escala propia; rendimientos anuales supuestos, sin garantías.</p></div><div class="card s5"><div class="head"><h2>Identidad</h2></div><div class="form2"><div class="field"><label>Tu nombre</label><input id="userName"></div><div class="field"><label>Nombre cartera propia</label><input id="customName"></div></div><div class="actions"><button class="btn ghost tiny" id="saveIdentity">Guardar</button></div></div><div class="card s7" id="customCard"><div class="head"><div><span class="custom-kicker">A TU MANERA</span><h2 id="customHeading">Personalizada</h2><p class="custom-intro">Elige los activos y reparte el 100%.</p></div><button class="custom-toggle" id="customToggle" type="button" aria-controls="customEditor" aria-expanded="false">Crear la mía <span aria-hidden="true">↗</span></button></div><div id="customEditor" hidden><div class="custom-editor-head"><span>Tu reparto</span><span class="pill" id="customSum">0%</span></div><div class="assetList" id="customAssets"></div><div class="actions"><button class="btn alt tiny" id="addAsset">+ Añadir activo</button><button class="btn tiny" id="useCustom">Usar esta cartera</button></div><div class="notice" style="margin-top:8px">La suma de los porcentajes debe ser 100%.</div></div></div><div class="card" id="selected" hidden><div class="head"><h2>Composición seleccionada</h2><span class="pill" id="selectedRisk">—</span></div><div id="selectedComp"></div></div></div></section>
-<section class="view" id="rebalanceo"><div class="hero"><div class="heroIn"><div><span class="kick">Aportación</span><h1>Rebalanceo</h1><p>Introduce lo que tienes. RUMBO dirige la siguiente aportación.</p></div><div class="num"><span>Total cartera</span><strong id="rebTotal">—</strong></div></div></div><div class="grid"><div class="card s5"><div class="head"><h2>Cartera actual</h2><span class="pill" id="rebName">Sin configurar</span></div><div class="holds" id="holds"></div><div class="field" style="margin-top:10px"><label>Nueva aportación</label><input id="newMoney" type="number" min="0" step="10" value="1000"></div><div class="actions"><button class="btn tiny" id="calc">Calcular</button><button class="btn ghost tiny" id="clear">Limpiar</button></div></div><div class="card s7"><div class="head"><h2>Próxima aportación</h2><span class="pill" id="contrib">—</span></div><div class="results" id="results"></div><div class="notice" id="rebNote" style="margin-top:8px"></div></div></div></section>
-<section class="view" id="horizonte"><div class="hero"><div class="heroIn"><div><span class="kick">Largo plazo</span><h1>Horizonte</h1><p>Una estimación útil, no una promesa.</p></div><div class="num"><span>Rentabilidad estimada</span><strong id="hRateHero">—</strong></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Proyección</h2><span class="pill" id="hName">Sin cartera</span></div><div class="hcards" id="hcards"></div></div><div class="card"><div class="head"><h2>Supuestos</h2></div><div class="block"><div class="sub"><span>Patrimonio actual</span><b id="hStart">—</b></div><div class="sub"><span>Aportación mensual</span><b id="hMonthly">—</b></div><div class="sub"><span>Rentabilidad anual</span><b id="hRate">—</b></div></div><div class="field" id="customRateWrap" style="margin-top:9px;display:none"><label>Rentabilidad personalizada</label><input id="customRate" type="number" min="0" max="30" step=".1" value="6"></div><div class="notice" style="margin-top:8px">Estimación nominal orientativa. No es una previsión garantizada.</div></div></div></section>
+<section class="view" id="cartera"><div class="hero"><div class="heroIn"><div><span class="kick">TU ESTRATEGIA</span><h1>Elige tu cartera.</h1><p>Un plan claro para invertir a tu manera.</p></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Tres estrategias para empezar</h2></div><div class="models" id="models"></div><p class="portfolio-footnote">Riesgo orientativo en escala propia. La rentabilidad es una hipótesis para la simulación, no una garantía.</p></div><div class="card s5"><div class="head"><h2>Identidad</h2></div><div class="form2"><div class="field"><label>Tu nombre</label><input id="userName"></div><div class="field"><label>Nombre cartera propia</label><input id="customName"></div></div><div class="actions"><button class="btn ghost tiny" id="saveIdentity">Guardar</button></div></div><div class="card s7" id="customCard"><div class="head"><div><span class="custom-kicker">A TU MANERA</span><h2 id="customHeading">Personalizada</h2><p class="custom-intro">Elige los activos y reparte el 100%.</p></div><button class="custom-toggle" id="customToggle" type="button" aria-controls="customEditor" aria-expanded="false">Crear la mía <span aria-hidden="true">↗</span></button></div><div id="customEditor" hidden><div class="custom-editor-head"><span>Tu reparto</span><span class="pill" id="customSum">0%</span></div><div class="assetList" id="customAssets"></div><div class="actions"><button class="btn alt tiny" id="addAsset">+ Añadir activo</button><button class="btn tiny" id="useCustom">Usar esta cartera</button></div><div class="notice" style="margin-top:8px">La suma de los porcentajes debe ser 100%.</div></div></div><div class="card" id="selected" hidden><div class="head"><h2>Composición seleccionada</h2><span class="pill" id="selectedRisk">—</span></div><div id="selectedComp"></div></div></div></section>
+<section class="view" id="rebalanceo"><div class="hero"><div class="heroIn"><div><span class="kick">Aportación</span><h1>Rebalanceo</h1><p>Introduce lo que tienes. La siguiente aportación se orienta según tu plan.</p></div><div class="num"><span>Total cartera</span><strong id="rebTotal">—</strong></div></div></div><div class="grid"><div class="card s5"><div class="head"><h2>Cartera actual</h2><span class="pill" id="rebName">Sin configurar</span></div><div class="holds" id="holds"></div><div class="field" style="margin-top:10px"><label>Nueva aportación</label><input id="newMoney" type="number" min="0" step="10" value="1000"></div><div class="actions"><button class="btn tiny" id="calc">Calcular</button><button class="btn ghost tiny" id="clear">Limpiar</button></div></div><div class="card s7"><div class="head"><h2>Próxima aportación</h2><span class="pill" id="contrib">—</span></div><div class="results" id="results"></div><div class="notice" id="rebNote" style="margin-top:8px"></div></div></div></section>
+<section class="view" id="horizonte"><div class="hero"><div class="heroIn"><div><span class="kick">Largo plazo</span><h1>Horizonte</h1><p>Una estimación útil, no una promesa.</p></div><div class="num"><span>Hipótesis anual</span><strong id="hRateHero">—</strong></div></div></div><div class="grid"><div class="card"><div class="head"><h2>Proyección</h2><span class="pill" id="hName">Sin cartera</span></div><div class="hcards" id="hcards"></div></div><div class="card"><div class="head"><h2>Supuestos</h2></div><div class="block"><div class="sub"><span>Patrimonio actual</span><b id="hStart">—</b></div><div class="sub"><span>Aportación mensual</span><b id="hMonthly">—</b></div><div class="sub"><span>Rentabilidad anual</span><b id="hRate">—</b></div></div><div class="field" id="customRateWrap" style="margin-top:9px;display:none"><label>Rentabilidad personalizada</label><input id="customRate" type="number" min="0" max="30" step=".1" value="6"></div><div class="notice" style="margin-top:8px">Escenario nominal basado en una rentabilidad constante. No incluye inflación, impuestos ni costes. No es una previsión ni asesoramiento financiero personalizado.</div></div></div></section>
 </main></div><div class="modal" id="modal"><div class="sheet"><div class="sh"><h3 id="modalTitle"></h3><button class="close" id="closeModal">×</button></div><div id="modalBody"></div></div></div>
 <script>
-const euro=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}),pct=n=>Number(n).toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:2})+'%',KEY='rumbo_v1';
+const euro=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}),pct=n=>Number(n).toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:2})+'%',KEY='perplexity_v1';
 const C={world:'#5688c7',em:'#d65d70',bonds:'#39aa7d',btc:'#d59a2e',eth:'#876fca'};
 const PROD={world:{id:'world',name:'Países desarrollados',short:'Desarrollados',detail:'iShares Developed World Index (IE) Acc EUR clase S',isin:'IE000ZYRH0Q7',ter:'0,06%',color:C.world},em:{id:'em',name:'Mercados emergentes',short:'Emergentes',detail:'iShares Emerging Markets Index Fund (IE) Acc EUR clase S',isin:'IE000QAZP7L2',ter:'0,16%',color:C.em},bonds:{id:'bonds',name:'Bonos globales',short:'Bonos',detail:'Vanguard Global Bond Index Fund',isin:'IE00B18GC888',ter:'—',color:C.bonds},btc:{id:'btc',name:'Bitcoin',short:'Bitcoin',detail:'BTC',isin:'—',ter:'—',color:C.btc},eth:{id:'eth',name:'Ethereum',short:'Ethereum',detail:'ETH',isin:'—',ter:'—',color:C.eth}};
-const MODELS={refugio:{name:'RUMBO Refugio',risk:3,rate:5,desc:'Perfil conservador con menor volatilidad objetivo.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'RUMBO Travesía',risk:5,rate:6,desc:'Perfil moderado con balance entre renta variable y activos defensivos.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'RUMBO Cumbre',risk:6,rate:8.5,desc:'Perfil dinámico con mayor volatilidad y retorno esperado.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
+const MODELS={refugio:{name:'Horizonte',risk:3,rate:5,desc:'Menor exposición a las oscilaciones, con renta fija.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'Equilibrio',risk:5,rate:6,desc:'Combina crecimiento, renta fija y una parte de Bitcoin.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'Cumbre',risk:6,rate:8.5,desc:'Más exposición a renta variable y criptoactivos; grandes caídas posibles.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
 let s={user:'Felipe',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,date:'31/08/2026',status:'Última referencia válida'}};
-try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)s={...s,...x,market:{...s.market,...(x.market||{})}}}catch(e){}
+try{const x=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('rumbo_v1')||'null');if(x)s={...s,...x,market:{...s.market,...(x.market||{})}}}catch(e){}
 function save(){localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
 function model(){return MODELS[s.type]||null}function pname(){const label=String(s.customName||'').trim();return s.type==='custom'?(label||'Mi cartera'):(model()?.name||'Sin configurar')}
 function assets(){if(s.type==='custom')return s.custom.map((a,i)=>({id:a.id||'c'+i,name:a.name||'Activo '+(i+1),short:a.name||'Activo '+(i+1),w:+a.pct||0,color:a.color||C.world,detail:'Activo personalizado'}));const m=model();if(!m)return[];const a=[],e=Math.max(0,Math.min(40,+s.market.em||11.85))/100;if(m.blocks.eq){a.push({...PROD.world,w:m.blocks.eq*(1-e)});a.push({...PROD.em,w:m.blocks.eq*e})}if(m.blocks.bond)a.push({...PROD.bonds,w:m.blocks.bond});if(m.blocks.crypto){if(m.eth){const h=Math.max(0,Math.min(40,+s.market.eth||11.43))/100;a.push({...PROD.btc,w:m.blocks.crypto*(1-h)});a.push({...PROD.eth,w:m.blocks.crypto*h})}else a.push({...PROD.btc,w:m.blocks.crypto})}return a}
@@ -645,7 +645,7 @@ function total(){return assets().reduce((z,a)=>z+(+s.hold[a.id]||0),0)}
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===id));render();scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 function bbar(l,v,c=''){return '<div class="bar"><span>'+l+'</span><div class="track '+c+'"><i style="width:'+v+'%"></i></div><b>'+v+'%</b></div>'}
 function renderModels(){models.innerHTML=Object.entries(MODELS).map(([id,m])=>'<div class="model '+(s.type===id?'sel':'')+'"><span class="pill">Riesgo '+m.risk+'/7</span><h3>'+m.name.replace('RUMBO ','')+'</h3><p>'+m.desc+'</p>'+bbar('Bolsa',m.blocks.eq)+(m.blocks.bond?bbar('Bonos',m.blocks.bond,'b'):'')+(m.blocks.crypto?bbar('Cripto',m.blocks.crypto,'c'):'')+'<div class="actions"><button class="btn tiny" onclick="choose(\''+id+'\')">'+(s.type===id?'Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">+ info</button></div></div>').join('')}
-window.choose=id=>{s.type=id;save();render()};window.info=id=>{const m=MODELS[id],old=s.type;s.type=id;const a=assets();s.type=old;modalTitle.textContent=m.name;modalBody.innerHTML='<p style="color:var(--mut);font-size:11px">'+m.desc+'</p><div class="info"><div><b>Riesgo estimado '+m.risk+'/7</b><small>Orientativo; no es SRI oficial PRIIPs.</small></div><div><b>Horizonte: '+pct(m.rate)+' anual</b><small>Estimación nominal media de largo plazo.</small></div>'+a.map(x=>'<div><b>'+x.name+' · '+pct(x.w)+'</b><small>'+x.detail+(x.isin&&x.isin!=='—'?' · ISIN '+x.isin:'')+(x.ter&&x.ter!=='—'?' · TER '+x.ter:'')+'</small></div>').join('')+'</div>';modal.classList.add('on')};closeModal.onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')}
+window.choose=id=>{s.type=id;save();render()};window.info=id=>{const m=MODELS[id],old=s.type;s.type=id;const a=assets();s.type=old;modalTitle.textContent=m.name;modalBody.innerHTML='<p style="color:var(--mut);font-size:11px">'+m.desc+'</p><div class="info"><div><b>Riesgo estimado '+m.risk+'/7</b><small>Orientativo; no es SRI oficial PRIIPs.</small></div><div><b>Hipótesis anual: '+pct(m.rate)+'</b><small>Solo para simular un escenario; no garantiza resultados.</small></div>'+a.map(x=>'<div><b>'+x.name+' · '+pct(x.w)+'</b><small>'+x.detail+(x.isin&&x.isin!=='—'?' · ISIN '+x.isin:'')+(x.ter&&x.ter!=='—'?' · TER '+x.ter:'')+'</small></div>').join('')+'</div>';modal.classList.add('on')};closeModal.onclick=()=>modal.classList.remove('on');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')}
 function blk(n,v,a){return '<div class="block"><div class="bt"><b>'+n+'</b><strong>'+pct(v)+'</strong></div>'+a.map(x=>'<div class="sub"><span>'+x.name+'</span><b>'+pct(x.w)+'</b></div>').join('')+'</div>'}
 function renderHome(){const a=assets(),ok=a.length,m=model();empty.hidden=ok;summary.hidden=!ok;marketCard.hidden=!m;homeTitle.innerHTML='Tu inversión,<br><em>con dirección.</em>';homeUser.textContent='Calcula dónde aportar y cuándo rebalancear.';homeTotal.textContent=euro.format(total());risk.textContent=m?'Riesgo '+m.risk+'/7':'Personalizada';if(ok){let pos=0,g=[];a.forEach(x=>{g.push(x.color+' '+pos+'% '+(pos+x.w)+'%');pos+=x.w});donut.style.background='conic-gradient('+g.join(',')+')';legend.innerHTML=a.map(x=>'<div><i style="background:'+x.color+'"></i><span>'+x.short+'</span><b>'+pct(x.w)+'</b></div>').join('');if(m){let h='';if(m.blocks.eq)h+=blk('Renta variable',m.blocks.eq,a.filter(x=>['world','em'].includes(x.id)));if(m.blocks.bond)h+=blk('Bonos',m.blocks.bond,a.filter(x=>x.id==='bonds'));if(m.blocks.crypto)h+=blk('Cripto',m.blocks.crypto,a.filter(x=>['btc','eth'].includes(x.id)));blocks.innerHTML=h}else blocks.innerHTML=''}emShare.textContent=pct(s.market.em);ethShare.textContent=pct(s.market.eth);ethChip.style.display=m?.eth?'inline-flex':'none';marketDate.textContent=s.market.date;marketNote.textContent=s.market.status}
 refresh.onclick=async()=>{refresh.disabled=true;refresh.textContent='Actualizando…';let msg=[];try{const r=await fetch('/api/market',{cache:'no-store'}),j=await r.json();if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;msg.push('Ethereum actualizado')}if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;msg.push('Emergentes actualizado')}s.market.date=j.updated||new Date().toLocaleDateString('es-ES')}catch(e){msg.push('No se pudo actualizar')}s.market.status=msg.length?msg.join(' · '):'Se mantiene la última referencia válida';save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar'}
@@ -663,7 +663,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
 <script id="rumbo-pro-v2">
 (function(){
  var link=document.createElement('link');link.rel='stylesheet';link.href='https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap';document.head.appendChild(link);
- var small=document.querySelector('.brand small');if(small)small.textContent='La estrategia vence al activo';
+ var small=document.querySelector('.brand small');if(small)small.textContent='Tu plan de inversión, con claridad';
  var icons={
   inicio:'<svg viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
   cartera:'<svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>',
@@ -791,7 +791,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   }
   if(!document.getElementById('resetModal')){
     var rm=document.createElement('div');rm.id='resetModal';rm.className='reset-modal';
-    rm.innerHTML='<div class="reset-box"><h3>Reiniciar cartera</h3><p>Se borrarán el nombre, la cartera elegida, los saldos y la aportación. RUMBO volverá al estado inicial.</p><div class="actions"><button class="btn ghost" id="cancelReset">Cancelar</button><button class="btn reset-confirm" id="confirmReset">Reiniciar</button></div></div>';
+    rm.innerHTML='<div class="reset-box"><h3>Reiniciar cartera</h3><p>Se borrarán el nombre, la cartera elegida, los saldos y la aportación. Perplexity volverá al estado inicial.</p><div class="actions"><button class="btn ghost" id="cancelReset">Cancelar</button><button class="btn reset-confirm" id="confirmReset">Reiniciar</button></div></div>';
     document.body.appendChild(rm);
   }
   var reset=document.getElementById('resetPortfolio'),modal=document.getElementById('resetModal');
@@ -844,15 +844,15 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
 <script id="rumbo-pro-v23">
 (function(){
  const UI={
-  refugio:{accent:'#5ed6b1'},
-  horizonte:{accent:'#7ecbdf'},
-  cumbre:{accent:'#efb974'}
+  refugio:{accent:'#5ed6b1',fit:'Si prefieres suavizar las oscilaciones.',includes:'Desarrollados · Emergentes · Bonos'},
+  horizonte:{accent:'#7ecbdf',fit:'Si aceptas un riesgo intermedio.',includes:'Desarrollados · Emergentes · Bonos · Bitcoin'},
+  cumbre:{accent:'#efb974',fit:'Si toleras caídas fuertes a largo plazo.',includes:'Desarrollados · Emergentes · Bitcoin · Ethereum'}
  };
  renderModels=function(){
   models.innerHTML=Object.entries(MODELS).map(([id,m])=>{
    const name=m.name.replace('RUMBO ',''),chosen=s.type===id;
    const allocation=[['Renta variable',m.blocks.eq],['Renta fija',m.blocks.bond],['Criptomonedas',m.blocks.crypto]].filter(([,value])=>value>0);
-   return '<article class="model model-'+id+(chosen?' sel':'')+'" style="--model-accent:'+UI[id].accent+'"><div class="model-top"><span class="model-art art-'+id+'" aria-hidden="true"></span><div class="model-identity"><span class="model-overline">CARTERA RUMBO</span><h3>'+name+'</h3></div>'+(chosen?'<span class="selected-mark" aria-label="Cartera seleccionada">✓</span>':'')+'</div><div class="model-allocation">'+allocation.map(([label,value])=>'<div class="allocation-row"><span>'+label+'</span><strong>'+value+'%</strong></div>').join('')+'</div><div class="model-stats"><span>Riesgo <strong>'+m.risk+'/7</strong></span><span>Rendimiento estimado <strong>'+pct(m.rate)+'</strong></span></div><div class="actions"><button class="btn tiny" aria-pressed="'+chosen+'" onclick="choose(\''+id+'\')">'+(chosen?'✓ Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">Detalles</button></div></article>';
+   return '<article class="model model-'+id+(chosen?' sel':'')+'" style="--model-accent:'+UI[id].accent+'"><div class="model-top"><span class="model-art art-'+id+'" aria-hidden="true"></span><div class="model-identity"><span class="model-overline">ESTRATEGIA</span><h3>'+name+'</h3></div>'+(chosen?'<span class="selected-mark" aria-label="Cartera seleccionada">✓</span>':'')+'</div><p class="model-fit">'+UI[id].fit+'</p><div class="model-allocation">'+allocation.map(([label,value])=>'<div class="allocation-row"><span>'+label+'</span><strong>'+value+'%</strong></div>').join('')+'</div><p class="model-includes">'+UI[id].includes+'</p><div class="model-stats"><span>Riesgo orientativo <strong>'+m.risk+'/7</strong></span><span>Hipótesis anual <strong>'+pct(m.rate)+'</strong></span></div><div class="actions"><button class="btn tiny" aria-pressed="'+chosen+'" onclick="choose(\''+id+'\')">'+(chosen?'✓ Seleccionada':'Elegir')+'</button><button class="btn ghost tiny" onclick="info(\''+id+'\')">Detalles</button></div></article>';
   }).join('');
  };
  const basePortfolio=renderPortfolio;
@@ -917,11 +917,11 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   try{
    const r=await fetch('/api/market?ts='+Date.now(),{cache:'no-store'}),j=await r.json();
    let ok=false;
-   if(Number.isFinite(+j.emShare)){s.market.em=+j.emShare;ok=true}
-   if(Number.isFinite(+j.ethShare)){s.market.eth=+j.ethShare;ok=true}
+   const changed=[];
+   if(j.emShare!=null&&Number.isFinite(+j.emShare)&&+j.emShare>0){s.market.em=+j.emShare;s.market.emDate=j.emDate||('consultado '+(j.updated||'hoy')+', fecha de fuente no disponible');s.market.date=s.market.emDate;ok=true;changed.push('MSCI')}
+   if(j.ethShare!=null&&Number.isFinite(+j.ethShare)&&+j.ethShare>0){s.market.eth=+j.ethShare;s.market.ethDate='consultado '+(j.updated||'hoy');ok=true;changed.push('CoinGecko')}
    const same=Math.abs((+s.market.em||0)-oldEm)<0.001 && Math.abs((+s.market.eth||0)-oldEth)<0.001;
-   s.market.date=j.emDate||j.updated||s.market.date;
-   s.market.status=ok?('Comprobado ahora · '+(same?'sin cambios · ':'')+'MSCI '+(s.market.date||'último dato publicado')):'No se pudo obtener un dato nuevo; se mantiene la última referencia válida.';
+   s.market.status=ok?('Consultado: '+changed.join(' y ')+(same?' · pesos sin cambios':'')+(j.errors?.length?' · otra fuente no disponible':'')):'No se pudo obtener un dato nuevo; se mantienen las referencias guardadas.';
   }catch(e){s.market.status='No se pudo comprobar ahora; se mantiene la última referencia válida.'}
   save();render();refresh.disabled=false;refresh.textContent='↻ Actualizar pesos';
  };
@@ -1154,7 +1154,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     if(!ct){
       alert.className='rebalance-alert';
       alert.innerHTML='<i class="signal"></i><div><strong>Distribución inicial</strong><p>Sin patrimonio previo, la aportación se reparte directamente según los pesos objetivo.</p></div>';
-      rebNote.textContent='RUMBO usa primero las aportaciones para acercar la cartera a su objetivo.';
+      rebNote.textContent='Perplexity usa primero las aportaciones para acercar la cartera a su objetivo.';
       return;
     }
     const action=warnings.find(w=>w.level==='action'),watch=warnings.find(w=>w.level==='watch');
@@ -1166,7 +1166,7 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
       alert.className='rebalance-alert';
       alert.innerHTML='<i class="signal"></i><div><strong>Cartera dentro de bandas</strong><p>La aportación corrige las desviaciones sin necesidad de ventas extraordinarias.</p></div>';
     }
-    rebNote.textContent='Regla RUMBO: primero aportaciones; venta solo si un bloque rebasa su banda y no se corrige razonablemente con las próximas aportaciones.';
+    rebNote.textContent='Regla de la cartera: primero aportaciones; venta solo si un bloque rebasa su banda y no se corrige razonablemente con las próximas aportaciones.';
   };
 
   render();
@@ -1180,13 +1180,13 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   function renderHomeV3(){
     const a=assets(), ok=a.length>0, m=model(), t=total();
     empty.hidden=ok;
-    document.getElementById('homeValue').hidden=false;
+    document.getElementById('homeValue').hidden=!ok;
     summary.hidden=!ok;
     homeMetrics.hidden=!ok;
     marketCard.hidden=true;
 
-    homeTitle.innerHTML='Tu inversión,<br><em>con dirección.</em>';
-    homeUser.textContent='Calcula dónde aportar y cuándo rebalancear.';
+    homeTitle.innerHTML='Tu cartera,<br><em>más clara.</em>';
+    homeUser.textContent='Organiza tu plan, orienta aportaciones y revisa desviaciones.';
     homeTotal.textContent=fmt0(t);
     homeTotal.classList.toggle('compact',String(Math.round(t)).replace(/\D/g,'').length>=7);
     if(!ok) return;
@@ -1223,5 +1223,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=3"></script>
+<script src="/plan-flow.js?v=4"></script>
 </body></html>
