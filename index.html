@@ -565,7 +565,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=2"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=3"><link rel="stylesheet" href="/perplexity.css?v=3"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>PERPLEXITY</b><small>Tu plan de inversión, con claridad</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -577,17 +577,17 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   <div class="homeHeroV3">
     <div class="homeSceneryImage" aria-hidden="true"></div>
     <div class="homeHeroCopy">
-      <span class="homeKicker">TU PLAN, DE UN VISTAZO</span>
-      <h1 id="homeTitle">Tu cartera,<br><em>más clara.</em></h1>
-      <p id="homeUser">Organiza tu plan, orienta aportaciones y revisa desviaciones.</p>
+      <span class="homeKicker">INVERSIÓN A LARGO PLAZO</span>
+      <h1 id="homeTitle">Tu inversión,<br><em>en orden.</em></h1>
+      <p id="homeUser">Un plan claro para decidir dónde aportar y cuándo revisar.</p>
     </div>
   </div>
 
-  <div class="homeValue" id="homeValue" hidden><span>Valor de la cartera</span><strong id="homeTotal">0 €</strong></div>
+  <div class="homeValue" id="homeValue" hidden><span>Valor registrado de la cartera</span><strong id="homeTotal">0 €</strong></div>
 
   <div class="homeV3Content">
     <div class="homeEmptyV3" id="empty">
-      <span class="homeEmptyEyebrow">TU PRIMER PASO</span><h2>Empieza por tu plan.</h2>
+      <span class="homeEmptyEyebrow">EMPIEZA AQUÍ</span><h2>Define tu reparto.</h2>
       <div class="homeEmptyIntro">
         <div class="homeCompass" aria-hidden="true">
           <div class="compassTicks"></div>
@@ -595,9 +595,10 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
           <div class="compassNeedle"><i></i></div>
           <div class="compassHub"></div>
         </div>
-        <p>Define una cartera, registra tus saldos y descubre cómo orientar tu próxima aportación.</p>
+        <p>Elige una estrategia o crea la tuya. Después registra tus importes para orientar cada aportación.</p>
       </div>
-      <button class="homeStartButton" onclick="go('cartera')">Configurar mi cartera <span aria-hidden="true">↗</span></button>
+      <ol class="perplexity-steps" aria-label="Cómo empezar"><li><b>01</b> Define tu plan</li><li><b>02</b> Registra tus saldos</li><li><b>03</b> Calcula tu aportación</li></ol>
+      <button class="homeStartButton" onclick="go('cartera')">Crear mi plan <span aria-hidden="true">↗</span></button>
     </div>
 
     <div class="homeDistributionV3" id="summary" hidden>
@@ -1190,8 +1191,8 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     homeMetrics.hidden=!ok;
     marketCard.hidden=true;
 
-    homeTitle.innerHTML='Tu cartera,<br><em>más clara.</em>';
-    homeUser.textContent='Organiza tu plan, orienta aportaciones y revisa desviaciones.';
+    homeTitle.innerHTML=ok?'Tu cartera,<br><em>de un vistazo.</em>':'Tu inversión,<br><em>en orden.</em>';
+    homeUser.textContent=ok?'Saldos, reparto y próximos pasos en un solo lugar.':'Un plan claro para decidir dónde aportar y cuándo revisar.';
     homeTotal.textContent=fmt0(t);
     homeTotal.classList.toggle('compact',String(Math.round(t)).replace(/\D/g,'').length>=7);
     if(!ok) return;
