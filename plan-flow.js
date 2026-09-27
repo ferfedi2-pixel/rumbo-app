@@ -146,7 +146,7 @@
   function renderSources() {
     const emDate = s.market.emDate || s.market.date || 'fecha no disponible';
     const ethDate = s.market.ethDate || 'fecha no confirmada';
-    byId('marketSources').textContent = 'Emergentes: '+pct(s.market.em)+' del bloque de renta variable (MSCI, '+emDate+'). Ethereum: '+pct(s.market.eth)+' del bloque cripto (CoinGecko, '+ethDate+'). '+(s.market.status||'');
+    byId('marketSources').textContent = 'Emergentes: '+pct(s.market.em)+' del bloque de renta variable (aproximación MSCI, '+emDate+'). Ethereum: '+pct(s.market.eth)+' del bloque cripto (cuota global de ETH de CoinGecko aplicada al bloque BTC/ETH; el resto se asigna a BTC, '+ethDate+'). '+(s.market.status||'');
   }
 
   const menu = byId('appMenu');
