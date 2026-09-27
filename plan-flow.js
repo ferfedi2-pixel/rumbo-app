@@ -75,11 +75,6 @@
   resultCard.classList.add('rebalance-result');
   resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
   contributeGrid.append(resultCard);
-  const guidance = document.createElement('p');
-  guidance.id = 'rebalanceGuidance';
-  guidance.className = 'rebalance-guidance';
-  guidance.setAttribute('aria-live','polite');
-  resultCard.querySelector('.head').after(guidance);
   const register = document.createElement('button');
   register.id = 'registerContribution';
   register.className = 'btn flow-register';
@@ -90,10 +85,6 @@
   lastRecord.id = 'lastContribution';
   lastRecord.className = 'flow-help';
   resultCard.append(lastRecord);
-  const rebalanceExplanation = document.createElement('details');
-  rebalanceExplanation.className = 'rebalance-explanation';
-  rebalanceExplanation.innerHTML = '<summary>¿Qué significa un rebalanceo extraordinario?</summary><p>Se muestra cuando, tras aportar, algún bloque sigue fuera de su banda y las próximas aportaciones podrían no corregirlo en el plazo calculado. Revisa los saldos, costes y tu situación antes de decidir; la aplicación no ejecuta operaciones.</p>';
-  resultCard.append(rebalanceExplanation);
 
   byId('rebalanceFlow')?.remove();
   const holdingsCard = byId('holds').closest('.card');
@@ -339,19 +330,36 @@
     const planned = assets();
     const amount = Math.max(0,Number(byId('newMoney').value)||0);
     const apportions = allocation(planned,planned.map(x => +s.hold[x.id] || 0),amount);
-    const priorities = planned.map((x,i) => ({name:x.short,amount:apportions[i]}))
-      .filter(x => x.amount > .005).sort((a,b) => b.amount-a.amount).slice(0,2).map(x => x.name);
-    guidance.textContent = amount > 0
-      ? 'Con '+euro.format(amount)+' de aportación, el reparto propuesto prioriza '+(priorities.length ? priorities.join(' y ') : 'los activos infraponderados')+'.'
-      : 'Introduce un importe para calcular el reparto.';
     results.querySelectorAll('.res').forEach((row,i) => {
-      const title = row.querySelector('.res-main > b');
-      if (!title || !planned[i]) return;
-      const value = document.createElement('small');
-      value.className = 'asset-current-value';
-      value.textContent = 'Saldo actual: '+euro.format(+s.hold[planned[i].id] || 0);
-      title.after(value);
+      const weights = row.querySelector('.weight-triplet');
+      const detail = row.querySelector('.asset-detail');
+      if (weights && detail) detail.prepend(weights);
+      const action = row.querySelector('.act');
+      if (action?.querySelector('.action-label')?.textContent === 'Revisar') {
+        const contribution = apportions[i] || 0;
+        action.querySelector('.action-label').textContent = contribution > .004 ? 'Aportar' : 'Mantener';
+        const value = action.querySelector('strong');
+        value.textContent = contribution > .004 ? euro.format(contribution) : '0 €';
+        value.classList.toggle('good',contribution > .004);
+        value.classList.toggle('pause',contribution <= .004);
+      }
     });
+    rebNote.hidden = true;
+    const alert = byId('rebalanceAlert');
+    const title = alert?.querySelector('strong');
+    const paragraph = alert?.querySelector('p');
+    if (title && paragraph) {
+      title.textContent = title.textContent.replace(/^Rebalanceo extraordinario:\s*/,'Revisar ');
+      paragraph.textContent = paragraph.textContent.replace(/\s*Pulsa \+ en cada activo para ver importes y destino\.$/,'');
+      if (alert.classList.contains('action') || alert.classList.contains('watch')) {
+        const explanation = document.createElement('details');
+        explanation.className = 'alert-details';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Ver motivo';
+        explanation.append(summary,paragraph);
+        alert.querySelector('div').append(explanation);
+      } else paragraph.remove();
+    }
   };
   function renderContribution() {
     byId('addPlanName').textContent = s.type ? currentName() : 'Sin plan';
