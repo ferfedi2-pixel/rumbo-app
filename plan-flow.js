@@ -79,6 +79,7 @@
   register.className = 'btn flow-register';
   register.type = 'button';
   register.textContent = 'Registrar aportación';
+  register.hidden = demoMode;
   resultCard.append(register);
   const lastRecord = document.createElement('p');
   lastRecord.id = 'lastContribution';
@@ -101,6 +102,12 @@
   rebHero.querySelector('.kick').textContent = 'CÁLCULO';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
   rebHero.querySelector('p').textContent = 'Aportación y desviaciones.';
+  if (demoMode) {
+    const demoLabel=document.createElement('small');
+    demoLabel.className='gemini-demo-label';
+    demoLabel.textContent='DEMOSTRACIÓN · SALDOS FICTICIOS · NO SE GUARDAN CAMBIOS';
+    rebHero.append(demoLabel);
+  }
   rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
@@ -370,5 +377,5 @@
     renderContribution();
   };
   render();
-  if (new URLSearchParams(location.search).get('view') === 'rebalanceo') go('rebalanceo');
+  if (demoMode || new URLSearchParams(location.search).get('view') === 'rebalanceo') go('rebalanceo');
 })();

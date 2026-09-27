@@ -565,7 +565,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
   .homeCompass{bottom:27px!important}
 }
 ===== END RUMBO HOME V5 ===== */
-</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=2"><link rel="stylesheet" href="/gemini.css?v=2"></head><body>
+</style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=3"><link rel="stylesheet" href="/plan-flow.css?v=2"><link rel="stylesheet" href="/gemini.css?v=3"></head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
   <button class="on" data-v="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></button>
@@ -638,7 +638,9 @@ const PROD={world:{id:'world',name:'Países desarrollados',short:'Desarrollados'
 const MODELS={refugio:{name:'RUMBO Refugio',risk:3,rate:5,desc:'Perfil conservador con menor volatilidad objetivo.',blocks:{eq:60,bond:40,crypto:0}},horizonte:{name:'RUMBO Travesía',risk:5,rate:6,desc:'Perfil moderado con balance entre renta variable y activos defensivos.',blocks:{eq:65,bond:25,crypto:10}},cumbre:{name:'RUMBO Cumbre',risk:6,rate:8.5,desc:'Perfil dinámico con mayor volatilidad y retorno esperado.',blocks:{eq:70,bond:0,crypto:30},eth:true}};
 let s={user:'Felipe',type:null,customName:'Mi cartera',customRate:6,custom:[],hold:{},money:1000,market:{em:11.85,eth:11.43,date:'31/08/2026',status:'Última referencia válida'}};
 try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)s={...s,...x,market:{...s.market,...(x.market||{})}}}catch(e){}
-function save(){localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
+const demoMode=new URLSearchParams(location.search).get('demo')==='1';
+if(demoMode)s={...s,user:'Demostración',type:'cumbre',hold:{world:20000,em:2800,btc:13500,eth:3750},money:1000,contributions:[],transitionByContributions:false};
+function save(){if(demoMode){saved.textContent='Demo · sin guardar';return}localStorage.setItem(KEY,JSON.stringify(s));saved.textContent='Guardado';setTimeout(()=>saved.textContent='Datos locales',700)}
 function model(){return MODELS[s.type]||null}function pname(){const label=String(s.customName||'').trim();return s.type==='custom'?(label||'Mi cartera'):(model()?.name||'Sin configurar')}
 function assets(){if(s.type==='custom')return s.custom.map((a,i)=>({id:a.id||'c'+i,name:a.name||'Activo '+(i+1),short:a.name||'Activo '+(i+1),w:+a.pct||0,color:a.color||C.world,detail:'Activo personalizado'}));const m=model();if(!m)return[];const a=[],e=Math.max(0,Math.min(40,+s.market.em||11.85))/100;if(m.blocks.eq){a.push({...PROD.world,w:m.blocks.eq*(1-e)});a.push({...PROD.em,w:m.blocks.eq*e})}if(m.blocks.bond)a.push({...PROD.bonds,w:m.blocks.bond});if(m.blocks.crypto){if(m.eth){const h=Math.max(0,Math.min(40,+s.market.eth||11.43))/100;a.push({...PROD.btc,w:m.blocks.crypto*(1-h)});a.push({...PROD.eth,w:m.blocks.crypto*h})}else a.push({...PROD.btc,w:m.blocks.crypto})}return a}
 function total(){return assets().reduce((z,a)=>z+(+s.hold[a.id]||0),0)}
@@ -1223,5 +1225,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=5"></script>
+<script src="/plan-flow.js?v=6"></script>
 </body></html>

@@ -7,6 +7,7 @@ body:has(#rebalanceo.on){background:#e9efeb!important;color:#26383d!important}
 #rebalanceo .hero .kick{color:#66777b!important;font:750 10px/1.4 system-ui,sans-serif!important;letter-spacing:.17em!important}
 #rebalanceo .hero h1{font:700 clamp(39px,4.3vw,54px)/1.03 Georgia,serif!important;letter-spacing:-.035em!important;color:#1a2c32!important;margin:7px 0 7px!important}
 #rebalanceo .hero p{color:#6c797b!important;font-size:13px!important}
+#rebalanceo .gemini-demo-label{display:block;margin-top:13px;color:#627174;font-size:10px;font-weight:750;letter-spacing:.1em;line-height:1.5}
 #rebalanceo .hero .num{color:#26383d!important}
 #rebalanceo .hero .num span{color:#718083!important}
 #rebalanceo .hero .num strong{color:#283c42!important;font-variant-numeric:tabular-nums;font-size:clamp(25px,3vw,35px)!important}
