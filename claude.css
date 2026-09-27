@@ -1,0 +1,49 @@
+/* Claude · lenguaje oscuro y superficies sobrias, aplicado después de V1. */
+:root{--bg:#07121c;--paper:#10222d;--ink:#f4f7f5;--mut:#a9bac2;--line:#ffffff25;--nav:#10222d;--nav2:#183441}
+body{background:#07121c!important;color:#f4f7f5!important}
+body .top,body .top .brand b{color:#f4f7f5!important}
+body .top .brand small,body .top #saved{color:#a9bac2!important}
+body .nav{background:#0c1c29!important;border:1px solid #3b505d!important;box-shadow:none!important}
+body .nav button{color:#b9c8cf!important}
+body .nav button.on{background:#23c7ad!important;color:#082620!important;box-shadow:none!important}
+body .view:not(#inicio) .hero{min-height:0!important;padding:24px 27px!important;border:0!important;border-bottom:1px solid #415967!important;border-radius:0!important;background:#07121c!important;box-shadow:none!important}
+body .view:not(#inicio) .hero:before,body .view:not(#inicio) .hero:after,body .view:not(#inicio) .motion-art{display:none!important}
+body .view:not(#inicio) .hero h1{font-family:Georgia,"Times New Roman",serif!important;font-weight:700!important}
+body .view:not(#inicio) .hero p{color:#b9cbd0!important}
+body .view:not(#inicio) .card{background:#10222d!important;border:1px solid #35505b!important;border-radius:12px!important;box-shadow:none!important;color:#f4f7f5!important}
+body .view:not(#inicio) .card h2,body .view:not(#inicio) .head h2{color:#f4f7f5!important}
+body .view:not(#inicio) .block,body .view:not(#inicio) .hold,body .view:not(#inicio) .res,body .view:not(#inicio) .hc,body .view:not(#inicio) .review-row,body .view:not(#inicio) .detail-stat,body .view:not(#inicio) .asset{background:transparent!important;border-color:#ffffff25!important;border-radius:9px!important;box-shadow:none!important;color:#f4f7f5!important}
+body .view:not(#inicio) .pill{background:#ffffff0b!important;border-color:#ffffff30!important;color:#c4d3d6!important}
+body .view:not(#inicio) .notice{background:#ffffff08!important;border-color:#ffffff25!important;color:#b9cbd0!important}
+body .view:not(#inicio) .field label{color:#b9cbd0!important}
+body .view:not(#inicio) input:not([type=color]){background:#0b1b26!important;color:#f5f8f6!important;border:1px solid #527079!important;border-radius:8px!important}
+body .view:not(#inicio) .btn{background:#22cbae!important;color:#082620!important;box-shadow:none!important}
+body .view:not(#inicio) .btn.ghost,body .view:not(#inicio) .btn.alt{background:transparent!important;color:#d1e5e2!important;border:1px solid #688a89!important}
+body :focus-visible{outline:2px solid #a6e7d9!important;outline-offset:3px!important}
+/* La ruta y brújula de Inicio son el único motivo gráfico. */
+#inicio #summary,#inicio .homeMetric,#inicio>.homeValue{box-shadow:none!important;background:#102b34!important;border:1px solid #375962!important}
+#inicio .homeEmptyV3{box-shadow:none!important}
+#cartera .model,#cartera .model-horizonte,#cartera .model-cumbre,#cartera .plan-reviewing .model.sel,#cartera .plan-reviewing .model-horizonte.sel,#cartera .plan-reviewing .model-cumbre.sel{background:#10222d!important;border:1px solid #405861!important;border-radius:12px!important;box-shadow:none!important;color:#f4f7f5!important}
+#cartera .model:before,#cartera .model-art,#cartera .model-overline{display:none!important}
+#cartera .model-top{min-height:37px!important}
+#cartera .model-refugio{border-top:3px solid #77bda9!important}
+#cartera .model-horizonte{border-top:3px solid #7aaac7!important}
+#cartera .model-cumbre{border-top:3px solid #c9a67e!important}
+#cartera .model.sel{outline:2px solid #e1ebdd!important;outline-offset:2px!important;padding:20px!important}
+#cartera .model .allocation-row,#cartera .model.sel .allocation-row{background:transparent!important;color:#e9f0ef!important;border:0!important;border-bottom:1px solid #ffffff22!important;border-radius:0!important;padding:8px 1px!important}
+#cartera .model .allocation-row strong,#cartera .model.sel .allocation-row strong,#cartera .model-stats strong,#cartera .model.sel .model-stats strong{color:#f4f7f5!important}
+#cartera .model-stats,#cartera .model.sel .model-stats{color:#b9cbd0!important}
+#cartera .card.s7,#cartera .active-plan-card{background:#10222d!important;border:1px solid #405861!important;border-radius:12px!important;box-shadow:none!important}
+#cartera .card.s7.custom-selected,#cartera .card.s7.custom-open{box-shadow:none!important;border-color:#77bda9!important}
+#cartera .plan-weights .plan-flow-row,.plan-compare>div{background:transparent!important;border:1px solid #ffffff25!important;border-radius:9px!important}
+.plan-flow-box{background:#10222d!important;border-radius:12px!important;box-shadow:none!important}
+/* Peso y categoría primero; cifra y acción conservan el acento. */
+#rebalanceo .res .res-main,#rebalanceo .res .res-main b,#rebalanceo .res small,#rebalanceo .weight-triplet span,#rebalanceo .weight-triplet b,#rebalanceo .review-row,#rebalanceo .review-row b,#rebalanceo .detail-stat b{color:#cbd6d9!important}
+#rebalanceo .weight-triplet span,#rebalanceo .weight-triplet .after{background:transparent!important;border-color:#ffffff25!important}
+#rebalanceo .res .act strong:not(.pause){color:#8ee3ca!important}
+#rebalanceo .res .act strong.pause{color:#d0dade!important}
+#rebalanceo .res .act .action-label{color:#8ee3ca!important}
+#rebalanceo .res .dot{background:#899ba4!important}
+#horizonte .card,#horizonte .hc{background:#10222d!important;border-color:#35505b!important;box-shadow:none!important;border-radius:12px!important}
+@media(max-width:600px){body .view:not(#inicio) .hero{margin:0!important;padding:20px 17px!important}body .view:not(#inicio) .card{padding:17px!important}#cartera .model.sel{padding:18px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important}}

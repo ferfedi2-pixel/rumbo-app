@@ -1,4 +1,4 @@
-/* RUMBO V1 · navegación diaria y revisión consciente del plan. */
+/* Navegación diaria y revisión del plan. */
 (() => {
   'use strict';
   const byId = id => document.getElementById(id);
@@ -98,9 +98,9 @@
   holdingsCard.classList.add('current-hold-card');
   planCard.after(holdingsCard,reviewCard);
   const rebHero = contributePage.querySelector('.heroIn > div');
-  rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
+  rebHero.querySelector('.kick').textContent = 'APORTACIÓN';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
-  rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebHero.querySelector('p').textContent = 'Introduce un importe y revisa el reparto propuesto.';
   rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
@@ -156,7 +156,7 @@
   const blocks = (type, custom) => {
     if (type === 'custom') return (custom || []).map(a => [a.name,+a.pct || 0]);
     const b = MODELS[type]?.blocks;
-    return b ? [['Renta variable',b.eq],['Renta fija',b.bond],['Criptomonedas',b.crypto]].filter(([,v]) => v > 0) : [];
+    return b ? [['Renta variable',b.eq],['Renta fija',b.bond],['Efectivo',b.cash]].filter(([,v]) => v > 0) : [];
   };
   const blockMarkup = list => list.map(([name,value]) => '<div class="plan-flow-row"><span>'+esc(name)+'</span><strong>'+pct(value)+'</strong></div>').join('');
   function archivePlan() {
@@ -176,9 +176,9 @@
     reviewCard.hidden = !active;
     selectedCard.hidden = !active;
     const hero = planPage.querySelector('.heroIn > div');
-    hero.querySelector('.kick').textContent = active ? 'TU CARTERA' : 'PRIMER PASO';
+    hero.querySelector('.kick').textContent = active ? 'CARTERA ACTIVA' : 'PRIMER PASO';
     hero.querySelector('h1').textContent = 'Cartera';
-    hero.querySelector('p').textContent = active ? 'Tu plan, saldos y distribución en un solo lugar.' : 'Escoge una estrategia para empezar o crea la tuya.';
+    hero.querySelector('p').textContent = active ? 'Consulta el objetivo y actualiza tus saldos.' : 'Compara tres repartos o crea el tuyo.';
     const customNameLabel = personalCard.querySelector('.custom-name-inline label');
     if (customNameLabel) customNameLabel.textContent = 'Ponle nombre a tu cartera';
     if (!active) return;
@@ -186,7 +186,7 @@
     hName.textContent = currentName();
     const m = model();
     const targets = blocks(s.type,s.custom);
-    planCard.innerHTML = '<span class="plan-eyebrow">PLAN ACTIVO</span><div class="plan-active-head"><div><h2>'+esc(currentName())+'</h2><p>Tu reparto objetivo para el largo plazo.</p></div><span class="pill">'+(m?'Riesgo '+m.risk+'/7':'Personalizada')+'</span></div><div class="plan-weights">'+blockMarkup(targets)+'</div><div class="plan-actions"><button type="button" class="btn ghost tiny" id="reviewPlan">Revisar mi plan</button>'+(reviewing?'<button type="button" class="btn ghost tiny" id="cancelPlanReview">Cancelar revisión</button>':'')+'</div>';
+    planCard.innerHTML = '<span class="plan-eyebrow">PLAN ACTIVO</span><div class="plan-active-head"><div><h2>'+esc(currentName())+'</h2><p>Pesos que guían las próximas aportaciones.</p></div><span class="pill">'+(m?'Riesgo '+m.risk+'/7':'Personalizada')+'</span></div><div class="plan-weights">'+blockMarkup(targets)+'</div><div class="plan-actions"><button type="button" class="btn ghost tiny" id="reviewPlan">Revisar mi plan</button>'+(reviewing?'<button type="button" class="btn ghost tiny" id="cancelPlanReview">Cancelar revisión</button>':'')+'</div>';
     byId('reviewPlan').onclick = beginReview;
     if (reviewing) byId('cancelPlanReview').onclick = cancelReview;
   }
@@ -346,7 +346,7 @@
     const a=assets(), m=Math.max(0,+byId('newMoney').value || 0);
     if (!a.length || !m) return;
     const amounts=allocation(a,a.map(x => +s.hold[x.id] || 0),m);
-    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
+    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto actualiza tus saldos guardados. No ejecuta compras.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
     byId('flowCancel').onclick=closeModal;
     byId('flowConfirm').onclick=() => {
       a.forEach((x,i) => {s.hold[x.id]=Math.round(((+s.hold[x.id]||0)+amounts[i])*100)/100});
