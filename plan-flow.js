@@ -72,6 +72,7 @@
   startPlan.onclick = () => go('cartera');
   controls.append(startPlan);
   const resultCard = byId('results').closest('.card');
+  resultCard.classList.add('rebalance-result');
   resultCard.querySelector('.head h2').textContent = 'Reparto propuesto';
   contributeGrid.append(resultCard);
   const register = document.createElement('button');
@@ -98,9 +99,9 @@
   holdingsCard.classList.add('current-hold-card');
   planCard.after(holdingsCard,reviewCard);
   const rebHero = contributePage.querySelector('.heroIn > div');
-  rebHero.querySelector('.kick').textContent = 'APORTACIÓN INTELIGENTE';
+  rebHero.querySelector('.kick').textContent = 'APORTACIÓN';
   rebHero.querySelector('h1').textContent = 'Rebalanceo';
-  rebHero.querySelector('p').textContent = 'Calcula dónde aportar y comprueba si tu cartera necesita un ajuste.';
+  rebHero.querySelector('p').textContent = 'Introduce un importe y revisa el reparto propuesto.';
   rebHero.parentElement.append(rebPage.querySelector('.heroIn .num'));
   rebPage.replaceChildren(...contributePage.childNodes);
   contributePage.remove();
@@ -176,9 +177,9 @@
     reviewCard.hidden = !active;
     selectedCard.hidden = !active;
     const hero = planPage.querySelector('.heroIn > div');
-    hero.querySelector('.kick').textContent = active ? 'TU CARTERA' : 'PRIMER PASO';
+    hero.querySelector('.kick').textContent = active ? 'CARTERA ACTIVA' : 'PRIMER PASO';
     hero.querySelector('h1').textContent = 'Cartera';
-    hero.querySelector('p').textContent = active ? 'Tu plan, saldos y distribución en un solo lugar.' : 'Escoge una estrategia para empezar o crea la tuya.';
+    hero.querySelector('p').textContent = active ? 'Consulta tus saldos y el reparto objetivo.' : 'Compara tres repartos o crea el tuyo.';
     const customNameLabel = personalCard.querySelector('.custom-name-inline label');
     if (customNameLabel) customNameLabel.textContent = 'Ponle nombre a tu cartera';
     if (!active) return;
@@ -249,7 +250,7 @@
       reviewing=false;snapshot=null;reason='';
       customEditor.hidden=true;
       personalCard.classList.remove('custom-open');
-      closeModal();save();render();go('inicio');
+      closeModal();save();render();go('cartera');
     };
   }
 
@@ -326,6 +327,39 @@
         if (explanation) explanation.textContent = 'Este saldo sigue incluido en el valor total, aunque el plan actual ya no asigna aportaciones a este activo.';
       });
     }
+    const planned = assets();
+    const amount = Math.max(0,Number(byId('newMoney').value)||0);
+    const apportions = allocation(planned,planned.map(x => +s.hold[x.id] || 0),amount);
+    results.querySelectorAll('.res').forEach((row,i) => {
+      const weights = row.querySelector('.weight-triplet');
+      const detail = row.querySelector('.asset-detail');
+      if (weights && detail) detail.prepend(weights);
+      const action = row.querySelector('.act');
+      if (action?.querySelector('.action-label')?.textContent === 'Revisar') {
+        const contribution = apportions[i] || 0;
+        action.querySelector('.action-label').textContent = contribution > .004 ? 'Aportar' : 'Mantener';
+        const value = action.querySelector('strong');
+        value.textContent = contribution > .004 ? euro.format(contribution) : '0 €';
+        value.classList.toggle('good',contribution > .004);
+        value.classList.toggle('pause',contribution <= .004);
+      }
+    });
+    rebNote.hidden = true;
+    const alert = byId('rebalanceAlert');
+    const title = alert?.querySelector('strong');
+    const paragraph = alert?.querySelector('p');
+    if (title && paragraph) {
+      title.textContent = title.textContent.replace(/^Rebalanceo extraordinario:\s*/,'Revisar ');
+      paragraph.textContent = paragraph.textContent.replace(/\s*Pulsa \+ en cada activo para ver importes y destino\.$/,'');
+      if (alert.classList.contains('action') || alert.classList.contains('watch')) {
+        const explanation = document.createElement('details');
+        explanation.className = 'alert-details';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Ver motivo';
+        explanation.append(summary,paragraph);
+        alert.querySelector('div').append(explanation);
+      } else paragraph.remove();
+    }
   };
   function renderContribution() {
     byId('addPlanName').textContent = s.type ? currentName() : 'Sin plan';
@@ -346,14 +380,14 @@
     const a=assets(), m=Math.max(0,+byId('newMoney').value || 0);
     if (!a.length || !m) return;
     const amounts=allocation(a,a.map(x => +s.hold[x.id] || 0),m);
-    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+euro.format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
+    openModal('<span class="plan-eyebrow">REGISTRAR APORTACIÓN</span><h2 id="planFlowTitle">¿La has realizado con estos importes?</h2><p>Esto solo actualiza tus saldos guardados en RUMBO. La aplicación no compra activos.</p><div class="plan-compare"><div>'+a.map((x,i) => '<div class="plan-flow-row"><span>'+esc(x.short)+'</span><strong>'+new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',minimumFractionDigits:2}).format(amounts[i])+'</strong></div>').join('')+'</div></div><p class="flow-help">Si invertiste otros importes, cancela y actualiza los saldos reales en Cartera.</p><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowConfirm">Sí, registrar</button></div>');
     byId('flowCancel').onclick=closeModal;
     byId('flowConfirm').onclick=() => {
       a.forEach((x,i) => {s.hold[x.id]=Math.round(((+s.hold[x.id]||0)+amounts[i])*100)/100});
       s.money=m;
       s.contributions ||= [];
       s.contributions.push({at:new Date().toISOString(),amount:m,allocations:Object.fromEntries(a.map((x,i) => [x.id,amounts[i]]))});
-      closeModal();save();render();go('inicio');
+      closeModal();save();render();go('cartera');
     };
   };
   clearSaldos.onclick = () => {
