@@ -1,0 +1,55 @@
+/* Formación 2.1: superficies y colores propios, limitados a Inicio. */
+#r21-education{--edu-text:#eff6f7;--edu-muted:#b4c8d1;--edu-accent:#80e1c9;--edu-line:#365360;color:var(--edu-text);background:transparent;margin:36px 0 0;padding:30px 0 8px;border-top:1px solid var(--edu-line);scroll-margin-top:24px}
+#r21-education [hidden]{display:none!important}
+#r21-education .r21-entry{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:0 4px}
+#r21-education .r21-eyebrow{font:700 .75rem/1.4 "Open Sans",sans-serif;letter-spacing:.16em;color:var(--edu-accent)}
+#r21-education h2{color:var(--edu-text)!important;font:700 clamp(1.65rem,3vw,2rem)/1.2 Georgia,serif;letter-spacing:-.025em;margin:10px 0}
+#r21-education .r21-entry p{color:var(--edu-muted)!important;font-size:1rem;line-height:1.65;margin:0}
+#r21-education button{background:#79dfc4!important;color:#06251e!important;border:1px solid #79dfc4;border-radius:12px;padding:12px 18px;min-height:48px;font:700 .875rem/1.5 "Open Sans",sans-serif;cursor:pointer;white-space:normal}
+#r21-education button:hover{background:#a0ecd8!important}
+#r21-education button:focus-visible,#r21-education summary:focus-visible,#r21-education a:focus-visible{outline:3px solid #f4d58c;outline-offset:5px}
+#r21-content{max-width:800px;margin:30px auto 0}
+#r21-education .r21-reading-title{color:var(--edu-muted)!important;font:600 .875rem/1.6 "Open Sans",sans-serif;letter-spacing:0;margin:0 0 10px;padding:0 4px}
+#r21-education .r21-module{background:transparent!important;border:0;border-top:1px solid var(--edu-line);border-radius:0;box-shadow:none;overflow-anchor:none}
+#r21-education .r21-module:last-child{border-bottom:1px solid var(--edu-line)}
+#r21-education .r21-module>summary{display:flex;align-items:center;gap:18px;padding:24px 4px;list-style:none;background:transparent!important;color:var(--edu-text)!important;cursor:pointer;min-height:92px}
+#r21-education summary::-webkit-details-marker{display:none}
+#r21-education .r21-number{font-size:.875rem;color:#e4c184;align-self:flex-start;padding-top:4px;font-variant-numeric:tabular-nums}
+#r21-education .r21-module-title{display:flex;flex-direction:column;gap:7px;min-width:0}
+#r21-education .r21-module-title>strong{font:700 clamp(1.2rem,2.6vw,1.45rem)/1.3 Georgia,serif;color:var(--edu-text)!important}
+#r21-education .r21-module-title>span{font-size:.875rem;line-height:1.5;color:var(--edu-muted)!important}
+#r21-education .r21-toggle{position:relative;width:28px;height:28px;flex:0 0 28px;margin-left:auto;border:1px solid #5e7c87;border-radius:50%}
+#r21-education .r21-toggle:before,#r21-education .r21-toggle:after{content:"";position:absolute;left:8px;top:12px;background:var(--edu-accent);width:10px;height:2px}
+#r21-education .r21-toggle:after{transform:rotate(90deg)}
+#r21-education .r21-module[open] .r21-toggle:after{display:none}
+#r21-education .r21-body{font:400 1.0625rem/1.8 "Open Sans",sans-serif;color:var(--edu-text)!important;padding:0 44px 28px;background:transparent!important}
+#r21-education .r21-body p{color:var(--edu-text)!important;margin:0 0 20px;overflow-wrap:anywhere}
+#r21-education .r21-body strong{color:inherit}
+#r21-education .r21-example{background:#14323e!important;border:1px solid #43646f;border-radius:14px;padding:20px;margin:24px 0}
+#r21-education .r21-example p{margin:0}
+#r21-education .r21-example strong{color:#9ae9d2!important}
+#r21-education .r21-closing{color:#8ee5ce!important;font-family:Georgia,serif;font-size:1.2rem;line-height:1.6;padding:4px 0 8px}
+#r21-education .r21-table-wrap{margin:24px 0;overflow-x:auto;border:1px solid #43646f;border-radius:14px;background:#14323e}
+#r21-education table{width:100%;border-collapse:collapse;font-size:.875rem;line-height:1.5;color:var(--edu-text)!important}
+#r21-education caption{padding:16px;text-align:left;color:#a1ead5;font-weight:700;background:#14323e}
+#r21-education th,#r21-education td{color:var(--edu-text)!important;background:transparent!important;padding:14px 12px;border:0;border-top:1px solid #43646f;text-align:right;font-variant-numeric:tabular-nums}
+#r21-education th:first-child{text-align:left}
+#r21-education thead th{font-weight:600;color:var(--edu-muted)!important}
+#r21-education .r21-sources{border:0;border-top:1px solid var(--edu-line);border-radius:0;box-shadow:none;background:transparent!important;margin-top:28px;padding-top:6px}
+#r21-education .r21-sources>summary{font-size:.875rem;color:var(--edu-accent)!important;padding:14px 0;cursor:pointer;list-style:none;background:transparent!important}
+#r21-education .r21-sources>summary:after{content:" +";margin-left:8px}
+#r21-education .r21-sources[open]>summary:after{content:" −"}
+#r21-education .r21-sources>div{font-size:.875rem;line-height:1.75}
+#r21-education .r21-sources p,#r21-education .r21-sources li{color:var(--edu-muted)!important}
+#r21-education .r21-sources ul{list-style:disc;margin:0 0 18px;padding-left:20px}
+#r21-education .r21-sources li{margin:8px 0}
+#r21-education a{color:var(--edu-accent)!important;text-underline-offset:4px}
+#r21-education .r21-date{font-size:.75rem}
+#r21-education blockquote{border-left:2px solid #e4c184;margin:26px 0;padding:4px 0 4px 18px;background:transparent;color:var(--edu-text)!important}
+#r21-education blockquote p{margin:0;font-family:Georgia,serif;font-size:1.2rem}
+#r21-education .r21-end{padding:28px 4px 16px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+#r21-education .r21-end p{color:var(--edu-text);font:700 1.25rem/1.5 Georgia,serif;margin:0;max-width:410px}
+#r21-education .r21-notice{color:var(--edu-muted)!important;font-size:.75rem;line-height:1.7;padding:8px 4px;margin:0}
+body[data-page="inicio"] .r2-footer{display:none}
+@media(max-width:600px){#r21-education{margin-top:28px;padding-top:26px}#r21-education .r21-entry{display:block}#r21-education .r21-entry button{margin-top:20px}#r21-education .r21-module>summary{gap:12px;padding:22px 0}#r21-education .r21-body{padding:0 0 26px;font-size:1rem}#r21-education .r21-example{padding:16px}#r21-education .r21-end{display:block}#r21-education .r21-end button{margin-top:16px}#r21-education th,#r21-education td{padding:12px 8px}#r21-education table{font-size:.8125rem}}
+@media(prefers-reduced-motion:reduce){#r21-education *{scroll-behavior:auto!important}}
