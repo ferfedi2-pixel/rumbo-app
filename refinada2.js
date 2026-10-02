@@ -88,8 +88,13 @@ function polish(){
  document.querySelector('.contribute-input .head').hidden=true;document.querySelector('.contribute-input .flow-help').hidden=true;
  $('newMoney').previousElementSibling.textContent='Nueva aportación (€)';
  $('homeTotal').textContent=money(total());
+ const expected=$('homeExpected').textContent;
+ let homeReturn=document.querySelector('.home-return-note');if(!homeReturn){homeReturn=document.createElement('small');homeReturn.className='home-return-note';$('summary').append(homeReturn)}
+ homeReturn.innerHTML='Rentabilidad supuesta <strong>'+esc(expected)+'</strong> anual';homeReturn.hidden=!active;
+ let planReturn=plan.querySelector('.plan-return-note');if(!planReturn){planReturn=document.createElement('p');planReturn.className='plan-return-note';plan.append(planReturn)}
+ planReturn.innerHTML='Rentabilidad supuesta <strong>'+esc(expected)+'</strong> anual';planReturn.hidden=!active;
 }
-const footer=document.createElement('footer');footer.className='r2-footer';footer.textContent='Contenido educativo. No es asesoramiento financiero ni una recomendación de inversión. Rentabilidades pasadas no garantizan resultados futuros.';document.querySelector('main').after(footer);
+const footer=document.createElement('footer');footer.className='r2-footer';footer.textContent='Invertir implica riesgo de pérdida.';document.querySelector('main').after(footer);
 for(const ext of ['JSON','CSV']){let b=document.createElement('button');b.className='btn ghost';b.textContent='Exportar '+ext;b.onclick=()=>{const data=ext==='JSON'?JSON.stringify(s,null,2):'Activo;Capital actual;Peso objetivo\r\n'+assets().map(a=>[a.short,s.hold[a.id]||0,a.w].map(v=>'"'+String(v).replaceAll('"','""')+'"').join(';')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+data],{type:ext==='JSON'?'application/json':'text/csv'})),link=document.createElement('a');link.href=url;link.download='rumbo-refinada-2.'+ext.toLowerCase();link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('settingsActions').append(b)}
 render();go('inicio');
 })();

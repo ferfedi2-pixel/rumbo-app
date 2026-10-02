@@ -140,3 +140,55 @@ html body[data-page]:has(#r2Nav) .top{background:var(--v-ink)!important}
  #inicio .homeDonutCenter{inset:16px!important}
  #inicio .homeAssetNumbers span{font-size:20px!important}
 }
+/* Prueba crema · lectura cálida y portada sin franja opaca. */
+html body[data-page="inicio"]:has(#r2Nav) .top{background:transparent!important;border:0!important}
+#inicio #homeMetrics{display:none!important}
+#inicio .home-return-note{display:block;margin:18px 0 0;padding-top:13px;border-top:1px solid #ffffff20;color:#d4c5ab;text-align:right;font-size:12px;line-height:1.5}
+#inicio .home-return-note strong{font-weight:700;color:#f4e7d2}
+#cartera .plan-return-note{margin:0;color:#d5c9ed;font-size:12px;line-height:1.5;text-align:right}
+#cartera .plan-return-note strong{font-weight:700;color:#ede4ff}
+#c23-education{background:transparent;border:0;padding-top:8px;margin-top:34px;color:#26343c}
+#c23-education .c23-entry{position:relative;padding:30px 30px 28px;border:1px solid #e0d5c2;border-radius:22px;background:linear-gradient(125deg,#f2ebdf,#e8ddc9);box-shadow:0 10px 28px #0002;margin-bottom:18px;overflow:hidden}
+#c23-education .c23-entry:before{content:"";display:block;width:38px;height:3px;border-radius:3px;background:#987a4b;margin-bottom:20px}
+#c23-education .c23-eyebrow{color:#6e5634;letter-spacing:.15em;font-size:11px}
+#c23-education h2{color:#27343b;font-size:clamp(30px,7.5vw,40px);max-width:520px;margin:12px 0 24px}
+#c23-education #c23-explore,#c23-education .c23-next{background:#293f45;color:#faf5eb;border-color:#293f45;border-radius:11px;padding:13px 20px;font-size:14px;box-shadow:none}
+#c23-education #c23-explore:hover,#c23-education .c23-next:hover{background:#3c5459;border-color:#3c5459}
+#c23-education .c23-module{background:#e7dfd1;border:1px solid #d5cbbb;border-radius:17px;margin:12px 0;box-shadow:0 6px 18px #0002}
+#c23-education .c23-module.is-open{background:#f3eddf;border-color:#dacdb6;box-shadow:0 12px 28px #0003}
+#c23-education .c23-toggle{color:#26343b;padding:22px 24px;gap:16px;grid-template-columns:25px minmax(0,1fr) 22px}
+#c23-education .c23-number{font-family:RumboSans,Arial,sans-serif;font-size:13px;font-weight:700;color:#715d40}
+#c23-education .c23-toggle strong{font:700 24px/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.015em}
+#c23-education .c23-toggle small{color:#535e5f;font-size:14px;line-height:1.5}
+#c23-education .c23-plus{color:#576247;font-size:25px}
+#c23-education .c23-body{color:#303d42;font-family:RumboSans,Arial,sans-serif!important;font-size:16px;line-height:1.7;padding:4px 64px 32px}
+#c23-education .c23-body>p{margin-bottom:20px}
+#c23-education .c23-example{background:#e6dbc7;border-left:3px solid #876838;color:#303b3c;border-radius:0 12px 12px 0;padding:20px 18px;margin:26px 0}
+#c23-education .c23-example>span{color:#674d2c;font-size:10px;letter-spacing:.1em}
+#c23-education .c23-caution{color:#58615e;font-size:14px}
+#c23-education .c23-caution>span{color:#6b5634}
+#c23-education .c23-quote{border-top-color:#a18c65;padding-top:22px;margin-top:30px}
+#c23-education blockquote{color:#26383c;font:italic 20px/1.55 Georgia,'Times New Roman',serif}
+#c23-education figcaption{color:#4b625b;font-size:13px}
+#c23-education .c23-sources{color:#606861;font-size:12px}
+#c23-education a{color:#225b58;text-decoration:underline;text-underline-offset:3px}
+html body[data-page="inicio"] #c23-education :is(button,a):focus-visible{outline:3px solid #625332!important;outline-offset:4px!important}
+@media(max-width:720px){
+ html body[data-page="inicio"]:has(#r2Nav) .top{height:90px!important;padding:16px 22px!important;background:transparent!important}
+ html body[data-page="inicio"]:has(#r2Nav) .top .brand{gap:10px!important}
+ html body[data-page="inicio"]:has(#r2Nav) .top .brand .logo{width:44px!important;height:50px!important}
+ html body[data-page="inicio"]:has(#r2Nav) .top .brand b{font-size:22px!important;letter-spacing:.2em!important;color:#fff8e8!important;text-shadow:0 2px 9px #08121c}
+ html body[data-page="inicio"]:has(#r2Nav) .top .brand small{color:#f1e7d4!important;font-size:9px!important;text-shadow:0 2px 8px #08121c}
+ html body[data-page="inicio"]:has(#r2Nav) .top #appMenuBtn{width:40px!important;height:40px!important;background:#10202c66!important;border:1px solid #e6dfc955!important;backdrop-filter:blur(8px);color:#f6eedf!important}
+ #inicio .homeSceneryImage:after{background:linear-gradient(180deg,#07121c35 0%,transparent 24%,#07121c20 44%,#07121ce0 82%,#07121c 100%)!important}
+}
+@media(max-width:600px){
+ #c23-education .c23-entry{padding:25px 23px;border-radius:20px}
+ #c23-education h2{font-size:31px;line-height:1.1}
+ #c23-education .c23-toggle{padding:21px 18px;gap:10px;grid-template-columns:20px minmax(0,1fr) 20px}
+ #c23-education .c23-toggle strong{font-size:22px}
+ #c23-education .c23-toggle small{font-size:13px;margin-top:8px}
+ #c23-education .c23-body{padding:2px 22px 26px}
+ #c23-education .c23-example{padding:18px 15px}
+ #cartera .plan-return-note{font-size:11px;margin-top:10px}
+}
