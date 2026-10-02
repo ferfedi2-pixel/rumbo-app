@@ -1,0 +1,126 @@
+/* Refinada 2.3 · Dirección visual: tinta, cielo, lavanda y arena.
+   Capa de presentación exclusivamente; no altera planes ni cálculos. */
+:root{--v-ink:#0b111c;--v-panel:#141f30;--v-line:#303e52;--v-text:#f2f4f8;--v-muted:#b4c0d0;--r2-line:#303e52;--r2-muted:#b4c0d0}
+html{background:var(--v-ink);color-scheme:dark}
+html body[data-page]{background:var(--v-ink)!important;color:var(--v-text)!important;--v-accent:#8cdcc9;--v-tint:#1a3439}
+html body[data-page="cartera"]{--v-accent:#c4b6f3;--v-tint:#302b47}
+html body[data-page="activos"]{--v-accent:#98caff;--v-tint:#20344d}
+html body[data-page="rebalanceo"]{--v-accent:#edc58b;--v-tint:#3a3025}
+html body[data-page="horizonte"]{--v-accent:#aabaff;--v-tint:#282f4b}
+html body[data-page] .top{background:var(--v-ink)!important;color:var(--v-text)!important;border-color:var(--v-line)!important;box-shadow:none!important}
+html body[data-page] .brand>div:last-child{display:block!important}
+html body[data-page] .brand b{color:var(--v-text)!important;font-size:18px!important;letter-spacing:.19em!important}
+html body[data-page] .brand small{color:var(--v-muted)!important;font-size:10px!important}
+html body[data-page] .top #saved{color:#a2afc1!important}
+html body[data-page] .top .logo{width:40px!important;height:40px!important;background:none!important;box-shadow:none!important}
+html body[data-page] #appMenuBtn{background:#172334!important;border-color:#36455b!important;color:#dce5f1!important;box-shadow:none!important}
+html body[data-page] .app #r2Nav.nav.nav{background:#121c2b!important;border:1px solid #334155!important;box-shadow:0 8px 28px #0005!important}
+html body[data-page] .app #r2Nav.nav.nav button{color:#b7c3d3!important;border-radius:14px!important}
+html body[data-page] .app #r2Nav.nav.nav button.on{background:var(--v-tint)!important;color:var(--v-accent)!important}
+html body[data-page] .app #r2Nav.nav.nav button:hover{color:#fff!important}
+html body[data-page] .view{color:var(--v-text)}
+html body[data-page] :is(button,input,select,summary,a):focus-visible{outline:2px solid var(--v-accent)!important;outline-offset:4px!important}
+html body[data-page] .r2-heading{padding-top:24px;padding-bottom:26px}
+html body[data-page] .r2-heading h1{color:var(--v-text)}
+html body[data-page] .r2-heading:before{content:"";display:block;width:36px;height:3px;background:var(--v-accent);border-radius:3px;margin-bottom:20px}
+html body[data-page] .r2-heading p,.r2-empty{color:var(--v-muted)}
+html body[data-page] .r2-footer{color:#a2afc1;border-top:1px solid var(--v-line);margin-top:32px}
+html body[data-page] :is(.r2-fields input,.hold input,select){background:#182538!important;border-color:#43516a!important;color:#f2f4f8!important}
+html body[data-page] .btn{box-shadow:none!important}
+/* Activos: una superficie legible con identidades sutiles, nunca crema. */
+#activos{padding-bottom:24px}
+#assetCatalog{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#activos .r2-catalog-row{--catalog-accent:#98caff;display:flex;align-items:flex-start;gap:16px;min-width:0;padding:24px 22px;border:1px solid #34455e;border-top:3px solid var(--catalog-accent);border-radius:18px;background:linear-gradient(140deg,#1b2b40,#131e2f 80%);box-shadow:0 10px 24px #0002}
+#activos .r2-catalog-row:nth-child(2){--catalog-accent:#e7aa98;background:linear-gradient(140deg,#30262e,#171e2d 80%);border-color:#4c3d4a;border-top-color:var(--catalog-accent)}
+#activos .r2-catalog-row:nth-child(3){--catalog-accent:#ebc27e;background:linear-gradient(140deg,#302a23,#1c202b 80%);border-color:#4b4439;border-top-color:var(--catalog-accent)}
+#activos .r2-catalog-row:nth-child(4){--catalog-accent:#bdb0f5;background:linear-gradient(140deg,#2a2941,#191f31 80%);border-color:#43415e;border-top-color:var(--catalog-accent)}
+#activos .r2-catalog-row>div{min-width:0}
+#activos .asset-symbol{width:42px;height:42px;margin-top:2px}
+#activos .r2-catalog-row h2{font-size:24px;line-height:1.18;color:#f4f6fa;overflow-wrap:anywhere}
+#activos .r2-catalog-row p{font-size:15px;line-height:1.6;color:#c2cbd9;margin:12px 0 18px}
+#activos .r2-catalog-row div>span{display:inline-flex;padding:6px 10px;border:1px solid #ffffff24;border-radius:8px;background:#080f1b55;font-size:12px;font-weight:700;color:var(--catalog-accent)}
+#activos #editPlanFromAssets{background:#9ccaff!important;color:#0c2137!important;border:0!important;border-radius:12px;padding:13px 20px!important;font-size:14px!important;margin-top:24px}
+/* Aportar: importe un 31 % menor y una acción cálida claramente diferenciada. */
+#rebalanceo .hero{padding:23px 0 24px!important}
+#rebalanceo .hero h1{font-size:40px!important}
+#rebalanceo .grid>.contribute-input{padding:25px!important;background:linear-gradient(145deg,#262833,#191f2c)!important;border:1px solid #45404a!important;border-radius:20px!important;align-self:start}
+#rebalanceo .grid>.rebalance-result{border-left:0!important;padding-left:12px!important}
+#rebalanceo #newMoney{font-size:44px!important;line-height:1.2!important;letter-spacing:-.035em!important;color:#f5e3c8!important;padding:6px 0 12px!important;border-bottom:1px solid #9f896b!important}
+#rebalanceo .contribute-input .field label{font-size:14px!important;color:#c5cbd6!important}
+#rebalanceo #newMoney:focus-visible{border-bottom-color:#edc58b!important;box-shadow:none!important}
+#rebalanceo #contributeControls .btn,#rebalanceo .flow-register{background:#e7bd80!important;color:#241b13!important;border:1px solid #e7bd80!important;min-height:48px;border-radius:12px!important;font-size:14px!important}
+#rebalanceo #contributeControls .btn:hover,#rebalanceo .flow-register:hover{background:#f2d3a5!important}
+#rebalanceo .flow-help{color:#b3becf;font-size:12px;line-height:1.6}
+#rebalanceo .r2-result-value span{color:#ddc299}
+#rebalanceo .r2-result-value span.warning{color:#edbd81}
+#rebalanceo .r2-track{background:#29364b}
+#rebalanceo .asset-more{border-color:#4e6077!important;color:#d4ddec!important}
+#rebalanceo .asset-more.open{background:#354057!important}
+#rebalanceo .pill{background:#302d2b!important;color:#eed4ac!important;border-color:#574b3d!important}
+/* Cartera: capas de tinta y lavanda, sin recuadros dentro de los indicadores. */
+#cartera #activePlanCard{background:linear-gradient(125deg,#29263f,#172235)!important;border-color:#4b4568!important;border-radius:20px!important;padding:24px!important}
+#cartera #activePlanCard .plan-eyebrow{color:#c9bdf1}
+#cartera #activePlanCard .plan-actions .btn{color:#cec2f4!important}
+#cartera #activePlanCard .pill{background:#37304e!important;color:#e0d7fa!important;border-color:#5a5275!important}
+#cartera .rebalance-review,#cartera .card.s7{background:#151f30!important;border-color:#354159!important}
+#cartera .model{background:linear-gradient(145deg,#223b3c,#14252e)!important}
+#cartera .model-horizonte{background:linear-gradient(145deg,#263c56,#192435)!important}
+#cartera .model-cumbre{background:linear-gradient(145deg,#483647,#25263a)!important}
+#cartera .model.sel{color:#f2f4f8!important;border-color:var(--model-accent)!important;box-shadow:0 0 0 2px #ffffff12!important}
+#cartera .model .allocation-row,#cartera .model.sel .allocation-row{background:transparent!important;border:0!important;border-bottom:1px solid #ffffff1f!important;border-radius:0!important;padding:10px 0!important;color:#e1e7ef!important}
+#cartera .model .allocation-row strong,#cartera .model.sel .allocation-row strong{color:#f5f5fa!important}
+#cartera .model .model-stats,#cartera .model.sel .model-stats{color:#bfcbda!important;gap:12px;font-size:12px}
+#cartera .model .model-stats span{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important}
+#cartera .model .model-stats strong,#cartera .model.sel .model-stats strong{color:#f3f4f8!important}
+#cartera .model.sel .btn.ghost{color:#e1e7ef!important;background:#ffffff0a!important;border-color:#ffffff55!important}
+#cartera .model.sel .btn:not(.ghost){background:var(--model-accent)!important;color:#101d2c!important}
+#cartera .card.s7 input{background:#1b293c!important;color:#f2f4f8!important;border-color:#465570!important}
+#cartera .custom-toggle,#cartera #useCustom{background:#c4b6ed!important;color:#211a32!important;border-color:#c4b6ed!important}
+#cartera .custom-kicker{color:#c4b6ed}
+#cartera .current-hold-card .pill{color:#d9cff2!important}
+/* Inicio: acentos cálidos y superficies azul noche; el paisaje conserva su protagonismo. */
+#inicio #summary{background:linear-gradient(130deg,#18273b,#141d2e)!important;border:1px solid #334159!important;border-radius:24px!important}
+#inicio .homeDonutCenter{background:#162236!important}
+#inicio .homeAssetNumbers strong{font-size:20px!important}
+#inicio .homeAssetNumbers span{color:#acb9cc!important;font-size:12px!important}
+#inicio .homeMetric{background:#171f30!important;border:1px solid #303b51!important;border-radius:16px!important}
+#inicio .homeMetric:first-child{background:#272437!important;border-color:#49415d!important}
+#inicio .homeMetric:last-child{background:#272522!important;border-color:#494238!important}
+#inicio .homeMetric small,#inicio .homeMetric p{color:#bac5d5!important}
+#inicio .homeEmptyV3{background:#1a2537!important;border:1px solid #3b485e!important;border-radius:22px!important}
+#inicio .homeEmptyV3 h2{color:#f4f2ed!important}
+#inicio .homeEmptyEyebrow{color:#e9c591!important}
+#inicio .homeEmptyV3 .homeEmptyIntro p{color:#c1cad7!important}
+#inicio .homeStartButton{background:#e7c18d!important;color:#241e17!important}
+#inicio>.homeValue{background:linear-gradient(115deg,#242638,#162337)!important;border-color:#40465d!important}
+#inicio>.homeValue span{color:#c0cadd!important}
+/* Horizonte conserva el gráfico y usa controles azulados. */
+#horizonte .r2-capital{padding:24px;border:1px solid #3c4668;border-radius:20px;background:linear-gradient(125deg,#262d49,#152234)}
+#horizonte .r2-capital>span{color:#c6cee2}
+#horizonte .r2-horizon-controls>label strong{color:#b6c6ff}
+#horizonte .r2-horizon-controls input[type=range]{accent-color:#aabaff}
+#horizonte .r2-projection-totals div:last-child strong{color:#c1b5f1}
+/* Materiales secundarios compartidos. */
+.plan-flow-box{background:#162132;border-color:#4c5a73}
+.plan-flow-box p{color:#c0cbda}
+#ajustes .card{background:#151f30!important;border-color:#3b485d!important}
+@media(max-width:780px){
+ #assetCatalog{grid-template-columns:1fr;gap:14px}
+ #rebalanceo .grid>.rebalance-result{padding-left:0!important;border-top:0!important}
+}
+@media(max-width:600px){
+ html body[data-page] .top .brand small{font-size:9px!important}
+ html body[data-page] .top #saved{display:none!important}
+ html body[data-page] .r2-heading{padding-top:12px;padding-bottom:23px}
+ html body[data-page] .r2-heading h1{font-size:36px}
+ #activos .r2-catalog-row{padding:21px 18px;gap:14px}
+ #activos .r2-catalog-row h2{font-size:22px}
+ #activos .r2-catalog-row p{font-size:15px;margin-top:10px;margin-bottom:14px}
+ #activos .asset-symbol{width:36px;height:36px}
+ #rebalanceo .hero h1{font-size:36px!important}
+ #rebalanceo .grid>.contribute-input{padding:21px!important}
+ #rebalanceo #newMoney{font-size:40px!important}
+ #cartera #activePlanCard{padding:20px!important}
+ #inicio .homeAssetNumbers strong{font-size:19px!important}
+ #horizonte .r2-capital{padding:20px}
+}
