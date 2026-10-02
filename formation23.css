@@ -1,53 +1,57 @@
-/* RUMBO 3.1 — estilos limitados al componente de formación de Inicio. */
-#r31-education{box-sizing:border-box;max-width:50rem;margin:2.125rem auto 0;padding:1.25rem 1rem calc(8rem + env(safe-area-inset-bottom));background:#07121c;color:#dbe6eb;font-size:1rem;line-height:1.65}
+/* RUMBO 3.2 — formato cálido anterior y contenido de la 3.1, solo formación. */
+#r31-education{box-sizing:border-box;max-width:50rem;margin:2.125rem auto 0;padding:.5rem 0 calc(8rem + env(safe-area-inset-bottom));background:transparent;color:#dbe6eb;font-size:1rem;line-height:1.65}
 #r31-education *,#r31-education *::before,#r31-education *::after{box-sizing:border-box}
 #r31-education [hidden]{display:none!important}
 #r31-education button{font-family:inherit;cursor:pointer}
-#r31-education :is(button,a):focus-visible{outline:3px solid #79ddc6!important;outline-offset:4px!important}
-#r31-education .r31-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem 1rem;align-items:center;margin-bottom:1.5rem}
-#r31-education .r31-eyebrow{grid-column:1;font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#39c6a3}
-#r31-education h2{grid-column:1;margin:0;color:#f4f7f6;font:700 1.5rem/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.015em}
-#r31-education #r31-explore{grid-column:2;grid-row:1 / span 2;align-self:center;border:1px solid #39c6a3;border-radius:.75rem;background:#39c6a3;color:#07121c;font-size:.9375rem;font-weight:600;line-height:1.4;padding:.625rem .875rem;min-height:2.75rem;max-width:8rem;transition:background-color 150ms,color 150ms}
-#r31-education #r31-explore:hover{background:#32b292;border-color:#32b292}
-#r31-education #r31-explore[aria-expanded="true"]{background:transparent;border-color:#1f3442;color:#a9bec8;font-size:.875rem;font-weight:500;padding:.375rem .75rem}
-#r31-education #r31-explore[aria-expanded="true"]:hover{color:#fff;background:#0a1722}
-#r31-education .r31-modules{display:grid;gap:.75rem}
-#r31-education .r31-module{background:#0a1722;border:1px solid #1f3442;border-radius:1rem;padding:1rem;min-width:0;scroll-margin-top:6rem}
-#r31-education .r31-module.is-open{background:#0c1c29;padding:1.25rem}
+#r31-education :is(button,a):focus-visible{outline:3px solid #625332!important;outline-offset:4px!important}
+#r31-education .r31-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4375rem 1.5rem;align-items:center;padding:1.25rem 1.5rem;border:1px solid #454b4c;border-radius:.9375rem;background:#252d31;box-shadow:none;margin-bottom:1rem}
+#r31-education .r31-eyebrow{grid-column:1;grid-row:1;color:#c5bda9;font-size:.6875rem;font-weight:700;letter-spacing:.14em;line-height:1.4;text-transform:uppercase}
+#r31-education h2{grid-column:1;grid-row:2;color:#f0e9dd;font:700 1.625rem/1.16 Georgia,'Times New Roman',serif;letter-spacing:-.015em;margin:0}
+#r31-education #r31-explore{grid-column:2;grid-row:1 / span 2;align-self:center;background:#c9c0ae;border:1px solid #c9c0ae;color:#253138;border-radius:.5625rem;font-size:.8125rem;font-weight:700;line-height:1.3;padding:.6875rem 1.0625rem;min-height:2.75rem;max-width:9.0625rem;transition:background-color 150ms}
+#r31-education #r31-explore:hover{background:#d8cfbc;border-color:#d8cfbc}
+#r31-education .r31-entry #r31-explore:focus-visible{outline-color:#eee2c8!important}
+#r31-education .r31-modules{display:grid;gap:0}
+#r31-education .r31-module{background:transparent;border:1px solid transparent;border-bottom-color:#53605c;border-radius:0;min-width:0;scroll-margin-top:6rem;box-shadow:none}
+#r31-education .r31-module.is-open{background:#f3eddf;border-color:#dacdb6;border-radius:1rem;margin:.5rem 0;box-shadow:0 10px 24px #0002}
 #r31-education h3{margin:0}
-#r31-education .r31-toggle{display:grid;grid-template-columns:1.25rem minmax(0,1fr) 1.25rem;gap:.75rem;align-items:start;width:100%;min-height:2.75rem;border:0;background:transparent;padding:0;color:#f4f7f6;text-align:left;border-radius:.375rem}
-#r31-education .r31-number{padding-top:.1875rem;font-size:.8125rem;line-height:1.5;color:#39c6a3;font-weight:600}
-#r31-education .r31-title{display:block;font:700 1.1875rem/1.3 Georgia,'Times New Roman',serif;color:#f4f7f6}
-#r31-education .r31-subtitle{display:block;margin-top:.375rem;color:#94a9b4;font-size:.875rem;font-weight:400;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#r31-education .r31-toggle{display:grid;grid-template-columns:1.5625rem minmax(0,1fr) 1.375rem;gap:1rem;align-items:start;width:100%;min-height:2.75rem;border:0;background:transparent;padding:1.375rem 1.5rem;color:#f0e9dd;text-align:left;border-radius:.75rem}
+#r31-education .r31-number{padding-top:.1875rem;font-size:.8125rem;line-height:1.5;color:#cbbd99;font-weight:700}
+#r31-education .r31-title{display:block;font:700 1.1875rem/1.3 Georgia,'Times New Roman',serif;letter-spacing:-.015em;color:#f4f1e9}
+#r31-education .r31-subtitle{display:block;margin-top:.375rem;color:#c4cfcc;font-size:.875rem;font-weight:400;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#r31-education .is-open .r31-number{color:#715d40}
+#r31-education .is-open .r31-title{color:#26343b}
+#r31-education .is-open .r31-subtitle{color:#535e5f}
 #r31-education .is-open .r31-subtitle{white-space:normal;overflow:visible}
-#r31-education .r31-chevron{width:1.25rem;height:1.25rem;margin-top:.125rem;color:#39c6a3;transition:transform 200ms}
+#r31-education .r31-chevron{width:1.25rem;height:1.25rem;margin-top:.125rem;color:#cbbd99;transition:transform 200ms}
+#r31-education .is-open .r31-chevron{color:#576247}
 #r31-education .r31-toggle[aria-expanded="true"] .r31-chevron{transform:rotate(180deg)}
-#r31-education .r31-body{margin-top:1.25rem;font-size:1rem;line-height:1.65;color:#dbe6eb;overflow-wrap:anywhere;animation:r31-reveal 160ms ease-out}
-#r31-education .r31-body>p{margin:0 0 1rem}
-#r31-education .r31-list{margin:1rem 0;padding-left:1.25rem;display:grid;gap:.875rem}
+#r31-education .r31-body{padding:.25rem 4rem 2rem;margin:0 auto;font-size:1rem;line-height:1.65;color:#303d42;overflow-wrap:anywhere;animation:r31-reveal 160ms ease-out}
+#r31-education .r31-body>p{margin:0 0 1.125rem}
+#r31-education .r31-list{margin:1rem 0 1.125rem;padding-left:1.25rem;display:grid;gap:.875rem}
 #r31-education .r31-body strong{font-weight:700}
-#r31-education .r31-example{background:#11303a;border-left:3px solid #39c6a3;border-radius:.75rem;padding:1rem;margin:1rem 0;color:#dbe6eb;font-size:1rem;line-height:1.65}
-#r31-education .r31-label{display:block;color:#39c6a3;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+#r31-education .r31-example{background:#e6dbc7;border-left:3px solid #876838;border-radius:0 .75rem .75rem 0;padding:1.25rem 1.125rem;margin:1.625rem 0;color:#303b3c;font-size:1rem;line-height:1.65}
+#r31-education .r31-label{display:block;color:#674d2c;font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 #r31-education .r31-example p{margin:.625rem 0 0}
-#r31-education .r31-example strong{color:#fff}
-#r31-education .r31-body .r31-caution{display:flex;align-items:flex-start;gap:.5rem;font-size:.875rem;color:#a9bec8;border-top:1px solid #162734;padding-top:.75rem;margin-top:1rem}
-#r31-education .r31-caution svg{flex:none;width:1rem;height:1rem;margin-top:.1875rem}
-#r31-education .r31-body .r31-rumbo{background:rgba(14,34,49,.6);border:1px solid #1f3d52;border-radius:.5rem;padding:.875rem;margin:.75rem 0;color:#dbe6eb;font-size:.9375rem}
-#r31-education .r31-quote{margin:1.5rem 0;padding-top:1rem;border-top:1px solid rgba(57,198,163,.4)}
-#r31-education blockquote{margin:0;color:#f4f7f6;font:italic 1.125rem/1.65 Georgia,'Times New Roman',serif}
-#r31-education figcaption{margin-top:.5rem;font-size:.8125rem;line-height:1.5;color:#86d8c3}
-#r31-education .r31-sources{font-size:.75rem;line-height:1.65;color:#8fa6b1;margin-top:1.5rem}
+#r31-education .r31-example strong{color:#26343b}
+#r31-education .r31-body .r31-caution{display:flex;align-items:flex-start;gap:.5rem;font-size:.875rem;color:#58615e;border-top:1px solid #cfc3ac;padding-top:.75rem;margin-top:1rem}
+#r31-education .r31-caution svg{flex:none;width:1rem;height:1rem;margin-top:.125rem;color:#6b5634}
+#r31-education .r31-body .r31-rumbo{background:#ece3d3;border:1px solid #d8cbb6;border-radius:.5rem;padding:.875rem;margin:.75rem 0 1.125rem;color:#303d42;font-size:.9375rem}
+#r31-education .r31-quote{margin:1.75rem 0;padding-top:1.375rem;border-top:1px solid #a18c65}
+#r31-education blockquote{margin:0;color:#26383c;font:italic 1.125rem/1.55 Georgia,'Times New Roman',serif}
+#r31-education figcaption{margin-top:.625rem;font-size:.8125rem;line-height:1.5;color:#4b625b}
+#r31-education .r31-sources{font-size:.75rem;line-height:1.7;color:#606861;margin-top:1.5rem}
 #r31-education .r31-sources>span{font-weight:600}
 #r31-education .r31-sources ul{list-style:none;margin:.375rem 0 0;padding:0;display:grid;gap:.5rem}
-#r31-education a{color:#79ddc6;text-decoration:underline;text-underline-offset:3px}
-#r31-education .r31-next{width:100%;border:0;border-radius:.75rem;background:#162734;color:#dbe6eb;font-size:.9375rem;font-weight:500;line-height:1.5;padding:.625rem 1.25rem;min-height:2.75rem;margin-top:1rem;transition:background-color 150ms}
-#r31-education .r31-next:hover{background:#1f3647}
-#r31-education .r31-closing{margin-top:1.5rem;padding:1.5rem;border:1px solid #1f3442;border-radius:1rem;background:#0c1c29;text-align:center}
-#r31-education .r31-closing h3{font:700 1.375rem/1.35 Georgia,'Times New Roman',serif;color:#fff}
-#r31-education .r31-closing p{margin:.5rem 0 0;color:#dbe6eb;font-size:1rem;line-height:1.65}
-#r31-education #r31-portfolio{display:block;width:100%;margin-top:1.25rem;border:0;border-radius:.75rem;background:#39c6a3;color:#07121c;font-size:1rem;font-weight:600;line-height:1.5;padding:.75rem 1.5rem;min-height:2.75rem;transition:background-color 150ms}
-#r31-education #r31-portfolio:hover{background:#32b292}
-#r31-education .r31-legal{color:#8fa6b1;font-size:.75rem;line-height:1.65;text-align:center;margin:1.5rem 0 0;padding:0 1rem}
+#r31-education a{color:#225b58;text-decoration:underline;text-underline-offset:3px}
+#r31-education .r31-next{width:100%;border:1px solid #293f45;border-radius:.6875rem;background:#293f45;color:#faf5eb;font-size:.9375rem;font-weight:700;line-height:1.5;padding:.625rem 1.25rem;min-height:2.75rem;margin-top:1rem;transition:background-color 150ms}
+#r31-education .r31-next:hover{background:#3c5459;border-color:#3c5459}
+#r31-education .r31-closing{margin-top:1.5rem;padding:1.5rem;border:1px solid #d5cbbb;border-radius:1.0625rem;background:#e7dfd1;text-align:center}
+#r31-education .r31-closing h3{font:700 1.375rem/1.35 Georgia,'Times New Roman',serif;color:#26343b}
+#r31-education .r31-closing p{margin:.5rem 0 0;color:#303d42;font-size:1rem;line-height:1.65}
+#r31-education #r31-portfolio{display:block;width:100%;margin-top:1.25rem;border:1px solid #293f45;border-radius:.6875rem;background:#293f45;color:#faf5eb;font-size:1rem;font-weight:700;line-height:1.5;padding:.75rem 1.5rem;min-height:2.75rem;transition:background-color 150ms}
+#r31-education #r31-portfolio:hover{background:#3c5459;border-color:#3c5459}
+#r31-education .r31-legal{color:#a9bec8;font-size:.75rem;line-height:1.65;text-align:center;margin:1.5rem 0 0;padding:0 1rem}
 @keyframes r31-reveal{from{opacity:0}to{opacity:1}}
-@media(min-width:640px){#r31-education{padding-left:1.5rem;padding-right:1.5rem}#r31-education h2{font-size:1.75rem}#r31-education .r31-closing{text-align:left}#r31-education .r31-next,#r31-education #r31-portfolio{width:auto}#r31-education .r31-body{max-width:38rem;margin-left:auto;margin-right:auto}}
+@media(min-width:640px){#r31-education .r31-closing{text-align:left}#r31-education .r31-next,#r31-education #r31-portfolio{width:auto}}
+@media(max-width:600px){#r31-education .r31-entry{padding:1.125rem 1.25rem;gap:.375rem .875rem;border-radius:.875rem}#r31-education h2{font-size:1.375rem;line-height:1.18}#r31-education #r31-explore{padding:.625rem .8125rem;max-width:6.625rem;font-size:.8125rem}#r31-education .r31-toggle{padding:1.3125rem 1.125rem;gap:.625rem;grid-template-columns:1.25rem minmax(0,1fr) 1.25rem}#r31-education .r31-body{padding:.125rem 1.375rem 1.625rem}#r31-education .r31-example{padding:1.125rem .9375rem}}
 @media(prefers-reduced-motion:reduce){#r31-education,#r31-education *{animation:none!important;transition:none!important;scroll-behavior:auto!important}#r31-education .r31-toggle[aria-expanded="true"] .r31-chevron{transform:none}}
