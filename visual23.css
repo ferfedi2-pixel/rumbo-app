@@ -124,3 +124,19 @@ html body[data-page] .btn{box-shadow:none!important}
  #inicio .homeAssetNumbers strong{font-size:19px!important}
  #horizonte .r2-capital{padding:20px}
 }
+/* Ajustes tras revisar las cinco vistas en móvil y escritorio. */
+html body[data-page]:has(#r2Nav){background:var(--v-ink)!important}
+html body[data-page]:has(#r2Nav) .top{background:var(--v-ink)!important}
+#inicio .homeAssetNumbers strong{font-size:13px!important;font-weight:400!important;color:#afbed1!important}
+#inicio .homeAssetNumbers span{font-size:22px!important;font-weight:700!important;color:#f4f6fa!important;margin-top:5px}
+#inicio .homeSectionHead>div,#inicio .homeDonutCenter small{display:none!important}
+#inicio .homeSectionHead{justify-content:flex-end;margin-bottom:8px}
+#inicio .homeDonutCenter{inset:19px!important}
+@media(min-width:800px){
+ #cartera.plan-active:not(.plan-reviewing){max-width:780px;margin:auto}
+ #cartera.plan-active:not(.plan-reviewing) .current-hold-card{grid-column:span 12}
+}
+@media(max-width:600px){
+ #inicio .homeDonutCenter{inset:16px!important}
+ #inicio .homeAssetNumbers span{font-size:20px!important}
+}
