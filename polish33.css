@@ -1,0 +1,90 @@
+/* RUMBO 3.3 — portada, navegación inferior y lectura. */
+html body[data-page] .app #r2Nav.nav.nav{position:fixed!important;inset:auto 12px calc(10px + env(safe-area-inset-bottom))!important;top:auto!important;width:calc(100% - 24px)!important;max-width:620px!important;margin:0 auto!important;z-index:90!important;background:#12232aef!important;backdrop-filter:blur(18px);border:1px solid #58706888!important;box-shadow:0 8px 32px #0006!important}
+html body[data-page] .app #r2Nav.nav.nav button{min-height:48px!important}
+html body[data-page] .app #r2Nav.nav.nav button.on{background:#244c49!important;color:#b3eddb!important}
+html body .app{padding-bottom:110px!important}
+#inicio .homeHeroV3{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:1fr!important;position:relative!important;min-height:480px!important;height:480px!important;border-radius:28px!important;overflow:hidden!important}
+#inicio .homeSceneryImage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;background-position:center 42%!important;border-radius:0!important}
+#inicio .homeSceneryImage:after{background:linear-gradient(90deg,#07121ca8,transparent 70%),linear-gradient(0deg,#07121cf5 0%,#07121c30 60%,#07121c20)!important}
+#inicio .homeHeroCopy{grid-area:1/1!important;align-self:end!important;position:relative!important;width:100%!important;padding:0 44px 40px!important}
+#inicio .homeHeroCopy h1{font-size:clamp(42px,5vw,64px)!important;line-height:1.02!important;max-width:650px!important;margin:0 0 16px!important;letter-spacing:-.045em!important}
+#inicio .homeHeroCopy h1 em{color:#96dfcb!important}
+#inicio .homeHeroCopy p{display:block!important;max-width:385px!important;line-height:1.5!important;color:#edf0e9!important}
+#inicio .homeHeroV3>.homeCompass{position:absolute!important;inset:40px 50px auto auto!important;grid-area:auto!important;width:174px!important;height:174px!important;margin:0!important;transform:rotate(-9deg)!important;z-index:3!important;background:url('/assets/rumbo-compass-dial.webp') center/contain no-repeat!important;filter:drop-shadow(0 14px 20px #0008)!important}
+#inicio .homeHeroV3>.homeCompass:before{display:none!important}
+#inicio .homeHeroV3>.homeCompass .compassNeedle{animation:northNeedleTilt 9s ease-in-out infinite}
+#inicio .homeEmptyIntro{display:block!important}
+#inicio .homeEmptyIntro p{max-width:none!important;margin:0!important}
+#inicio .homeEmptyV3{padding:24px!important}
+#r31-education{margin-top:28px;padding-bottom:28px;max-width:52rem}
+#r31-education .r31-entry{padding:22px 24px;background:#263432;border-color:#52615a}
+#r31-education .r33-overview{color:#b6c7c0;font-size:12px;letter-spacing:.04em;margin:18px 3px 12px}
+#r31-education .r31-toggle{padding:15px 20px;align-items:center;gap:14px}
+#r31-education .r31-title{font-size:19px;line-height:1.28}
+#r31-education .r31-subtitle{margin-top:3px;font-size:13px;line-height:1.4}
+#r31-education .r31-number{font:700 11px/1.5 RumboSans,Arial,sans-serif;letter-spacing:.08em}
+#r31-education .r31-module{border-bottom-color:#52635a}
+#r31-education .r31-module.is-open{border-color:#d4c5ac;border-radius:16px;margin:8px 0 12px;background:#f4eee2;box-shadow:0 10px 30px #0002}
+#r31-education .is-open .r31-toggle{padding-top:22px;padding-bottom:22px;border-bottom:1px solid #d8cebc;border-radius:16px 16px 0 0}
+#r31-education .r31-body{padding:28px 56px 32px;font-size:16px;line-height:1.75}
+#r31-education .r31-body h4{font:700 24px/1.25 Georgia,serif;letter-spacing:-.02em;color:#243c39;margin:32px 0 16px}
+#r31-education .r31-body h4:first-child{margin-top:0}
+#r31-education .r33-key{border-left:3px solid #74816a;padding:12px 18px;background:#e7e4d6;border-radius:0 8px 8px 0;margin:24px 0!important}
+#r31-education .r33-note{font-size:13px;color:#59645c;line-height:1.6}
+#r31-education .r33-note em{font-style:normal}
+#r31-education .r33-table-wrap{max-width:100%;overflow-x:auto;margin:24px 0 16px;border:1px solid #d1c7b3;border-radius:10px}
+#r31-education table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.5;color:#303d42;background:transparent;table-layout:auto}
+#r31-education th,#r31-education td{padding:12px 14px;text-align:left;vertical-align:top;border:0;border-bottom:1px solid #d8cebc;white-space:normal}
+#r31-education th{font-size:11px;letter-spacing:.04em;background:#e3dece;color:#32473f}
+#r31-education tr:last-child td{border-bottom:0}
+#r31-education tbody tr:nth-child(even){background:#ede7d9}
+#r31-education .r31-quote{padding:24px 0 8px;margin:28px 0 20px;border-top:1px solid #ae9971}
+#r31-education blockquote{font-size:24px;line-height:1.4}
+#r31-education figcaption{font-size:12px}
+#r31-education .r31-sources{border-top:1px solid #d2c7b5;padding-top:14px;font-size:12px}
+#r31-education .r31-sources summary{cursor:pointer;min-height:44px;display:list-item;font-size:13px;font-weight:700;color:#35554a;list-style-position:inside;padding:10px 0}
+#r31-education .r31-sources p{margin:10px 0}
+#r31-education .r31-next{margin-top:24px;background:#2f4d43;border-color:#2f4d43}
+#r31-education .r31-closing{padding:32px;background:#e7e3d5;border-color:#c1baa7}
+#r31-education .r31-closing .r31-eyebrow{color:#5b6655;margin-bottom:16px}
+#r31-education .r31-closing h4{font:700 27px/1.25 Georgia,serif;color:#2e433c;margin:22px 0 0}
+#r31-education .r31-closing p{font-size:15px}
+#r31-education .r33-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin-top:24px}
+#r31-education #r31-portfolio,#r31-education #r33-custom{font:700 13px/1.5 RumboSans,Arial,sans-serif;min-height:48px;padding:12px 16px;margin:0;width:auto;border-radius:9px;border:1px solid #2f4d43;background:#2f4d43;color:#fff}
+#r31-education #r33-custom{background:transparent;color:#2f4d43}
+@media(max-width:600px){
+ #inicio .homeHeroV3{height:520px!important;min-height:0!important;width:calc(100% + 36px)!important;margin:0 -18px!important;border-radius:0!important}
+ #inicio .homeSceneryImage{background-position:40% 35%!important}
+ #inicio .homeSceneryImage:after{background:linear-gradient(180deg,#07121c5c,transparent 35%,#07121c55 62%,#07121cf5)!important}
+ #inicio .homeHeroV3>.homeCompass{inset:108px 25px auto auto!important;width:130px!important;height:130px!important}
+ #inicio .homeHeroCopy{padding:0 26px 30px!important}
+ #inicio .homeHeroCopy h1{font-size:clamp(39px,10.5vw,48px)!important;max-width:350px!important}
+ #inicio .homeHeroCopy p{font-size:14px!important;max-width:290px!important}
+ #inicio .homeEmptyV3{padding:22px!important}
+ #r31-education .r31-toggle{padding:14px 8px;gap:10px;grid-template-columns:22px minmax(0,1fr) 20px}
+ #r31-education .is-open .r31-toggle{padding:18px 16px}
+ #r31-education .r31-title{font-size:18px}
+ #r31-education .r31-subtitle{font-size:12px}
+ #r31-education .r31-body{padding:22px 20px 26px;font-size:16px;line-height:1.7}
+ #r31-education .r31-entry{padding:20px 18px}
+ #r31-education .r33-overview{font-size:11px}
+ #r31-education .r31-body h4{font-size:23px}
+ #r31-education table{font-size:12px}
+ #r31-education th,#r31-education td{padding:10px 8px}
+ #r31-education blockquote{font-size:22px}
+ #r31-education .r31-closing{padding:24px 20px}
+ #r31-education #r31-portfolio,#r31-education #r33-custom{width:100%}
+}
+@media(prefers-reduced-motion:reduce){#inicio .homeHeroV3>.homeCompass .compassNeedle{animation:none!important}}
+/* Primer paso: bloque compacto después de trasladar la brújula a la portada. */
+html body[data-page] #inicio .homeEmptyV3{display:block!important;min-height:0!important;padding:24px!important}
+html body[data-page] #inicio .homeEmptyIntro{display:block!important;margin:14px 0 20px!important;width:100%!important}
+html body[data-page] #inicio .homeEmptyV3 .homeEmptyIntro p{width:100%!important;max-width:none!important;margin:0!important;font-size:14px!important;line-height:1.5!important}
+html body[data-page] #inicio .homeEmptyV3 h2{margin:8px 0 0!important}
+@media(max-width:600px){#inicio .homeHeroV3{width:calc(100% + 24px)!important;margin:0 -12px!important}}
+html body[data-page] #inicio .homeEmptyIntro{padding:0!important;min-height:0!important;height:auto!important;background:transparent!important;border:0!important;border-radius:0!important;text-align:left!important}
+@media(max-width:720px){html body[data-page="inicio"]:has(#r2Nav) .app>.top{left:0!important;right:0!important;width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}}
+#inicio .homeSceneryImage{grid-area:1/1!important}
+#r31-education th,#r31-education td{overflow-wrap:normal;word-break:normal}
+#inicio #empty>.homeEmptyIntro{padding:0!important}
+html body[data-page] #inicio .homeEmptyV3[hidden]{display:none!important}
