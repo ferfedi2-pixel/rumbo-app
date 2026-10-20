@@ -1,0 +1,37 @@
+/* RUMBO 3.4 — fichas y lectura continua */
+.r34-plan-details[hidden],#r31-content[hidden],.r31-body[hidden]{display:none!important}
+.model.r34-expanded{grid-column:1/-1}
+.r34-plan-details,.r34-asset-detail{font-family:RumboSans,'Open Sans',Arial,sans-serif;color:#303d3b;background:#f4eee2;border:1px solid #d4c5ac;border-radius:16px;text-align:left;min-width:0}
+.r34-plan-details{margin-top:20px;padding:26px;line-height:1.75;font-size:15px}
+.r34-plan-details p{color:#303d3b!important;font-size:15px!important;line-height:1.75!important;margin:12px 0!important}
+.r34-plan-details .r34-intro{font:22px/1.5 Georgia,serif!important;color:#243c39!important}
+.r34-product{padding:24px 0;border-bottom:1px solid #d8cebc;line-height:1.75;min-width:0}
+.r34-product-head{display:flex;gap:16px;justify-content:space-between;align-items:baseline}
+.r34-product h4,.r34-costs h4,.r34-notes h4{font:700 22px/1.3 Georgia,serif!important;color:#243c39!important;margin:0 0 12px!important;letter-spacing:-.02em}
+.r34-product-head>span{white-space:nowrap;color:#355b4f;font-weight:700;font-size:14px}
+.r34-product .r34-class{font-size:12px!important;letter-spacing:.04em;color:#667060!important}
+.r34-product dl{margin:20px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.r34-product dt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#626d63}
+.r34-product dd{margin:4px 0 0;font-size:14px;overflow-wrap:anywhere}
+.r34-product code{font:14px/1.6 monospace;color:#244d40;background:#e3e5d9;padding:4px 6px;border-radius:4px}
+.r34-plan-details a,.r34-asset-detail a{color:#2b6253;text-decoration:underline;text-underline-offset:3px;font-size:13px}
+.r34-plan-details .r34-note,.r34-product .r34-note{font-size:12px!important;line-height:1.65!important;color:#5b665e!important}
+.r34-costs{padding:28px 0 12px;overflow-x:auto}
+.r34-costs table{width:100%;border-collapse:collapse;table-layout:auto;color:#303d3b;font-size:13px;background:transparent}
+.r34-costs th,.r34-costs td{padding:12px 8px;border:0;border-bottom:1px solid #d3c9b7;text-align:right;white-space:normal}
+.r34-costs th:first-child{text-align:left}
+.r34-costs thead,.r34-costs tfoot{background:#e3dece}
+.r34-notes{border-top:1px solid #d4c5ac;margin-top:16px;padding-top:8px}
+.r34-notes summary,.r34-asset-detail>summary{cursor:pointer;padding:16px 0;font-weight:700;font-size:14px;list-style-position:inside}
+.r34-notes h4{margin-top:24px!important}
+.r34-asset-detail{padding:0 22px;margin-bottom:12px}
+.r34-asset-detail>summary span{float:right;font-size:13px;color:#355b4f}
+.r34-asset-detail .r34-product{border:0;padding-top:12px}
+#r31-education .r31-entry h2{font-size:26px;margin:0}
+#r31-education .r31-module,#r31-education .r31-module.is-open{margin:0!important;border-radius:0;box-shadow:none}
+#r31-education .r31-toggle,#r31-education .is-open .r31-toggle{padding:16px 20px!important;border-radius:0;min-height:66px}
+#r31-education .r31-modules{border-radius:16px;overflow:hidden;margin-top:16px}
+#r31-education .r31-toggle .r31-title{flex:1;text-align:left;font-weight:700}
+#r31-education .r31-body{overflow-anchor:none}
+@media(max-width:600px){.r34-plan-details{padding:18px 14px}.r34-product-head{display:block}.r34-product-head>span{display:block;margin-bottom:10px}.r34-product dl{grid-template-columns:1fr;gap:12px}.r34-product h4{font-size:21px!important}.r34-asset-detail{padding:0 16px}.r34-costs th,.r34-costs td{padding:10px 5px;font-size:12px}}
+@media(max-width:600px){.r34-plan-details .r34-intro{font-size:20px!important;line-height:1.5!important}}
