@@ -10,11 +10,20 @@ const icons={inicio:svg('<path d="m3 10 9-7 9 7v11h-6v-7H9v7H3z"/>'),cartera:svg
 const globe=svg('<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/>');
 function badge(a){return '<span class="asset-symbol" style="--asset:'+esc(a.color)+'">'+(a.id==='btc'?'<img src="/assets/coins/btc.svg" alt="">':a.id==='eth'?'<img src="/assets/coins/eth.png" alt="">':a.id==='world'||a.id==='em'?globe:a.id==='bonds'?svg('<path d="M4 9h16M3 21h18M5 9v12m7-12v12m7-12v12M3 7l9-4 9 4z"/>'):esc(a.short.slice(0,1)))+'</span>'}
 const nav=document.querySelector('.nav');nav.id='r2Nav';
-nav.innerHTML=[['inicio','Inicio'],['cartera','Cartera'],['activos','Activos'],['rebalanceo','Aportar'],['horizonte','Horizonte']].map(([id,name])=>'<button data-v="'+id+'" aria-label="'+name+'">'+icons[id]+'<span>'+name+'</span></button>').join('');
+nav.innerHTML=[['inicio','Inicio'],['cartera','Cartera'],['activos','Planes'],['rebalanceo','Aportar'],['horizonte','Horizonte']].map(([id,name])=>'<button data-v="'+id+'" aria-label="'+name+'">'+icons[id]+'<span>'+name+'</span></button>').join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.v));
-const assetPage=document.createElement('section');assetPage.id='activos';assetPage.className='view';assetPage.innerHTML='<div class="r2-heading"><h1>Activos</h1><p>Los componentes de tu plan.</p></div><div id="assetCatalog"></div><button class="btn" id="editPlanFromAssets">Editar mi plan</button>';
+const assetPage=document.createElement('section');assetPage.id='activos';assetPage.className='view';assetPage.innerHTML='<div class="r2-heading"><h1>Planes</h1><p>Tu reparto, con toda la información a mano.</p></div><div id="assetCatalog"></div><button class="btn" id="editPlanFromAssets">Editar mi plan</button>';
 document.querySelector('main').append(assetPage);
-$('editPlanFromAssets').onclick=()=>{go('cartera');$('reviewPlan')?.click()};
+$('editPlanFromAssets').onclick=()=>{customToggle.click()};
+// Los planes se consultan juntos; Cartera queda dedicada a los saldos.
+const planSelection=$('models').closest('.card'),customPlan=$('customCard');
+const activeOverview=document.createElement('div');activeOverview.id='reviewActivePlan';
+assetPage.querySelector('.r2-heading').after(activeOverview);
+const componentHeading=document.createElement('h3');componentHeading.className='review-section-label';componentHeading.id='reviewComponentsTitle';componentHeading.textContent='Composición del plan';
+$('assetCatalog').before(componentHeading);
+const planCosts=document.createElement('details');planCosts.id='reviewPlanCosts';planCosts.className='review-cost-details';
+$('assetCatalog').after(planCosts);
+assetPage.append(planSelection,customPlan);
 const originalGo=go;go=function(id){originalGo(id);document.body.dataset.page=id;nav.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current',b.dataset.v===id?'page':'false'))};
 // Pesos de ejemplo estables: no actualizar objetivos por datos de mercado.
 $('refresh').onclick=()=>{};$('refresh').hidden=true;
@@ -25,8 +34,9 @@ renderCustom=function(){
 $('customAssets').innerHTML=s.custom.map((a,i)=>'<div class="r2-editor-row"><select aria-label="Seleccionar activo '+(i+1)+'" onchange="r2Select('+i+',this.value)"><option value="">Personalizado</option>'+Object.values(PROD).map(x=>'<option value="'+x.id+'" '+(a.name===x.short?'selected':'')+'>'+x.short+'</option>').join('')+'</select><div class="r2-editor-name"><input type="color" aria-label="Color '+(i+1)+'" value="'+esc(a.color)+'" onchange="editA('+i+',\'color\',this.value)"><input aria-label="Nombre '+(i+1)+'" value="'+esc(a.name)+'" placeholder="Nombre del activo" onchange="editA('+i+',\'name\',this.value)"></div><div class="r2-stepper"><button aria-label="Restar 5 puntos a '+esc(a.name)+'" onclick="r2Step('+i+',-5)">−</button><label><input aria-label="Porcentaje '+(i+1)+'" type="number" min="0" max="100" step="5" value="'+a.pct+'" onchange="editA('+i+',\'pct\',Math.max(0,Math.min(100,Number(this.value)||0)))"><span>%</span></label><button aria-label="Sumar 5 puntos a '+esc(a.name)+'" onclick="r2Step('+i+',5)">+</button><button class="r2-delete" aria-label="Eliminar '+esc(a.name)+'" onclick="delA('+i+')">×</button></div></div>').join('')||'<p>Añade el primer activo de tu plan.</p>';
 const sum=s.custom.reduce((z,a)=>z+Number(a.pct||0),0);$('customSum').textContent=percent(sum);$('customSum').classList.toggle('invalid',Math.abs(sum-100)>.00001);$('useCustom').disabled=!s.custom.length||Math.abs(sum-100)>.00001;
 };
-window.r2Select=(i,id)=>{if(!PROD[id])return;s.custom[i].name=PROD[id].short;s.custom[i].color=PROD[id].color;save();renderCustom()};
-window.r2Step=(i,d)=>{s.custom[i].pct=Math.max(0,Math.min(100,Number(s.custom[i].pct||0)+d));save();renderCustom()};
+window.editA=(i,k,v)=>{s.custom[i][k]=k==='pct'?+v:v;renderCustom()};
+window.r2Select=(i,id)=>{if(!PROD[id])return;s.custom[i].name=PROD[id].short;s.custom[i].color=PROD[id].color;renderCustom()};
+window.r2Step=(i,d)=>{s.custom[i].pct=Math.max(0,Math.min(100,Number(s.custom[i].pct||0)+d));renderCustom()};
 // Proporcional al déficit, mayor resto en céntimos, incluido objetivo cero.
 allocation=function(list,values,amount){
  if(!list.length||!Number.isFinite(amount)||amount<0||values.some(v=>!Number.isFinite(v)||v<0)||list.some(x=>!Number.isFinite(x.w)||x.w<0)||Math.abs(list.reduce((z,x)=>z+x.w,0)-100)>1e-6)throw Error('Revisa los valores y los pesos: deben sumar 100%.');
@@ -47,12 +57,12 @@ calcNow=function(){
  const V=vals.reduce((z,v)=>z+v,0),adds=allocation(list,vals,A),T=V+A;
  const min=list.some((a,i)=>a.w===0&&vals[i]>0)?Infinity:Math.max(0,...list.filter(a=>a.w>0).map(a=>Number(s.hold[a.id]||0)/(a.w/100)-V));
  $('results').innerHTML=list.map((a,i)=>{const after=vals[i]+adds[i],weight=T?100*after/T:0,diff=weight-a.w,off=Math.abs(diff)>Math.max(5,a.w*.25),status=adds[i]>.004?'Aportar':off?'Revisar':'Mantener';
- return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<strong>'+esc(a.short)+'</strong><div class="r2-result-value"><span class="'+(off?'warning':'')+'">'+status+'</span><b>'+money(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><dl><div><dt>Capital actual</dt><dd>'+exact(vals[i])+'</dd></div><div><dt>Aportación exacta</dt><dd>'+exact(adds[i])+'</dd></div><div><dt>Objetivo en euros</dt><dd>'+exact(T*a.w/100)+'</dd></div><div><dt>Peso objetivo</dt><dd>'+percent(a.w)+'</dd></div><div><dt>Peso tras aportar</dt><dd>'+percent(weight)+'</dd></div><div><dt>Desviación residual</dt><dd>'+(diff>0?'+':'')+percent(diff).replace('%','')+' pp</dd></div></dl></div></div>'}).join('');
+ return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<strong>'+esc(a.short)+'</strong><div class="r2-result-value"><span class="'+(off?'warning':'')+'">'+status+'</span><b>'+exact(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><dl><div><dt>Capital actual</dt><dd>'+exact(vals[i])+'</dd></div><div><dt>Capital objetivo</dt><dd>'+exact(T*a.w/100)+'</dd></div><div><dt>Peso actual</dt><dd>'+percent(V?100*vals[i]/V:0)+'</dd></div><div><dt>Peso objetivo</dt><dd>'+percent(a.w)+'</dd></div></dl><p class="review-after-weight"><span>Peso tras aportar</span><strong>'+percent(weight)+'</strong></p></div></div>'}).join('');
  $('contrib').textContent=money(A);
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
  const residual=list.some((a,i)=>T&&Math.abs((vals[i]+adds[i])/T*100-a.w)>.000001);
- summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p>Sin cambios de precios ni costes. Los importes principales están redondeados; el detalle conserva los céntimos.</p>';
+ summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
  $('rebalanceAlert')?.remove();
  $('registerContribution').disabled=!(A>0);
 };
@@ -75,14 +85,14 @@ const baseRender=render;render=function(){baseRender();polish()};
 function polish(){
  const active=!!s.type,plan=$('activePlanCard');
  document.querySelector('#cartera .hero').hidden=true;
- const sel=$('models').closest('.card');sel.querySelector('.head h2').textContent='Elige tu cartera';
+ const sel=$('models').closest('.card');sel.querySelector('.head h2').textContent=active?'Otros planes':'Elige un plan';
  if(!sel.querySelector('.r2-plan-intro')){const p=document.createElement('p');p.className='r2-plan-intro';p.textContent='Tres repartos de ejemplo, con distintos niveles de riesgo. O crea el tuyo.';sel.querySelector('.head').after(p)}
  plan.querySelector('.plan-active-head p')?.remove();
  $('rebalanceReview').hidden=true;$('selected').hidden=true;
  const holds=$('holds').closest('.card');holds.querySelector('h2').textContent='Tus activos';$('rebName').textContent=money(total());
  $('holds').querySelectorAll('.hold').forEach((row,i)=>{const a=assets()[i];row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));const input=row.querySelector('input');input.setAttribute('aria-label','Capital actual de '+a.short);input.type='text';input.inputMode='decimal';input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2});input.onfocus=()=>{input.value=String(s.hold[a.id]||'')};input.onchange=()=>{if(input.value===''||!input.checkValidity()){input.setCustomValidity('Introduce un importe válido, mayor o igual que cero.');input.reportValidity();return}input.setCustomValidity('');const value=Number(input.value.replace(',','.'));if(!Number.isFinite(value)||value<0){input.setCustomValidity('Introduce un importe válido.');input.reportValidity();return}setH(a.id,value)};input.oninput=()=>input.setCustomValidity('')});
  $('assetCatalog').innerHTML=assets().map(a=>'<article class="r2-catalog-row">'+badge(a)+'<div><h2>'+esc(a.short)+'</h2><p>'+esc(notes[a.id]||'Componente definido por ti. Comprueba su riesgo, liquidez y costes.')+'</p><span>Objetivo '+percent(a.w)+'</span></div></article>').join('')||'<p class="r2-empty">Crea tu cartera para ver aquí sus activos.</p>';
- $('editPlanFromAssets').textContent=active?'Editar mi plan':'Crear mi cartera';
+ $('editPlanFromAssets').textContent='Editar mi plan';$('editPlanFromAssets').hidden=s.type!=='custom';
  document.querySelector('#rebalanceo h1').textContent='Aportar';document.querySelector('#rebalanceo .hero p').textContent='Calcula. Tú decides y ejecutas.';
  document.querySelector('#rebalanceo .hero .kick').hidden=true;document.querySelector('#rebalanceo .hero .num').hidden=true;
  document.querySelector('.contribute-input .head').hidden=true;document.querySelector('.contribute-input .flow-help').hidden=true;
@@ -91,8 +101,7 @@ function polish(){
  const expected=$('homeExpected').textContent;
  let homeReturn=document.querySelector('.home-return-note');if(!homeReturn){homeReturn=document.createElement('small');homeReturn.className='home-return-note';$('summary').append(homeReturn)}
  homeReturn.innerHTML='Rentabilidad supuesta <strong>'+esc(expected)+'</strong> anual';homeReturn.hidden=!active;
- let planReturn=plan.querySelector('.plan-return-note');if(!planReturn){planReturn=document.createElement('p');planReturn.className='plan-return-note';plan.append(planReturn)}
- planReturn.innerHTML='Rentabilidad supuesta <strong>'+esc(expected)+'</strong> anual';planReturn.hidden=!active;
+
 }
 const footer=document.createElement('footer');footer.className='r2-footer';footer.textContent='Invertir implica riesgo de pérdida.';document.querySelector('main').after(footer);
 for(const ext of ['JSON','CSV']){let b=document.createElement('button');b.className='btn ghost';b.textContent='Exportar '+ext;b.onclick=()=>{const data=ext==='JSON'?JSON.stringify(s,null,2):'Activo;Capital actual;Peso objetivo\r\n'+assets().map(a=>[a.short,s.hold[a.id]||0,a.w].map(v=>'"'+String(v).replaceAll('"','""')+'"').join(';')).join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+data],{type:ext==='JSON'?'application/json':'text/csv'})),link=document.createElement('a');link.href=url;link.download='rumbo-refinada-2.'+ext.toLowerCase();link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('settingsActions').append(b)}

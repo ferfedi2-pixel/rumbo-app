@@ -69,7 +69,7 @@
   startPlan.className = 'btn';
   startPlan.type = 'button';
   startPlan.textContent = 'Configurar mi cartera';
-  startPlan.onclick = () => go('cartera');
+  startPlan.onclick = () => go('activos');
   controls.append(startPlan);
   const resultCard = byId('results').closest('.card');
   resultCard.classList.add('rebalance-result');
@@ -187,27 +187,10 @@
     hName.textContent = currentName();
     const m = model();
     const targets = blocks(s.type,s.custom);
-    planCard.innerHTML = '<span class="plan-eyebrow">PLAN ACTIVO</span><div class="plan-active-head"><div><h2>'+esc(currentName())+'</h2><p>Tu reparto objetivo para el largo plazo.</p></div><span class="pill">'+(m?'Riesgo '+m.risk+'/7':'Personalizada')+'</span></div><div class="plan-weights">'+blockMarkup(targets)+'</div><div class="plan-actions"><button type="button" class="btn ghost tiny" id="reviewPlan">Revisar mi plan</button>'+(reviewing?'<button type="button" class="btn ghost tiny" id="cancelPlanReview">Cancelar revisión</button>':'')+'</div>';
-    byId('reviewPlan').onclick = beginReview;
-    if (reviewing) byId('cancelPlanReview').onclick = cancelReview;
+    planCard.innerHTML = '<div class="review-compact-plan"><div><span class="plan-eyebrow">PLAN ACTIVO</span><h2>'+esc(currentName())+'</h2></div><button type="button" class="btn ghost tiny" id="reviewPlan">Ver plan <span aria-hidden="true">↗︎</span></button></div>';
+    byId('reviewPlan').onclick = () => go('activos');
   }
 
-  function beginReview() {
-    if (reviewing) {
-      selectionCard.scrollIntoView({behavior:'smooth',block:'start'});
-      return;
-    }
-    openModal('<span class="plan-eyebrow">REVISAR MI PLAN</span><h2 id="planFlowTitle">¿Por qué quieres revisarlo?</h2><p>Esta pausa ayuda a distinguir una decisión duradera de una reacción al mercado.</p><label class="flow-label" for="planReason">Motivo principal</label><select id="planReason"><option value="">Selecciona un motivo</option><option value="objetivo">Cambió mi objetivo u horizonte</option><option value="situacion">Cambió mi situación personal</option><option value="riesgo">Quiero ajustar el riesgo que asumo</option><option value="mercado">Me preocupa una caída del mercado</option><option value="otro">Otro motivo</option></select><div class="flow-buttons"><button type="button" class="btn ghost" id="flowCancel">Cancelar</button><button type="button" class="btn" id="flowNext">Comparar planes</button></div>');
-    byId('flowCancel').onclick = closeModal;
-    byId('flowNext').onclick = () => {
-      reason = byId('planReason').value;
-      if (!reason) {byId('planReason').focus();return}
-      snapshot = {type:s.type,custom:copyCustom(),customName:s.customName};
-      reviewing = true;
-      closeModal();render();
-      selectionCard.scrollIntoView({behavior:'smooth',block:'start'});
-    };
-  }
   function cancelReview() {
     if (snapshot) {s.custom=snapshot.custom;s.customName=snapshot.customName}
     reviewing=false;snapshot=null;reason='';
@@ -218,7 +201,7 @@
   }
   const originalGo = go;
   go = function (id) {
-    if (reviewing && id !== 'cartera') cancelReview();
+    if (reviewing && id !== 'activos') cancelReview();
     originalGo(id);
   };
 
@@ -256,17 +239,20 @@
 
   window.choose = id => {
     if (!MODELS[id]) return;
-    if (s.type && !reviewing) {beginReview();return}
+    if (id === s.type && !reviewing) return;
+    if (s.type && !reviewing) {snapshot={type:s.type,custom:copyCustom(),customName:s.customName};reviewing=true;}
     if (reviewing && id === snapshot?.type) return;
     offerPlan({type:id});
   };
   customToggle.onclick = () => {
     const open = customEditor.hidden;
+    if(open && s.type && !reviewing){snapshot={type:s.type,custom:copyCustom(),customName:s.customName};reviewing=true;}
+    if(!open && reviewing){cancelReview();return;}
     customEditor.hidden = !open;
     customToggle.setAttribute('aria-expanded',String(open));
     personalCard.classList.toggle('custom-open',open);
     customToggle.firstChild.textContent = open?'Cerrar ':'Crear la mía ';
-    customToggle.querySelector('span').textContent = open?'−':'↗';
+    customToggle.querySelector('span').textContent = open?'−':'↗︎';
     if (open) customEditor.scrollIntoView({behavior:'smooth',block:'start'});
   };
   useCustom.onclick = () => {
