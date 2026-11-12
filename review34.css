@@ -83,11 +83,23 @@
 #rebalanceo .r2-result-top .asset-more{width:32px!important;height:32px!important;font-size:20px!important;min-height:32px}
 #rebalanceo .r2-track{margin:20px 8px 4px 38px}
 #rebalanceo .r2-detail{padding:20px 0 0 38px}
-#rebalanceo .r2-detail dl{gap:18px 12px}
-#rebalanceo .r2-detail dt{font-size:12px;line-height:1.5;color:#aabcc4;margin-bottom:6px}
-#rebalanceo .r2-detail dd{font-size:16px;line-height:1.3;color:#e9f2ee;font-variant-numeric:tabular-nums}
-#rebalanceo .review-after-weight{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#afc3bd;border-top:1px solid #ffffff18;padding:15px 0 0;margin:18px 0 0}
-#rebalanceo .review-after-weight strong{color:#cce7dc;font-size:16px;font-variant-numeric:tabular-nums}
+#cartera .review-balance-hint{color:#adbac7;font-size:13px;margin:0 0 4px;line-height:1.5}
+#cartera #holds .hold .review-balance-gap{color:#a9b9c4;font-size:12px;line-height:1.45;margin-top:4px}
+#rebalanceo .review-allocation-compare{width:100%;table-layout:fixed;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
+#rebalanceo .review-allocation-compare th{font-weight:600;font-size:12px;color:#aabcc4;padding:0 6px 6px 0}
+#rebalanceo .review-allocation-compare td{font-size:16px;line-height:1.35;color:#e9f2ee;padding:3px 6px 3px 0;overflow-wrap:anywhere}
+#rebalanceo .review-allocation-compare :is(th,td):last-child{text-align:right;padding-right:0}
+#rebalanceo .review-allocation-compare td:last-child{color:#cce7dc;font-weight:700}
+#horizonte .r2-scenario-field{min-width:0}
+#horizonte .r2-scenario-field label{display:block;line-height:1.35}
+#horizonte .r2-scenario-field output{display:block;font-size:clamp(16px,4.1vw,23px);font-weight:700;color:#ecedf7;line-height:1.4;margin-top:6px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#horizonte .r2-scenario-field input{min-width:0;min-height:44px;font-size:16px}
+#horizonte .r2-scenario-actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+#horizonte .r2-scenario-actions .btn{min-height:44px;padding:10px 16px;font-size:13px;border-radius:12px}
+#horizonte #r2UsePortfolio{background:transparent!important;color:#d7e1f8!important;border:1px solid #697896!important}
+#horizonte #r2EditScenario{min-width:118px;background:#aabaff!important;color:#162038!important;border:1px solid #aabaff!important}
+#horizonte .r2-scenario-status{font-size:12px;line-height:1.5;color:#abb8cb;margin:10px 0 18px}
+#horizonte .r2-chart-legend{gap:8px 18px;flex-wrap:wrap}
 .review-version{color:#a7bcb3;font:400 11px/1.5 RumboSans,Arial,sans-serif;margin:24px auto 0;max-width:780px;letter-spacing:.03em}
 @media(max-width:600px){#inicio .homeHeroV3>.homeCompass{top:135px!important}#activos #models{grid-template-columns:1fr}#activos #models .model{padding:20px!important}#reviewActivePlan h2{font-size:31px}.review-plan-heading{gap:10px}#rebalanceo .r2-result-value b{font-size:18px!important}#rebalanceo .r2-detail{padding-left:0}#activos #customCard>.head{flex-wrap:wrap}#activos #customCard .custom-toggle{flex:none}#activos #models .r34-plan-details{margin:16px -6px 0;padding:18px 12px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

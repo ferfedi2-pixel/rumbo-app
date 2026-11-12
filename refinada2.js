@@ -57,7 +57,7 @@ calcNow=function(){
  const V=vals.reduce((z,v)=>z+v,0),adds=allocation(list,vals,A),T=V+A;
  const min=list.some((a,i)=>a.w===0&&vals[i]>0)?Infinity:Math.max(0,...list.filter(a=>a.w>0).map(a=>Number(s.hold[a.id]||0)/(a.w/100)-V));
  $('results').innerHTML=list.map((a,i)=>{const after=vals[i]+adds[i],weight=T?100*after/T:0,diff=weight-a.w,off=Math.abs(diff)>Math.max(5,a.w*.25),status=adds[i]>.004?'Aportar':off?'Revisar':'Mantener';
- return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<strong>'+esc(a.short)+'</strong><div class="r2-result-value"><span class="'+(off?'warning':'')+'">'+status+'</span><b>'+exact(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><dl><div><dt>Capital actual</dt><dd>'+exact(vals[i])+'</dd></div><div><dt>Capital objetivo</dt><dd>'+exact(T*a.w/100)+'</dd></div><div><dt>Peso actual</dt><dd>'+percent(V?100*vals[i]/V:0)+'</dd></div><div><dt>Peso objetivo</dt><dd>'+percent(a.w)+'</dd></div></dl><p class="review-after-weight"><span>Peso tras aportar</span><strong>'+percent(weight)+'</strong></p></div></div>'}).join('');
+ return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<strong>'+esc(a.short)+'</strong><div class="r2-result-value"><span class="'+(off?'warning':'')+'">'+status+'</span><b>'+exact(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><table class="review-allocation-compare" aria-label="Comparación de capital y peso de '+esc(a.short)+'"><thead><tr><th scope="col">Tras aportar</th><th scope="col">Objetivo</th></tr></thead><tbody><tr><td>'+exact(after)+'</td><td>'+exact(T*a.w/100)+'</td></tr><tr><td>'+percent(weight)+'</td><td>'+percent(a.w)+'</td></tr></tbody></table></div></div>' }).join('');
  $('contrib').textContent=money(A);
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
@@ -67,20 +67,78 @@ calcNow=function(){
  $('registerContribution').disabled=!(A>0);
 };
 window.r2Detail=b=>{const d=b.closest('.r2-result').querySelector('.r2-detail');d.hidden=!d.hidden;b.textContent=d.hidden?'+':'−';b.setAttribute('aria-expanded',String(!d.hidden))};
-// Horizonte propio, basado en el gráfico de áreas de Lovable, hasta 30 años.
-let scenario=s.scenario||{years:30,monthly:s.money||1000,rate:6,inflation:0,fee:0};
+// Horizonte: simulación en euros nominales, con supuestos independientes de la cartera.
+const scenarioFields=[
+ {key:'capital',label:'Saldo de partida',unit:'€',min:0,max:1e9},
+ {key:'monthly',label:'Aportación mensual',unit:'€',min:0,max:1e9},
+ {key:'rate',label:'Rentabilidad anual',unit:'%',min:-100,max:100},
+ {key:'fee',label:'Costes anuales',unit:'%',min:0,max:100}
+];
 const legacyH=document.createElement('div');legacyH.hidden=true;legacyH.append(...$('horizonte').childNodes);
-$('horizonte').innerHTML='<div class="r2-heading"><span class="r2-eyebrow">SIMULACIÓN · HIPOTÉTICO</span><h1>Horizonte</h1><p>El tiempo también forma parte de tu plan.</p></div><div id="r2Projection"></div><div class="r2-horizon-controls"><label>Horizonte <strong id="r2Years"></strong><input id="r2YearInput" type="range" min="1" max="30" step="1"></label><div class="r2-fields">'+[['monthly','Aportación mensual (€)',0,10000000],['rate','Rentabilidad anual (%)',0,30],['inflation','Inflación anual (%)',0,20],['fee','Costes anuales (%)',0,5]].map(([k,label,min,max])=>'<label>'+label+'<input id="scenario-'+k+'" type="number" min="'+min+'" max="'+max+'" step="'+(k==='monthly'?'10':'.1')+'"></label>').join('')+'</div><p class="r2-fine">Capital inicial: <b id="r2Initial"></b>. Puedes cambiarlo en Cartera.</p><details><summary>Supuestos y límites</summary><p>Aportaciones al final de cada mes. Rentabilidad anual constante, con costes descontados. Si introduces inflación, los resultados se expresan en euros de hoy. No incluye impuestos ni cambios del mercado. Puedes perder capital.</p></details></div>';
+$('horizonte').innerHTML=`<div class="r2-heading"><span class="r2-eyebrow">SIMULACIÓN · HIPOTÉTICO</span><h1>Horizonte</h1><p>El tiempo también forma parte de tu plan.</p></div>
+<div id="r2Projection"></div><div class="r2-horizon-controls">
+ <label for="r2YearInput">Horizonte <strong id="r2Years"></strong></label><input id="r2YearInput" aria-label="Horizonte en años" type="range" min="1" max="30" step="1">
+ <form id="r2ScenarioForm">
+  <div class="r2-fields">${scenarioFields.map(({key,label,unit,min,max})=>`<div class="r2-scenario-field"><label for="scenario-${key}">${label}<span class="r2-scenario-unit" hidden> (${unit})</span></label><output id="scenario-display-${key}"></output><input id="scenario-${key}" type="number" inputmode="decimal" min="${min}" max="${max}" step="any" required disabled hidden></div>`).join('')}</div>
+  <div class="r2-scenario-actions"><button type="button" class="btn ghost" id="r2UsePortfolio">Usar mi cartera</button><button type="submit" class="btn" id="r2EditScenario">Editar valores</button></div>
+  <p class="r2-scenario-status" id="r2ScenarioStatus" role="status"></p>
+ </form>
+ <details><summary>Supuestos y límites</summary><p>Los valores de cartera toman el saldo total y el último importe indicado en Aportar como aportación mensual. Los planes RUMBO usan su rentabilidad supuesta y los gastos corrientes ponderados por pesos objetivo. En un plan propio, la rentabilidad y los costes parten de 0 % hasta que los indiques.</p><p>El cálculo descuenta los costes de la rentabilidad supuesta y añade las aportaciones al final de cada mes. Los resultados se expresan en euros nominales, sin impuestos ni ajuste por inflación. Los costes de referencia no incluyen compraventas ni otros costes de operación. Puedes perder capital.</p></details>
+</div>`;
 $('horizonte').append(legacyH);
+let scenarioEditing=false;
+const scenarioYears=()=>Math.min(30,Math.max(1,Math.round(Number(s.scenario?.years)||30)));
+function portfolioScenario(){
+ const active=model();
+ const fee=active?(window.rumboProductDetails?.weightedAnnualCost(assets().filter(a=>a.w>0))??0):0;
+ return {capital:total(),monthly:Number(s.money)||0,rate:active?.rate??0,fee:Number(fee.toFixed(8))};
+}
+const scenarioValues=()=>s.scenario?.values??portfolioScenario();
+const scenarioEuro=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',useGrouping:'always',minimumFractionDigits:0,maximumFractionDigits:2});
+const scenarioRate=new Intl.NumberFormat('es-ES',{maximumFractionDigits:3});
+function renderScenarioControls(values){
+ for(const {key,unit} of scenarioFields){
+  const input=$('scenario-'+key),display=$('scenario-display-'+key);
+  input.disabled=input.hidden=!scenarioEditing;
+  display.hidden=scenarioEditing;
+  input.parentElement.querySelector('.r2-scenario-unit').hidden=!scenarioEditing;
+  if(!scenarioEditing)display.textContent=unit==='€'?scenarioEuro.format(values[key]):scenarioRate.format(values[key])+' %';
+ }
+ $('r2EditScenario').textContent=scenarioEditing?'OK':'Editar valores';
+ $('r2ScenarioStatus').textContent=scenarioEditing?'Prueba otros valores. Solo se aplican a esta simulación.':s.scenario?.values?'Valores de simulación · tu cartera sigue igual.':model()?'Datos de tu cartera y supuestos de tu plan.':s.type?'Datos de tu cartera · indica la rentabilidad y los costes si los conoces.':'Define tus valores para probar una simulación.';
+}
 renderH=function(){
- const st=total(),years=scenario.years,m=scenario.monthly,r=Math.pow((1+scenario.rate/100)*(1-scenario.fee/100),1/12)-1;let val=st,paid=st;const points=[{v:st,p:st}];
- for(let month=1;month<=years*12;month++){val=val*(1+r)+m;paid+=m;if(month%12===0){let def=Math.pow(1+scenario.inflation/100,month/12);points.push({v:val/def,p:paid/def})}}
+ const values=scenarioValues(),{capital:st,monthly:m,rate,fee}=values,years=scenarioYears(),r=Math.pow((1+rate/100)*(1-fee/100),1/12)-1;
+ let val=st,paid=st;const points=[{v:st,p:st}];
+ for(let month=1;month<=years*12;month++){val=val*(1+r)+m;paid+=m;if(month%12===0)points.push({v:val,p:paid})}
  const end=points.at(-1),max=Math.max(1,...points.flatMap(p=>[p.v,p.p]))*1.08,W=640,H=280,x=i=>52+i/years*566,y=v=>H-30-v/max*(H-55),line=k=>points.map((p,i)=>(i?'L':'M')+x(i).toFixed(1)+','+y(p[k]).toFixed(1)).join(' '),area=k=>line(k)+'L'+x(years)+','+(H-30)+'L52,'+(H-30)+'Z';
- $('r2Projection').innerHTML='<div class="r2-capital"><span>Capital final · '+years+' años</span><strong>'+money(end.v)+'</strong><small>'+(scenario.inflation?'En euros de hoy':'En euros nominales')+'</small></div><div class="r2-chart-legend"><span><i></i>Capital aportado</span><span><i></i>Valor estimado</span></div><svg class="r2-chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Evolución hipotética hasta '+years+' años. Capital final '+money(end.v)+'"><defs><linearGradient id="mintFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#39c6a3" stop-opacity=".6"/><stop offset="1" stop-color="#39c6a3" stop-opacity=".03"/></linearGradient></defs>'+[0,.25,.5,.75,1].map(t=>'<line x1="52" x2="618" y1="'+y(max*t)+'" y2="'+y(max*t)+'" stroke="#304b58" stroke-dasharray="3 5"/><text x="46" y="'+(y(max*t)+4)+'" text-anchor="end">'+Math.round(max*t/1000)+'k</text>').join('')+'<path d="'+area('v')+'" fill="url(#mintFill)"/><path d="'+area('p')+'" fill="#D9CCA8" opacity=".28"/><path d="'+line('p')+'" stroke="#D9CCA8" stroke-width="2" fill="none"/><path d="'+line('v')+'" stroke="#39C6A3" stroke-width="3" fill="none"/>'+[0,Math.round(years/3),Math.round(years*2/3),years].filter((v,i,a)=>a.indexOf(v)===i).map(n=>'<text x="'+x(n)+'" y="274" text-anchor="middle">'+n+' años</text>').join('')+'</svg><div class="r2-projection-totals"><div><span>Aportado</span><strong>'+money(end.p)+'</strong></div><div><span>Diferencia estimada</span><strong>'+money(end.v-end.p)+'</strong></div></div>';
- $('r2Years').textContent=years+' años';$('r2YearInput').value=years;$('r2Initial').textContent=money(st);for(const k of ['monthly','rate','inflation','fee'])$('scenario-'+k).value=scenario[k];
+ const axis=new Intl.NumberFormat('es-ES',{notation:'compact',maximumFractionDigits:1});
+ $('r2Projection').innerHTML='<div class="r2-capital"><span>Capital final · '+years+' años</span><strong>'+money(end.v)+'</strong><small>En euros nominales</small></div><div class="r2-chart-legend"><span><i></i>Capital de partida y aportaciones</span><span><i></i>Valor estimado</span></div><svg class="r2-chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Evolución hipotética hasta '+years+' años. Capital final '+money(end.v)+'"><defs><linearGradient id="mintFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#39c6a3" stop-opacity=".6"/><stop offset="1" stop-color="#39c6a3" stop-opacity=".03"/></linearGradient></defs>'+[0,.25,.5,.75,1].map(t=>'<line x1="52" x2="618" y1="'+y(max*t)+'" y2="'+y(max*t)+'" stroke="#304b58" stroke-dasharray="3 5"/><text x="46" y="'+(y(max*t)+4)+'" text-anchor="end">'+axis.format(max*t)+'</text>').join('')+'<path d="'+area('v')+'" fill="url(#mintFill)"/><path d="'+area('p')+'" fill="#D9CCA8" opacity=".28"/><path d="'+line('p')+'" stroke="#D9CCA8" stroke-width="2" fill="none"/><path d="'+line('v')+'" stroke="#39C6A3" stroke-width="3" fill="none"/>'+[0,Math.round(years/3),Math.round(years*2/3),years].filter((v,i,a)=>a.indexOf(v)===i).map(n=>'<text x="'+x(n)+'" y="274" text-anchor="middle">'+n+' años</text>').join('')+'</svg><div class="r2-projection-totals"><div><span>Capital y aportaciones</span><strong>'+money(end.p)+'</strong></div><div><span>Diferencia estimada</span><strong>'+money(end.v-end.p)+'</strong></div></div>';
+ $('r2Years').textContent=years+(years===1?' año':' años');$('r2YearInput').value=years;
+ renderScenarioControls(values);
 };
-$('r2YearInput').oninput=e=>{scenario.years=Number(e.target.value);s.scenario=scenario;save();renderH()};
-for(const k of ['monthly','rate','inflation','fee'])$('scenario-'+k).onchange=e=>{if(!e.target.value||!e.target.checkValidity()){e.target.reportValidity();return}scenario[k]=Number(e.target.value);s.scenario=scenario;save();renderH()};
+$('r2YearInput').oninput=e=>{s.scenario={years:Number(e.target.value),values:s.scenario?.values??null};save();renderH()};
+$('r2ScenarioForm').onsubmit=e=>{
+ e.preventDefault();
+ if(!scenarioEditing){
+  const values=scenarioValues();
+  scenarioEditing=true;
+  for(const {key} of scenarioFields)$('scenario-'+key).value=values[key];
+  renderScenarioControls(values);
+  $('scenario-capital').focus();
+  return;
+ }
+ const values=Object.fromEntries(scenarioFields.map(({key})=>[key,$('scenario-'+key).valueAsNumber]));
+ s.scenario={years:scenarioYears(),values};
+ scenarioEditing=false;save();renderH();$('r2EditScenario').focus();
+};
+$('r2UsePortfolio').onclick=()=>{
+ s.scenario={years:scenarioYears(),values:null};
+ scenarioEditing=false;save();renderH();
+ $('r2ScenarioStatus').textContent='Datos de tu cartera aplicados.';
+};
+const goWithReviewNav=go;
+go=function(id){if(id!=='horizonte')scenarioEditing=false;goWithReviewNav(id)};
 const baseRender=render;render=function(){baseRender();polish()};
 function polish(){
  const active=!!s.type,plan=$('activePlanCard');
@@ -89,8 +147,8 @@ function polish(){
  if(!sel.querySelector('.r2-plan-intro')){const p=document.createElement('p');p.className='r2-plan-intro';p.textContent='Tres repartos de ejemplo, con distintos niveles de riesgo. O crea el tuyo.';sel.querySelector('.head').after(p)}
  plan.querySelector('.plan-active-head p')?.remove();
  $('rebalanceReview').hidden=true;$('selected').hidden=true;
- const holds=$('holds').closest('.card');holds.querySelector('h2').textContent='Tus activos';$('rebName').textContent=money(total());
- $('holds').querySelectorAll('.hold').forEach((row,i)=>{const a=assets()[i];row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));const input=row.querySelector('input');input.setAttribute('aria-label','Capital actual de '+a.short);input.type='text';input.inputMode='decimal';input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2});input.onfocus=()=>{input.value=String(s.hold[a.id]||'')};input.onchange=()=>{if(input.value===''||!input.checkValidity()){input.setCustomValidity('Introduce un importe válido, mayor o igual que cero.');input.reportValidity();return}input.setCustomValidity('');const value=Number(input.value.replace(',','.'));if(!Number.isFinite(value)||value<0){input.setCustomValidity('Introduce un importe válido.');input.reportValidity();return}setH(a.id,value)};input.oninput=()=>input.setCustomValidity('')});
+ const holds=$('holds').closest('.card');holds.querySelector('h2').textContent='Saldos actuales';$('rebName').textContent=money(total());
+ $('holds').querySelectorAll('.hold').forEach((row,i)=>{const a=assets()[i];row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));const input=row.querySelector('input');input.setAttribute('aria-label','Capital actual de '+a.short);input.type='text';input.inputMode='decimal';input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2});input.onfocus=()=>{input.value=String(s.hold[a.id]||'').replace('.',',');input.select()};input.onblur=()=>{if(input.validity.valid)input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2})};input.onchange=()=>{if(input.value===''||!input.checkValidity()){input.setCustomValidity('Introduce un importe válido, mayor o igual que cero.');input.reportValidity();return}input.setCustomValidity('');const value=Number(input.value.replace(',','.'));if(!Number.isFinite(value)||value<0){input.setCustomValidity('Introduce un importe válido.');input.reportValidity();return}setH(a.id,value)};input.oninput=()=>input.setCustomValidity('')});
  $('assetCatalog').innerHTML=assets().map(a=>'<article class="r2-catalog-row">'+badge(a)+'<div><h2>'+esc(a.short)+'</h2><p>'+esc(notes[a.id]||'Componente definido por ti. Comprueba su riesgo, liquidez y costes.')+'</p><span>Objetivo '+percent(a.w)+'</span></div></article>').join('')||'<p class="r2-empty">Crea tu cartera para ver aquí sus activos.</p>';
  $('editPlanFromAssets').textContent='Editar mi plan';$('editPlanFromAssets').hidden=s.type!=='custom';
  document.querySelector('#rebalanceo h1').textContent='Aportar';document.querySelector('#rebalanceo .hero p').textContent='Calcula. Tú decides y ejecutas.';
@@ -98,9 +156,6 @@ function polish(){
  document.querySelector('.contribute-input .head').hidden=true;document.querySelector('.contribute-input .flow-help').hidden=true;
  $('newMoney').previousElementSibling.textContent='Nueva aportación (€)';
  $('homeTotal').textContent=money(total());
- const expected=$('homeExpected').textContent;
- let homeReturn=document.querySelector('.home-return-note');if(!homeReturn){homeReturn=document.createElement('small');homeReturn.className='home-return-note';$('summary').append(homeReturn)}
- homeReturn.innerHTML='Rentabilidad supuesta <strong>'+esc(expected)+'</strong> anual';homeReturn.hidden=!active;
 
 }
 const footer=document.createElement('footer');footer.className='r2-footer';footer.textContent='Invertir implica riesgo de pérdida.';document.querySelector('main').after(footer);

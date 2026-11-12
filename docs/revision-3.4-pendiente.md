@@ -30,3 +30,14 @@ Chromium headless, anchos de 360, 390, 430 y 1440 px:
 - Sin errores de JavaScript. Comprobaciones sintácticas y `git diff --check` correctos.
 
 Publicación prevista en rama de revisión independiente; no sustituir el enlace anterior ni promover a producción. Pendiente: comprobar despliegue y revisión de Felipe en su móvil antes de decidir 3.5.
+
+## Segundo pase de revisión · Inicio, Cartera, Aportar y Horizonte
+
+Base: `f7813103305f989058acdc7b2a187ca4c3374dd3`. Se mantiene la etiqueta «3.4 · Pendiente de revisar».
+
+- Inicio: separación de miles también en cifras de cuatro dígitos. El gráfico sigue mostrando la distribución y el supuesto de rentabilidad se consulta en Horizonte.
+- Cartera: «Saldos actuales» con una sola indicación de edición. Bajo cada activo se muestra la diferencia entre su peso actual y el objetivo en puntos porcentuales, con un decimal. Se omite si aún no hay saldo.
+- Aportar: dos columnas, «Tras aportar» y «Objetivo», cada una con importe y peso. El objetivo se destaca en menta. El cálculo de reparto no cambia.
+- Horizonte: saldo de partida, aportación mensual, rentabilidad y costes, en euros nominales. «Usar mi cartera» vuelve al saldo total, al importe indicado en Aportar y a los supuestos del plan activo. Se reutiliza el coste anual ponderado de la ficha por pesos objetivo, sin actualizar fuentes. En plan propio no se presupone rentabilidad ni coste. «Editar valores» abre los campos; «OK» aplica un escenario guardado por separado, sin modificar saldos, importe de Aportar ni plan. Se conserva el horizonte elegido al volver a los datos de cartera.
+
+Validado en Chromium a 320, 360, 390, 430 y 1440 px. Se comprobaron los tres planes RUMBO y un plan propio, validación de importes, conservación del escenario tras recargar, descarte de cambios sin confirmar, recuperación de datos de cartera y actualización de los saldos de referencia. El caso de la captura de 39.326 € y 1.000 € de aportación muestra 22.239,46 € y 55,15 % tras aportar a Desarrollados, frente a 24.883,16 € y 61,71 % de objetivo. Se volvió a comprobar el registro de una aportación y los cambios de plan sin pérdida de saldos.
