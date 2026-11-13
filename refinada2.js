@@ -186,7 +186,13 @@ function polish(){
   row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));
   name.nextElementSibling?.remove();name.insertAdjacentHTML('afterend',driftMarkup(a,balance,value));
   input.setAttribute('aria-label','Saldo actual de '+a.short);input.removeAttribute('onchange');input.type='text';input.inputMode='decimal';input.required=true;input.value=balanceFormat.format(value);
-  input.onfocus=()=>input.select();input.oninput=()=>{input.setCustomValidity('');$('r34BalanceStatus').textContent='Cambios sin guardar.';};
+  if(!input.parentElement.classList.contains('r34-euro-field')){
+    const wrap=document.createElement('span');wrap.className='r34-euro-field';
+    input.before(wrap);wrap.append(input);
+   }
+   input.onfocus=()=>{input.dataset.previousBalance=input.value;input.value='';};
+   input.onblur=()=>{if(!input.value.trim())input.value=input.dataset.previousBalance||'0';};
+   input.oninput=()=>{input.setCustomValidity('');$('r34BalanceStatus').textContent='Cambios sin guardar.';};
  });
  $('assetCatalog').innerHTML=assets().map(a=>'<article class="r2-catalog-row">'+badge(a)+'<div><h2>'+esc(a.short)+'</h2><p>'+esc(notes[a.id]||'Componente definido por ti. Comprueba su riesgo, liquidez y costes.')+'</p><span>Objetivo '+percent(a.w)+'</span></div></article>').join('')||'<p class="r2-empty">Crea tu cartera para ver aquí sus activos.</p>';
  $('editPlanFromAssets').textContent='Editar mi plan';$('editPlanFromAssets').hidden=s.type!=='custom';
