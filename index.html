@@ -567,7 +567,7 @@ input:focus{border-color:rgba(45,95,141,.45)!important;box-shadow:0 0 0 3px rgba
 ===== END RUMBO HOME V5 ===== */
 </style><link rel="stylesheet" href="/home.css?v=24"><link rel="stylesheet" href="/portfolio.css?v=34-review"><link rel="stylesheet" href="/plan-flow.css?v=2"><link rel="stylesheet" href="/curated.css?v=2"><link rel="stylesheet" href="/refinada2.css"><link rel="stylesheet" href="/visual23.css"><link rel="stylesheet" href="/formation23.css?v=33"><link rel="stylesheet" href="/polish33.css?v=33">
 <link rel="stylesheet" href="/products34.css?v=34">
-<link rel="stylesheet" href="/review34.css?v=34-horizonte">
+<link rel="stylesheet" href="/review34.css?v=34-saldos">
 </head><body>
 <div class="app"><header class="top"><div class="brand"><div class="logo"><img src="/assets/rumbo-mark.svg" alt=""></div><div><b>RUMBO</b><small>La estrategia vence al activo</small></div></div><small id="saved" style="color:var(--mut)">Datos locales</small></header>
 <nav class="nav" aria-label="Navegación principal">
@@ -1213,9 +1213,8 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
       const dot=document.createElement('i');dot.className='homeAssetDot';dot.style.background=row.color;
       const label=document.createElement('span');label.className='homeAssetName';label.textContent=row.name;
       const numbers=document.createElement('div');numbers.className='homeAssetNumbers';
-      const share=document.createElement('strong');share.textContent=pct(row.share);
       const euros=document.createElement('span');euros.textContent=fmt0(row.amount);
-      numbers.append(share,euros);item.append(dot,label,numbers);return item;
+      numbers.append(euros);item.append(dot,label,numbers);return item;
     }));
 
     homeContribution.textContent=fmt0(+s.money||0);
@@ -1227,5 +1226,5 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
   renderHomeV3();
 })();
 </script>
-<script src="/plan-flow.js?v=34-review"></script>
-<script src="/refinada2.js?v=34-horizonte"></script><script src="/products34.js?v=34-horizonte"></script><script src="/formation23.js?v=34"></script><script src="/review34.js?v=34-horizonte"></script></body></html>
+<script src="/plan-flow.js?v=34-saldos"></script>
+<script src="/refinada2.js?v=34-saldos"></script><script src="/products34.js?v=34-horizonte"></script><script src="/formation23.js?v=34-saldos"></script><script src="/review34.js?v=34-saldos"></script></body></html>

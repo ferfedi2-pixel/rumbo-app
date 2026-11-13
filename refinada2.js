@@ -5,12 +5,20 @@ const $=id=>document.getElementById(id);
 const money=n=>Math.round(Number(n)||0).toLocaleString('de-DE')+' €';
 const exact=n=>Number(n).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
 const percent=n=>Number(n).toLocaleString('es-ES',{maximumFractionDigits:2})+'%';
+const deviationNumber=new Intl.NumberFormat('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1});
+function driftMarkup(asset,balance,value){
+ if(!(balance>0))return '';
+ const gap=100*value/balance-asset.w,rounded=Math.round(Math.abs(gap)*10)/10;
+ const tone=rounded===0?'even':gap<0?'under':'over',sign=tone==='even'?'':gap<0?'−':'+';
+ return '<small class="r34-drift r34-drift-'+tone+'" aria-label="Desviación '+sign+deviationNumber.format(rounded)+' puntos porcentuales">Desviación <span>'+sign+deviationNumber.format(rounded)+' %</span></small>';
+}
+
 const svg=(path)=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">'+path+'</svg>';
 const icons={inicio:svg('<path d="m3 10 9-7 9 7v11h-6v-7H9v7H3z"/>'),cartera:svg('<rect x="3" y="6" width="18" height="15" rx="3"/><path d="M8 6V3h8v3M3 12h18m-11 0v3h4v-3"/>'),activos:svg('<circle cx="8" cy="8" r="5"/><circle cx="16" cy="16" r="5"/>'),rebalanceo:svg('<path d="M12 3v18M3 12h18"/>'),horizonte:svg('<path d="M3 20V4m0 16h18M6 15l5-5 4 3 6-9"/>')};
 const globe=svg('<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/>');
 function badge(a){return '<span class="asset-symbol" style="--asset:'+esc(a.color)+'">'+(a.id==='btc'?'<img src="/assets/coins/btc.svg" alt="">':a.id==='eth'?'<img src="/assets/coins/eth.png" alt="">':a.id==='world'||a.id==='em'?globe:a.id==='bonds'?svg('<path d="M4 9h16M3 21h18M5 9v12m7-12v12m7-12v12M3 7l9-4 9 4z"/>'):esc(a.short.slice(0,1)))+'</span>'}
 const nav=document.querySelector('.nav');nav.id='r2Nav';
-nav.innerHTML=[['inicio','Inicio'],['cartera','Cartera'],['activos','Planes'],['rebalanceo','Aportar'],['horizonte','Horizonte']].map(([id,name])=>'<button data-v="'+id+'" aria-label="'+name+'">'+icons[id]+'<span>'+name+'</span></button>').join('');
+nav.innerHTML=[['inicio','Inicio'],['cartera','Cartera'],['rebalanceo','Aportar'],['horizonte','Horizonte']].map(([id,name])=>'<button data-v="'+id+'" aria-label="'+name+'">'+icons[id]+'<span>'+name+'</span></button>').join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 const assetPage=document.createElement('section');assetPage.id='activos';assetPage.className='view';assetPage.innerHTML='<div class="r2-heading"><h1>Planes</h1><p>Tu reparto, con toda la información a mano.</p></div><div id="assetCatalog"></div><button class="btn" id="editPlanFromAssets">Editar mi plan</button>';
 document.querySelector('main').append(assetPage);
@@ -56,8 +64,8 @@ calcNow=function(){
  try{baseCalc()}catch(e){$('results').textContent=e.message;$('registerContribution').disabled=true;return}
  const V=vals.reduce((z,v)=>z+v,0),adds=allocation(list,vals,A),T=V+A;
  const min=list.some((a,i)=>a.w===0&&vals[i]>0)?Infinity:Math.max(0,...list.filter(a=>a.w>0).map(a=>Number(s.hold[a.id]||0)/(a.w/100)-V));
- $('results').innerHTML=list.map((a,i)=>{const after=vals[i]+adds[i],weight=T?100*after/T:0,diff=weight-a.w,off=Math.abs(diff)>Math.max(5,a.w*.25),status=adds[i]>.004?'Aportar':off?'Revisar':'Mantener';
- return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<strong>'+esc(a.short)+'</strong><div class="r2-result-value"><span class="'+(off?'warning':'')+'">'+status+'</span><b>'+exact(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><table class="review-allocation-compare" aria-label="Comparación de capital y peso de '+esc(a.short)+'"><thead><tr><th scope="col">Tras aportar</th><th scope="col">Objetivo</th></tr></thead><tbody><tr><td>'+exact(after)+'</td><td>'+exact(T*a.w/100)+'</td></tr><tr><td>'+percent(weight)+'</td><td>'+percent(a.w)+'</td></tr></tbody></table></div></div>' }).join('');
+ $('results').innerHTML=list.map((a,i)=>{const after=vals[i]+adds[i],weight=T?100*after/T:0,diff=weight-a.w,off=Math.abs(diff)>Math.max(5,a.w*.25),paused=adds[i]===0;
+ return '<div class="r2-result"><div class="r2-result-top">'+badge(a)+'<div class="r2-result-name"><strong>'+esc(a.short)+'</strong>'+driftMarkup(a,V,vals[i])+'</div><div class="r2-result-value"><span class="'+(paused?'r34-pause':'')+'">'+(paused?'Pausar':'Aportar')+'</span><b>'+exact(adds[i])+'</b></div><button class="asset-more" aria-label="Detalle de '+esc(a.short)+'" aria-expanded="false" onclick="r2Detail(this)">+</button></div><div class="r2-track" aria-label="Peso final '+percent(weight)+'; objetivo '+percent(a.w)+'"><i style="width:'+Math.min(100,weight)+'%;background:'+(off?'#D7A94B':a.color)+'"></i><b style="left:'+a.w+'%"></b></div><div class="r2-detail" hidden><table class="review-allocation-compare" aria-label="Comparación de capital y peso de '+esc(a.short)+'"><thead><tr><th scope="col">Tras aportar</th><th scope="col">Objetivo</th></tr></thead><tbody><tr><td>'+exact(after)+'</td><td>'+exact(T*a.w/100)+'</td></tr><tr><td>'+percent(weight)+'</td><td>'+percent(a.w)+'</td></tr></tbody></table></div></div>' }).join('');
  $('contrib').textContent=money(A);
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
@@ -139,6 +147,30 @@ $('r2UsePortfolio').onclick=()=>{
 };
 const goWithReviewNav=go;
 go=function(id){if(id!=='horizonte')scenarioEditing=false;goWithReviewNav(id)};
+// Los importes se validan y guardan juntos. El reparto solo usa saldos confirmados.
+const balanceList=$('holds'),balanceForm=document.createElement('form');
+balanceForm.id='r34BalanceForm';balanceList.before(balanceForm);balanceForm.append(balanceList);
+balanceForm.insertAdjacentHTML('beforeend','<div class="r34-balance-actions"><button type="submit" class="btn" id="r34SaveBalances">Actualizar</button><span role="status" id="r34BalanceStatus"></span></div>');
+const balanceFormat=new Intl.NumberFormat('es-ES',{useGrouping:'always',maximumFractionDigits:2});
+const readBalance=text=>{
+ const v=text.trim();
+ if(/^(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d{1,2})?$/.test(v))return Number(v.replaceAll('.','').replace(',','.'));
+ if(/^\d+\.\d{1,2}$/.test(v))return Number(v);
+ return NaN;
+};
+balanceForm.onsubmit=e=>{
+ e.preventDefault();
+ const next={...s.hold},list=assets(),inputs=balanceList.querySelectorAll('input');
+ for(let i=0;i<inputs.length;i++){
+  const input=inputs[i],value=readBalance(input.value);
+  if(!Number.isFinite(value)||value>Number.MAX_SAFE_INTEGER/100){
+   input.setCustomValidity('Introduce un saldo válido, mayor o igual que cero, con hasta dos decimales.');input.reportValidity();return;
+  }
+  next[list[i].id]=value;
+ }
+ s.hold=next;save();render();$('r34BalanceStatus').textContent='Saldos actualizados.';
+};
+$('results').closest('.card').querySelector('.head').hidden=true;
 const baseRender=render;render=function(){baseRender();polish()};
 function polish(){
  const active=!!s.type,plan=$('activePlanCard');
@@ -148,7 +180,14 @@ function polish(){
  plan.querySelector('.plan-active-head p')?.remove();
  $('rebalanceReview').hidden=true;$('selected').hidden=true;
  const holds=$('holds').closest('.card');holds.querySelector('h2').textContent='Saldos actuales';$('rebName').textContent=money(total());
- $('holds').querySelectorAll('.hold').forEach((row,i)=>{const a=assets()[i];row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));const input=row.querySelector('input');input.setAttribute('aria-label','Capital actual de '+a.short);input.type='text';input.inputMode='decimal';input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2});input.onfocus=()=>{input.value=String(s.hold[a.id]||'').replace('.',',');input.select()};input.onblur=()=>{if(input.validity.valid)input.value=Number(s.hold[a.id]||0).toLocaleString('de-DE',{maximumFractionDigits:2})};input.onchange=()=>{if(input.value===''||!input.checkValidity()){input.setCustomValidity('Introduce un importe válido, mayor o igual que cero.');input.reportValidity();return}input.setCustomValidity('');const value=Number(input.value.replace(',','.'));if(!Number.isFinite(value)||value<0){input.setCustomValidity('Introduce un importe válido.');input.reportValidity();return}setH(a.id,value)};input.oninput=()=>input.setCustomValidity('')});
+ const held=assets(),balance=total();$('r34BalanceStatus').textContent='';
+ $('holds').querySelectorAll('.hold').forEach((row,i)=>{
+  const a=held[i],value=Number(s.hold[a.id]||0),input=row.querySelector('input'),name=row.querySelector('b');
+  row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));
+  name.nextElementSibling?.remove();name.insertAdjacentHTML('afterend',driftMarkup(a,balance,value));
+  input.setAttribute('aria-label','Saldo actual de '+a.short);input.removeAttribute('onchange');input.type='text';input.inputMode='decimal';input.required=true;input.value=balanceFormat.format(value);
+  input.onfocus=()=>input.select();input.oninput=()=>{input.setCustomValidity('');$('r34BalanceStatus').textContent='Cambios sin guardar.';};
+ });
  $('assetCatalog').innerHTML=assets().map(a=>'<article class="r2-catalog-row">'+badge(a)+'<div><h2>'+esc(a.short)+'</h2><p>'+esc(notes[a.id]||'Componente definido por ti. Comprueba su riesgo, liquidez y costes.')+'</p><span>Objetivo '+percent(a.w)+'</span></div></article>').join('')||'<p class="r2-empty">Crea tu cartera para ver aquí sus activos.</p>';
  $('editPlanFromAssets').textContent='Editar mi plan';$('editPlanFromAssets').hidden=s.type!=='custom';
  document.querySelector('#rebalanceo h1').textContent='Aportar';document.querySelector('#rebalanceo .hero p').textContent='Calcula. Tú decides y ejecutas.';

@@ -22,5 +22,5 @@ document.getElementById(header.getAttribute('aria-controls')).hidden=!expanded;
 header.closest('.r31-module').classList.toggle('is-open',expanded);
 }));
 const menu=document.getElementById('appMenu');
-if(menu){const learnButton=document.createElement('button');learnButton.type='button';learnButton.textContent='Aprende';learnButton.onclick=()=>{menu.classList.remove('on');if(!home.classList.contains('on'))go('inicio');show();entry.focus({preventScroll:true});section.scrollIntoView({block:'start',behavior:'auto'});};menu.prepend(learnButton);}
+if(menu){const learnButton=document.createElement('button');learnButton.type='button';learnButton.textContent='Aprende';learnButton.onclick=()=>{menu.classList.remove('on');const trigger=document.getElementById('appMenuBtn');trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-label','Abrir menú');if(!home.classList.contains('on'))go('inicio');show();entry.focus({preventScroll:true});section.scrollIntoView({block:'start',behavior:'auto'});};menu.insertBefore(learnButton,document.getElementById('openSettings'));}
 })();

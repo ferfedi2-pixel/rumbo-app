@@ -63,10 +63,9 @@
 #activos #customCard .custom-toggle{font-size:12px!important;padding:12px 14px!important;min-height:44px;border-radius:10px!important}
 #activos #customEditor{padding:20px 0 0}
 #cartera #activePlanCard.review-plan-compact{background:none!important;border:0!important;border-bottom:1px solid #384654!important;border-radius:0!important;padding:8px 0 20px!important;margin:0 0 8px!important;box-shadow:none!important}
-.review-compact-plan{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.review-compact-plan{display:flex;align-items:center;justify-content:flex-start;gap:14px}
 #cartera #activePlanCard .plan-eyebrow{font-size:10px!important;color:#b7c7c4!important}
 #cartera #activePlanCard h2{font-size:25px!important;margin:5px 0 0!important;color:#f3f2ed!important}
-#cartera #activePlanCard #reviewPlan{border:0!important;background:none!important;color:#b7dfcf!important;font-size:13px!important;white-space:nowrap;padding:8px 0 8px 12px!important}
 #cartera .current-hold-card>.head{margin:10px 0 6px!important}
 #cartera .current-hold-card h2{font-size:24px!important}
 .review-portfolio-total{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:24px 0 0;color:#c2cfd2;font-size:14px}
@@ -74,17 +73,15 @@
 #cartera #holds .hold{padding:20px 0!important}
 #reviewEmptyPortfolio{padding:20px 0;line-height:1.6;color:#afc1c5}
 #reviewEmptyPortfolio h1{color:#f4f3ed;font:700 36px/1.2 Georgia,serif}
-#rebalanceo .review-target-note{font-size:12px;line-height:1.6;color:#a9bbc1;margin:10px 0 4px}
 #rebalanceo .r2-result-top{grid-template-columns:30px minmax(0,1fr) auto 32px;gap:8px}
-#rebalanceo .r2-result-top>strong{font-size:14px!important;line-height:1.4}
-#rebalanceo .r2-result-value b{font-size:20px!important;font-variant-numeric:tabular-nums}
+#rebalanceo .r2-result-name>strong{font-size:14px!important;line-height:1.4}
+#rebalanceo .r2-result-value b{font-size:clamp(20px,5.5vw,25px)!important;font-variant-numeric:tabular-nums}
 #rebalanceo .r2-result-value span{font-size:11px!important}
 #rebalanceo .r2-result-top .asset-symbol{width:30px;height:30px}
 #rebalanceo .r2-result-top .asset-more{width:32px!important;height:32px!important;font-size:20px!important;min-height:32px}
 #rebalanceo .r2-track{margin:20px 8px 4px 38px}
 #rebalanceo .r2-detail{padding:20px 0 0 38px}
 #cartera .review-balance-hint{color:#adbac7;font-size:13px;margin:0 0 4px;line-height:1.5}
-#cartera #holds .hold .review-balance-gap{color:#a9b9c4;font-size:12px;line-height:1.45;margin-top:4px}
 #rebalanceo .review-allocation-compare{width:100%;table-layout:fixed;border-collapse:collapse;text-align:left;font-variant-numeric:tabular-nums}
 #rebalanceo .review-allocation-compare th{font-weight:600;font-size:12px;color:#aabcc4;padding:0 6px 6px 0}
 #rebalanceo .review-allocation-compare td{font-size:16px;line-height:1.35;color:#e9f2ee;padding:3px 6px 3px 0;overflow-wrap:anywhere}
@@ -101,5 +98,33 @@
 #horizonte .r2-scenario-status{font-size:12px;line-height:1.5;color:#abb8cb;margin:10px 0 18px}
 #horizonte .r2-chart-legend{gap:8px 18px;flex-wrap:wrap}
 .review-version{color:#a7bcb3;font:400 11px/1.5 RumboSans,Arial,sans-serif;margin:24px auto 0;max-width:780px;letter-spacing:.03em}
-@media(max-width:600px){#inicio .homeHeroV3>.homeCompass{top:135px!important}#activos #models{grid-template-columns:1fr}#activos #models .model{padding:20px!important}#reviewActivePlan h2{font-size:31px}.review-plan-heading{gap:10px}#rebalanceo .r2-result-value b{font-size:18px!important}#rebalanceo .r2-detail{padding-left:0}#activos #customCard>.head{flex-wrap:wrap}#activos #customCard .custom-toggle{flex:none}#activos #models .r34-plan-details{margin:16px -6px 0;padding:18px 12px}}
+@media(max-width:600px){#inicio .homeHeroV3>.homeCompass{top:135px!important}#activos #models{grid-template-columns:1fr}#activos #models .model{padding:20px!important}#reviewActivePlan h2{font-size:31px}.review-plan-heading{gap:10px}#rebalanceo .r2-detail{padding-left:0}#activos #customCard>.head{flex-wrap:wrap}#activos #customCard .custom-toggle{flex:none}#activos #models .r34-plan-details{margin:16px -6px 0;padding:18px 12px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+
+/* Controles de uso diario: cuatro accesos y saldos con confirmación conjunta. */
+html body .app #r2Nav.nav.nav{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#inicio .homeAssetNumbers span{margin-top:0}
+#cartera #activePlanCard .model-art{transform:scale(.76);margin:-6px!important}
+.review-custom-mark{width:44px;height:44px;flex:none;object-fit:contain}
+#cartera #holds .hold{grid-template-columns:34px minmax(0,1fr) minmax(120px,36%)!important;gap:10px!important}
+#cartera #holds .hold input{font-size:clamp(19px,5.4vw,24px)!important;font-weight:700;min-width:0;font-variant-numeric:tabular-nums}
+#cartera #holds .hold b{overflow-wrap:anywhere}
+.r34-balance-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+#cartera #r34SaveBalances{min-height:44px;padding:10px 16px;font-size:13px;background:#a7dbc9!important;color:#122821!important;border-radius:12px}
+#r34BalanceStatus{font-size:12px;color:#adbac7}
+#cartera .r34-drift,#rebalanceo .r34-drift{display:block;margin-top:4px;font-size:11px;line-height:1.35;color:#b5c2cf}
+.r34-drift span{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.r34-drift-under span{color:#90d8bd}
+.r34-drift-over span,#rebalanceo .r2-result-value span.r34-pause{color:#ff9caa}
+#rebalanceo .grid>.contribute-input{padding:14px 16px!important}
+#rebalanceo #contributeControls{grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px}
+#rebalanceo #contributeControls .field{min-width:0;margin:0!important}
+#rebalanceo #newMoney{width:100%;min-width:0;min-height:42px;font-size:26px!important;padding:4px 0 6px!important;font-variant-numeric:tabular-nums}
+#rebalanceo #contributeControls .btn{min-height:44px;padding:8px 14px!important;font-size:13px!important;width:auto!important}
+#rebalanceo #rebStartPlan{grid-column:1/-1;justify-self:start}
+#rebalanceo .r2-result-name{min-width:0;overflow-wrap:anywhere}
+#rebalanceo .r2-result-top{grid-template-columns:30px minmax(0,1fr) auto 44px}
+#rebalanceo .r2-result-top .asset-more{width:44px!important;height:44px!important;min-height:44px}
+#rebalanceo .review-allocation-compare td{font-size:18px}
+@media(max-width:350px){#cartera #holds .hold{grid-template-columns:28px minmax(0,1fr) 116px!important;gap:7px!important}#rebalanceo .r2-result-top{grid-template-columns:27px minmax(0,1fr) auto 44px;gap:6px}#rebalanceo .r2-result-top .asset-symbol{width:27px;height:27px}}

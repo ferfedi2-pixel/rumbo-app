@@ -41,3 +41,15 @@ Base: `f7813103305f989058acdc7b2a187ca4c3374dd3`. Se mantiene la etiqueta «3.4 
 - Horizonte: saldo de partida, aportación mensual, rentabilidad y costes, en euros nominales. «Usar mi cartera» vuelve al saldo total, al importe indicado en Aportar y a los supuestos del plan activo. Se reutiliza el coste anual ponderado de la ficha por pesos objetivo, sin actualizar fuentes. En plan propio no se presupone rentabilidad ni coste. «Editar valores» abre los campos; «OK» aplica un escenario guardado por separado, sin modificar saldos, importe de Aportar ni plan. Se conserva el horizonte elegido al volver a los datos de cartera.
 
 Validado en Chromium a 320, 360, 390, 430 y 1440 px. Se comprobaron los tres planes RUMBO y un plan propio, validación de importes, conservación del escenario tras recargar, descarte de cambios sin confirmar, recuperación de datos de cartera y actualización de los saldos de referencia. El caso de la captura de 39.326 € y 1.000 € de aportación muestra 22.239,46 € y 55,15 % tras aportar a Desarrollados, frente a 24.883,16 € y 61,71 % de objetivo. Se volvió a comprobar el registro de una aportación y los cambios de plan sin pérdida de saldos.
+
+## Tercer pase de revisión · Accesos diarios y actualización de saldos
+
+Base: `0e1a60d1a650e0ebfc200d2a880c35b773b12149`. Se mantiene «3.4 · Pendiente de revisar».
+
+- La barra inferior conserva Inicio, Cartera, Aportar y Horizonte. Planes queda en el menú superior junto a Aprende y Ajustes. El inicio sin plan conserva el acceso directo para configurarlo.
+- Inicio conserva total y gráfico; el desglose solo muestra nombres e importes. Cartera presenta el logo del plan activo y saldos con cifras más grandes.
+- «Actualizar» valida todos los saldos antes de guardar el conjunto. Inicio, Cartera, Aportar y el modo de cartera de Horizonte reflejan los saldos confirmados.
+- Cartera y Aportar muestran la diferencia entre el peso actual y el objetivo debajo del activo. En pantalla se usa el formato compacto con signo y %; la etiqueta accesible especifica puntos porcentuales. Si todavía no hay saldo, se omite la diferencia.
+- Aportar tiene controles más compactos, cifras más grandes y muestra «Pausar» cuando el reparto es cero. Se mantiene el detalle desplegable y la metodología de reparto.
+
+Comprobado en Chromium de 320 a 1440 px, con revisión visual a 390 px. Se verificaron los accesos, los logos, la validación conjunta sin guardados parciales, los saldos tras recargar y el reparto del caso anterior: 805,46 € y 194,54 €, con los dos activos restantes en pausa.

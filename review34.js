@@ -5,12 +5,10 @@ const $=id=>document.getElementById(id),pctReview=n=>Number(n).toLocaleString('e
 const money=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(n);
 const shortName=name=>String(name||'').replace(/^RUMBO\s+/i,'');
 const totalRow=document.createElement('div');totalRow.className='review-portfolio-total';
-totalRow.innerHTML='<span>Total de la cartera</span>';totalRow.append($('rebName'));$('holds').after(totalRow);
-const balanceHint=document.createElement('p');balanceHint.className='review-balance-hint';$('holds').before(balanceHint);
-const pointNumber=new Intl.NumberFormat('es-ES',{maximumFractionDigits:1});
+totalRow.innerHTML='<span>Total de la cartera</span>';totalRow.append($('rebName'));$('r34BalanceForm').after(totalRow);
+const balanceHint=document.createElement('p');balanceHint.className='review-balance-hint';balanceHint.textContent='Antes de aportar, indica el saldo actual de cada activo.';$('r34BalanceForm').before(balanceHint);
 const emptyPortfolio=document.createElement('div');emptyPortfolio.id='reviewEmptyPortfolio';emptyPortfolio.innerHTML='<h1>Cartera</h1><p>Elige un plan para empezar a registrar tus saldos.</p><button type="button" class="btn">Ver planes →</button>';
 emptyPortfolio.querySelector('button').onclick=()=>go('activos');$('cartera').append(emptyPortfolio);
-const targetNote=document.createElement('p');targetNote.className='review-target-note';targetNote.textContent='Capital objetivo: calculado sobre el total de la cartera tras aportar.';$('results').before(targetNote);
 const reviewVersion=document.createElement('p');reviewVersion.className='review-version';reviewVersion.textContent='3.4 · Pendiente de revisar';document.querySelector('.r2-footer').before(reviewVersion);
 const baseRender=render;
 render=function(){baseRender();renderReviewLayout();};
@@ -38,19 +36,8 @@ function renderReviewLayout(){
  $('customCard').hidden=s.type==='custom'&&$('customEditor').hidden;
  $('editPlanFromAssets').onclick=()=>{$('customCard').hidden=false;if($('customEditor').hidden)$('customToggle').click();};
  $('userName').closest('.card').hidden=true;
- const balance=total(),held=assets();
- $('rebName').textContent=money(balance);
+ $('rebName').textContent=money(total());
  $('activePlanCard').classList.add('review-plan-compact');
- balanceHint.textContent=balance>0?'Toca un importe para actualizarlo.':'Toca cada importe para añadir tu saldo.';
- $('holds').querySelectorAll('.hold small').forEach((line,i)=>{
-  const asset=held[i];
-  line.hidden=!(balance>0);
-  if(line.hidden)return;
-  const gap=(Number(s.hold[asset.id]||0)/balance)*100-asset.w;
-  const size=Math.round(Math.abs(gap)*10)/10;
-  line.textContent=size===0?'En línea con el objetivo':pointNumber.format(size)+(size===1?' punto ':' puntos ')+(gap>0?'por encima':'por debajo');
-  line.classList.add('review-balance-gap');
- });
 }
 // Cerrar un editor propio vuelve a mostrar solo el plan activo.
 const originalCustomToggle=$('customToggle').onclick;

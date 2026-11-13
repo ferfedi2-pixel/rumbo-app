@@ -120,12 +120,13 @@
   byId('resetModal').querySelector('p').textContent = 'Se borrarán el plan, los saldos, las aportaciones registradas y los ajustes de este dispositivo. No se puede deshacer.';
 
   const menu = byId('appMenu');
-  menu.innerHTML = '<span class="menu-title">Más opciones</span><button type="button" id="openSettings">Ajustes</button>';
+  menu.innerHTML = '<span class="menu-title">Más opciones</span><button type="button" id="openPlans">Planes</button><button type="button" id="openSettings">Ajustes</button>';
   function closeMenu() {
     menu.classList.remove('on');
     byId('appMenuBtn').setAttribute('aria-expanded','false');
     byId('appMenuBtn').setAttribute('aria-label','Abrir menú');
   }
+  byId('openPlans').onclick = () => {closeMenu();go('activos')};
   byId('openSettings').onclick = () => {closeMenu();go('ajustes')};
 
   const flowModal = document.createElement('div');
@@ -186,9 +187,8 @@
     rebName.textContent = currentName();
     hName.textContent = currentName();
     const m = model();
-    const targets = blocks(s.type,s.custom);
-    planCard.innerHTML = '<div class="review-compact-plan"><div><span class="plan-eyebrow">PLAN ACTIVO</span><h2>'+esc(currentName())+'</h2></div><button type="button" class="btn ghost tiny" id="reviewPlan">Ver plan <span aria-hidden="true">↗︎</span></button></div>';
-    byId('reviewPlan').onclick = () => go('activos');
+    const mark = m ? '<span class="model-art art-'+s.type+'" aria-hidden="true"></span>' : '<img class="review-custom-mark" src="/assets/rumbo-mark.svg" alt="">';
+    planCard.innerHTML = '<div class="review-compact-plan">'+mark+'<div><span class="plan-eyebrow">PLAN ACTIVO</span><h2>'+esc(currentName())+'</h2></div></div>';
   }
 
   function cancelReview() {
