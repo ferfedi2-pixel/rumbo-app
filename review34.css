@@ -152,3 +152,31 @@ html body .app #r2Nav.nav.nav{grid-template-columns:repeat(4,minmax(0,1fr))!impo
   #cartera #holds .hold{grid-template-columns:30px minmax(0,1fr) minmax(0,126px)!important;gap:8px!important}
   #cartera #holds .hold input{font-size:18px!important;padding:10px 5px!important}
 }
+
+/* Campos de saldo: símbolo monetario separado, borde fino y menor anchura. */
+#cartera #holds .hold{
+ grid-template-columns:34px minmax(0,1fr) minmax(0,132px)!important;
+}
+#cartera #holds .r34-euro-field{
+ position:relative;display:block;width:100%;max-width:132px;min-width:0;
+}
+#cartera #holds .r34-euro-field::after{
+ content:"€";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+ color:#b9c8d5;font-size:15px;font-weight:500;pointer-events:none;
+}
+#cartera #holds .r34-euro-field input{
+ width:100%!important;max-width:none!important;box-sizing:border-box;
+ padding:9px 25px 9px 7px!important;text-align:center!important;
+ font-size:clamp(17px,4.5vw,21px)!important;font-weight:650;
+ border:1px solid #44546a!important;border-radius:11px!important;
+ box-shadow:none!important;outline:none;
+}
+#cartera #holds .r34-euro-field input:focus{
+ border-color:#8ccbb7!important;box-shadow:0 0 0 1px #8ccbb7!important;
+}
+@media(max-width:380px){
+ #cartera #holds .hold{grid-template-columns:30px minmax(0,1fr) minmax(0,118px)!important}
+ #cartera #holds .r34-euro-field{max-width:118px}
+ #cartera #holds .r34-euro-field input{font-size:17px!important;padding-right:22px!important}
+ #cartera #holds .r34-euro-field::after{right:8px;font-size:14px}
+}
