@@ -128,3 +128,27 @@ html body .app #r2Nav.nav.nav{grid-template-columns:repeat(4,minmax(0,1fr))!impo
 #rebalanceo .r2-result-top .asset-more{width:44px!important;height:44px!important;min-height:44px}
 #rebalanceo .review-allocation-compare td{font-size:18px}
 @media(max-width:350px){#cartera #holds .hold{grid-template-columns:28px minmax(0,1fr) 116px!important;gap:7px!important}#rebalanceo .r2-result-top{grid-template-columns:27px minmax(0,1fr) auto 44px;gap:6px}#rebalanceo .r2-result-top .asset-symbol{width:27px;height:27px}}
+
+
+/* 3.4 · Ajuste móvil de los campos de saldo: compactos y centrados. */
+#cartera #holds .hold{
+  grid-template-columns:34px minmax(0,1fr) minmax(0,148px)!important;
+  gap:12px!important;
+  align-items:center;
+}
+#cartera #holds .hold input{
+  width:100%!important;
+  max-width:148px;
+  min-width:0;
+  box-sizing:border-box;
+  text-align:center!important;
+  font-size:clamp(18px,4.8vw,22px)!important;
+  font-weight:650;
+  font-variant-numeric:tabular-nums;
+  padding:10px 8px!important;
+  border-radius:12px!important;
+}
+@media(max-width:380px){
+  #cartera #holds .hold{grid-template-columns:30px minmax(0,1fr) minmax(0,126px)!important;gap:8px!important}
+  #cartera #holds .hold input{font-size:18px!important;padding:10px 5px!important}
+}
