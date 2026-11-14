@@ -180,3 +180,12 @@ html body .app #r2Nav.nav.nav{grid-template-columns:repeat(4,minmax(0,1fr))!impo
  #cartera #holds .r34-euro-field input{font-size:17px!important;padding-right:22px!important}
  #cartera #holds .r34-euro-field::after{right:8px;font-size:14px}
 }
+
+/* Evitar doble halo de foco: el campo mantiene una sola línea fina. */
+html body #cartera #holds .r34-euro-field input:focus,
+html body #cartera #holds .r34-euro-field input:focus-visible{
+ outline:0!important;
+ border:1px solid #91cbb8!important;
+ box-shadow:none!important;
+}
+#cartera #holds .r34-euro-field:focus-within{outline:0!important;box-shadow:none!important}
