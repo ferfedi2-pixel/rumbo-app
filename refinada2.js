@@ -185,7 +185,7 @@ function polish(){
   const a=held[i],value=Number(s.hold[a.id]||0),input=row.querySelector('input'),name=row.querySelector('b');
   row.querySelector('.badge')?.remove();row.insertAdjacentHTML('afterbegin',badge(a));
   name.nextElementSibling?.remove();name.insertAdjacentHTML('afterend',driftMarkup(a,balance,value));
-  input.setAttribute('aria-label','Saldo actual de '+a.short);input.removeAttribute('onchange');input.type='text';input.inputMode='decimal';input.required=true;input.value=balanceFormat.format(value);
+  input.setAttribute('aria-label','Saldo actual de '+a.short);input.removeAttribute('onchange');input.type='text';input.inputMode='decimal';input.required=true;input.placeholder='';input.value=balanceFormat.format(value);
   if(!input.parentElement.classList.contains('r34-euro-field')){
     const wrap=document.createElement('span');wrap.className='r34-euro-field';
     input.before(wrap);wrap.append(input);
