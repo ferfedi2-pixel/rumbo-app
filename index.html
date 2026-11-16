@@ -1211,7 +1211,10 @@ function render(){renderHome();renderPortfolio();renderReb();renderH()}render();
     legend.replaceChildren(...rows.map(row=>{
       const item=document.createElement('div');item.className='homeAssetRow';
       const dot=document.createElement('i');dot.className='homeAssetDot';dot.style.background=row.color;
-      const label=document.createElement('span');label.className='homeAssetName';label.textContent=row.name;
+      const label=document.createElement('div');label.className='homeAssetLabel';
+      const assetName=document.createElement('span');assetName.className='homeAssetName';assetName.textContent=row.name;
+      const share=document.createElement('span');share.className='homeAssetShare';share.textContent=(useActual?row.share:0).toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+      label.append(assetName,share);
       const numbers=document.createElement('div');numbers.className='homeAssetNumbers';
       const euros=document.createElement('span');euros.textContent=fmt0(row.amount);
       numbers.append(euros);item.append(dot,label,numbers);return item;
