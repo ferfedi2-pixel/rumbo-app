@@ -86,7 +86,7 @@ calcNow=function(){
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
  const residual=list.some((a,i)=>T&&Math.abs((vals[i]+adds[i])/T*100-a.w)>.000001);
- summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
+ summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p><b>Prueba:</b> prioridad a activos bajo su banda (2 pp si pesan menos del 10 %, 3 pp entre 10 % y 30 %, 5 pp por encima). Después, reparto proporcional al déficit. Las bandas no cambian el objetivo.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
  $('rebalanceAlert')?.remove();
  $('registerContribution').disabled=!(A>0);
 };
