@@ -189,3 +189,13 @@ html body #cartera #holds .r34-euro-field input:focus-visible{
  box-shadow:none!important;
 }
 #cartera #holds .r34-euro-field:focus-within{outline:0!important;box-shadow:none!important}
+
+/* Inicio: porcentaje real debajo del nombre e importes un punto mayores. */
+#inicio .homeAssetLabel{display:flex;flex-direction:column;gap:5px;min-width:0}
+#inicio .homeAssetShare{font-size:14px;line-height:1.25;font-weight:650;color:#a9d9c9;font-variant-numeric:tabular-nums}
+#inicio .homeAssetNumbers span{font-size:clamp(20px,5.4vw,25px)!important;line-height:1.2;font-weight:750;letter-spacing:-.025em;color:#f6f8f9!important;font-variant-numeric:tabular-nums}
+#inicio .homeAssetRow{min-height:74px!important;align-items:center}
+@media(max-width:380px){
+ #inicio .homeAssetNumbers span{font-size:20px!important}
+ #inicio .homeAssetShare{font-size:13px}
+}
