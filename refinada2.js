@@ -45,32 +45,27 @@ const sum=s.custom.reduce((z,a)=>z+Number(a.pct||0),0);$('customSum').textConten
 window.editA=(i,k,v)=>{s.custom[i][k]=k==='pct'?+v:v;renderCustom()};
 window.r2Select=(i,id)=>{if(!PROD[id])return;s.custom[i].name=PROD[id].short;s.custom[i].color=PROD[id].color;renderCustom()};
 window.r2Step=(i,d)=>{s.custom[i].pct=Math.max(0,Math.min(100,Number(s.custom[i].pct||0)+d));renderCustom()};
-// Experimento aislado: prioridad para activos por debajo de su banda; resto proporcional al déficit.
-function r34Band(weight){return weight<10?2:weight<=30?3:5}
+// Proyección euclídea: minimiza desviaciones cuadráticas finales sin ventas.
+function r34Band(weight){return Math.min(5,Math.max(2,weight*.2))}
 allocation=function(list,values,amount){
- if(!list.length||!Number.isFinite(amount)||amount<0||values.some(v=>!Number.isFinite(v)||v<0)||list.some(x=>!Number.isFinite(x.w)||x.w<0)||Math.abs(list.reduce((z,x)=>z+x.w,0)-100)>1e-6)throw Error('Revisa los valores y los pesos: deben sumar 100%.');
- const cents=Math.round(amount*100),V=values.reduce((z,v)=>z+v,0),T=V+cents/100;
+ if(!list.length||values.length!==list.length||!Number.isFinite(amount)||amount<0||values.some(v=>!Number.isFinite(v)||v<0)||list.some(x=>!Number.isFinite(x.w)||x.w<0)||Math.abs(list.reduce((z,x)=>z+x.w,0)-100)>1e-6)throw Error('Revisa los valores y los pesos: deben sumar 100%.');
+ const cents=Math.round(amount*100),V=values.reduce((z,v)=>z+v,0);
  if(!cents)return list.map(()=>0);
- // Con cartera vacía, mantener el reparto objetivo sin aplicar bandas.
- if(V===0){const raw=list.map(x=>cents*x.w/100),out=raw.map(Math.floor);let rest=cents-out.reduce((s,v)=>s+v,0);const order=raw.map((v,i)=>({i,frac:v-out[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);for(let j=0;j<rest;j++)out[order[j%order.length].i]++;return out.map(v=>v/100)}
- const out=list.map(()=>0);let left=cents;
- // La comparación se realiza con el total final (incluida la aportación).
- const urgent=list.map((a,i)=>{
-  const band=r34Band(a.w),actual=100*values[i]/V,lower=Math.max(0,a.w-band);
-  return {i,priority:(a.w-actual)/band,needed:Math.max(0,Math.ceil((T*lower/100-values[i])*100-1e-8))};
- }).filter(x=>x.priority>1&&x.needed>0).sort((a,b)=>b.priority-a.priority||a.i-b.i);
- for(const x of urgent){if(!left)break;const take=Math.min(left,x.needed);out[x.i]+=take;left-=take}
- if(left){
-  const deficits=list.map((a,i)=>Math.max(0,T*a.w/100-values[i]-out[i]/100));
-  const D=deficits.reduce((s,v)=>s+v,0);
-  // Si no queda déficit, distribuir según objetivos sin vender posiciones.
-  const raw=list.map((a,i)=>left*(D?deficits[i]/D:a.w/100));
-  const whole=raw.map(Math.floor);let rest=left-whole.reduce((s,v)=>s+v,0);
-  const order=raw.map((v,i)=>({i,frac:v-whole[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);
-  for(let j=0;j<rest;j++)whole[order[j%order.length].i]++;
-  for(let i=0;i<out.length;i++)out[i]+=whole[i];
+ const T=V+cents/100,gaps=list.map((x,i)=>T*x.w/100-values[i]);
+ const sorted=[...gaps].sort((a,b)=>b-a);
+ let prefix=0,lambda=0;
+ for(let k=1;k<=sorted.length;k++){
+  prefix+=sorted[k-1];
+  const cut=(prefix-cents/100)/k;
+  if(k===sorted.length||cut>=sorted[k]-1e-10){lambda=cut;break}
  }
- return out.map(v=>v/100);
+ const raw=gaps.map(g=>Math.max(0,(g-lambda)*100));
+ const whole=raw.map(v=>Math.floor(v+1e-8));
+ let rest=cents-whole.reduce((z,v)=>z+v,0);
+ const order=raw.map((v,i)=>({i,frac:v-whole[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);
+ if(rest>0)for(let j=0;j<rest;j++)whole[order[j%order.length].i]++;
+ if(rest<0)for(let j=0;j< -rest;j++){const idx=[...order].reverse().find(x=>whole[x.i]>0);if(!idx)throw Error('Error de redondeo.');whole[idx.i]--}
+ return whole.map(v=>v/100);
 };
 const baseCalc=calcNow;
 calcNow=function(){
@@ -86,7 +81,7 @@ calcNow=function(){
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
  const residual=list.some((a,i)=>T&&Math.abs((vals[i]+adds[i])/T*100-a.w)>.000001);
- summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p><b>Prueba:</b> prioridad a activos bajo su banda (2 pp si pesan menos del 10 %, 3 pp entre 10 % y 30 %, 5 pp por encima). Después, reparto proporcional al déficit. Las bandas no cambian el objetivo.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
+ summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p><b>Prueba de optimización global:</b> se minimizan las desviaciones finales de todos los activos, sin ventas. Las bandas son informativas (entre 2 y 5 puntos porcentuales) y no alteran el reparto.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
  $('rebalanceAlert')?.remove();
  $('registerContribution').disabled=!(A>0);
 };
