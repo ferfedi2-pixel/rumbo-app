@@ -45,15 +45,31 @@ const sum=s.custom.reduce((z,a)=>z+Number(a.pct||0),0);$('customSum').textConten
 window.editA=(i,k,v)=>{s.custom[i][k]=k==='pct'?+v:v;renderCustom()};
 window.r2Select=(i,id)=>{if(!PROD[id])return;s.custom[i].name=PROD[id].short;s.custom[i].color=PROD[id].color;renderCustom()};
 window.r2Step=(i,d)=>{s.custom[i].pct=Math.max(0,Math.min(100,Number(s.custom[i].pct||0)+d));renderCustom()};
-// Proporcional al déficit, mayor resto en céntimos, incluido objetivo cero.
+// Experimento aislado: prioridad para activos por debajo de su banda; resto proporcional al déficit.
+function r34Band(weight){return weight<10?2:weight<=30?3:5}
 allocation=function(list,values,amount){
  if(!list.length||!Number.isFinite(amount)||amount<0||values.some(v=>!Number.isFinite(v)||v<0)||list.some(x=>!Number.isFinite(x.w)||x.w<0)||Math.abs(list.reduce((z,x)=>z+x.w,0)-100)>1e-6)throw Error('Revisa los valores y los pesos: deben sumar 100%.');
- const cents=Math.round(amount*100),T=values.reduce((z,v)=>z+v,0)+cents/100;
- const deficits=list.map((x,i)=>Math.max(0,T*x.w/100-values[i])),D=deficits.reduce((z,v)=>z+v,0);
+ const cents=Math.round(amount*100),V=values.reduce((z,v)=>z+v,0),T=V+cents/100;
  if(!cents)return list.map(()=>0);
- const raw=deficits.map(d=>D?cents*d/D:0),out=raw.map(Math.floor);
- let rest=cents-out.reduce((z,v)=>z+v,0);const order=raw.map((v,i)=>({i,r:v-out[i]})).sort((a,b)=>b.r-a.r||a.i-b.i);
- for(let j=0;j<rest;j++)out[order[j%order.length].i]++;
+ // Con cartera vacía, mantener el reparto objetivo sin aplicar bandas.
+ if(V===0){const raw=list.map(x=>cents*x.w/100),out=raw.map(Math.floor);let rest=cents-out.reduce((s,v)=>s+v,0);const order=raw.map((v,i)=>({i,frac:v-out[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);for(let j=0;j<rest;j++)out[order[j%order.length].i]++;return out.map(v=>v/100)}
+ const out=list.map(()=>0);let left=cents;
+ // La comparación se realiza con el total final (incluida la aportación).
+ const urgent=list.map((a,i)=>{
+  const band=r34Band(a.w),actual=100*values[i]/V,lower=Math.max(0,a.w-band);
+  return {i,priority:(a.w-actual)/band,needed:Math.max(0,Math.ceil((T*lower/100-values[i])*100-1e-8))};
+ }).filter(x=>x.priority>1&&x.needed>0).sort((a,b)=>b.priority-a.priority||a.i-b.i);
+ for(const x of urgent){if(!left)break;const take=Math.min(left,x.needed);out[x.i]+=take;left-=take}
+ if(left){
+  const deficits=list.map((a,i)=>Math.max(0,T*a.w/100-values[i]-out[i]/100));
+  const D=deficits.reduce((s,v)=>s+v,0);
+  // Si no queda déficit, distribuir según objetivos sin vender posiciones.
+  const raw=list.map((a,i)=>left*(D?deficits[i]/D:a.w/100));
+  const whole=raw.map(Math.floor);let rest=left-whole.reduce((s,v)=>s+v,0);
+  const order=raw.map((v,i)=>({i,frac:v-whole[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);
+  for(let j=0;j<rest;j++)whole[order[j%order.length].i]++;
+  for(let i=0;i<out.length;i++)out[i]+=whole[i];
+ }
  return out.map(v=>v/100);
 };
 const baseCalc=calcNow;
