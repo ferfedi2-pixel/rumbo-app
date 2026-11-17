@@ -45,26 +45,33 @@ const sum=s.custom.reduce((z,a)=>z+Number(a.pct||0),0);$('customSum').textConten
 window.editA=(i,k,v)=>{s.custom[i][k]=k==='pct'?+v:v;renderCustom()};
 window.r2Select=(i,id)=>{if(!PROD[id])return;s.custom[i].name=PROD[id].short;s.custom[i].color=PROD[id].color;renderCustom()};
 window.r2Step=(i,d)=>{s.custom[i].pct=Math.max(0,Math.min(100,Number(s.custom[i].pct||0)+d));renderCustom()};
-// Proyección euclídea: minimiza desviaciones cuadráticas finales sin ventas.
+// Optimización ponderada: minimiza la suma de (peso final - objetivo)^2 / objetivo.
 function r34Band(weight){return Math.min(5,Math.max(2,weight*.2))}
 allocation=function(list,values,amount){
  if(!list.length||values.length!==list.length||!Number.isFinite(amount)||amount<0||values.some(v=>!Number.isFinite(v)||v<0)||list.some(x=>!Number.isFinite(x.w)||x.w<0)||Math.abs(list.reduce((z,x)=>z+x.w,0)-100)>1e-6)throw Error('Revisa los valores y los pesos: deben sumar 100%.');
  const cents=Math.round(amount*100),V=values.reduce((z,v)=>z+v,0);
  if(!cents)return list.map(()=>0);
- const T=V+cents/100,gaps=list.map((x,i)=>T*x.w/100-values[i]);
- const sorted=[...gaps].sort((a,b)=>b-a);
- let prefix=0,lambda=0;
- for(let k=1;k<=sorted.length;k++){
-  prefix+=sorted[k-1];
-  const cut=(prefix-cents/100)/k;
-  if(k===sorted.length||cut>=sorted[k]-1e-10){lambda=cut;break}
+ const T=V+cents/100;
+ const items=list.map((x,i)=>({i,w:x.w/100,g:T*x.w/100-values[i]})).filter(x=>x.w>0);
+ const sorted=[...items].sort((a,b)=>b.g/b.w-a.g/a.w||a.i-b.i);
+ let G=0,W=0,lambda=0;
+ for(let k=0;k<sorted.length;k++){
+  G+=sorted[k].g;W+=sorted[k].w;
+  const cut=(G-cents/100)/W;
+  if(k===sorted.length-1||cut>=sorted[k+1].g/sorted[k+1].w){lambda=cut;break}
  }
- const raw=gaps.map(g=>Math.max(0,(g-lambda)*100));
- const whole=raw.map(v=>Math.floor(v+1e-8));
+ const whole=list.map(()=>0);
+ for(const x of items)whole[x.i]=Math.max(0,Math.floor((x.g-lambda*x.w)*100+1e-8));
  let rest=cents-whole.reduce((z,v)=>z+v,0);
- const order=raw.map((v,i)=>({i,frac:v-whole[i]})).sort((a,b)=>b.frac-a.frac||a.i-b.i);
- if(rest>0)for(let j=0;j<rest;j++)whole[order[j%order.length].i]++;
- if(rest<0)for(let j=0;j< -rest;j++){const idx=[...order].reverse().find(x=>whole[x.i]>0);if(!idx)throw Error('Error de redondeo.');whole[idx.i]--}
+ // Redondeo discreto óptimo: menor incremento marginal del error ponderado.
+ while(rest>0){
+  const best=items.reduce((a,b)=>((2*(whole[b.i]-b.g*100)+1)/b.w)<((2*(whole[a.i]-a.g*100)+1)/a.w)?b:a);
+  whole[best.i]++;rest--;
+ }
+ while(rest<0){
+  const best=items.filter(x=>whole[x.i]>0).reduce((a,b)=>((-2*(whole[b.i]-b.g*100)+1)/b.w)<((-2*(whole[a.i]-a.g*100)+1)/a.w)?b:a);
+  whole[best.i]--;rest++;
+ }
  return whole.map(v=>v/100);
 };
 const baseCalc=calcNow;
@@ -81,7 +88,7 @@ calcNow=function(){
  let summary=$('r2Residual');if(!summary){summary=document.createElement('details');summary.id='r2Residual';$('results').after(summary)}
  summary.hidden=false;
  const residual=list.some((a,i)=>T&&Math.abs((vals[i]+adds[i])/T*100-a.w)>.000001);
- summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p><b>Prueba de optimización global:</b> se minimizan las desviaciones finales de todos los activos, sin ventas. Las bandas son informativas (entre 2 y 5 puntos porcentuales) y no alteran el reparto.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
+ summary.innerHTML='<summary>'+(T===0?'Introduce tu capital para comparar':residual?'Quedan desviaciones · ver resumen':'Reparto objetivo alcanzado')+'</summary><p>Aportación mínima teórica para recuperar los pesos: <b>'+(Number.isFinite(min)?exact(min):'no es posible solo con aportaciones')+'</b>.</p><p><b>Optimización ponderada:</b> se minimizan las desviaciones finales teniendo en cuenta el peso objetivo de cada activo, sin ventas. Los activos con objetivo cero no reciben aportaciones. Las bandas no alteran el reparto.</p><p>Sin cambios de precios ni costes. El cálculo conserva los céntimos.</p>';
  $('rebalanceAlert')?.remove();
  $('registerContribution').disabled=!(A>0);
 };
